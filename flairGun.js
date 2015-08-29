@@ -32,6 +32,28 @@ function EventEmitter() { /* Nothing to set */ }
 EventEmitter.prototype._listeners = undefined;
 
 /**
+ * Return a list of assigned event listeners.
+ *
+ * @param {String} event The events that should be listed.
+ * @param {Boolean} exists We only need to know if there are listeners.
+ * @returns {Array|Boolean}
+ * @api public
+ */
+EventEmitter.prototype.listeners = function listeners(exists) {
+  var available = this._listeners;
+
+  if (exists) return !!available;
+  if (!available) return [];
+  if (available.fn) return [available.fn];
+
+  for (var i = 0, l = available.length, ee = new Array(l); i < l; i++) {
+    ee[i] = available[i].fn;
+  }
+
+  return ee;
+};
+
+/**
  * Emit an event to all registered event listeners.
  *
  * @param {String} event The name of the event.
@@ -107,6 +129,68 @@ EventEmitter.prototype.add = function add(fn, context) {
       this._listeners, listener
     ];
   }
+
+  return this;
+};
+
+/**
+ * Remove event listeners.
+ *
+ * @param {String} event The event we want to remove.
+ * @param {Function} fn The listener that we need to find.
+ * @param {Mixed} context Only remove listeners matching this context.
+ * @param {Boolean} once Only remove once listeners.
+ * @api public
+ 
+EventEmitter.prototype.removeListener = function removeListener(fn, context) {
+
+  if (!this._listeners) return this;
+
+  var listeners = _listeners
+    , events = [];
+
+  if (fn) {
+    if (listeners.fn) {
+      if (
+           listeners.fn !== fn
+        || (context && listeners.context !== context)
+      ) {
+        events.push(listeners);
+      }
+    } else {
+      for (var i = 0, length = listeners.length; i < length; i++) {
+        if (
+             listeners[i].fn !== fn
+          || (context && listeners[i].context !== context)
+        ) {
+          events.push(listeners[i]);
+        }
+      }
+    }
+  }
+
+  //
+  // Reset the array, or remove it completely if we have no more listeners.
+  //
+  if (events.length) {
+    this._listeners = (events.length === 1) ? events[0] : events;
+  } else {
+    delete this._listeners;
+  }
+
+  return this;
+}; */
+
+/**
+ * Remove all listeners or only the listeners for the specified event.
+ *
+ * @param {String} event The event want to remove all listeners for.
+ * @api public
+ */
+EventEmitter.prototype.removeAllListeners = function removeAllListeners() {
+  if (!this._listeners) return this;
+
+  delete this._listeners;
 
   return this;
 };
