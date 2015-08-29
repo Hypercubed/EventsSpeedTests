@@ -5,7 +5,7 @@ describe('EventEmitter', function tests() {
   var EventEmitter = require('./flairGun')
     , assume = require('assume');
 
-  xit('inherits when used with require(util).inherits', function () {
+  it('inherits when used with require(util).inherits', function () {
     function Beast() {
       /* rawr, i'm a beast */
     }
@@ -21,12 +21,11 @@ describe('EventEmitter', function tests() {
     moop.listeners();
     meap.listeners();
 
-    moop.on('data', function () {
+    moop.add(function () {
       throw new Error('I should not emit');
     });
 
-    meap.emit('data', 'rawr');
-    meap.removeListener('foo');
+    meap.emit('rawr');
     meap.removeAllListeners();
   });
 
@@ -362,45 +361,21 @@ describe('EventEmitter', function tests() {
     });
   });
 
-  xdescribe('EventEmitter#removeAllListeners', function () {
-    it('removes all events for the specified events', function () {
+  describe('EventEmitter#removeAllListeners', function () {
+    it('removes all events', function () {
       var e = new EventEmitter();
 
-      e.on('foo', function () { throw new Error('oops'); });
-      e.on('foo', function () { throw new Error('oops'); });
-      e.on('bar', function () { throw new Error('oops'); });
-      e.on('aaa', function () { throw new Error('oops'); });
-
-      assume(e.removeAllListeners('foo')).equals(e);
-      assume(e.listeners('foo').length).equals(0);
-      assume(e.listeners('bar').length).equals(1);
-      assume(e.listeners('aaa').length).equals(1);
-
-      assume(e.removeAllListeners('bar')).equals(e);
-      assume(e.removeAllListeners('aaa')).equals(e);
-
-      assume(e.emit('foo')).equals(false);
-      assume(e.emit('bar')).equals(false);
-      assume(e.emit('aaa')).equals(false);
-    });
-
-    it('just nukes the fuck out of everything', function () {
-      var e = new EventEmitter();
-
-      e.on('foo', function () { throw new Error('oops'); });
-      e.on('foo', function () { throw new Error('oops'); });
-      e.on('bar', function () { throw new Error('oops'); });
-      e.on('aaa', function () { throw new Error('oops'); });
+      e.add(function () { throw new Error('oops'); });
+      e.add(function () { throw new Error('oops'); });
+      e.add(function () { throw new Error('oops'); });
+      e.add(function () { throw new Error('oops'); });
 
       assume(e.removeAllListeners()).equals(e);
-      assume(e.listeners('foo').length).equals(0);
-      assume(e.listeners('bar').length).equals(0);
-      assume(e.listeners('aaa').length).equals(0);
+      assume(e.listeners().length).equals(0);
 
-      assume(e.emit('foo')).equals(false);
-      assume(e.emit('bar')).equals(false);
-      assume(e.emit('aaa')).equals(false);
+      assume(e.emit()).equals(false);
     });
+
   });
 
 });
