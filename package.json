@@ -1,0 +1,20 @@
+{
+  "jspm": {
+    "directories": {},
+    "dependencies": {
+      "benchmark": "npm:benchmark@^1.0.0",
+      "eventemitter2": "github:asyncly/EventEmitter2@^0.4.14",
+      "eventemitter3": "github:primus/eventemitter3@^1.1.1",
+      "events": "github:jspm/nodelibs-events@^0.1.1",
+      "hcSignals": "github:Hypercubed/js-signals@fixv8optbuild",
+      "signals": "github:millermedeiros/js-signals@^1.0.0"
+    },
+    "devDependencies": {
+      "traceur": "github:jmcriffey/bower-traceur@0.0.88",
+      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88"
+    }
+  },
+  "devDependencies": {
+    "jspm": "^0.16.2"
+  }
+}
