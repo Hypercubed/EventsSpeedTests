@@ -29,14 +29,16 @@
     "microtime": "~2.0.0",
     "signal-emitter": "0.0.1",
     "event-signal": "^0.1.6",
-    "signals-lite": "^0.9.3"
+    "signals-lite": "^0.9.3",
+    "mini-signals": "0.0.1"
   },
   "name": "EventsSpeedTests",
   "version": "0.0.0",
   "description": "fusee",
   "main": "benchmarks/index.js",
   "scripts": {
-    "bench": "node ./benchmarks/index.js"
+    "bench": "node ./benchmarks/index.js",
+    "postinstall": "jspm install"
   },
   "repository": {
     "type": "git",
