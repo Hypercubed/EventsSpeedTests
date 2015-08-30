@@ -1,4 +1,4 @@
-/* istanbul ignore next */
+
 describe('EventEmitter', function tests() {
   'use strict';
 
@@ -184,7 +184,7 @@ describe('EventEmitter', function tests() {
       assume(e.emit()).equals(true);
     });
 
-    xit('should return false when there are no events to emit', function (done) {
+    it('should return false when there are no events to emit', function () {
       var e = new EventEmitter();
 
       assume(e.emit()).equals(false);
@@ -277,54 +277,20 @@ describe('EventEmitter', function tests() {
     });
   });
 
-  xdescribe('EventEmitter#removeListener', function () {
+  describe('EventEmitter#removeListener', function () {
     it('should only remove the event with the specified function', function () {
       var e = new EventEmitter();
 
       function bar() {}
-      e.on('foo', function () {});
-      e.on('bar', function () {});
-      e.on('bar', bar);
+      e.add(function () {});
+      e.add(function () {});
+      e.add(bar);
 
-      assume(e.removeListener('foo', bar)).equals(e);
-      assume(e.listeners('foo').length).equals(1);
-      assume(e.listeners('bar').length).equals(2);
+      assume(e.listeners().length).equals(3);
 
-      assume(e.removeListener('foo')).equals(e);
-      assume(e.listeners('foo').length).equals(0);
-      assume(e.listeners('bar').length).equals(2);
+      assume(e.removeListener(bar)).equals(e);
+      assume(e.listeners().length).equals(2);
 
-      assume(e.removeListener('bar', bar)).equals(e);
-      assume(e.listeners('bar').length).equals(1);
-      assume(e.removeListener('bar')).equals(e);
-      assume(e.listeners('bar').length).equals(0);
-    });
-
-    it('should only remove once events when using the once flag', function () {
-      var e = new EventEmitter();
-
-      function foo() {}
-      e.on('foo', foo);
-
-      assume(e.removeListener('foo', function () {}, undefined, true)).equals(e);
-      assume(e.listeners('foo').length).equals(1);
-      assume(e.removeListener('foo', foo, undefined, true)).equals(e);
-      assume(e.listeners('foo').length).equals(1);
-      assume(e.removeListener('foo', foo)).equals(e);
-      assume(e.listeners('foo').length).equals(0);
-
-      e.on('foo', foo);
-      e.once('foo', foo);
-
-      assume(e.removeListener('foo', function () {}, undefined, true)).equals(e);
-      assume(e.listeners('foo').length).equals(2);
-      assume(e.removeListener('foo', foo, undefined, true)).equals(e);
-      assume(e.listeners('foo').length).equals(1);
-
-      e.once('foo', foo);
-
-      assume(e.removeListener('foo', foo)).equals(e);
-      assume(e.listeners('foo').length).equals(0);
     });
 
     it('should only remove listeners matching the correct context', function () {
@@ -333,31 +299,31 @@ describe('EventEmitter', function tests() {
 
       function foo() {}
       function bar() {}
-      e.on('foo', foo, context);
+      e.add(foo, context);
 
-      assume(e.listeners('foo').length).equals(1);
-      assume(e.removeListener('foo', function () {}, context)).equals(e);
-      assume(e.listeners('foo').length).equals(1);
-      assume(e.removeListener('foo', foo, { baz: 'quux' })).equals(e);
-      assume(e.listeners('foo').length).equals(1);
-      assume(e.removeListener('foo', foo, context)).equals(e);
-      assume(e.listeners('foo').length).equals(0);
+      assume(e.listeners().length).equals(1);
+      assume(e.removeListener(function () {}, context)).equals(e);
+      assume(e.listeners().length).equals(1);
+      assume(e.removeListener(foo, { baz: 'quux' })).equals(e);
+      assume(e.listeners().length).equals(1);
+      assume(e.removeListener(foo, context)).equals(e);
+      assume(e.listeners().length).equals(0);
 
-      e.on('foo', foo, context);
-      e.on('foo', bar);
+      e.add(foo, context);
+      e.add(bar);
 
-      assume(e.listeners('foo').length).equals(2);
-      assume(e.removeListener('foo', foo, { baz: 'quux' })).equals(e);
-      assume(e.listeners('foo').length).equals(2);
-      assume(e.removeListener('foo', foo, context)).equals(e);
-      assume(e.listeners('foo').length).equals(1);
-      assume(e.listeners('foo')[0]).equals(bar);
+      assume(e.listeners().length).equals(2);
+      assume(e.removeListener(foo, { baz: 'quux' })).equals(e);
+      assume(e.listeners().length).equals(2);
+      assume(e.removeListener(foo, context)).equals(e);
+      assume(e.listeners().length).equals(1);
+      assume(e.listeners()[0]).equals(bar);
 
-      e.on('foo', foo, context);
+      e.add(foo, context);
 
-      assume(e.listeners('foo').length).equals(2);
-      assume(e.removeAllListeners('foo')).equals(e);
-      assume(e.listeners('foo').length).equals(0);
+      assume(e.listeners().length).equals(2);
+      assume(e.removeAllListeners()).equals(e);
+      assume(e.listeners().length).equals(0);
     });
   });
 

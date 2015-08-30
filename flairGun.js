@@ -141,12 +141,13 @@ EventEmitter.prototype.add = function add(fn, context) {
  * @param {Mixed} context Only remove listeners matching this context.
  * @param {Boolean} once Only remove once listeners.
  * @api public
+ */
  
 EventEmitter.prototype.removeListener = function removeListener(fn, context) {
 
   if (!this._listeners) return this;
 
-  var listeners = _listeners
+  var listeners = this._listeners
     , events = [];
 
   if (fn) {
@@ -179,7 +180,7 @@ EventEmitter.prototype.removeListener = function removeListener(fn, context) {
   }
 
   return this;
-}; */
+}; 
 
 /**
  * Remove all listeners or only the listeners for the specified event.
@@ -194,6 +195,9 @@ EventEmitter.prototype.removeAllListeners = function removeAllListeners() {
 
   return this;
 };
+
+EventEmitter.prototype.dispatch = EventEmitter.prototype.emit;
+EventEmitter.prototype.remove = EventEmitter.prototype.removeListener;
 
 //
 // Expose the module.

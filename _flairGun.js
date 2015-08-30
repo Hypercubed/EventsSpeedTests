@@ -1,15 +1,18 @@
 var EventEmitter3 = require('eventemitter3');
-var ee3 = new EventEmitter3();
 
-var i = 0;
-function uuid() {
-  return i++;
-}
+require('util').inherits(ShotgunSignal, EventEmitter3);
 
 function ShotgunSignal() {
-  var id = 's'+uuid();
-  this.add = ee3.on.bind(ee3, id);
-  this.emit = ee3.emit.bind(ee3, id);
+  //this.add = EventEmitter3.prototype.on.bind(this, 'emit');
+  //this.emit = EventEmitter3.prototype.emit.bind(this, 'emit');
+}
+
+ShotgunSignal.prototype.add = function(fn) {
+  return this.on('emit', fn);
+}
+
+ShotgunSignal.prototype.emit = function() {
+  return EventEmitter3.prototype.emit.call(this, 'emit');
 }
 
 module.exports = ShotgunSignal;

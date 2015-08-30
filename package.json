@@ -1,21 +1,47 @@
 {
   "jspm": {
     "directories": {},
-    "dependencies": {
+    "dependencies": {},
+    "devDependencies": {
       "benchmark": "npm:benchmark@^1.0.0",
       "eventemitter2": "github:asyncly/EventEmitter2@^0.4.14",
       "eventemitter3": "github:primus/eventemitter3@^1.1.1",
       "events": "github:jspm/nodelibs-events@^0.1.1",
       "hcSignals": "github:Hypercubed/js-signals@fixv8optbuild",
-      "signals": "github:millermedeiros/js-signals@^1.0.0"
-    },
-    "devDependencies": {
+      "signals": "github:millermedeiros/js-signals@^1.0.0",
+      "util": "github:jspm/nodelibs-util@^0.1.0",
       "traceur": "github:jmcriffey/bower-traceur@0.0.88",
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88"
     }
   },
   "devDependencies": {
-    "jspm": "^0.16.2",
-    "assume": "^1.2.6"
-  }
+    "benchmark": "~1.0.0",
+    "eventemitter2": "~0.4.14",
+    "assume": "~1.2.6",
+    "jspm": "~0.16.2",
+    "eventemitter3": "~1.1.1",
+    "signals": "~1.0.0",
+    "microtime": "~2.0.0",
+    "signal-emitter": "0.0.1",
+    "event-signal": "^0.1.6",
+    "signals-lite": "^0.9.3"
+  },
+  "name": "fusee",
+  "version": "0.0.0",
+  "description": "fusee",
+  "main": "_flairGun.js",
+  "scripts": {
+    "test": "mocha flairGun-spec.js",
+    "bench": "node ./benchmarks/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Hypercubed/fuseejs.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Hypercubed/fuseejs/issues"
+  },
+  "homepage": "https://github.com/Hypercubed/fuseejs"
 }
