@@ -1,11 +1,6 @@
 'use strict';
 
 /**
- * Benchmark related modules.
- */
-var benchmark = require('benchmark');
-
-/**
  * Preparation code.
  */
 var EventEmitter2 = require('eventemitter2'),
@@ -13,13 +8,12 @@ var EventEmitter2 = require('eventemitter2'),
     EventEmitter1 = require('events').EventEmitter,
     Signal = require('signals'),
     Signal2,
-    ShotgunSignal = require('../flairGun'),
+    MiniSignal = require('mini-signals'),
     SignalEmitter = require('signal-emitter'),
     EventSignal = require('event-signal'),
     SignalLite = require('signals-lite').SignalLite;
 
 if (typeof window !== 'undefined') {
-  window.Benchmark = benchmark;
   Signal2 = require('hcSignals');
 } else {
   EventEmitter2 = EventEmitter2.EventEmitter2;
@@ -44,7 +38,7 @@ var ee1 = new EventEmitter1(),
     eventSignal = new EventSignal(),
     signal = new Signal(),
     signal2 = new Signal2(),
-    shotgunSignal = new ShotgunSignal(),
+    miniSignal = new MiniSignal(),
     signalLite = new SignalLite();
 
 ee1.on('foo', handle); ee1.on('foo', handle2);
@@ -52,7 +46,7 @@ ee2.on('foo', handle); ee2.on('foo', handle2);
 ee3.on('foo', handle); ee3.on('foo', handle2);
 signal.add(handle); signal.add(handle2);
 signal2.add(handle); signal2.add(handle2);
-shotgunSignal.add(handle); shotgunSignal.add(handle2);
+miniSignal.add(handle); miniSignal.add(handle2);
 signalEmitter.on(handle); signalEmitter.on(handle2);
 eventSignal.addListener(handle);  eventSignal.addListener(handle2);
 signalLite.add(handle);  signalLite.add(handle2);
@@ -78,23 +72,23 @@ suite
     ee3.emit('foo', 'bar', 'baz');
     ee3.emit('foo', 'bar', 'baz', 'boom');
   })
-  .add('Signal', function() {
+  .add('JS-Signals', function() {
     signal.dispatch();
     signal.dispatch('bar');
     signal.dispatch('bar', 'baz');
     signal.dispatch('bar', 'baz', 'boom');
   })
-  .add('Signal patch', function() {
+  .add('JS-Signals patch', function() {
     signal2.dispatch();
     signal2.dispatch('bar');
     signal2.dispatch('bar', 'baz');
     signal2.dispatch('bar', 'baz', 'boom');
   })
-  .add('ShotgunSignal', function() {
-    shotgunSignal.emit();
-    shotgunSignal.emit('bar');
-    shotgunSignal.emit('bar', 'baz');
-    shotgunSignal.emit('bar', 'baz', 'boom');
+  .add('MiniSignals', function() {
+    miniSignal.emit();
+    miniSignal.emit('bar');
+    miniSignal.emit('bar', 'baz');
+    miniSignal.emit('bar', 'baz', 'boom');
   })
   .add('signal-emitter', function() {
     signalEmitter.emit();

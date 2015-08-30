@@ -1,23 +1,16 @@
 'use strict';
 
 /**
- * Benchmark related modules.
- */
-var benchmark = require('benchmark');
-
-/**
  * Preparation code.
  */
 var EventEmitter2 = require('eventemitter2'),
     EventEmitter3 = require('eventemitter3'),
-    EventEmitter1 = require('events').EventEmitter;
-
-var Signal = require('signals'),
-    ShotgunSignal = require('../flairGun'),
+    EventEmitter1 = require('events').EventEmitter,
+    Signal = require('signals'),
+    MiniSignal = require('mini-signals'),
     Signal2;
 
 if (typeof window !== 'undefined') {
-  window.Benchmark = benchmark;
   Signal2 = require('hcSignals');
 } else {
   EventEmitter2 = EventEmitter2.EventEmitter2;
@@ -36,7 +29,7 @@ var ee2 = new EventEmitter2(),
     ee1 = new EventEmitter1(),
     signal = new Signal(),
     signal2 = new Signal2(),
-    shotgunSignal = new ShotgunSignal();
+    miniSignal = new MiniSignal();
 
 var suite = require('./suite')('add-remove');
 
@@ -53,17 +46,17 @@ suite
     ee3.on('foo', handle);
     ee3.removeListener('foo', handle);
   })
-  .add('Signal', function() {
+  .add('JS-Signals', function() {
     signal.add(handle);
     signal.remove(handle);
   })
-  .add('Signal patch', function() {
+  .add('JS-Signals patch', function() {
     signal2.add(handle);
     signal2.remove(handle);
   })
-  .add('ShotgunSignal', function() {
-    shotgunSignal.add(handle);
-    shotgunSignal.remove(handle);
+  .add('MiniSignals', function() {
+    miniSignal.add(handle);
+    miniSignal.remove(handle);
   });
 
 suite

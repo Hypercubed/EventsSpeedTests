@@ -1,5 +1,9 @@
 var benchmark = require('benchmark');
 
+if (typeof window !== 'undefined') {
+  window.Benchmark = benchmark;
+}
+
 module.exports = function suite(name) {
   var suite = new benchmark.Suite(name);
 
@@ -21,4 +25,3 @@ module.exports = function suite(name) {
 
   return suite;
 }
-

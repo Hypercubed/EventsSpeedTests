@@ -9,11 +9,15 @@ System.config({
 
   map: {
     "benchmark": "npm:benchmark@1.0.0",
+    "event-signal": "npm:event-signal@0.1.6",
     "eventemitter2": "github:asyncly/EventEmitter2@0.4.14",
     "eventemitter3": "github:primus/eventemitter3@1.1.1",
     "events": "github:jspm/nodelibs-events@0.1.1",
     "hcSignals": "github:Hypercubed/js-signals@fixv8optbuild",
+    "mini-signals": "github:Hypercubed/mini-signals@master",
+    "signal-emitter": "npm:signal-emitter@0.0.1",
     "signals": "github:millermedeiros/js-signals@1.0.0",
+    "signals-lite": "npm:signals-lite@0.9.3",
     "traceur": "github:jmcriffey/bower-traceur@0.0.88",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
     "util": "github:jspm/nodelibs-util@0.1.0",

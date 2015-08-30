@@ -7,11 +7,10 @@ var EventEmitter2 = require('eventemitter2'),
     EventEmitter3 = require('eventemitter3'),
     EventEmitter1 = require('events').EventEmitter,
     Signal = require('signals'),
-    ShotgunSignal = require('../flairGun'),
+    MiniSignal = require('mini-signals'),
     Signal2;
 
 if (typeof window !== 'undefined') {
-  window.Benchmark = benchmark;
   Signal2 = require('hcSignals');
 } else {
   EventEmitter2 = EventEmitter2.EventEmitter2;
@@ -30,14 +29,14 @@ suite
   .add('EventEmitter3', function() {
     var ee2 = new EventEmitter3();
   })
-  .add('Signal', function() {
+  .add('JS-Signals', function() {
     var signal = new Signal();
   })
-  .add('Signal patch', function() {
+  .add('JS-Signals patch', function() {
     var signal2 = new Signal2();
   })
-  .add('ShotgunSignal', function() {
-    var shotgunSignal = new ShotgunSignal();
+  .add('MiniSignals', function() {
+    var miniSignal = new MiniSignal();
   });
 
 suite
