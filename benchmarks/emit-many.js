@@ -35,30 +35,27 @@ var ee1 = new EventEmitter1(),
     signalLite = new SignalLite(),
     miniVent = new MiniVent();
 
-function handle() {
-  if (arguments.length > 100) {console.log('damn');}
+for(var i = 0; i < 10; i++) {
+  var handle = function handle() {
+    if (arguments.length > 100) {console.log('damn');}
+  }
+
+  // events
+  ee1.on('foo', handle);
+  ee2.on('foo', handle);
+  ee3.on('foo', handle);
+  miniVent.on('foo', handle);
+
+  // signals
+  signal.add(handle);
+  signal2.add(handle);
+  miniSignal.add(handle);
+  signalEmitter.on(handle);
+  eventSignal.addListener(handle);
+  signalLite.add(handle);
 }
 
-function handle2() {
-  if (arguments.length > 100) {console.log('damn');}
-}
-
-// events
-ee1.on('foo', handle); ee1.on('foo', handle2);
-ee2.on('foo', handle); ee2.on('foo', handle2);
-ee3.on('foo', handle); ee3.on('foo', handle2);
-miniVent.on('foo', handle); miniVent.on('foo', handle2);
-
-// signals
-signal.add(handle); signal.add(handle2);
-signal2.add(handle); signal2.add(handle2);
-miniSignal.add(handle); miniSignal.add(handle2);
-signalEmitter.on(handle); signalEmitter.on(handle2);
-eventSignal.addListener(handle);  eventSignal.addListener(handle2);
-signalLite.add(handle);  signalLite.add(handle2);
-
-
-var suite = require('./suite')('emit');
+var suite = require('./suite')('emit many');
 
 suite
   .add('EventEmitter1', function() {

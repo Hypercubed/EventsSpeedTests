@@ -58,68 +58,38 @@ eventSignal.addListener(handle);  eventSignal.addListener(handle2);
 signalLite.add(handle);  signalLite.add(handle2);
 
 
-var suite = require('./suite')('emit');
+var suite = require('./suite')('emit large');
 
 suite
   .add('EventEmitter1', function() {
-    ee1.emit('foo');
-    ee1.emit('foo', 'bar');
-    ee1.emit('foo', 'bar', 'baz');
-    ee1.emit('foo', 'bar', 'baz', 'boom');
+    ee1.emit('foo', 'bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })
   .add('EventEmitter2', function() {
-    ee2.emit('foo');
-    ee2.emit('foo', 'bar');
-    ee2.emit('foo', 'bar', 'baz');
-    ee2.emit('foo', 'bar', 'baz', 'boom');
+    ee2.emit('foo', 'bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })
   .add('EventEmitter3', function() {
-    ee3.emit('foo');
-    ee3.emit('foo', 'bar');
-    ee3.emit('foo', 'bar', 'baz');
-    ee3.emit('foo', 'bar', 'baz', 'boom');
+    ee3.emit('foo', 'bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })
   .add('JS-Signals', function() {
-    signal.dispatch();
-    signal.dispatch('bar');
-    signal.dispatch('bar', 'baz');
-    signal.dispatch('bar', 'baz', 'boom');
+    signal.dispatch('bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })
   .add('JS-Signals patch', function() {
-    signal2.dispatch();
-    signal2.dispatch('bar');
-    signal2.dispatch('bar', 'baz');
-    signal2.dispatch('bar', 'baz', 'boom');
+    signal2.dispatch('bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })
   .add('MiniSignals', function() {
-    miniSignal.emit();
-    miniSignal.emit('bar');
-    miniSignal.emit('bar', 'baz');
-    miniSignal.emit('bar', 'baz', 'boom');
+    miniSignal.emit('bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })
   .add('signal-emitter', function() {
-    signalEmitter.emit();
-    signalEmitter.emit('bar');
-    signalEmitter.emit('bar', 'baz');
-    signalEmitter.emit('bar', 'baz', 'boom');
+    signalEmitter.emit('bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })
   .add('event-signal', function() {  // note event signal only passes on param
-    eventSignal.emit();
-    eventSignal.emit('bar');
-    eventSignal.emit(['bar', 'baz']);
-    eventSignal.emit(['bar', 'baz', 'boom']);
+    eventSignal.emit(['bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9]);
   })
   .add('signal-lite', function() {
-    signalLite.trigger();
-    signalLite.trigger('bar');
-    signalLite.trigger('bar', 'baz');
-    signalLite.trigger('bar', 'baz', 'boom');
+    signalLite.trigger('bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })
   .add('minivents', function() {
-    miniVent.emit('foo');
-    miniVent.emit('foo','bar');
-    miniVent.emit('foo','bar', 'baz');
-    miniVent.emit('foo','bar', 'baz', 'boom');
+    miniVent.emit('foo','bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   });
 
 suite

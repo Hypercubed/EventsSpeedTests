@@ -30,7 +30,8 @@
     "signal-emitter": "0.0.1",
     "event-signal": "^0.1.6",
     "signals-lite": "^0.9.3",
-    "mini-signals": "0.0.1"
+    "mini-signals": "0.0.1",
+    "minivents": "^1.1.7"
   },
   "name": "EventsSpeedTests",
   "version": "0.0.0",
