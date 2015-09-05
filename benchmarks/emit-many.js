@@ -16,6 +16,7 @@ var EventEmitter2 = require('eventemitter2'),
 
 if (typeof window !== 'undefined') {
   Signal2 = require('hcSignals');
+  MiniSignal = (typeof MiniSignal !== 'function') ? MiniSignal.default : MiniSignal;  // https://github.com/systemjs/systemjs/issues/304
 } else {
   EventEmitter2 = EventEmitter2.EventEmitter2;
   Signal2 = require('../jspm_packages/github/Hypercubed/js-signals@fixv8optbuild/dist/signals');
@@ -89,10 +90,10 @@ suite
     signal2.dispatch('bar', 'baz', 'boom');
   })
   .add('MiniSignals', function() {
-    miniSignal.emit();
-    miniSignal.emit('bar');
-    miniSignal.emit('bar', 'baz');
-    miniSignal.emit('bar', 'baz', 'boom');
+    miniSignal.dispatch();
+    miniSignal.dispatch('bar');
+    miniSignal.dispatch('bar', 'baz');
+    miniSignal.dispatch('bar', 'baz', 'boom');
   })
   .add('signal-emitter', function() {
     signalEmitter.emit();

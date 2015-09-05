@@ -3,7 +3,8 @@
     "directories": {},
     "dependencies": {
       "event-signal": "npm:event-signal@^0.1.6",
-      "mini-signals": "github:Hypercubed/mini-signals@master",
+      "mini-signals": "github:Hypercubed/mini-signals@^0.0.2",
+      "minivents": "github:allouis/minivents@^1.1.7",
       "signal-emitter": "npm:signal-emitter@^0.0.1",
       "signals-lite": "npm:signals-lite@^0.9.3"
     },
