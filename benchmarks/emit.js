@@ -6,8 +6,9 @@
 var EventEmitter2 = require('eventemitter2'),
     EventEmitter3 = require('eventemitter3'),
     EventEmitter1 = require('events').EventEmitter,
+    FastEventEmitter = require('fast-event-emitter'),
     Signal = require('signals'),
-    Signal2,
+    Signal2 = require('signals-patch'),
     MiniSignal = require('mini-signals'),
     SignalEmitter = require('signal-emitter'),
     EventSignal = require('event-signal'),
@@ -15,11 +16,9 @@ var EventEmitter2 = require('eventemitter2'),
     MiniVent = require('minivents');
 
 if (typeof window !== 'undefined') {
-  Signal2 = require('hcSignals');
   MiniSignal = (typeof MiniSignal !== 'function') ? MiniSignal.default : MiniSignal;  // https://github.com/systemjs/systemjs/issues/304
 } else {
   EventEmitter2 = EventEmitter2.EventEmitter2;
-  Signal2 = require('../jspm_packages/github/Hypercubed/js-signals@fixv8optbuild/dist/signals');
 }
 
 /**
@@ -28,6 +27,7 @@ if (typeof window !== 'undefined') {
 var ee1 = new EventEmitter1(),
     ee2 = new EventEmitter2(),
     ee3 = new EventEmitter3(),
+    fastEmitter = new FastEventEmitter(),
     signalEmitter = new SignalEmitter(new EventEmitter3(), 'foo'),
     eventSignal = new EventSignal(),
     signal = new Signal(),
@@ -48,6 +48,7 @@ function handle2() {
 ee1.on('foo', handle); ee1.on('foo', handle2);
 ee2.on('foo', handle); ee2.on('foo', handle2);
 ee3.on('foo', handle); ee3.on('foo', handle2);
+fastEmitter.on('foo', handle); fastEmitter.on('foo', handle2);
 miniVent.on('foo', handle); miniVent.on('foo', handle2);
 
 // signals
@@ -63,9 +64,7 @@ miniSignal.dispatch('bar');
 miniSignal.dispatch('bar', 'baz');
 miniSignal.dispatch('bar', 'baz', 'boom');
 
-var suite = require('./suite')('emit');
-
-suite
+require('./suite')('emit')
   .add('EventEmitter1', function() {
     ee1.emit('foo');
     ee1.emit('foo', 'bar');
@@ -83,6 +82,12 @@ suite
     ee3.emit('foo', 'bar');
     ee3.emit('foo', 'bar', 'baz');
     ee3.emit('foo', 'bar', 'baz', 'boom');
+  })
+  .add('fast-event-emitter', function() {
+    fastEmitter.emit('foo');
+    fastEmitter.emit('foo', 'bar');
+    fastEmitter.emit('foo', 'bar', 'baz');
+    fastEmitter.emit('foo', 'bar', 'baz', 'boom');
   })
   .add('JS-Signals', function() {
     signal.dispatch();
@@ -125,7 +130,5 @@ suite
     miniVent.emit('foo','bar');
     miniVent.emit('foo','bar', 'baz');
     miniVent.emit('foo','bar', 'baz', 'boom');
-  });
-
-suite
+  })
   .run();

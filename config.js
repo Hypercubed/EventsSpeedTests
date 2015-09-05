@@ -13,12 +13,14 @@ System.config({
     "eventemitter2": "github:asyncly/EventEmitter2@0.4.14",
     "eventemitter3": "github:primus/eventemitter3@1.1.1",
     "events": "github:jspm/nodelibs-events@0.1.1",
+    "fast-event-emitter": "npm:fast-event-emitter@0.0.2",
     "hcSignals": "github:Hypercubed/js-signals@fixv8optbuild",
     "mini-signals": "github:Hypercubed/mini-signals@0.0.2",
     "minivents": "github:allouis/minivents@1.1.7",
     "signal-emitter": "npm:signal-emitter@0.0.1",
     "signals": "github:millermedeiros/js-signals@1.0.0",
     "signals-lite": "npm:signals-lite@0.9.3",
+    "signals-patch": "github:Hypercubed/js-signals@fixv8optbuild",
     "traceur": "github:jmcriffey/bower-traceur@0.0.88",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
     "util": "github:jspm/nodelibs-util@0.1.0",
@@ -33,6 +35,9 @@ System.config({
     },
     "npm:benchmark@1.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.1"
+    },
+    "npm:fast-event-emitter@0.0.2": {
+      "protoclass": "npm:protoclass@0.0.6"
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
