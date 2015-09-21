@@ -1,6 +1,38 @@
-<!doctype html>
-<script src="jspm_packages/system.js"></script>
-<script src="config.js"></script>
-<script>
-System.import('benchmarks/index');
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>EventsSpeedTests</title>
+  <style>
+    button {
+      padding: .5em 1em;
+      display: block;
+      text-align: center;
+      margin-top: 5px;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body id="home">
+
+	<h1>EventsSpeedTests</h1>
+
+  <script src="jspm_packages/system.js"></script>
+  <script src="config.js"></script>
+  <script>
+    var tests = ['index','emit','init','add-remove'];
+    tests.map(add);
+
+    function add(name) {
+      var element = document.createElement("button");
+      element.innerHTML = name;
+      element.onclick=function(){
+        System.import('benchmarks/'+name)
+      }
+      document.body.appendChild(element);
+    }
+  </script>
+
+</body>
+</html>

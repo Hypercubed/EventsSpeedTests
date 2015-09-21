@@ -6,35 +6,19 @@
 var EventEmitter2 = require('eventemitter2'),
     EventEmitter3 = require('eventemitter3'),
     EventEmitter1 = require('events').EventEmitter,
-    FastEventEmitter = require('fast-event-emitter'),
     Signal = require('signals'),
-    Signal2 = require('signals-patch'),
+    Signal2,
     MiniSignal = require('mini-signals'),
     SignalEmitter = require('signal-emitter'),
     EventSignal = require('event-signal'),
-    SignalLite = require('signals-lite').SignalLite,
-    MiniVent = require('minivents');
+    SignalLite = require('signals-lite').SignalLite;
 
 if (typeof window !== 'undefined') {
-  MiniSignal = (typeof MiniSignal !== 'function') ? MiniSignal.default : MiniSignal;  // https://github.com/systemjs/systemjs/issues/304
+  Signal2 = require('hcSignals');
 } else {
   EventEmitter2 = EventEmitter2.EventEmitter2;
+  Signal2 = require('../jspm_packages/github/Hypercubed/js-signals@fixv8optbuild/dist/signals');
 }
-
-/**
- * Instances.
- */
-var ee1 = new EventEmitter1(),
-    ee2 = new EventEmitter2(),
-    ee3 = new EventEmitter3(),
-    fastEmitter = new FastEventEmitter(),
-    signalEmitter = new SignalEmitter(new EventEmitter3(), 'foo'),
-    eventSignal = new EventSignal(),
-    signal = new Signal(),
-    signal2 = new Signal2(),
-    miniSignal = new MiniSignal(),
-    signalLite = new SignalLite(),
-    miniVent = new MiniVent();
 
 function handle() {
   if (arguments.length > 100) {console.log('damn');}
@@ -44,14 +28,22 @@ function handle2() {
   if (arguments.length > 100) {console.log('damn');}
 }
 
-// events
+/**
+ * Instances.
+ */
+var ee1 = new EventEmitter1(),
+    ee2 = new EventEmitter2(),
+    ee3 = new EventEmitter3(),
+    signalEmitter = new SignalEmitter(new EventEmitter3(), 'foo'),
+    eventSignal = new EventSignal(),
+    signal = new Signal(),
+    signal2 = new Signal2(),
+    miniSignal = new MiniSignal(),
+    signalLite = new SignalLite();
+
 ee1.on('foo', handle); ee1.on('foo', handle2);
 ee2.on('foo', handle); ee2.on('foo', handle2);
 ee3.on('foo', handle); ee3.on('foo', handle2);
-fastEmitter.on('foo', handle); fastEmitter.on('foo', handle2);
-miniVent.on('foo', handle); miniVent.on('foo', handle2);
-
-// signals
 signal.add(handle); signal.add(handle2);
 signal2.add(handle); signal2.add(handle2);
 miniSignal.add(handle); miniSignal.add(handle2);
@@ -59,12 +51,9 @@ signalEmitter.on(handle); signalEmitter.on(handle2);
 eventSignal.addListener(handle);  eventSignal.addListener(handle2);
 signalLite.add(handle);  signalLite.add(handle2);
 
-miniSignal.dispatch();
-miniSignal.dispatch('bar');
-miniSignal.dispatch('bar', 'baz');
-miniSignal.dispatch('bar', 'baz', 'boom');
+var suite = require('./suite')('emit');
 
-require('./suite')('emit')
+suite
   .add('EventEmitter1', function() {
     ee1.emit('foo');
     ee1.emit('foo', 'bar');
@@ -82,12 +71,6 @@ require('./suite')('emit')
     ee3.emit('foo', 'bar');
     ee3.emit('foo', 'bar', 'baz');
     ee3.emit('foo', 'bar', 'baz', 'boom');
-  })
-  .add('fast-event-emitter', function() {
-    fastEmitter.emit('foo');
-    fastEmitter.emit('foo', 'bar');
-    fastEmitter.emit('foo', 'bar', 'baz');
-    fastEmitter.emit('foo', 'bar', 'baz', 'boom');
   })
   .add('JS-Signals', function() {
     signal.dispatch();
@@ -113,22 +96,18 @@ require('./suite')('emit')
     signalEmitter.emit('bar', 'baz');
     signalEmitter.emit('bar', 'baz', 'boom');
   })
-  .add('event-signal', function() {  // note event signal only passes on param
+  .add('event-signal', function() {
     eventSignal.emit();
     eventSignal.emit('bar');
-    eventSignal.emit(['bar', 'baz']);
-    eventSignal.emit(['bar', 'baz', 'boom']);
+    eventSignal.emit('bar', 'baz');
+    eventSignal.emit('bar', 'baz', 'boom');
   })
   .add('signal-lite', function() {
     signalLite.trigger();
     signalLite.trigger('bar');
     signalLite.trigger('bar', 'baz');
     signalLite.trigger('bar', 'baz', 'boom');
-  })
-  .add('minivents', function() {
-    miniVent.emit('foo');
-    miniVent.emit('foo','bar');
-    miniVent.emit('foo','bar', 'baz');
-    miniVent.emit('foo','bar', 'baz', 'boom');
-  })
+  });
+
+suite
   .run();

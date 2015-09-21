@@ -52,7 +52,7 @@ require('./suite')('add-remove')
     signal2.remove(handle);
   })
   .add('MiniSignals', function() {
-    miniSignal.add(handle);
-    miniSignal.remove(handle);
+    var _handle = miniSignal.add(handle);
+    miniSignal.detach(_handle);
   })
   .run();
