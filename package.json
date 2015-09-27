@@ -27,7 +27,7 @@
     "fast-event-emitter": "0.0.2",
     "jspm": "~0.16.2",
     "microtime": "~2.0.0",
-    "mini-signals": "0.0.7",
+    "mini-signals": "^1.0.1",
     "minivents": "^1.1.7",
     "signal-emitter": "0.0.1",
     "signals": "^1.0.0",
@@ -37,13 +37,13 @@
   "jspm": {
     "directories": {},
     "devDependencies": {
-      "mini-signals": "github:Hypercubed/mini-signals@^0.0.7",
       "benchmark": "npm:benchmark@^1.0.0",
       "event-signal": "npm:event-signal@^0.1.6",
       "eventemitter2": "github:asyncly/EventEmitter2@^0.4.14",
       "eventemitter3": "github:primus/eventemitter3@^1.1.1",
       "events": "github:jspm/nodelibs-events@^0.1.1",
       "fast-event-emitter": "npm:fast-event-emitter@^0.0.2",
+      "mini-signals": "github:Hypercubed/mini-signals@^1.0.1",
       "minivents": "github:allouis/minivents@^1.1.7",
       "signal-emitter": "npm:signal-emitter@^0.0.1",
       "signals": "github:millermedeiros/js-signals@^1.0.0",
