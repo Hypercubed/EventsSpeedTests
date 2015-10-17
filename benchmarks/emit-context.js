@@ -20,14 +20,19 @@ if (typeof window !== 'undefined') {
   Signal2 = require('../jspm_packages/github/Hypercubed/js-signals@fixv8optbuild/dist/signals');
 }
 
-function handle(a,b) {
-  if (arguments.length > 0 && a !== 'bar') {console.log('damn'); process.exit(); }
-  if (arguments.length > 1 && b !== 'baz') {console.log('damn'); process.exit(); }
+var ctx = {
+  foo: 'bar'
+};
+
+function handle() {
   if (arguments.length > 100) {console.log('damn');}
+  if (this !== ctx) {console.log('damn'); process.exit(); }
+
 }
 
 function handle2() {
   if (arguments.length > 100) {console.log('damn');}
+  if (this !== ctx) {console.log('damn'); process.exit(); }
 }
 
 /**
@@ -43,17 +48,17 @@ var ee1 = new EventEmitter1(),
     miniSignal = new MiniSignal(),
     signalLite = new SignalLite();
 
-ee1.on('foo', handle); ee1.on('foo', handle2);
-ee2.on('foo', handle); ee2.on('foo', handle2);
-ee3.on('foo', handle); ee3.on('foo', handle2);
-signal.add(handle); signal.add(handle2);
-signal2.add(handle); signal2.add(handle2);
-miniSignal.add(handle); miniSignal.add(handle2);
-signalEmitter.on(handle); signalEmitter.on(handle2);
-eventSignal.addListener(handle);  eventSignal.addListener(handle2);
-signalLite.add(handle);  signalLite.add(handle2);
+ee1.on('foo', handle.bind(ctx)); ee1.on('foo', handle2.bind(ctx));
+ee2.on('foo', handle.bind(ctx)); ee2.on('foo', handle2.bind(ctx));
+ee3.on('foo', handle, ctx); ee3.on('foo', handle2, ctx);
+signal.add(handle, ctx); signal.add(handle2, ctx);
+signal2.add(handle, ctx); signal2.add(handle2, ctx);
+miniSignal.add(handle.bind(ctx)); miniSignal.add(handle2.bind(ctx));
+signalEmitter.on(handle, ctx); signalEmitter.on(handle2, ctx);
+eventSignal.addListener(handle, ctx);  eventSignal.addListener(handle2, ctx);
+signalLite.add(handle, ctx);  signalLite.add(handle2, ctx);
 
-var suite = require('./suite')('emit');
+var suite = require('./suite')('emit with context');
 
 suite
   .add('EventEmitter1', function() {
@@ -98,7 +103,7 @@ suite
     signalEmitter.emit('bar', 'baz');
     signalEmitter.emit('bar', 'baz', 'boom');
   })
-  /* .add('event-signal', function() {  // this is not a fair test, eventSignal.emit only emits one argument
+  /* .add('event-signal', function() { // this is not a fair test, eventSignal.emit only emits one argument
     eventSignal.emit();
     eventSignal.emit('bar');
     eventSignal.emit('bar', 'baz');

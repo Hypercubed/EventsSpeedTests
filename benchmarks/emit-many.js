@@ -97,12 +97,12 @@ require('./suite')('emit many')
     signalEmitter.emit('bar', 'baz');
     signalEmitter.emit('bar', 'baz', 'boom');
   })
-  .add('event-signal', function() {  // note event signal only passes on param
+  /* .add('event-signal', function() {  // this is not a fair test, eventSignal.emit only emits one argument
     eventSignal.emit();
     eventSignal.emit('bar');
     eventSignal.emit(['bar', 'baz']);
     eventSignal.emit(['bar', 'baz', 'boom']);
-  })
+  }) */
   .add('signal-lite', function() {
     signalLite.trigger();
     signalLite.trigger('bar');

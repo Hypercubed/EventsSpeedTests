@@ -79,9 +79,9 @@ require('./suite')('emit large')
   .add('signal-emitter', function() {
     signalEmitter.emit('bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })
-  .add('event-signal', function() {  // note event signal only passes on param
+  /* .add('event-signal', function() {  // this is not a fair test, eventSignal.emit only emits one argument
     eventSignal.emit(['bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9]);
-  })
+  }) */
   .add('signal-lite', function() {
     signalLite.trigger('bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })

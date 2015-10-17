@@ -5,7 +5,7 @@
   "private": true,
   "main": "benchmarks/index.js",
   "scripts": {
-    "bench": "node ./benchmarks/index.js",
+    "start": "node ./benchmarks/index.js",
     "postinstall": "jspm install"
   },
   "repository": {
