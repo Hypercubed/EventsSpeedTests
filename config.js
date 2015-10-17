@@ -15,7 +15,7 @@ System.config({
     "events": "github:jspm/nodelibs-events@0.1.1",
     "fast-event-emitter": "npm:fast-event-emitter@0.0.2",
     "hcSignals": "github:Hypercubed/js-signals@fixv8optbuild",
-    "mini-signals": "github:Hypercubed/mini-signals@1.0.1",
+    "mini-signals": "github:Hypercubed/mini-signals@1.0.2",
     "minivents": "github:allouis/minivents@1.1.7",
     "signal-emitter": "npm:signal-emitter@0.0.1",
     "signals": "github:millermedeiros/js-signals@1.0.0",

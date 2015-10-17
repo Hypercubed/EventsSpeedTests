@@ -2,115 +2,131 @@
 # Node (v0.12.7)
 
 # emit
-    EventEmitter1 x 426,407 ops/sec ±1.81% (90 runs sampled)
-    EventEmitter2 x 482,602 ops/sec ±0.83% (96 runs sampled)
-    EventEmitter3 x 1,241,667 ops/sec ±0.70% (97 runs sampled)
-    JS-Signals x 129,669 ops/sec ±1.20% (97 runs sampled)
-    JS-Signals patch x 258,168 ops/sec ±0.50% (98 runs sampled)
-    MiniSignals x 8,406,317 ops/sec ±0.35% (98 runs sampled)
-    signal-emitter x 90,751 ops/sec ±0.50% (98 runs sampled)
-    event-signal x 1,156,551 ops/sec ±0.50% (96 runs sampled)
-    signal-lite x 181,583 ops/sec ±4.41% (92 runs sampled)
+    EventEmitter1 x 267,163 ops/sec ±3.24% (87 runs sampled)
+    EventEmitter2 x 429,622 ops/sec ±2.69% (81 runs sampled)
+    EventEmitter3 x 896,974 ops/sec ±2.45% (88 runs sampled)
+    JS-Signals x 101,671 ops/sec ±2.84% (87 runs sampled)
+    JS-Signals patch x 182,735 ops/sec ±3.26% (84 runs sampled)
+    MiniSignals x 5,533,384 ops/sec ±2.94% (87 runs sampled)
+    signal-emitter x 65,385 ops/sec ±2.75% (89 runs sampled)
+    signal-lite x 150,899 ops/sec ±2.29% (90 runs sampled)
 *Fastest is MiniSignals*
+
+# emit with context
+    EventEmitter1 x 167,342 ops/sec ±2.07% (83 runs sampled)
+    EventEmitter2 x 206,448 ops/sec ±2.19% (92 runs sampled)
+    EventEmitter3 x 1,675,786 ops/sec ±7.57% (90 runs sampled)
+    JS-Signals x 93,240 ops/sec ±1.20% (91 runs sampled)
+    JS-Signals patch x 184,445 ops/sec ±1.71% (90 runs sampled)
+    MiniSignals x 280,108 ops/sec ±2.89% (85 runs sampled)
+    signal-emitter x 71,186 ops/sec ±1.89% (89 runs sampled)
+    signal-lite x 139,469 ops/sec ±2.60% (92 runs sampled)
+*Fastest is EventEmitter3*
 
 # emit many
-    EventEmitter1 x 233,984 ops/sec ±3.00% (87 runs sampled)
-    EventEmitter2 x 261,174 ops/sec ±2.03% (94 runs sampled)
-    EventEmitter3 x 378,676 ops/sec ±0.74% (98 runs sampled)
-    JS-Signals x 85,175 ops/sec ±0.78% (94 runs sampled)
-    JS-Signals patch x 150,728 ops/sec ±0.55% (97 runs sampled)
-    MiniSignals x 1,152,564 ops/sec ±4.96% (75 runs sampled)
-    signal-emitter x 74,070 ops/sec ±2.78% (95 runs sampled)
-    event-signal x 646,242 ops/sec ±0.62% (98 runs sampled)
-    signal-lite x 118,500 ops/sec ±0.61% (99 runs sampled)
-    minivents x 100,930 ops/sec ±0.56% (100 runs sampled)
-*Fastest is MiniSignals*
+    EventEmitter1 x 184,466 ops/sec ±2.86% (81 runs sampled)
+    EventEmitter2 x 227,856 ops/sec ±1.96% (96 runs sampled)
+    EventEmitter3 x 615,354 ops/sec ±2.21% (91 runs sampled)
+    JS-Signals x 72,405 ops/sec ±1.48% (93 runs sampled)
+    JS-Signals patch x 121,024 ops/sec ±2.56% (86 runs sampled)
+    MiniSignals x 234,835 ops/sec ±3.71% (78 runs sampled)
+    signal-emitter x 71,596 ops/sec ±2.18% (94 runs sampled)
+    signal-lite x 97,296 ops/sec ±2.01% (89 runs sampled)
+    minivents x 82,116 ops/sec ±2.47% (90 runs sampled)
+*Fastest is EventEmitter3*
 
 # emit large
-    EventEmitter1 x 861,677 ops/sec ±13.51% (61 runs sampled)
-    EventEmitter2 x 1,048,956 ops/sec ±3.43% (93 runs sampled)
-    EventEmitter3 x 2,009,149 ops/sec ±1.03% (99 runs sampled)
-    JS-Signals x 341,789 ops/sec ±0.65% (100 runs sampled)
-    JS-Signals patch x 618,258 ops/sec ±0.59% (94 runs sampled)
-    MiniSignals x 16,979,320 ops/sec ±4.39% (76 runs sampled)
-    signal-emitter x 214,830 ops/sec ±4.31% (91 runs sampled)
-    event-signal x 4,388,644 ops/sec ±0.34% (100 runs sampled)
-    signal-lite x 563,504 ops/sec ±6.01% (89 runs sampled)
-    minivents x 511,763 ops/sec ±1.29% (94 runs sampled)
-*Fastest is MiniSignals*
+    EventEmitter1 x 848,804 ops/sec ±8.36% (77 runs sampled)
+    EventEmitter2 x 1,008,757 ops/sec ±3.87% (84 runs sampled)
+    EventEmitter3 x 2,422,885 ops/sec ±2.79% (84 runs sampled)
+    JS-Signals x 176,279 ops/sec ±3.92% (82 runs sampled)
+    JS-Signals patch x 426,127 ops/sec ±3.54% (90 runs sampled)
+    MiniSignals x 2,474,559 ops/sec ±2.17% (90 runs sampled)
+    signal-emitter x 224,988 ops/sec ±1.95% (87 runs sampled)
+    signal-lite x 459,911 ops/sec ±1.50% (94 runs sampled)
+    minivents x 372,995 ops/sec ±2.35% (87 runs sampled)
+*Fastest is MiniSignals,EventEmitter3*
 
 # init
-    EventEmitter1 x 22,864,789 ops/sec ±4.35% (83 runs sampled)
-    EventEmitter2 x 23,396,016 ops/sec ±0.33% (100 runs sampled)
-    EventEmitter3 x 84,938,678 ops/sec ±5.44% (91 runs sampled)
-    JS-Signals x 2,397,285 ops/sec ±4.63% (49 runs sampled)
-    JS-Signals patch x 1,191,947 ops/sec ±3.02% (70 runs sampled)
-    MiniSignals x 38,953,952 ops/sec ±4.12% (99 runs sampled)
+    EventEmitter1 x 19,546,511 ops/sec ±4.12% (80 runs sampled)
+    EventEmitter2 x 27,348,440 ops/sec ±2.96% (85 runs sampled)
+    EventEmitter3 x 68,163,501 ops/sec ±1.26% (93 runs sampled)
+    JS-Signals x 1,998,206 ops/sec ±3.96% (57 runs sampled)
+    JS-Signals patch x 1,323,836 ops/sec ±1.80% (88 runs sampled)
+    MiniSignals x 37,168,383 ops/sec ±2.41% (91 runs sampled)
 *Fastest is EventEmitter3*
 
 # add-remove
-    EventEmitter1 x 1,238,591 ops/sec ±0.55% (98 runs sampled)
-    EventEmitter2 x 675,527 ops/sec ±1.31% (98 runs sampled)
-    EventEmitter3 x 1,167,721 ops/sec ±2.94% (92 runs sampled)
-    JS-Signals x 377,696 ops/sec ±0.90% (99 runs sampled)
-    JS-Signals patch x 582,978 ops/sec ±0.66% (99 runs sampled)
-    MiniSignals x 984,493 ops/sec ±4.90% (76 runs sampled)
-*Fastest is EventEmitter1*
+    EventEmitter1 x 979,758 ops/sec ±1.97% (89 runs sampled)
+    EventEmitter2 x 576,199 ops/sec ±1.90% (88 runs sampled)
+    EventEmitter3 x 1,153,919 ops/sec ±1.00% (92 runs sampled)
+    JS-Signals x 440,575 ops/sec ±1.10% (88 runs sampled)
+    JS-Signals patch x 443,779 ops/sec ±1.55% (95 runs sampled)
+    MiniSignals x 1,143,085 ops/sec ±2.00% (93 runs sampled)
+*Fastest is EventEmitter3*
 
-# Chrome (Version 45.0.2454.101 m)
+# Chrome (Version 45)
 
 # emit
-    EventEmitter1 x 769,602 ops/sec ±0.73% (98 runs sampled)
-    EventEmitter2 x 705,161 ops/sec ±3.84% (90 runs sampled)
-    EventEmitter3 x 2,631,502 ops/sec ±0.97% (96 runs sampled)
-    JS-Signals x 94,907 ops/sec ±1.38% (96 runs sampled)
-    JS-Signals patch x 204,548 ops/sec ±0.68% (92 runs sampled)
-    MiniSignals x 7,627,762 ops/sec ±0.67% (96 runs sampled)
-    signal-emitter x 108,526 ops/sec ±0.82% (93 runs sampled)
-    event-signal x 1,371,763 ops/sec ±0.95% (97 runs sampled)
-    signal-lite x 145,675 ops/sec ±1.75% (93 runs sampled)
+    EventEmitter1 x 571,916 ops/sec ±0.80% (93 runs sampled)
+    EventEmitter2 x 580,421 ops/sec ±1.05% (91 runs sampled)
+    EventEmitter3 x 2,254,324 ops/sec ±0.61% (93 runs sampled)
+    JS-Signals x 85,095 ops/sec ±1.12% (92 runs sampled)
+    JS-Signals patch x 155,678 ops/sec ±0.61% (92 runs sampled)
+    MiniSignals x 5,981,267 ops/sec ±1.03% (95 runs sampled)
+    signal-emitter x 98,961 ops/sec ±0.95% (91 runs sampled)
+    signal-lite x 118,542 ops/sec ±1.09% (92 runs sampled)
 *Fastest is MiniSignals*
+
+# emit with context
+    EventEmitter1 x 178,630 ops/sec ±0.45% (93 runs sampled)
+    EventEmitter2 x 145,003 ops/sec ±0.95% (93 runs sampled)
+    EventEmitter3 x 2,008,676 ops/sec ±1.20% (89 runs sampled)
+    JS-Signals x 81,656 ops/sec ±0.78% (93 runs sampled)
+    JS-Signals patch x 154,052 ops/sec ±1.21% (91 runs sampled)
+    MiniSignals x 193,865 ops/sec ±0.91% (86 runs sampled)
+    signal-emitter x 103,220 ops/sec ±0.60% (91 runs sampled)
+    signal-lite x 120,894 ops/sec ±1.12% (88 runs sampled)
+*Fastest is EventEmitter3*
 
 # emit many
-    EventEmitter1 x 352,174 ops/sec ±0.54% (98 runs sampled)
-    EventEmitter2 x 343,561 ops/sec ±0.47% (97 runs sampled)
-    EventEmitter3 x 673,209 ops/sec ±3.23% (89 runs sampled)
-    JS-Signals x 50,857 ops/sec ±4.10% (89 runs sampled)
-    JS-Signals patch x 127,228 ops/sec ±0.67% (99 runs sampled)
-    MiniSignals x 1,239,448 ops/sec ±6.88% (80 runs sampled)
-    signal-emitter x 68,301 ops/sec ±3.91% (87 runs sampled)
-    event-signal x 573,719 ops/sec ±4.44% (80 runs sampled)
-    signal-lite x 80,095 ops/sec ±4.34% (86 runs sampled)
-    minivents x 58,081 ops/sec ±3.28% (69 runs sampled)
-*Fastest is MiniSignals*
+    EventEmitter1 x 303,592 ops/sec ±1.25% (92 runs sampled)
+    EventEmitter2 x 232,959 ops/sec ±1.22% (89 runs sampled)
+    EventEmitter3 x 658,096 ops/sec ±0.68% (90 runs sampled)
+    JS-Signals x 64,375 ops/sec ±1.12% (91 runs sampled)
+    JS-Signals patch x 92,149 ops/sec ±0.94% (89 runs sampled)
+    MiniSignals x 226,467 ops/sec ±0.97% (90 runs sampled)
+    signal-emitter x 91,426 ops/sec ±0.89% (93 runs sampled)
+    signal-lite x 79,924 ops/sec ±0.88% (89 runs sampled)
+    minivents x 76,097 ops/sec ±0.75% (92 runs sampled)
+*Fastest is EventEmitter3*
 
 # emit large
-    EventEmitter1 x 2,042,451 ops/sec ±0.80% (96 runs sampled)
-    EventEmitter2 x 1,745,718 ops/sec ±4.60% (83 runs sampled)
-    EventEmitter3 x 2,006,378 ops/sec ±3.50% (89 runs sampled)
-    JS-Signals x 132,426 ops/sec ±1.05% (97 runs sampled)
-    JS-Signals patch x 425,103 ops/sec ±1.14% (96 runs sampled)
-    MiniSignals x 20,951,827 ops/sec ±0.75% (97 runs sampled)
-    signal-emitter x 271,456 ops/sec ±0.65% (94 runs sampled)
-    event-signal x 3,454,847 ops/sec ±3.10% (66 runs sampled)
-    signal-lite x 162,944 ops/sec ±4.67% (91 runs sampled)
-    minivents x 361,794 ops/sec ±0.99% (95 runs sampled)
-*Fastest is MiniSignals*
+    EventEmitter1 x 1,620,006 ops/sec ±0.99% (94 runs sampled)
+    EventEmitter2 x 1,268,757 ops/sec ±1.33% (91 runs sampled)
+    EventEmitter3 x 2,671,745 ops/sec ±1.09% (89 runs sampled)
+    JS-Signals x 142,380 ops/sec ±0.96% (94 runs sampled)
+    JS-Signals patch x 355,281 ops/sec ±0.85% (94 runs sampled)
+    MiniSignals x 2,503,902 ops/sec ±0.97% (94 runs sampled)
+    signal-emitter x 242,070 ops/sec ±1.58% (91 runs sampled)
+    signal-lite x 180,220 ops/sec ±1.18% (93 runs sampled)
+    minivents x 320,851 ops/sec ±1.30% (89 runs sampled)
+*Fastest is EventEmitter3*
 
 # init
-    EventEmitter1 x 51,094,982 ops/sec ±4.61% (79 runs sampled)
-    EventEmitter2 x 30,431,362 ops/sec ±4.14% (92 runs sampled)
-    EventEmitter3 x 85,640,742 ops/sec ±4.07% (90 runs sampled)
-    JS-Signals x 1,601,767 ops/sec ±9.05% (61 runs sampled)
-    JS-Signals patch x 1,094,455 ops/sec ±1.02% (98 runs sampled)
-    MiniSignals x 38,098,708 ops/sec ±4.57% (77 runs sampled)
+    EventEmitter1 x 50,182,536 ops/sec ±0.78% (94 runs sampled)
+    EventEmitter2 x 32,777,448 ops/sec ±1.97% (89 runs sampled)
+    EventEmitter3 x 66,973,780 ops/sec ±0.76% (90 runs sampled)
+    JS-Signals x 1,736,944 ops/sec ±5.55% (50 runs sampled)
+    JS-Signals patch x 829,520 ops/sec ±1.61% (82 runs sampled)
+    MiniSignals x 43,494,091 ops/sec ±0.82% (95 runs sampled)
 *Fastest is EventEmitter3*
 
 # add-remove
-    EventEmitter1 x 948,050 ops/sec ±4.07% (89 runs sampled)
-    EventEmitter2 x 1,143,075 ops/sec ±4.03% (87 runs sampled)
-    EventEmitter3 x 948,399 ops/sec ±1.58% (95 runs sampled)
-    JS-Signals x 413,445 ops/sec ±4.40% (83 runs sampled)
-    JS-Signals patch x 344,013 ops/sec ±3.23% (92 runs sampled)
-    MiniSignals x 952,922 ops/sec ±3.29% (93 runs sampled)
-*Fastest is EventEmitter2*
+    EventEmitter1 x 1,111,354 ops/sec ±0.92% (93 runs sampled)
+    EventEmitter2 x 1,045,212 ops/sec ±0.99% (92 runs sampled)
+    EventEmitter3 x 1,237,196 ops/sec ±0.76% (96 runs sampled)
+    JS-Signals x 433,043 ops/sec ±0.93% (92 runs sampled)
+    JS-Signals patch x 417,911 ops/sec ±2.31% (89 runs sampled)
+    MiniSignals x 809,605 ops/sec ±1.96% (91 runs sampled)
+*Fastest is EventEmitter3*
