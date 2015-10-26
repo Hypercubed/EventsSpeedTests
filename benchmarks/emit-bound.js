@@ -50,15 +50,15 @@ var ee1 = new EventEmitter1(),
 
 ee1.on('foo', handle.bind(ctx)); ee1.on('foo', handle2);
 ee2.on('foo', handle.bind(ctx)); ee2.on('foo', handle2);
-ee3.on('foo', handle, ctx); ee3.on('foo', handle2);
-signal.add(handle, ctx); signal.add(handle2);
-signal2.add(handle, ctx); signal2.add(handle2);
-miniSignal.add(handle,ctx); miniSignal.add(handle2);
-signalEmitter.on(handle, ctx); signalEmitter.on(handle2);
-eventSignal.addListener(handle, ctx);  eventSignal.addListener(handle2);
-signalLite.add(handle, ctx);  signalLite.add(handle2);
+ee3.on('foo', handle.bind(ctx)); ee3.on('foo', handle2);
+signal.add(handle.bind(ctx)); signal.add(handle2);
+signal2.add(handle.bind(ctx)); signal2.add(handle2);
+miniSignal.add(handle.bind(ctx)); miniSignal.add(handle2);
+signalEmitter.on(handle.bind(ctx)); signalEmitter.on(handle2);
+eventSignal.addListener(handle.bind(ctx));  eventSignal.addListener(handle2);
+signalLite.add(handle.bind(ctx));  signalLite.add(handle2);
 
-var suite = require('./suite')('emit with context');
+var suite = require('./suite')('emit with bound function');
 
 suite
   .add('EventEmitter1', function() {
