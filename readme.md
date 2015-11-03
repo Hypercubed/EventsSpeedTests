@@ -36,7 +36,6 @@
     EventEmitter2 x 5,679,515 ops/sec ±0.64% (96 runs sampled)
     EventEmitter3 x 7,129,785 ops/sec ±2.75% (91 runs sampled)
     JS-Signals x 452,252 ops/sec ±4.18% (94 runs sampled)
-    JS-Signals patch ReferenceError: signal2 is not defined
     MiniSignals x 4,625,450 ops/sec ±2.07% (90 runs sampled)
     signal-emitter x 451,842 ops/sec ±0.85% (97 runs sampled)
     event-signal x 5,341,134 ops/sec ±0.82% (95 runs sampled)
@@ -118,7 +117,6 @@
     EventEmitter2 x 4,014,867 ops/sec ±0.86% (95 runs sampled)
     EventEmitter3 x 4,240,796 ops/sec ±2.08% (85 runs sampled)
     JS-Signals x 281,507 ops/sec ±2.11% (97 runs sampled)
-suite.js:20 JS-Signals patch ReferenceError: signal2 is not defined
     MiniSignals x 3,876,742 ops/sec ±1.10% (95 runs sampled)
     signal-emitter x 339,245 ops/sec ±2.95% (90 runs sampled)
     event-signal x 3,924,614 ops/sec ±1.56% (95 runs sampled)

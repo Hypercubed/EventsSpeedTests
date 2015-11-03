@@ -62,9 +62,6 @@ suite
   .add('JS-Signals', function() {
     signal.dispatch('bar');
   })
-  .add('JS-Signals patch', function() {
-    signal2.dispatch('bar');
-  })
   .add('MiniSignals', function() {
     miniSignal.dispatch('bar');
   })
