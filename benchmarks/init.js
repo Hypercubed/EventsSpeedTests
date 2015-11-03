@@ -7,8 +7,7 @@ var EventEmitter2 = require('eventemitter2'),
     EventEmitter3 = require('eventemitter3'),
     EventEmitter1 = require('events').EventEmitter,
     Signal = require('signals'),
-    MiniSignal = require('mini-signals'),
-    Signal2 = require('signals-patch');
+    MiniSignal = require('mini-signals');
 
 if (typeof window !== 'undefined') {
   MiniSignal = (typeof MiniSignal !== 'function') ? MiniSignal.default : MiniSignal;  // https://github.com/systemjs/systemjs/issues/304
@@ -28,9 +27,6 @@ require('./suite')('init')
   })
   .add('JS-Signals', function() {
     var signal = new Signal();
-  })
-  .add('JS-Signals patch', function() {
-    var signal2 = new Signal2();
   })
   .add('MiniSignals', function() {
     var miniSignal = new MiniSignal();

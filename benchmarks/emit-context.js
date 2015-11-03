@@ -7,17 +7,13 @@ var EventEmitter2 = require('eventemitter2'),
     EventEmitter3 = require('eventemitter3'),
     EventEmitter1 = require('events').EventEmitter,
     Signal = require('signals'),
-    Signal2,
     MiniSignal = require('mini-signals'),
     SignalEmitter = require('signal-emitter'),
     EventSignal = require('event-signal'),
     SignalLite = require('signals-lite').SignalLite;
 
-if (typeof window !== 'undefined') {
-  Signal2 = require('hcSignals');
-} else {
+if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
-  Signal2 = require('../jspm_packages/github/Hypercubed/js-signals@fixv8optbuild/dist/signals');
 }
 
 var ctx = {
@@ -44,7 +40,6 @@ var ee1 = new EventEmitter1(),
     signalEmitter = new SignalEmitter(new EventEmitter3(), 'foo'),
     eventSignal = new EventSignal(),
     signal = new Signal(),
-    signal2 = new Signal2(),
     miniSignal = new MiniSignal(),
     signalLite = new SignalLite();
 
@@ -52,7 +47,6 @@ ee1.on('foo', handle.bind(ctx)); ee1.on('foo', handle2);
 ee2.on('foo', handle.bind(ctx)); ee2.on('foo', handle2);
 ee3.on('foo', handle, ctx); ee3.on('foo', handle2);
 signal.add(handle, ctx); signal.add(handle2);
-signal2.add(handle, ctx); signal2.add(handle2);
 miniSignal.add(handle,ctx); miniSignal.add(handle2);
 signalEmitter.on(handle, ctx); signalEmitter.on(handle2);
 eventSignal.addListener(handle, ctx);  eventSignal.addListener(handle2);
@@ -84,12 +78,6 @@ suite
     signal.dispatch('bar');
     signal.dispatch('bar', 'baz');
     signal.dispatch('bar', 'baz', 'boom');
-  })
-  .add('JS-Signals patch', function() {
-    signal2.dispatch();
-    signal2.dispatch('bar');
-    signal2.dispatch('bar', 'baz');
-    signal2.dispatch('bar', 'baz', 'boom');
   })
   .add('MiniSignals', function() {
     miniSignal.dispatch();

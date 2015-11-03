@@ -7,16 +7,13 @@ var EventEmitter2 = require('eventemitter2'),
     EventEmitter3 = require('eventemitter3'),
     EventEmitter1 = require('events').EventEmitter,
     Signal = require('signals'),
-    Signal2 = require('signals-patch'),
     MiniSignal = require('mini-signals'),
     SignalEmitter = require('signal-emitter'),
     EventSignal = require('event-signal'),
     SignalLite = require('signals-lite').SignalLite,
     MiniVent = require('minivents');
 
-if (typeof window !== 'undefined') {
-  MiniSignal = (typeof MiniSignal !== 'function') ? MiniSignal.default : MiniSignal;  // https://github.com/systemjs/systemjs/issues/304
-} else {
+if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
 }
 
@@ -29,7 +26,6 @@ var ee1 = new EventEmitter1(),
     signalEmitter = new SignalEmitter(new EventEmitter3(), 'foo'),
     eventSignal = new EventSignal(),
     signal = new Signal(),
-    signal2 = new Signal2(),
     miniSignal = new MiniSignal(),
     signalLite = new SignalLite(),
     miniVent = new MiniVent();
@@ -50,7 +46,6 @@ miniVent.on('foo', handle); miniVent.on('foo', handle2);
 
 // signals
 signal.add(handle); signal.add(handle2);
-signal2.add(handle); signal2.add(handle2);
 miniSignal.add(handle); miniSignal.add(handle2);
 signalEmitter.on(handle); signalEmitter.on(handle2);
 eventSignal.addListener(handle);  eventSignal.addListener(handle2);
@@ -69,9 +64,6 @@ require('./suite')('emit large')
   })
   .add('JS-Signals', function() {
     signal.dispatch('bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
-  })
-  .add('JS-Signals patch', function() {
-    signal2.dispatch('bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
   })
   .add('MiniSignals', function() {
     miniSignal.dispatch('bar', 'baz', 'boom',1,2,3,4,5,6,7,8,9);
