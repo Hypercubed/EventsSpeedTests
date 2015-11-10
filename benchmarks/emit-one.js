@@ -16,14 +16,14 @@ if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
 }
 
-function handle(a,b) {
-  if (arguments.length > 0 && a !== 'bar') {console.log('damn'); process.exit(); }
-  if (arguments.length > 1 && b !== 'baz') {console.log('damn'); process.exit(); }
-  if (arguments.length > 100) {console.log('damn');}
+function handle (a, b) {
+  if (arguments.length > 0 && a !== 'bar') { console.log('damn'); process.exit(); }
+  if (arguments.length > 1 && b !== 'baz') { console.log('damn'); process.exit(); }
+  if (arguments.length > 100) { console.log('damn'); }
 }
 
-function handle2() {
-  if (arguments.length > 100) {console.log('damn');}
+function handle2 () {
+  if (arguments.length > 100) { console.log('damn'); }
 }
 
 /**
@@ -44,34 +44,34 @@ ee3.on('foo', handle); ee3.on('foo', handle2);
 signal.add(handle); signal.add(handle2);
 miniSignal.add(handle); miniSignal.add(handle2);
 signalEmitter.on(handle); signalEmitter.on(handle2);
-eventSignal.addListener(handle);  eventSignal.addListener(handle2);
-signalLite.add(handle);  signalLite.add(handle2);
+eventSignal.addListener(handle); eventSignal.addListener(handle2);
+signalLite.add(handle); signalLite.add(handle2);
 
 var suite = require('./suite')('emit one parameter');
 
 suite
-  .add('EventEmitter1', function() {
+  .add('EventEmitter1', function () {
     ee1.emit('bar');
   })
-  .add('EventEmitter2', function() {
+  .add('EventEmitter2', function () {
     ee2.emit('bar');
   })
-  .add('EventEmitter3', function() {
+  .add('EventEmitter3', function () {
     ee3.emit('bar');
   })
-  .add('JS-Signals', function() {
+  .add('JS-Signals', function () {
     signal.dispatch('bar');
   })
-  .add('MiniSignals', function() {
+  .add('MiniSignals', function () {
     miniSignal.dispatch('bar');
   })
-  .add('signal-emitter', function() {
+  .add('signal-emitter', function () {
     signalEmitter.emit('bar');
   })
-  .add('event-signal', function() {  // eventSignal.emit only emits one argument
+  .add('event-signal', function () {  // eventSignal.emit only emits one argument
     eventSignal.emit('bar');
   })
-  .add('signal-lite', function() {
+  .add('signal-lite', function () {
     signalLite.trigger('bar');
   });
 

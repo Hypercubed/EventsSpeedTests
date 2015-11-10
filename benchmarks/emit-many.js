@@ -3,15 +3,15 @@
 /**
  * Preparation code.
  */
-var EventEmitter2 = require('eventemitter2'),
-    EventEmitter3 = require('eventemitter3'),
-    EventEmitter1 = require('events').EventEmitter,
-    Signal = require('signals'),
-    MiniSignal = require('mini-signals'),
-    SignalEmitter = require('signal-emitter'),
-    EventSignal = require('event-signal'),
-    SignalLite = require('signals-lite').SignalLite,
-    MiniVent = require('minivents');
+var EventEmitter2 = require('eventemitter2');
+var EventEmitter3 = require('eventemitter3');
+var EventEmitter1 = require('events').EventEmitter;
+var Signal = require('signals');
+var MiniSignal = require('mini-signals');
+var SignalEmitter = require('signal-emitter');
+var EventSignal = require('event-signal');
+var SignalLite = require('signals-lite').SignalLite;
+var MiniVent = require('minivents');
 
 if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
@@ -20,20 +20,20 @@ if (typeof window === 'undefined') {
 /**
  * Instances.
  */
-var ee1 = new EventEmitter1(),
-    ee2 = new EventEmitter2(),
-    ee3 = new EventEmitter3(),
-    signalEmitter = new SignalEmitter(new EventEmitter3(), 'foo'),
-    eventSignal = new EventSignal(),
-    signal = new Signal(),
-    miniSignal = new MiniSignal(),
-    signalLite = new SignalLite(),
-    miniVent = new MiniVent();
+var ee1 = new EventEmitter1();
+var ee2 = new EventEmitter2();
+var ee3 = new EventEmitter3();
+var signalEmitter = new SignalEmitter(new EventEmitter3(), 'foo');
+var eventSignal = new EventSignal();
+var signal = new Signal();
+var miniSignal = new MiniSignal();
+var signalLite = new SignalLite();
+var miniVent = new MiniVent();
 
-for(var i = 0; i < 10; i++) {
-  var handle = function handle() {
-    if (arguments.length > 100) {console.log('damn');}
-  }
+for (var i = 0; i < 10; i++) {
+  var handle = function handle () {
+    if (arguments.length > 100) { console.log('damn'); }
+  };
 
   // events
   ee1.on('foo', handle);
@@ -50,37 +50,37 @@ for(var i = 0; i < 10; i++) {
 }
 
 require('./suite')('emit many')
-  .add('EventEmitter1', function() {
+  .add('EventEmitter1', function () {
     ee1.emit('foo');
     ee1.emit('foo', 'bar');
     ee1.emit('foo', 'bar', 'baz');
     ee1.emit('foo', 'bar', 'baz', 'boom');
   })
-  .add('EventEmitter2', function() {
+  .add('EventEmitter2', function () {
     ee2.emit('foo');
     ee2.emit('foo', 'bar');
     ee2.emit('foo', 'bar', 'baz');
     ee2.emit('foo', 'bar', 'baz', 'boom');
   })
-  .add('EventEmitter3', function() {
+  .add('EventEmitter3', function () {
     ee3.emit('foo');
     ee3.emit('foo', 'bar');
     ee3.emit('foo', 'bar', 'baz');
     ee3.emit('foo', 'bar', 'baz', 'boom');
   })
-  .add('JS-Signals', function() {
+  .add('JS-Signals', function () {
     signal.dispatch();
     signal.dispatch('bar');
     signal.dispatch('bar', 'baz');
     signal.dispatch('bar', 'baz', 'boom');
   })
-  .add('MiniSignals', function() {
+  .add('MiniSignals', function () {
     miniSignal.dispatch();
     miniSignal.dispatch('bar');
     miniSignal.dispatch('bar', 'baz');
     miniSignal.dispatch('bar', 'baz', 'boom');
   })
-  .add('signal-emitter', function() {
+  .add('signal-emitter', function () {
     signalEmitter.emit();
     signalEmitter.emit('bar');
     signalEmitter.emit('bar', 'baz');
@@ -92,16 +92,16 @@ require('./suite')('emit many')
     eventSignal.emit(['bar', 'baz']);
     eventSignal.emit(['bar', 'baz', 'boom']);
   }) */
-  .add('signal-lite', function() {
+  .add('signal-lite', function () {
     signalLite.trigger();
     signalLite.trigger('bar');
     signalLite.trigger('bar', 'baz');
     signalLite.trigger('bar', 'baz', 'boom');
   })
-  .add('minivents', function() {
+  .add('minivents', function () {
     miniVent.emit('foo');
-    miniVent.emit('foo','bar');
-    miniVent.emit('foo','bar', 'baz');
-    miniVent.emit('foo','bar', 'baz', 'boom');
+    miniVent.emit('foo', 'bar');
+    miniVent.emit('foo', 'bar', 'baz');
+    miniVent.emit('foo', 'bar', 'baz', 'boom');
   })
   .run();

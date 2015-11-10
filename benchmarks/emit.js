@@ -17,26 +17,26 @@ if (typeof window === 'undefined') {
 }
 
 function handle (a, b) {
-  if (arguments.length > 0 && a !== 'bar') {console.log('damn'); process.exit(); }
-  if (arguments.length > 1 && b !== 'baz') {console.log('damn'); process.exit(); }
-  if (arguments.length > 100) {console.log('damn');}
+  if (arguments.length > 0 && a !== 'bar') { console.log('damn'); process.exit(); }
+  if (arguments.length > 1 && b !== 'baz') { console.log('damn'); process.exit(); }
+  if (arguments.length > 100) { console.log('damn'); }
 }
 
-function handle2() {
-  if (arguments.length > 100) {console.log('damn');}
+function handle2 () {
+  if (arguments.length > 100) { console.log('damn'); }
 }
 
 /**
  * Instances.
  */
-var ee1 = new EventEmitter1(),
-    ee2 = new EventEmitter2(),
-    ee3 = new EventEmitter3(),
-    signalEmitter = new SignalEmitter(new EventEmitter3(), 'foo'),
-    eventSignal = new EventSignal(),
-    signal = new Signal(),
-    miniSignal = new MiniSignal(),
-    signalLite = new SignalLite();
+var ee1 = new EventEmitter1();
+var ee2 = new EventEmitter2();
+var ee3 = new EventEmitter3();
+var signalEmitter = new SignalEmitter(new EventEmitter3(), 'foo');
+var eventSignal = new EventSignal();
+var signal = new Signal();
+var miniSignal = new MiniSignal();
+var signalLite = new SignalLite();
 
 ee1.on('foo', handle); ee1.on('foo', handle2);
 ee2.on('foo', handle); ee2.on('foo', handle2);
