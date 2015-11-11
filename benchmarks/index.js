@@ -4,5 +4,7 @@ require('./emit-bound');
 require('./emit-one');
 require('./emit-many');
 require('./emit-large');
+require('./emit-arrays');
+require('./emit-objects');
 require('./init');
 require('./add-remove');

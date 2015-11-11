@@ -9,11 +9,11 @@ module.exports = function suite (name) {
 
   suite
     .on('start', function cycle (e) {
-      console.log('\n#', this.name);
+      console.log('\n##', this.name);
     })
     .on('cycle', function cycle (e) {
       if (!e.target.aborted) {
-        console.log(String(e.target));
+        console.log('    ' + String(e.target));
       }
     })
     .on('error', function (e) {

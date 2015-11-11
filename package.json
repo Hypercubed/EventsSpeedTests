@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Hypercubed/EventsSpeedTests",
   "devDependencies": {
+    "@reactivex/rxjs": "^5.0.0-alpha.10",
     "assume": "~1.2.6",
     "benchmark": "~1.0.0",
     "event-signal": "^0.1.6",
@@ -34,8 +35,9 @@
     "signals-lite": "^0.9.3"
   },
   "jspm": {
-    "directories": {},
-    "dependencies": {},
+    "dependencies": {
+      "@reactivex/rxjs": "npm:@reactivex/rxjs@^5.0.0-alpha.10"
+    },
     "devDependencies": {
       "benchmark": "npm:benchmark@^1.0.0",
       "event-signal": "npm:event-signal@^0.1.6",
@@ -52,5 +54,6 @@
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
       "util": "github:jspm/nodelibs-util@^0.1.0"
     }
-  }
+  },
+  "dependencies": {}
 }

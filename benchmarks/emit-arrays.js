@@ -17,13 +17,16 @@ if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
 }
 
-function handle (a, b) {
-  if (arguments.length > 0 && a !== 'bar') { console.log('damn'); process.exit(); }
-  if (arguments.length !== 1) { console.log('damn'); }
+function handle (a) {
+  if (arguments.length > 1) { console.log('damn'); }
+  if (a) {
+    if (a.length > 0 && a[0] !== 'bar') { console.log('damn'); }
+    if (a.length > 1 && a[1] !== 'baz') { console.log('damn'); }
+  }
 }
 
 function handle2 () {
-  if (arguments.length !== 1) { console.log('damn'); }
+  if (arguments.length > 1) { console.log('damn'); }
 }
 
 /**
@@ -49,35 +52,62 @@ eventSignal.addListener(handle); eventSignal.addListener(handle2);
 signalLite.add(handle); signalLite.add(handle2);
 subject.subscribe(handle); subject.subscribe(handle2);
 
-var suite = require('./suite')('emit one parameter');
+var suite = require('./suite')('emit arrays');
 
 suite
   .add('EventEmitter1', function () {
-    ee1.emit('bar');
+    ee1.emit('foo');
+    ee1.emit('foo', ['bar']);
+    ee1.emit('foo', ['bar', 'baz']);
+    ee1.emit('foo', ['bar', 'baz', 'boom']);
   })
   .add('EventEmitter2', function () {
-    ee2.emit('bar');
+    ee2.emit('foo');
+    ee2.emit('foo', ['bar']);
+    ee2.emit('foo', ['bar', 'baz']);
+    ee2.emit('foo', ['bar', 'baz', 'boom']);
   })
   .add('EventEmitter3', function () {
-    ee3.emit('bar');
+    ee3.emit('foo');
+    ee3.emit('foo', ['bar']);
+    ee3.emit('foo', ['bar', 'baz']);
+    ee3.emit('foo', ['bar', 'baz', 'boom']);
   })
   .add('RXJS', function () {
-    subject.next('bar');
+    subject.next();
+    subject.next(['bar']);
+    subject.next(['bar', 'baz']);
+    subject.next(['bar', 'baz', 'boom']);
   })
   .add('JS-Signals', function () {
-    signal.dispatch('bar');
+    signal.dispatch();
+    signal.dispatch(['bar']);
+    signal.dispatch(['bar', 'baz']);
+    signal.dispatch(['bar', 'baz', 'boom']);
   })
   .add('MiniSignals', function () {
-    miniSignal.dispatch('bar');
+    miniSignal.dispatch();
+    miniSignal.dispatch(['bar']);
+    miniSignal.dispatch(['bar', 'baz']);
+    miniSignal.dispatch(['bar', 'baz', 'boom']);
   })
   .add('signal-emitter', function () {
-    signalEmitter.emit('bar');
+    signalEmitter.emit();
+    signalEmitter.emit(['bar']);
+    signalEmitter.emit(['bar', 'baz']);
+    signalEmitter.emit(['bar', 'baz', 'boom']);
   })
-  .add('event-signal', function () {  // eventSignal.emit only emits one argument
-    eventSignal.emit('bar');
+  .add('event-signal', function () {  // this is not a fair test, eventSignal.emit only emits one argument
+    eventSignal.emit();
+    eventSignal.emit(['bar']);
+    eventSignal.emit(['bar', 'baz']);
+    eventSignal.emit(['bar', 'baz', 'boom']);
   })
   .add('signal-lite', function () {
-    signalLite.trigger('bar');
+    signalLite.trigger();
+    signalLite.trigger(['bar']);
+    signalLite.trigger(['bar', 'baz']);
+    signalLite.trigger(['bar', 'baz', 'boom']);
   });
 
 suite
