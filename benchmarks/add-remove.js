@@ -3,9 +3,9 @@
 /**
  * Preparation code.
  */
+var EventEmitter1 = require('events').EventEmitter;
 var EventEmitter2 = require('eventemitter2');
 var EventEmitter3 = require('eventemitter3');
-var EventEmitter1 = require('events').EventEmitter;
 var Signal = require('signals');
 var MiniSignal = require('mini-signals');
 
@@ -13,8 +13,10 @@ if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
 }
 
-function handle () {
-  if (arguments.length > 100) { console.log('damn'); }
+function handle() {
+  if (arguments.length > 100) {
+    console.log('damn');
+  }
 }
 
 /**
@@ -27,7 +29,7 @@ var signal = new Signal();
 var miniSignal = new MiniSignal();
 
 require('./suite')('add-remove')
-  .add('EventEmitter1', function () {
+  .add('EventEmitter', function () {
     ee1.on('foo', handle);
     ee1.removeListener('foo', handle);
   })

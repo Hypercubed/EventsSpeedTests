@@ -3,9 +3,9 @@
 /**
  * Preparation code.
  */
+var EventEmitter1 = require('events').EventEmitter;
 var EventEmitter2 = require('eventemitter2');
 var EventEmitter3 = require('eventemitter3');
-var EventEmitter1 = require('events').EventEmitter;
 var Signal = require('signals');
 var MiniSignal = require('mini-signals');
 var SignalEmitter = require('signal-emitter');
@@ -31,8 +31,10 @@ var signalLite = new SignalLite();
 var miniVent = new MiniVent();
 
 for (var i = 0; i < 10; i++) {
-  var handle = function handle () {
-    if (arguments.length > 100) { console.log('damn'); }
+  var handle = function handle() {
+    if (arguments.length > 100) {
+      console.log('damn');
+    }
   };
 
   // events
@@ -50,7 +52,7 @@ for (var i = 0; i < 10; i++) {
 }
 
 require('./suite')('emit many')
-  .add('EventEmitter1', function () {
+  .add('EventEmitter', function () {
     ee1.emit('foo');
     ee1.emit('foo', 'bar');
     ee1.emit('foo', 'bar', 'baz');
@@ -93,10 +95,10 @@ require('./suite')('emit many')
     eventSignal.emit(['bar', 'baz', 'boom']);
   }) */
   .add('signal-lite', function () {
-    signalLite.trigger();
-    signalLite.trigger('bar');
-    signalLite.trigger('bar', 'baz');
-    signalLite.trigger('bar', 'baz', 'boom');
+    signalLite.broadcast();
+    signalLite.broadcast('bar');
+    signalLite.broadcast('bar', 'baz');
+    signalLite.broadcast('bar', 'baz', 'boom');
   })
   .add('minivents', function () {
     miniVent.emit('foo');

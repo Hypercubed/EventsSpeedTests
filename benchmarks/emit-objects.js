@@ -3,9 +3,9 @@
 /**
  * Preparation code.
  */
+var EventEmitter1 = require('events').EventEmitter;
 var EventEmitter2 = require('eventemitter2');
 var EventEmitter3 = require('eventemitter3');
-var EventEmitter1 = require('events').EventEmitter;
 var Signal = require('signals');
 var MiniSignal = require('mini-signals');
 var SignalEmitter = require('signal-emitter');
@@ -17,17 +17,27 @@ if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
 }
 
-function handle (a) {
-  if (arguments.length > 1) { console.log('damn array length'); }
+function handle(a) {
+  if (arguments.length > 1) {
+    console.log('damn array length');
+  }
   if (a) {
-    if (a.bar && a.bar !== 'bar') { console.log('damn bar'); }
-    if (a.baz && a.baz !== 'baz') { console.log('damn baz'); }
-    if (a.boom && a.boom !== 'boom') { console.log('damn boom'); }
+    if (a.bar && a.bar !== 'bar') {
+      console.log('damn bar');
+    }
+    if (a.baz && a.baz !== 'baz') {
+      console.log('damn baz');
+    }
+    if (a.boom && a.boom !== 'boom') {
+      console.log('damn boom');
+    }
   }
 }
 
-function handle2 () {
-  if (arguments.length > 1) { console.log('damn'); }
+function handle2() {
+  if (arguments.length > 1) {
+    console.log('damn');
+  }
 }
 
 /**
@@ -43,20 +53,29 @@ var miniSignal = new MiniSignal();
 var signalLite = new SignalLite();
 var subject = new Subject();
 
-ee1.on('foo', handle); ee1.on('foo', handle2);
-ee2.on('foo', handle); ee2.on('foo', handle2);
-ee3.on('foo', handle); ee3.on('foo', handle2);
-signal.add(handle); signal.add(handle2);
-miniSignal.add(handle); miniSignal.add(handle2);
-signalEmitter.on(handle); signalEmitter.on(handle2);
-eventSignal.addListener(handle); eventSignal.addListener(handle2);
-signalLite.add(handle); signalLite.add(handle2);
-subject.subscribe(handle); subject.subscribe(handle2);
+ee1.on('foo', handle);
+ee1.on('foo', handle2);
+ee2.on('foo', handle);
+ee2.on('foo', handle2);
+ee3.on('foo', handle);
+ee3.on('foo', handle2);
+signal.add(handle);
+signal.add(handle2);
+miniSignal.add(handle);
+miniSignal.add(handle2);
+signalEmitter.on(handle);
+signalEmitter.on(handle2);
+eventSignal.addListener(handle);
+eventSignal.addListener(handle2);
+signalLite.add(handle);
+signalLite.add(handle2);
+subject.subscribe(handle);
+subject.subscribe(handle2);
 
 var suite = require('./suite')('emit objects');
 
 suite
-  .add('EventEmitter1', function () {
+  .add('EventEmitter', function () {
     ee1.emit('foo');
     ee1.emit('foo', {bar: 'bar'});
     ee1.emit('foo', {bar: 'bar', baz: 'baz'});
@@ -105,10 +124,10 @@ suite
     eventSignal.emit({bar: 'bar', baz: 'baz', boom: 'boom'});
   })
   .add('signal-lite', function () {
-    signalLite.trigger();
-    signalLite.trigger({bar: 'bar'});
-    signalLite.trigger({bar: 'bar', baz: 'baz'});
-    signalLite.trigger({bar: 'bar', baz: 'baz', boom: 'boom'});
+    signalLite.broadcast();
+    signalLite.broadcast({bar: 'bar'});
+    signalLite.broadcast({bar: 'bar', baz: 'baz'});
+    signalLite.broadcast({bar: 'bar', baz: 'baz', boom: 'boom'});
   });
 
 suite

@@ -1,7 +1,7 @@
 require('./emit');
+require('./emit-one');
 require('./emit-context');
 require('./emit-bound');
-require('./emit-one');
 require('./emit-many');
 require('./emit-large');
 require('./emit-arrays');

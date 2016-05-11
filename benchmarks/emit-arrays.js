@@ -3,9 +3,9 @@
 /**
  * Preparation code.
  */
+var EventEmitter1 = require('events').EventEmitter;
 var EventEmitter2 = require('eventemitter2');
 var EventEmitter3 = require('eventemitter3');
-var EventEmitter1 = require('events').EventEmitter;
 var Signal = require('signals');
 var MiniSignal = require('mini-signals');
 var SignalEmitter = require('signal-emitter');
@@ -17,16 +17,24 @@ if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
 }
 
-function handle (a) {
-  if (arguments.length > 1) { console.log('damn'); }
+function handle(a) {
+  if (arguments.length > 1) {
+    console.log('damn');
+  }
   if (a) {
-    if (a.length > 0 && a[0] !== 'bar') { console.log('damn'); }
-    if (a.length > 1 && a[1] !== 'baz') { console.log('damn'); }
+    if (a.length > 0 && a[0] !== 'bar') {
+      console.log('damn');
+    }
+    if (a.length > 1 && a[1] !== 'baz') {
+      console.log('damn');
+    }
   }
 }
 
-function handle2 () {
-  if (arguments.length > 1) { console.log('damn'); }
+function handle2() {
+  if (arguments.length > 1) {
+    console.log('damn');
+  }
 }
 
 /**
@@ -55,7 +63,7 @@ subject.subscribe(handle); subject.subscribe(handle2);
 var suite = require('./suite')('emit arrays');
 
 suite
-  .add('EventEmitter1', function () {
+  .add('EventEmitter', function () {
     ee1.emit('foo');
     ee1.emit('foo', ['bar']);
     ee1.emit('foo', ['bar', 'baz']);
@@ -104,10 +112,10 @@ suite
     eventSignal.emit(['bar', 'baz', 'boom']);
   })
   .add('signal-lite', function () {
-    signalLite.trigger();
-    signalLite.trigger(['bar']);
-    signalLite.trigger(['bar', 'baz']);
-    signalLite.trigger(['bar', 'baz', 'boom']);
+    signalLite.broadcast();
+    signalLite.broadcast(['bar']);
+    signalLite.broadcast(['bar', 'baz']);
+    signalLite.broadcast(['bar', 'baz', 'boom']);
   });
 
 suite

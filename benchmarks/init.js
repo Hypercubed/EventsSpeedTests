@@ -3,20 +3,20 @@
 /**
  * Preparation code.
  */
+var EventEmitter1 = require('events').EventEmitter;
 var EventEmitter2 = require('eventemitter2');
 var EventEmitter3 = require('eventemitter3');
-var EventEmitter1 = require('events').EventEmitter;
 var Signal = require('signals');
 var MiniSignal = require('mini-signals');
 
-if (typeof window !== 'undefined') {
-  MiniSignal = (typeof MiniSignal !== 'function') ? MiniSignal.default : MiniSignal;  // https://github.com/systemjs/systemjs/issues/304
-} else {
+if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
+} else {
+  MiniSignal = (typeof MiniSignal === 'function') ? MiniSignal : MiniSignal.default;  // https://github.com/systemjs/systemjs/issues/304
 }
 
 require('./suite')('init')
-  .add('EventEmitter1', function () {
+  .add('EventEmitter', function () {
     var ee2 = new EventEmitter1();
   })
   .add('EventEmitter2', function () {

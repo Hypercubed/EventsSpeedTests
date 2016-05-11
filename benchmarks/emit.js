@@ -3,9 +3,9 @@
 /**
  * Preparation code.
  */
+var EventEmitter1 = require('events').EventEmitter;
 var EventEmitter2 = require('eventemitter2');
 var EventEmitter3 = require('eventemitter3');
-var EventEmitter1 = require('events').EventEmitter;
 var Signal = require('signals');
 var MiniSignal = require('mini-signals');
 var SignalEmitter = require('signal-emitter');
@@ -16,14 +16,24 @@ if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
 }
 
-function handle (a, b) {
-  if (arguments.length > 0 && a !== 'bar') { console.log('damn'); process.exit(); }
-  if (arguments.length > 1 && b !== 'baz') { console.log('damn'); process.exit(); }
-  if (arguments.length > 100) { console.log('damn'); }
+function handle(a, b) {
+  if (arguments.length > 0 && a !== 'bar') {
+    console.log('damn');
+    process.exit();
+  }
+  if (arguments.length > 1 && b !== 'baz') {
+    console.log('damn');
+    process.exit();
+  }
+  if (arguments.length > 100) {
+    console.log('damn');
+  }
 }
 
-function handle2 () {
-  if (arguments.length > 100) { console.log('damn'); }
+function handle2() {
+  if (arguments.length > 100) {
+    console.log('damn');
+  }
 }
 
 /**
@@ -38,19 +48,27 @@ var signal = new Signal();
 var miniSignal = new MiniSignal();
 var signalLite = new SignalLite();
 
-ee1.on('foo', handle); ee1.on('foo', handle2);
-ee2.on('foo', handle); ee2.on('foo', handle2);
-ee3.on('foo', handle); ee3.on('foo', handle2);
-signal.add(handle); signal.add(handle2);
-miniSignal.add(handle); miniSignal.add(handle2);
-signalEmitter.on(handle); signalEmitter.on(handle2);
-eventSignal.addListener(handle); eventSignal.addListener(handle2);
-signalLite.add(handle); signalLite.add(handle2);
+ee1.on('foo', handle);
+ee1.on('foo', handle2);
+ee2.on('foo', handle);
+ee2.on('foo', handle2);
+ee3.on('foo', handle);
+ee3.on('foo', handle2);
+signal.add(handle);
+signal.add(handle2);
+miniSignal.add(handle);
+miniSignal.add(handle2);
+signalEmitter.on(handle);
+signalEmitter.on(handle2);
+eventSignal.addListener(handle);
+eventSignal.addListener(handle2);
+signalLite.add(handle);
+signalLite.add(handle2);
 
 var suite = require('./suite')('emit');
 
 suite
-  .add('EventEmitter1', function () {
+  .add('EventEmitter', function () {
     ee1.emit('foo');
     ee1.emit('foo', 'bar');
     ee1.emit('foo', 'bar', 'baz');
@@ -93,10 +111,10 @@ suite
     eventSignal.emit('bar', 'baz', 'boom');
   }) */
   .add('signal-lite', function () {
-    signalLite.trigger();
-    signalLite.trigger('bar');
-    signalLite.trigger('bar', 'baz');
-    signalLite.trigger('bar', 'baz', 'boom');
+    signalLite.broadcast();
+    signalLite.broadcast('bar');
+    signalLite.broadcast('bar', 'baz');
+    signalLite.broadcast('bar', 'baz', 'boom');
   });
 
 suite

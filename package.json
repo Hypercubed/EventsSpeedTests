@@ -6,7 +6,8 @@
   "main": "benchmarks/index.js",
   "scripts": {
     "start": "node ./benchmarks/index.js",
-    "postinstall": "jspm install"
+    "postinstall": "jspm install",
+    "test": "xo"
   },
   "repository": {
     "type": "git",
@@ -19,41 +20,59 @@
   },
   "homepage": "https://github.com/Hypercubed/EventsSpeedTests",
   "devDependencies": {
-    "@reactivex/rxjs": "^5.0.0-alpha.10",
+    "@reactivex/rxjs": "^5.0.0-beta.7",
     "assume": "~1.2.6",
-    "benchmark": "~1.0.0",
+    "benchmark": "^2.1.0",
     "event-signal": "^0.1.6",
-    "eventemitter2": "~0.4.14",
-    "eventemitter3": "~1.1.1",
+    "eventemitter2": "^1.0.3",
+    "eventemitter3": "^1.2.0",
     "fast-event-emitter": "0.0.2",
+    "install": "^0.7.3",
     "jspm": "~0.16.2",
-    "microtime": "~2.0.0",
-    "mini-signals": "^1.1.0",
-    "minivents": "^1.1.7",
+    "microtime": "^2.1.1",
+    "mini-signals": "^1.1.1",
+    "minivents": "^2.0.1",
+    "npm": "^3.8.9",
+    "reactive-property": "^0.9.0",
     "signal-emitter": "0.0.1",
     "signals": "^1.0.0",
-    "signals-lite": "^0.9.3"
+    "signals-lite": "^1.0.0",
+    "xo": "^0.15.0"
   },
   "jspm": {
     "dependencies": {
-      "@reactivex/rxjs": "npm:@reactivex/rxjs@^5.0.0-alpha.10"
+      "lodash": "npm:lodash@^4.12.0",
+      "process": "github:jspm/nodelibs-process@^0.1.2"
     },
     "devDependencies": {
-      "benchmark": "npm:benchmark@^1.0.0",
+      "@reactivex/rxjs": "npm:@reactivex/rxjs@^5.0.0-alpha.10",
+      "benchmark": "npm:benchmark@^2.1.0",
       "event-signal": "npm:event-signal@^0.1.6",
-      "eventemitter2": "github:asyncly/EventEmitter2@^0.4.14",
-      "eventemitter3": "github:primus/eventemitter3@^1.1.1",
+      "eventemitter2": "github:asyncly/EventEmitter2@^1.0.0",
+      "eventemitter3": "github:primus/eventemitter3@^1.2.0",
       "events": "github:jspm/nodelibs-events@^0.1.1",
       "fast-event-emitter": "npm:fast-event-emitter@^0.0.2",
-      "mini-signals": "npm:mini-signals@^1.1.0",
-      "minivents": "github:allouis/minivents@^1.1.7",
+      "mini-signals": "npm:mini-signals@^1.1.1",
+      "minivents": "github:allouis/minivents@^2.0.1",
+      "reactive-property": "npm:reactive-property@^0.9.0",
       "signal-emitter": "npm:signal-emitter@^0.0.1",
       "signals": "github:millermedeiros/js-signals@^1.0.0",
-      "signals-lite": "npm:signals-lite@^0.9.3",
+      "signals-lite": "npm:signals-lite@^1.0.0",
       "traceur": "github:jmcriffey/bower-traceur@0.0.88",
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
       "util": "github:jspm/nodelibs-util@^0.1.0"
     }
   },
-  "dependencies": {}
+  "dependencies": {},
+  "xo": {
+    "space": 2,
+    "envs": [
+      "node",
+      "browser"
+    ],
+    "ignores": [
+      "jspm_packages/**",
+      "config.js"
+    ]
+  }
 }
