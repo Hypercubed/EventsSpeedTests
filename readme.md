@@ -4,7 +4,7 @@
 
 ## Testing
 
-- events.EventEmitter (node or github:jspm/nodelibs-events@^0.1.1)
+- events.EventEmitter (node or nodelibs-events@^0.2.0-alpha)
 - @reactivex/rxjs: ^5.0.0-beta.7
 - event-signal: ^0.1.6
 - eventemitter2: ^1.0.3

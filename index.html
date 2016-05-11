@@ -19,9 +19,10 @@
 	<h1>EventsSpeedTests</h1>
 
   <script src="jspm_packages/system.js"></script>
-  <script src="config.js"></script>
+  <script src="jspm.browser.js"></script>
+	<script src="jspm.config.js"></script>
   <script>
-    var tests = ['index','emit','emit-one','init','add-remove'];
+    var tests = ['index.js','emit.js','emit-one.js','init.js','add-remove.js'];
     tests.map(add);
 
     function add(name) {

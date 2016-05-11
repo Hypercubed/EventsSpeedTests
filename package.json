@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "EventsSpeedTests",
   "private": true,
-  "main": "benchmarks/index.js",
   "scripts": {
     "start": "node ./benchmarks/index.js",
     "postinstall": "jspm install",
@@ -40,27 +39,59 @@
     "xo": "^0.15.0"
   },
   "jspm": {
+    "directories": {
+      "lib": "src"
+    },
     "dependencies": {
-      "lodash": "npm:lodash@^4.12.0",
-      "process": "github:jspm/nodelibs-process@^0.1.2"
+      "lodash": "npm:lodash@^4.12.0"
     },
     "devDependencies": {
       "@reactivex/rxjs": "npm:@reactivex/rxjs@^5.0.0-alpha.10",
+      "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
       "benchmark": "npm:benchmark@^2.1.0",
       "event-signal": "npm:event-signal@^0.1.6",
       "eventemitter2": "github:asyncly/EventEmitter2@^1.0.0",
       "eventemitter3": "github:primus/eventemitter3@^1.2.0",
-      "events": "github:jspm/nodelibs-events@^0.1.1",
       "fast-event-emitter": "npm:fast-event-emitter@^0.0.2",
       "mini-signals": "npm:mini-signals@^1.1.1",
       "minivents": "github:allouis/minivents@^2.0.1",
+      "module": "github:jspm/nodelibs-module@^0.2.0-alpha",
+      "plugin-traceur": "npm:systemjs-plugin-traceur@^0.0.1",
       "reactive-property": "npm:reactive-property@^0.9.0",
       "signal-emitter": "npm:signal-emitter@^0.0.1",
       "signals": "github:millermedeiros/js-signals@^1.0.0",
       "signals-lite": "npm:signals-lite@^1.0.0",
       "traceur": "github:jmcriffey/bower-traceur@0.0.88",
-      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88",
-      "util": "github:jspm/nodelibs-util@^0.1.0"
+      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.88"
+    },
+    "peerDependencies": {
+      "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
+      "events": "github:jspm/nodelibs-events@^0.2.0-alpha",
+      "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
+      "util": "github:jspm/nodelibs-util@^0.2.0-alpha"
+    },
+    "overrides": {
+      "github:jmcriffey/bower-traceur-runtime@0.0.88": {
+        "format": "global",
+        "meta": {
+          "traceur-runtime.js": {
+            "exports": "$traceurRuntime",
+            "format": "global"
+          }
+        }
+      },
+      "github:jmcriffey/bower-traceur@0.0.88": {
+        "format": "global",
+        "meta": {
+          "traceur.js": {
+            "exports": "traceur",
+            "format": "global"
+          }
+        }
+      },
+      "npm:@reactivex/rxjs@5.0.0-alpha.10": {
+        "format": "cjs"
+      }
     }
   },
   "dependencies": {},
