@@ -35,6 +35,7 @@
     "namespace-emitter": "^1.0.0",
     "npm": "^3.8.9",
     "observ": "^0.2.0",
+    "observable": "^2.1.4",
     "reactive-property": "^0.9.0",
     "signal-emitter": "0.0.1",
     "signals": "^1.0.0",
