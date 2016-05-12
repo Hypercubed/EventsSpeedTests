@@ -2,14 +2,20 @@
 
 var c = 0;
 
-function handle() {
+function handle(a) {
+  if (arguments.length === 1 && a === undefined) {
+    return;
+  }
   if (arguments.length !== 12) {
     throw new Error('invalid arguments length');
   }
   c++;
 }
 
-function handle2() {
+function handle2(a) {
+  if (arguments.length === 1 && a === undefined) {
+    return;
+  }
   if (arguments.length !== 12) {
     throw new Error('invalid arguments length');
   }
@@ -17,6 +23,8 @@ function handle2() {
 
 var subjects = require('./subjects').createInstancesOn(handle, handle2);
 var suiteFactory = require('./suite');
+
+console.log('\n## emit many parameters');
 
 suiteFactory('emit many parameters')
   .add('Theoretical max', function () {

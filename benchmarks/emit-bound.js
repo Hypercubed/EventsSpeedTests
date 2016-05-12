@@ -53,6 +53,8 @@ var suiteFactory = require('./suite');
 
 var bHandel = handle.bind(ctx);
 
+console.log('\n## emit with bound function');
+
 suiteFactory('emit with bound function')
   .add('Theoretical max', function () {
     bHandel('bar');

@@ -3,6 +3,9 @@
 var c = 0;
 
 function handle(a, b) {
+  if (arguments.length === 1 && a === undefined) {
+    return;
+  }
   if (arguments.length > 0 && a !== 'bar') {
     throw new Error('invalid arguments');
   }
@@ -23,6 +26,8 @@ function handle2() {
 
 var subjects = require('./subjects').createInstancesOn(handle, handle2);
 var suiteFactory = require('./suite');
+
+console.log('\n## emit several');
 
 suiteFactory('emit')
   .add('Theoretical max', function () {

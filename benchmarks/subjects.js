@@ -10,6 +10,10 @@ var SignalLite = require('signals-lite').SignalLite;
 var Subject = require('@reactivex/rxjs/dist/cjs/Subject').Subject;
 var reactiveProperty = require('reactive-property');
 var MiniVent = require('minivents');
+var observ = require('observ');
+var observable = require('observable');
+var namespaceEmitter = require('namespace-emitter');
+var d3Dispatch = require('d3-dispatch').dispatch;
 
 if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
@@ -26,7 +30,11 @@ module.exports.constructors = {
   SignalLite,
   Subject,
   reactiveProperty,
-  MiniVent
+  MiniVent,
+  observ,
+  observable,
+  namespaceEmitter,
+  d3Dispatch
 };
 
 module.exports.createInstances = createInstances;
@@ -45,6 +53,10 @@ function createInstances() {
   var subject = new Subject();
   var rProperty = reactiveProperty();
   var miniVent = new MiniVent();
+  var observValue = observ();
+  var observableValue = observable();
+  var nsEmitter = namespaceEmitter();
+  var dispatch = d3Dispatch('foo');
 
   return {
     ee1,
@@ -57,12 +69,16 @@ function createInstances() {
     signalLite,
     subject,
     rProperty,
-    miniVent
+    miniVent,
+    observValue,
+    observableValue,
+    nsEmitter,
+    dispatch
   };
 }
 
 function addHandles(subjects, handels) {
-  handels.forEach(function (h) {
+  handels.forEach(function (h, i) {
     subjects.ee1.on('foo', h);
     subjects.ee2.on('foo', h);
     subjects.ee3.on('foo', h);
@@ -74,6 +90,10 @@ function addHandles(subjects, handels) {
     subjects.subject.subscribe(h);
     subjects.rProperty.on(h);
     subjects.miniVent.on('foo', h);
+    subjects.observValue(h);
+    subjects.observableValue(h);
+    subjects.nsEmitter.on('foo', h);
+    subjects.dispatch.on('foo.' + i, h);
   });
 
   return subjects;

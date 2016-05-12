@@ -3,6 +3,9 @@
 var c = 0;
 
 function handle(a) {
+  if (arguments.length === 1 && a === undefined) {
+    return;
+  }
   if (arguments.length === 0 || arguments.length > 2) {
     throw new Error('invalid arguments length');
   } else {
@@ -30,6 +33,8 @@ function handle2() {
 
 var subjects = require('./subjects').createInstancesOn(handle, handle2);
 var suiteFactory = require('./suite');
+
+console.log('\n## emit arrays');
 
 suiteFactory('emit arrays')
   .add('Theoretical max', function () {

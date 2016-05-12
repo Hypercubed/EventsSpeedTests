@@ -4,7 +4,9 @@
  * Preparation code.
  */
 var subjects = require('./subjects').constructors;
-var dummy;
+var dummy = '';
+
+console.log('\n## init' + dummy);
 
 require('./suite')('init')
   .add('EventEmitter', function () {

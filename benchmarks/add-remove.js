@@ -6,6 +6,8 @@ function handle() {
   throw new Error('invalid arguments');
 }
 
+console.log('\n## add-remove');
+
 require('./suite')('add-remove')
   .add('EventEmitter', function () {
     subjects.ee1.on('foo', handle);

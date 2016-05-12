@@ -7,15 +7,10 @@ if (typeof window !== 'undefined') {
   window.Benchmark = benchmark;
 }
 
-console.log('#', benchmark.platform.description);
-
-module.exports = function suite(name, theory) {
+module.exports = function suite(name) {
   var suite = new benchmark.Suite(name);
 
   suite
-    .on('start', function cycle() {
-      console.log('\n##', this.name);
-    })
     .on('cycle', function cycle(e) {
       if (!e.target.aborted) {
         console.log('    ' + String(e.target));

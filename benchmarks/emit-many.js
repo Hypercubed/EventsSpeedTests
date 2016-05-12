@@ -7,7 +7,10 @@ var addHandles = require('./subjects').addHandles;
 
 var handels = Array.apply(null, Array(10)).map(function () {
   return function (a) {
-    if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+    if (arguments.length === 1 && a === undefined) {
+      return;
+    }
+    if (arguments.length > 2 || a !== 'bar') {
       throw new Error('invalid arguments');
     }
     c++;
@@ -17,6 +20,8 @@ var handels = Array.apply(null, Array(10)).map(function () {
 addHandles(subjects, handels);
 
 var suiteFactory = require('./suite');
+
+console.log('\n## emit many listeners');
 
 suiteFactory('emit many listeners')
   .add('Theoretical max', function () {

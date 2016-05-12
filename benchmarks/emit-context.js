@@ -51,6 +51,8 @@ var suiteFactory = require('./suite');
 
 var bHandel = handle.bind(ctx);
 
+console.log('\n## emit with context');
+
 suiteFactory('emit with context')
   .add('Theoretical max', function () {
     bHandel('bar');
