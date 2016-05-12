@@ -1,52 +1,34 @@
 'use strict';
 
-/**
- * Preparation code.
- */
-var EventEmitter1 = require('events').EventEmitter;
-var EventEmitter2 = require('eventemitter2');
-var EventEmitter3 = require('eventemitter3');
-var Signal = require('signals');
-var MiniSignal = require('mini-signals');
-
-if (typeof window === 'undefined') {
-  EventEmitter2 = EventEmitter2.EventEmitter2;
-}
+var subjects = require('./subjects').createInstances();
 
 function handle() {
-  if (arguments.length > 100) {
-    console.log('damn');
-  }
+  throw new Error('invalid arguments');
 }
-
-/**
- * Instances.
- */
-var ee2 = new EventEmitter2();
-var ee3 = new EventEmitter3();
-var ee1 = new EventEmitter1();
-var signal = new Signal();
-var miniSignal = new MiniSignal();
 
 require('./suite')('add-remove')
   .add('EventEmitter', function () {
-    ee1.on('foo', handle);
-    ee1.removeListener('foo', handle);
+    subjects.ee1.on('foo', handle);
+    subjects.ee1.removeListener('foo', handle);
   })
   .add('EventEmitter2', function () {
-    ee2.on('foo', handle);
-    ee2.removeListener('foo', handle);
+    subjects.ee2.on('foo', handle);
+    subjects.ee2.removeListener('foo', handle);
   })
   .add('EventEmitter3', function () {
-    ee3.on('foo', handle);
-    ee3.removeListener('foo', handle);
+    subjects.ee3.on('foo', handle);
+    subjects.ee3.removeListener('foo', handle);
+  })
+  .add('ReactiveProperty', function () {
+    subjects.rProperty.on(handle);
+    subjects.rProperty.off(handle);
   })
   .add('JS-Signals', function () {
-    signal.add(handle);
-    signal.remove(handle);
+    subjects.signal.add(handle);
+    subjects.signal.remove(handle);
   })
   .add('MiniSignals', function () {
-    var _handle = miniSignal.add(handle);
-    miniSignal.detach(_handle);
+    var _handle = subjects.miniSignal.add(handle);
+    subjects.miniSignal.detach(_handle);
   })
   .run();

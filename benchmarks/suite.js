@@ -9,7 +9,7 @@ if (typeof window !== 'undefined') {
 
 console.log('#', benchmark.platform.description);
 
-module.exports = function suite(name) {
+module.exports = function suite(name, theory) {
   var suite = new benchmark.Suite(name);
 
   suite
@@ -25,7 +25,9 @@ module.exports = function suite(name) {
       console.log(String(e.target.name) + ' ' + String(e.target.error));
     })
     .on('complete', function () {
-      console.log('Fastest is ' + this.filter('fastest').map('name'));
+      if (this.length > 1) {
+        console.log('Fastest is ' + this.filter('fastest').map('name'));
+      }
     });
 
   return suite;

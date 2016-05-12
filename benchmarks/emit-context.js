@@ -1,122 +1,104 @@
 'use strict';
-
-/**
- * Preparation code.
- */
-var EventEmitter1 = require('events').EventEmitter;
-var EventEmitter2 = require('eventemitter2');
-var EventEmitter3 = require('eventemitter3');
-var Signal = require('signals');
-var MiniSignal = require('mini-signals');
-var SignalEmitter = require('signal-emitter');
-var EventSignal = require('event-signal');
-var SignalLite = require('signals-lite').SignalLite;
-
-if (typeof window === 'undefined') {
-  EventEmitter2 = EventEmitter2.EventEmitter2;
-}
+var c = 0;
 
 var ctx = {
   foo: 'bar'
 };
 
 function handle() {
-  if (arguments.length > 100) {
-    console.log('damn');
+  if (arguments.length === 0 || arguments.length > 2) {
+    throw new Error('invalid arguments length');
   }
   if (this !== ctx) {
-    console.log('damn');
-    process.exit();
+    throw new Error('invalid context');
   }
+  c++;
 }
 
 function handle2() {
-  if (arguments.length > 100) {
-    console.log('damn');
+  if (arguments.length === 0 || arguments.length > 2) {
+    throw new Error('invalid arguments length');
   }
-  // if (this !== ctx) {console.log('damn'); process.exit(); }
 }
 
 /**
  * Instances.
  */
-var ee1 = new EventEmitter1();
-var ee2 = new EventEmitter2();
-var ee3 = new EventEmitter3();
-var signalEmitter = new SignalEmitter(new EventEmitter3(), 'foo');
-var eventSignal = new EventSignal();
-var signal = new Signal();
-var miniSignal = new MiniSignal();
-var signalLite = new SignalLite();
+var subjects = require('./subjects').createInstances();
 
-ee1.on('foo', handle.bind(ctx));
-ee1.on('foo', handle2);
-ee2.on('foo', handle.bind(ctx));
-ee2.on('foo', handle2);
-ee3.on('foo', handle, ctx);
-ee3.on('foo', handle2);
-signal.add(handle, ctx);
-signal.add(handle2);
-miniSignal.add(handle, ctx);
-miniSignal.add(handle2);
-signalEmitter.on(handle, ctx);
-signalEmitter.on(handle2);
-eventSignal.addListener(handle, ctx);
-eventSignal.addListener(handle2);
-signalLite.add(handle, ctx);
-signalLite.add(handle2);
+subjects.ee1.on('foo', handle.bind(ctx));
+subjects.ee1.on('foo', handle2);
+subjects.ee2.on('foo', handle.bind(ctx));
+subjects.ee2.on('foo', handle2);
+subjects.ee3.on('foo', handle, ctx);
+subjects.ee3.on('foo', handle2);
+subjects.signal.add(handle, ctx);
+subjects.signal.add(handle2);
+subjects.miniSignal.add(handle, ctx);
+subjects.miniSignal.add(handle2);
+subjects.signalEmitter.on(handle, ctx);
+subjects.signalEmitter.on(handle2);
+subjects.eventSignal.addListener(handle, ctx);
+subjects.eventSignal.addListener(handle2);
+subjects.signalLite.add(handle, ctx);
+subjects.signalLite.add(handle2);
+subjects.subject.subscribe(handle.bind(ctx));
+subjects.subject.subscribe(handle2);
+subjects.rProperty.on(handle.bind(ctx));
+subjects.rProperty.on(handle2);
 
-var suite = require('./suite')('emit with context');
+var suiteFactory = require('./suite');
 
-suite
+var bHandel = handle.bind(ctx);
+
+suiteFactory('emit with context')
+  .add('Theoretical max', function () {
+    bHandel('bar');
+    handle2('bar');
+  })
+  .on('cycle', function (e) {
+    if (c < e.target.count) {
+      throw new Error('something is wrong');
+    }
+    c = 0;
+  })
+  .run();
+
+suiteFactory('emit with context')
+  .on('cycle', function (e) {
+    if (c < e.target.count) {
+      throw new Error('something is wrong');
+    }
+    c = 0;
+  })
   .add('EventEmitter', function () {
-    ee1.emit('foo');
-    ee1.emit('foo', 'bar');
-    ee1.emit('foo', 'bar', 'baz');
-    ee1.emit('foo', 'bar', 'baz', 'boom');
+    subjects.ee1.emit('foo', 'bar');
   })
   .add('EventEmitter2', function () {
-    ee2.emit('foo');
-    ee2.emit('foo', 'bar');
-    ee2.emit('foo', 'bar', 'baz');
-    ee2.emit('foo', 'bar', 'baz', 'boom');
+    subjects.ee2.emit('foo', 'bar');
   })
   .add('EventEmitter3', function () {
-    ee3.emit('foo');
-    ee3.emit('foo', 'bar');
-    ee3.emit('foo', 'bar', 'baz');
-    ee3.emit('foo', 'bar', 'baz', 'boom');
+    subjects.ee3.emit('foo', 'bar');
+  })
+  .add('RXJS', function () {
+    subjects.subject.next('bar');
+  })
+  .add('ReactiveProperty', function () {
+    subjects.rProperty('bar');
   })
   .add('JS-Signals', function () {
-    signal.dispatch();
-    signal.dispatch('bar');
-    signal.dispatch('bar', 'baz');
-    signal.dispatch('bar', 'baz', 'boom');
+    subjects.signal.dispatch('bar');
   })
   .add('MiniSignals', function () {
-    miniSignal.dispatch();
-    miniSignal.dispatch('bar');
-    miniSignal.dispatch('bar', 'baz');
-    miniSignal.dispatch('bar', 'baz', 'boom');
+    subjects.miniSignal.dispatch('bar');
   })
   .add('signal-emitter', function () {
-    signalEmitter.emit();
-    signalEmitter.emit('bar');
-    signalEmitter.emit('bar', 'baz');
-    signalEmitter.emit('bar', 'baz', 'boom');
+    subjects.signalEmitter.emit('bar');
   })
-  /* .add('event-signal', function() { // this is not a fair test, eventSignal.emit only emits one argument
-    eventSignal.emit();
-    eventSignal.emit('bar');
-    eventSignal.emit('bar', 'baz');
-    eventSignal.emit('bar', 'baz', 'boom');
-  }) */
+  .add('event-signal', function () {
+    subjects.eventSignal.emit('bar');
+  })
   .add('signal-lite', function () {
-    signalLite.broadcast();
-    signalLite.broadcast('bar');
-    signalLite.broadcast('bar', 'baz');
-    signalLite.broadcast('bar', 'baz', 'boom');
-  });
-
-suite
+    subjects.signalLite.broadcast('bar');
+  })
   .run();
