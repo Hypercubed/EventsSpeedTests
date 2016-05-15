@@ -20,21 +20,21 @@ if (typeof window === 'undefined') {
 }
 
 module.exports.constructors = {
-  EventEmitter1,
-  EventEmitter2,
-  EventEmitter3,
-  Signal,
-  MiniSignal,
-  SignalEmitter,
-  EventSignal,
-  SignalLite,
-  Subject,
-  reactiveProperty,
-  MiniVent,
-  observ,
-  observable,
-  namespaceEmitter,
-  d3Dispatch
+  EventEmitter1: EventEmitter1,
+  EventEmitter2: EventEmitter2,
+  EventEmitter3: EventEmitter3,
+  Signal: Signal,
+  MiniSignal: MiniSignal,
+  SignalEmitter: SignalEmitter,
+  EventSignal: EventSignal,
+  SignalLite: SignalLite,
+  Subject: Subject,
+  reactiveProperty: reactiveProperty,
+  MiniVent: MiniVent,
+  observ: observ,
+  observable: observable,
+  namespaceEmitter: namespaceEmitter,
+  d3Dispatch: d3Dispatch
 };
 
 module.exports.createInstances = createInstances;
@@ -59,21 +59,21 @@ function createInstances() {
   var dispatch = d3Dispatch('foo');
 
   return {
-    ee1,
-    ee2,
-    ee3,
-    signalEmitter,
-    eventSignal,
-    signal,
-    miniSignal,
-    signalLite,
-    subject,
-    rProperty,
-    miniVent,
-    observValue,
-    observableValue,
-    nsEmitter,
-    dispatch
+    ee1: ee1,
+    ee2: ee2,
+    ee3: ee3,
+    signalEmitter: signalEmitter,
+    eventSignal: eventSignal,
+    signal: signal,
+    miniSignal: miniSignal,
+    signalLite: signalLite,
+    subject: subject,
+    rProperty: rProperty,
+    miniVent: miniVent,
+    observValue: observValue,
+    observableValue: observableValue,
+    nsEmitter: nsEmitter,
+    dispatch: dispatch
   };
 }
 

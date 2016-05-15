@@ -1,132 +1,181 @@
 # Node.js 6.1.0 on Darwin 64-bit
 
-## emit several
-    Theoretical max x 46,174,389 ops/sec ±2.41% (83 runs sampled)
-    EventEmitter x 3,109,218 ops/sec ±1.91% (70 runs sampled)
-    EventEmitter2 x 740,305 ops/sec ±1.98% (79 runs sampled)
-    EventEmitter3 x 1,273,608 ops/sec ±1.70% (75 runs sampled)
-    JS-Signals x 161,723 ops/sec ±1.69% (77 runs sampled)
-    MiniSignals x 6,944,511 ops/sec ±2.14% (78 runs sampled)
-    signal-emitter x 149,581 ops/sec ±2.28% (69 runs sampled)
-    signal-lite x 6,844,681 ops/sec ±1.51% (79 runs sampled)
-Fastest is MiniSignals
+## emit
+
+    EventEmitter ................................... 2,691,958 op/s
+    EventEmitter2 .................................. 746,021 op/s
+    EventEmitter3 .................................. 1,244,308 op/s
+    JS-Signals ..................................... 144,930 op/s
+    MiniSignals .................................... 5,338,591 op/s
+    signal-emitter ................................. 151,113 op/s
+    signal-lite .................................... 5,254,768 op/s
+
+    Theoretical max ................................ 11,386,263 op/s
+
+Suites:  2
+Benches: 8
+Elapsed: 12,073.69 ms
 
 ## emit one parameter
-    Theoretical max x 76,658,237 ops/sec ±2.51% (80 runs sampled)
-    EventEmitter x 12,960,725 ops/sec ±1.60% (78 runs sampled)
-    EventEmitter2 x 5,730,721 ops/sec ±1.88% (82 runs sampled)
-    EventEmitter3 x 18,308,820 ops/sec ±1.54% (82 runs sampled)
-    d3-dispatch x 1,958,388 ops/sec ±2.35% (82 runs sampled)
-    namespace-emitter x 561,516 ops/sec ±1.52% (79 runs sampled)
-    ReactiveProperty x 17,867,091 ops/sec ±1.47% (79 runs sampled)
-    observable x 513,571 ops/sec ±1.55% (78 runs sampled)
-    observ x 7,887,100 ops/sec ±3.47% (74 runs sampled)
-    RXJS x 4,194,128 ops/sec ±2.05% (72 runs sampled)
-    JS-Signals x 583,098 ops/sec ±1.78% (74 runs sampled)
-    MiniSignals x 25,285,740 ops/sec ±1.61% (74 runs sampled)
-    signal-emitter x 651,901 ops/sec ±1.90% (72 runs sampled)
-    event-signal x 6,926,711 ops/sec ±1.68% (80 runs sampled)
-    signal-lite x 24,692,365 ops/sec ±1.57% (67 runs sampled)
-    minivents x 524,106 ops/sec ±2.64% (79 runs sampled)
-Fastest is MiniSignals
 
-## emit with context
-    Theoretical max x 35,643,844 ops/sec ±1.44% (86 runs sampled)
-    EventEmitter x 10,145,038 ops/sec ±1.60% (84 runs sampled)
-    EventEmitter2 x 5,011,208 ops/sec ±2.16% (84 runs sampled)
-    EventEmitter3 x 15,292,710 ops/sec ±2.16% (84 runs sampled)
-    RXJS x 4,201,068 ops/sec ±3.02% (82 runs sampled)
-    ReactiveProperty x 16,057,886 ops/sec ±2.22% (82 runs sampled)
-    JS-Signals x 605,771 ops/sec ±2.28% (84 runs sampled)
-    MiniSignals x 20,674,064 ops/sec ±1.89% (84 runs sampled)
-    signal-emitter x 640,792 ops/sec ±2.95% (81 runs sampled)
-    event-signal x 6,287,461 ops/sec ±1.96% (83 runs sampled)
-    signal-lite x 20,117,793 ops/sec ±2.41% (83 runs sampled)
-Fastest is MiniSignals
+    EventEmitter ................................... 11,110,754 op/s
+    EventEmitter2 .................................. 5,124,637 op/s
+    EventEmitter3 .................................. 14,831,783 op/s
+    d3-dispatch .................................... 2,037,111 op/s
+    namespace-emitter .............................. 540,278 op/s
+    ReactiveProperty ............................... 15,116,426 op/s
+    observable ..................................... 492,347 op/s
+    observ ......................................... 7,024,447 op/s
+    RXJS ........................................... 3,991,431 op/s
+    JS-Signals ..................................... 570,474 op/s
+    MiniSignals .................................... 21,466,349 op/s
+    signal-emitter ................................. 776,375 op/s
+    event-signal ................................... 6,301,256 op/s
+    signal-lite .................................... 20,264,122 op/s
+    minivents ...................................... 477,322 op/s
 
-## emit with bound function
-    Theoretical max x 33,891,641 ops/sec ±1.99% (83 runs sampled)
-    EventEmitter x 9,736,715 ops/sec ±2.10% (82 runs sampled)
-    EventEmitter2 x 4,905,458 ops/sec ±2.52% (82 runs sampled)
-    EventEmitter3 x 13,663,444 ops/sec ±1.61% (84 runs sampled)
-    RXJS x 4,201,239 ops/sec ±2.82% (83 runs sampled)
-    ReactiveProperty x 16,709,667 ops/sec ±2.95% (83 runs sampled)
-    JS-Signals x 632,050 ops/sec ±1.68% (83 runs sampled)
-    MiniSignals x 7,794,316 ops/sec ±1.27% (85 runs sampled)
-    signal-emitter x 623,072 ops/sec ±3.25% (76 runs sampled)
-    event-signal x 5,761,416 ops/sec ±2.01% (86 runs sampled)
-    signal-lite x 6,029,363 ops/sec ±1.41% (81 runs sampled)
-Fastest is ReactiveProperty
+    Theoretical max ................................ 29,291,880 op/s
 
-## emit many listeners
-    Theoretical max x 7,424,609 ops/sec ±1.93% (82 runs sampled)
-    EventEmitter x 5,465,846 ops/sec ±1.54% (88 runs sampled)
-    EventEmitter2 x 3,206,692 ops/sec ±1.71% (85 runs sampled)
-    EventEmitter3 x 5,881,499 ops/sec ±1.26% (88 runs sampled)
-    RXJS x 1,783,018 ops/sec ±1.62% (85 runs sampled)
-    ReactiveProperty x 5,406,985 ops/sec ±1.18% (84 runs sampled)
-    JS-Signals x 285,907 ops/sec ±1.52% (88 runs sampled)
-    MiniSignals x 7,777,266 ops/sec ±1.21% (87 runs sampled)
-    signal-emitter x 589,657 ops/sec ±2.12% (81 runs sampled)
-    event-signal x 3,902,745 ops/sec ±2.45% (86 runs sampled)
-    signal-lite x 7,074,361 ops/sec ±1.45% (84 runs sampled)
-    minivents x 125,637 ops/sec ±1.85% (87 runs sampled)
-Fastest is MiniSignals
-
-## emit many parameters
-    Theoretical max x 83,110,867 ops/sec ±2.00% (83 runs sampled)
-    EventEmitter x 773,105 ops/sec ±1.29% (86 runs sampled)
-    EventEmitter2 x 702,727 ops/sec ±2.20% (83 runs sampled)
-    EventEmitter3 x 789,245 ops/sec ±1.53% (84 runs sampled)
-    JS-Signals x 218,800 ops/sec ±1.58% (87 runs sampled)
-    MiniSignals x 20,899,371 ops/sec ±1.46% (89 runs sampled)
-    signal-emitter x 374,204 ops/sec ±1.99% (87 runs sampled)
-    signal-lite x 19,830,937 ops/sec ±1.50% (87 runs sampled)
-    minivents x 146,492 ops/sec ±2.44% (86 runs sampled)
-Fastest is MiniSignals
-
-## emit arrays
-    Theoretical max x 23,435,669 ops/sec ±1.39% (82 runs sampled)
-    EventEmitter x 4,262,924 ops/sec ±1.66% (86 runs sampled)
-    EventEmitter2 x 1,824,514 ops/sec ±1.70% (82 runs sampled)
-    EventEmitter3 x 6,226,343 ops/sec ±1.49% (86 runs sampled)
-    RXJS x 1,539,193 ops/sec ±1.49% (85 runs sampled)
-    ReactiveProperty x 5,996,150 ops/sec ±4.40% (79 runs sampled)
-    JS-Signals x 211,397 ops/sec ±1.45% (85 runs sampled)
-    MiniSignals x 9,130,494 ops/sec ±1.57% (80 runs sampled)
-    signal-emitter x 232,712 ops/sec ±1.85% (86 runs sampled)
-    event-signal x 2,277,047 ops/sec ±1.68% (85 runs sampled)
-    signal-lite x 8,358,670 ops/sec ±1.65% (84 runs sampled)
-Fastest is MiniSignals
-
-## emit object
-    Theoretical max x 22,853,273 ops/sec ±1.35% (83 runs sampled)
-    EventEmitter x 3,994,080 ops/sec ±1.52% (85 runs sampled)
-    EventEmitter2 x 1,776,086 ops/sec ±1.58% (84 runs sampled)
-    EventEmitter3 x 5,644,996 ops/sec ±1.73% (82 runs sampled)
-    RXJS x 1,520,319 ops/sec ±1.36% (87 runs sampled)
-    ReactiveProperty x 6,210,321 ops/sec ±4.47% (83 runs sampled)
-    JS-Signals x 208,365 ops/sec ±1.75% (83 runs sampled)
-    MiniSignals x 8,347,544 ops/sec ±2.59% (84 runs sampled)
-    signal-emitter x 210,299 ops/sec ±4.55% (79 runs sampled)
-    event-signal x 2,033,391 ops/sec ±2.49% (81 runs sampled)
-    signal-lite x 7,037,573 ops/sec ±2.60% (80 runs sampled)
-Fastest is MiniSignals
+Suites:  2
+Benches: 16
+Elapsed: 24,520.45 ms
 
 ## init
-    EventEmitter x 17,350,217 ops/sec ±4.17% (82 runs sampled)
-    EventEmitter2 x 30,058,674 ops/sec ±6.07% (78 runs sampled)
-    EventEmitter3 x 49,564,683 ops/sec ±9.07% (80 runs sampled)
-    ReactiveProperty x 1,382,226 ops/sec ±8.56% (55 runs sampled)
-    JS-Signals x 1,856,366 ops/sec ±6.52% (55 runs sampled)
-    MiniSignals x 37,556,074 ops/sec ±2.42% (81 runs sampled)
-Fastest is EventEmitter3
+
+    EventEmitter ................................... 21,895,993 op/s
+    EventEmitter2 .................................. 34,219,374 op/s
+    EventEmitter3 .................................. 63,175,157 op/s
+    ReactiveProperty ............................... 1,414,366 op/s
+    JS-Signals ..................................... 2,016,695 op/s
+    MiniSignals .................................... 45,834,534 op/s
+
+    Theoretical max ................................ 65,223,056 op/s
+
+Suites:  2
+Benches: 7
+Elapsed: 9,509.33 ms
 
 ## add-remove
-    EventEmitter x 4,294,503 ops/sec ±2.89% (75 runs sampled)
-    EventEmitter2 x 1,178,853 ops/sec ±2.91% (75 runs sampled)
-    EventEmitter3 x 1,804,416 ops/sec ±2.08% (84 runs sampled)
-    ReactiveProperty x 5,076,734 ops/sec ±1.78% (84 runs sampled)
-    JS-Signals x 755,099 ops/sec ±1.88% (84 runs sampled)
-    MiniSignals x 15,001,352 ops/sec ±4.99% (80 runs sampled)
-Fastest is MiniSignals
+
+    EventEmitter ................................... 4,606,447 op/s
+    EventEmitter2 .................................. 1,285,349 op/s
+    EventEmitter3 .................................. 1,908,405 op/s
+    ReactiveProperty ............................... 5,435,031 op/s
+    JS-Signals ..................................... 804,503 op/s
+    MiniSignals .................................... 17,040,500 op/s
+
+Suites:  1
+Benches: 6
+Elapsed: 9,123.98 ms
+
+## emit with context
+
+    EventEmitter ................................... 10,664,961 op/s
+    EventEmitter2 .................................. 5,234,496 op/s
+    EventEmitter3 .................................. 17,084,106 op/s
+    RXJS ........................................... 4,522,444 op/s
+    ReactiveProperty ............................... 20,159,198 op/s
+    JS-Signals ..................................... 575,153 op/s
+    MiniSignals .................................... 24,561,186 op/s
+    signal-emitter ................................. 782,988 op/s
+    event-signal ................................... 6,312,289 op/s
+    signal-lite .................................... 23,352,940 op/s
+
+    Theoretical max ................................ 43,643,253 op/s
+
+Suites:  2
+Benches: 11
+Elapsed: 16,177.07 ms
+
+## emit with bound function
+
+    EventEmitter ................................... 9,941,106 op/s
+    EventEmitter2 .................................. 5,527,780 op/s
+    EventEmitter3 .................................. 15,811,475 op/s
+    RXJS ........................................... 4,650,511 op/s
+    ReactiveProperty ............................... 18,839,879 op/s
+    JS-Signals ..................................... 578,601 op/s
+    MiniSignals .................................... 8,704,371 op/s
+    signal-emitter ................................. 785,019 op/s
+    event-signal ................................... 6,354,529 op/s
+    signal-lite .................................... 6,794,457 op/s
+
+    Theoretical max ................................ 46,436,240 op/s
+
+Suites:  2
+Benches: 11
+Elapsed: 16,735.75 ms
+
+## emit many listeners
+
+    EventEmitter ................................... 3,890,662 op/s
+    EventEmitter2 .................................. 2,866,980 op/s
+    EventEmitter3 .................................. 4,364,376 op/s
+    RXJS ........................................... 1,579,758 op/s
+    ReactiveProperty ............................... 4,249,929 op/s
+    JS-Signals ..................................... 273,855 op/s
+    MiniSignals .................................... 5,168,631 op/s
+    signal-emitter ................................. 670,271 op/s
+    event-signal ................................... 3,227,116 op/s
+    signal-lite .................................... 4,771,311 op/s
+    minivents ...................................... 96,408 op/s
+
+    Theoretical max ................................ 5,353,266 op/s
+
+Suites:  2
+Benches: 12
+Elapsed: 19,662.01 ms
+
+## emit many parameters
+    EventEmitter ................................... 803,993 op/s
+    EventEmitter2 .................................. 708,765 op/s
+    EventEmitter3 .................................. 843,888 op/s
+    JS-Signals ..................................... 49,452 op/s
+    MiniSignals .................................... 9,904,301 op/s
+    signal-emitter ................................. 351,890 op/s
+    signal-lite .................................... 14,361,587 op/s
+    minivents ...................................... 129,559 op/s
+
+    Theoretical max ................................ 18,825,543 op/s
+
+Suites:  2
+Benches: 9
+Elapsed: 16,901.15 ms
+
+## emit arrays
+
+    EventEmitter ................................... 3,334,924 op/s
+    EventEmitter2 .................................. 1,641,453 op/s
+    EventEmitter3 .................................. 4,860,544 op/s
+    RXJS ........................................... 1,398,969 op/s
+    ReactiveProperty ............................... 4,274,918 op/s
+    JS-Signals ..................................... 183,172 op/s
+    MiniSignals .................................... 7,299,927 op/s
+    signal-emitter ................................. 231,058 op/s
+    event-signal ................................... 1,914,223 op/s
+    signal-lite .................................... 5,143,471 op/s
+
+    Theoretical max ................................ 12,525,894 op/s
+
+Suites:  2
+Benches: 11
+Elapsed: 16,266.40 ms
+
+## emit objects
+
+    EventEmitter ................................... 3,256,736 op/s
+    EventEmitter2 .................................. 1,688,924 op/s
+    EventEmitter3 .................................. 4,976,736 op/s
+    RXJS ........................................... 1,452,686 op/s
+    ReactiveProperty ............................... 5,878,016 op/s
+    JS-Signals ..................................... 201,392 op/s
+    MiniSignals .................................... 7,603,827 op/s
+    signal-emitter ................................. 256,982 op/s
+    event-signal ................................... 2,027,285 op/s
+    signal-lite .................................... 6,810,431 op/s
+
+    Theoretical max ................................ 12,442,791 op/s
+
+Suites:  2
+Benches: 11
+Elapsed: 16,456.84 ms

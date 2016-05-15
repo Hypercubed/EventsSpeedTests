@@ -1,4 +1,6 @@
-'use strict';
+/* global bench, suite */
+
+var subjects = require('./utils/subjects').createInstancesOn(handle, handle2);
 
 var c = 0;
 
@@ -29,83 +31,66 @@ function handle2() {
   }
 }
 
-var subjects = require('./subjects').createInstancesOn(handle, handle2);
-var suiteFactory = require('./suite');
+suite('emit objects', function () {
+  bench('EventEmitter', function () {
+    subjects.ee1.emit('foo', {bar: 'bar'});
+    subjects.ee1.emit('foo', {bar: 'bar', baz: 'baz'});
+    subjects.ee1.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
+  });
+  bench('EventEmitter2', function () {
+    subjects.ee2.emit('foo', {bar: 'bar'});
+    subjects.ee2.emit('foo', {bar: 'bar', baz: 'baz'});
+    subjects.ee2.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
+  });
+  bench('EventEmitter3', function () {
+    subjects.ee3.emit('foo', {bar: 'bar'});
+    subjects.ee3.emit('foo', {bar: 'bar', baz: 'baz'});
+    subjects.ee3.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
+  });
+  bench('RXJS', function () {
+    subjects.subject.next({bar: 'bar'});
+    subjects.subject.next({bar: 'bar', baz: 'baz'});
+    subjects.subject.next({bar: 'bar', baz: 'baz', boom: 'boom'});
+  });
+  bench('ReactiveProperty', function () {
+    subjects.rProperty({bar: 'bar'});
+    subjects.rProperty({bar: 'bar', baz: 'baz'});
+    subjects.rProperty({bar: 'bar', baz: 'baz', boom: 'boom'});
+  });
+  bench('JS-Signals', function () {
+    subjects.signal.dispatch({bar: 'bar'});
+    subjects.signal.dispatch({bar: 'bar', baz: 'baz'});
+    subjects.signal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
+  });
+  bench('MiniSignals', function () {
+    subjects.miniSignal.dispatch({bar: 'bar'});
+    subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz'});
+    subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
+  });
+  bench('signal-emitter', function () {
+    subjects.signalEmitter.emit({bar: 'bar'});
+    subjects.signalEmitter.emit({bar: 'bar', baz: 'baz'});
+    subjects.signalEmitter.emit({bar: 'bar', baz: 'baz', boom: 'boom'});
+  });
+  bench('event-signal', function () {  // this is not a fair test, eventSignal.emit only emits one argument
+    subjects.eventSignal.emit({bar: 'bar'});
+    subjects.eventSignal.emit({bar: 'bar', baz: 'baz'});
+    subjects.eventSignal.emit({bar: 'bar', baz: 'baz', boom: 'boom'});
+  });
+  bench('signal-lite', function () {
+    subjects.signalLite.broadcast({bar: 'bar'});
+    subjects.signalLite.broadcast({bar: 'bar', baz: 'baz'});
+    subjects.signalLite.broadcast({bar: 'bar', baz: 'baz', boom: 'boom'});
+  });
+});
 
-console.log('\n## emit object');
-
-suiteFactory('emit objects')
-  .add('Theoretical max', function () {
+suite('*emit objects*', function () {
+  bench('Theoretical max', function () {
     handle({bar: 'bar'});
     handle2({bar: 'bar'});
     handle({bar: 'bar', baz: 'baz'});
     handle2({bar: 'bar', baz: 'baz'});
     handle({bar: 'bar', baz: 'baz', boom: 'boom'});
     handle2({bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .on('cycle', function (e) {
-    if (c < e.target.count) {
-      throw new Error('something is wrong');
-    }
-    c = 0;
-  })
-  .run();
-
-suiteFactory('emit objects')
-  .on('cycle', function (e) {
-    if (c < e.target.count) {
-      throw new Error('something is wrong');
-    }
-    c = 0;
-  })
-  .add('EventEmitter', function () {
-    subjects.ee1.emit('foo', {bar: 'bar'});
-    subjects.ee1.emit('foo', {bar: 'bar', baz: 'baz'});
-    subjects.ee1.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .add('EventEmitter2', function () {
-    subjects.ee2.emit('foo', {bar: 'bar'});
-    subjects.ee2.emit('foo', {bar: 'bar', baz: 'baz'});
-    subjects.ee2.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .add('EventEmitter3', function () {
-    subjects.ee3.emit('foo', {bar: 'bar'});
-    subjects.ee3.emit('foo', {bar: 'bar', baz: 'baz'});
-    subjects.ee3.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .add('RXJS', function () {
-    subjects.subject.next({bar: 'bar'});
-    subjects.subject.next({bar: 'bar', baz: 'baz'});
-    subjects.subject.next({bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .add('ReactiveProperty', function () {
-    subjects.rProperty({bar: 'bar'});
-    subjects.rProperty({bar: 'bar', baz: 'baz'});
-    subjects.rProperty({bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .add('JS-Signals', function () {
-    subjects.signal.dispatch({bar: 'bar'});
-    subjects.signal.dispatch({bar: 'bar', baz: 'baz'});
-    subjects.signal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .add('MiniSignals', function () {
-    subjects.miniSignal.dispatch({bar: 'bar'});
-    subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz'});
-    subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .add('signal-emitter', function () {
-    subjects.signalEmitter.emit({bar: 'bar'});
-    subjects.signalEmitter.emit({bar: 'bar', baz: 'baz'});
-    subjects.signalEmitter.emit({bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .add('event-signal', function () {  // this is not a fair test, eventSignal.emit only emits one argument
-    subjects.eventSignal.emit({bar: 'bar'});
-    subjects.eventSignal.emit({bar: 'bar', baz: 'baz'});
-    subjects.eventSignal.emit({bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .add('signal-lite', function () {
-    subjects.signalLite.broadcast({bar: 'bar'});
-    subjects.signalLite.broadcast({bar: 'bar', baz: 'baz'});
-    subjects.signalLite.broadcast({bar: 'bar', baz: 'baz', boom: 'boom'});
-  })
-  .run();
+  });
+});
