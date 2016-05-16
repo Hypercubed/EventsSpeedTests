@@ -1,4 +1,4 @@
-/* global suite, bench */
+/* global bench, suite */
 
 var subjects = require('./utils/subjects').createInstances();
 

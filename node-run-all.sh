@@ -1,41 +1,39 @@
-node ./bench/utils/header.js
-
 echo ""
-matcha ./bench/emit.js $@
+matcha ./benchmark/emit.js $@
 sleep 10
 
 echo ""
-matcha ./bench/emit-one.js $@
+matcha ./benchmark/emit-one.js $@
 sleep 10
 
 echo ""
-matcha ./bench/init.js $@
+matcha ./benchmark/init.js $@
 sleep 10
 
 echo ""
-matcha ./bench/add-remove.js $@
+matcha ./benchmark/add-remove.js $@
 sleep 10
 
 echo ""
-matcha ./bench/emit-context.js $@
+matcha ./benchmark/emit-context.js $@
 sleep 10
 
 echo ""
-matcha ./bench/emit-bound.js $@
+matcha ./benchmark/emit-bound.js $@
 sleep 10
 
 echo ""
-matcha ./bench/emit-many.js $@
+matcha ./benchmark/emit-many.js $@
 sleep 10
 
 echo ""
-matcha ./bench/emit-large.js $@
+matcha ./benchmark/emit-large.js $@
 sleep 10
 
 echo ""
-matcha ./bench/emit-arrays.js $@
+matcha ./benchmark/emit-arrays.js $@
 sleep 10
 
 echo ""
-matcha ./bench/emit-objects.js $@
+matcha ./benchmark/emit-objects.js $@
 sleep 10
