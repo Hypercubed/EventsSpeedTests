@@ -19,6 +19,7 @@
 - d3-dispatch: 0.4.3
 - observ: 0.2.0
 - observable: 2.1.4
+- EventDispatcher: 1.0.0
 
 ## Results
 
