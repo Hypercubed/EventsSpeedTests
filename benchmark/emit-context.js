@@ -1,6 +1,6 @@
 /* global bench, suite */
 
-var subjects = require('./utils/subjects').createInstances();
+var subjects = require('../subjects').createInstances();
 
 var c = 0;
 
@@ -48,6 +48,13 @@ subjects.rProperty.on(handle2);
 var bHandel = handle.bind(ctx);
 
 suite('emit with context', function () {
+  bench('Theoretical max', function () {
+    bHandel('bar');
+    handle2('bar');
+  });
+});
+
+suite('*emit with context', function () {
   bench('EventEmitter', function () {
     subjects.ee1.emit('foo', 'bar');
   });
@@ -86,12 +93,5 @@ suite('emit with context', function () {
 
   bench('signal-lite', function () {
     subjects.signalLite.broadcast('bar');
-  });
-});
-
-suite('*emit with context*', function () {
-  bench('Theoretical max', function () {
-    bHandel('bar');
-    handle2('bar');
   });
 });

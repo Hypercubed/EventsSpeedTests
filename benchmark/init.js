@@ -1,12 +1,18 @@
 /* global bench, suite */
 
-var subjects = require('./utils/subjects').constructors;
+var subjects = require('../subjects').constructors;
 
 var dummy = '';
 
 function Dummy() {}
 
 suite('init', function () {
+  bench('Theoretical max', function () {
+    dummy = new Dummy();
+  });
+});
+
+suite('*init', function () {
   bench('EventEmitter', function () {
     dummy = new subjects.EventEmitter1();
   });
@@ -25,10 +31,7 @@ suite('init', function () {
   bench('MiniSignals', function () {
     dummy = new subjects.MiniSignal();
   });
-});
-
-suite('*init*', function () {
-  bench('Theoretical max', function () {
-    dummy = new Dummy();
+  bench('EventDispatcher', function () {
+    dummy = new subjects.EventDispatcher();
   });
 });

@@ -1,6 +1,6 @@
 /* global bench, suite */
 
-var subjects = require('./utils/subjects').createInstancesOn(handle, handle2);
+var subjects = require('../subjects').createInstancesOn(handle, handle2);
 
 var c = 0;
 
@@ -24,6 +24,13 @@ function handle2(a) {
 }
 
 suite('emit one parameter', function () {
+  bench('Theoretical max', function () {
+    handle('bar');
+    handle2('bar');
+  });
+});
+
+suite('*emit one parameter', function () {
   bench('EventEmitter', function () {
     subjects.ee1.emit('foo', 'bar');
   });
@@ -82,12 +89,5 @@ suite('emit one parameter', function () {
 
   bench('minivents', function () {
     subjects.miniVent.emit('foo', 'bar');
-  });
-});
-
-suite('*emit one parameter*', function () {
-  bench('Theoretical max', function () {
-    handle('bar');
-    handle2('bar');
   });
 });

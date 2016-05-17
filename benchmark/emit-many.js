@@ -1,7 +1,7 @@
 /* global bench, suite */
 
-var subjects = require('./utils/subjects').createInstances();
-var addHandles = require('./utils/subjects').addHandles;
+var subjects = require('../subjects').createInstances();
+var addHandles = require('../subjects').addHandles;
 
 var c = 0;
 
@@ -20,6 +20,14 @@ var handels = Array.apply(null, Array(10)).map(function () {
 addHandles(subjects, handels);
 
 suite('emit many listeners', function () {
+  bench('Theoretical max', function () {
+    for (var i = 0; i < 10; i++) {
+      (handels[i])('bar');
+    }
+  });
+});
+
+suite('*emit many listeners', function () {
   bench('EventEmitter', function () {
     subjects.ee1.emit('foo', 'bar');
   });
@@ -52,13 +60,5 @@ suite('emit many listeners', function () {
   });
   bench('minivents', function () {
     subjects.miniVent.emit('foo', 'bar');
-  });
-});
-
-suite('*emit many listeners*', function () {
-  bench('Theoretical max', function () {
-    for (var i = 0; i < 10; i++) {
-      (handels[i])('bar');
-    }
   });
 });

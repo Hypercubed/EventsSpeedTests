@@ -46,7 +46,8 @@ module.exports = function (runner, utils) {
     if (suite.benches.length > 1) {
       var benches = suite.benches.slice().sort(desc);
       console.log('');
-      console.log('*Fastest is **' + benches[0].title + '***');
+      console.log('*Fastest is __' + benches[0].title + '__*');
+      console.log('');
     }
   });
 

@@ -1,6 +1,6 @@
 /* global bench, suite */
 
-var subjects = require('./utils/subjects').createInstancesOn(handle, handle2);
+var subjects = require('../subjects').createInstancesOn(handle, handle2);
 
 var c = 0;
 
@@ -34,6 +34,17 @@ function handle2() {
 }
 
 suite('emit arrays', function () {
+  bench('Theoretical max', function () {
+    handle(['bar']);
+    handle2(['bar']);
+    handle(['bar', 'baz']);
+    handle2(['bar', 'baz']);
+    handle(['bar', 'baz', 'boom']);
+    handle2(['bar', 'baz', 'boom']);
+  });
+});
+
+suite('*emit arrays', function () {
   bench('EventEmitter', function () {
     subjects.ee1.emit('foo', ['bar']);
     subjects.ee1.emit('foo', ['bar', 'baz']);
@@ -92,16 +103,5 @@ suite('emit arrays', function () {
     subjects.signalLite.broadcast(['bar']);
     subjects.signalLite.broadcast(['bar', 'baz']);
     subjects.signalLite.broadcast(['bar', 'baz', 'boom']);
-  });
-});
-
-suite('*emit arrays*', function () {
-  bench('Theoretical max', function () {
-    handle(['bar']);
-    handle2(['bar']);
-    handle(['bar', 'baz']);
-    handle2(['bar', 'baz']);
-    handle(['bar', 'baz', 'boom']);
-    handle2(['bar', 'baz', 'boom']);
   });
 });

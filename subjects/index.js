@@ -14,6 +14,7 @@ var observ = require('observ');
 var observable = require('observable');
 var namespaceEmitter = require('namespace-emitter');
 var d3Dispatch = require('d3-dispatch').dispatch;
+var EventDispatcher = require('./eventdispatcher');
 
 if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
@@ -34,7 +35,8 @@ module.exports.constructors = {
   observ: observ,
   observable: observable,
   namespaceEmitter: namespaceEmitter,
-  d3Dispatch: d3Dispatch
+  d3Dispatch: d3Dispatch,
+  EventDispatcher: EventDispatcher
 };
 
 module.exports.createInstances = createInstances;
@@ -57,6 +59,7 @@ function createInstances() {
   var observableValue = observable();
   var nsEmitter = namespaceEmitter();
   var dispatch = d3Dispatch('foo');
+  var eventDispatcher = new EventDispatcher();
 
   return {
     ee1: ee1,
@@ -73,7 +76,8 @@ function createInstances() {
     observValue: observValue,
     observableValue: observableValue,
     nsEmitter: nsEmitter,
-    dispatch: dispatch
+    dispatch: dispatch,
+    eventDispatcher: eventDispatcher
   };
 }
 
@@ -94,6 +98,7 @@ function addHandles(subjects, handels) {
     subjects.observableValue(h);
     subjects.nsEmitter.on('foo', h);
     subjects.dispatch.on('foo.' + i, h);
+    subjects.eventDispatcher.addEventListener('foo', h);
   });
 
   return subjects;

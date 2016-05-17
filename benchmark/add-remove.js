@@ -1,6 +1,6 @@
 /* global bench, suite */
 
-var subjects = require('./utils/subjects').createInstances();
+var subjects = require('../subjects').createInstances();
 
 function handle() {
   throw new Error('invalid arguments');
@@ -30,5 +30,9 @@ suite('add-remove', function () {
   bench('MiniSignals', function () {
     var _handle = subjects.miniSignal.add(handle);
     subjects.miniSignal.detach(_handle);
+  });
+  bench('EventDispatcher', function () {
+    subjects.eventDispatcher.addEventListener('foo', handle);
+    subjects.eventDispatcher.removeEventListener('foo', handle);
   });
 });
