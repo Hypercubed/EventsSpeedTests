@@ -4,7 +4,6 @@
   "description": "EventsSpeedTests",
   "private": true,
   "scripts": {
-    "start": "matcha -R markdown",
     "test": "xo"
   },
   "repository": {
@@ -21,12 +20,12 @@
     "@reactivex/rxjs": "^5.0.0-beta.7",
     "assume": "~1.2.6",
     "browserify": "^13.0.1",
+    "chuhai": "^1.0.0",
     "d3-dispatch": "^0.4.3",
     "event-signal": "^0.1.6",
     "eventemitter2": "^1.0.3",
     "eventemitter3": "^1.2.0",
     "fast-event-emitter": "0.0.2",
-    "matcha": "^0.7.0",
     "microtime": "^2.1.1",
     "mini-signals": "^1.1.1",
     "minivents": "^2.0.1",
@@ -48,6 +47,9 @@
     "envs": [
       "node",
       "browser"
+    ],
+    "ignores": [
+      "subjects/eventdispatcher.js"
     ]
   }
 }

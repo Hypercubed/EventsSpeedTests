@@ -1,64 +1,61 @@
-/* global bench, suite */
+var suite = require('chuhai');
 
-var subjects = require('../subjects').createInstances();
-var addHandles = require('../subjects').addHandles;
+suite('emit many listeners', function (s) {
+  s.set('maxTime', 0.01);
+  s.set('minSamples', 10);
 
-var c = 0;
+  var handels = Array.apply(null, Array(10)).map(function () {
+    return function (a) {
+      if (arguments.length === 1 && a === undefined) {
+        return;
+      }
+      if (arguments.length > 2 || a !== 'bar') {
+        throw new Error('invalid arguments');
+      }
+    };
+  });
 
-var handels = Array.apply(null, Array(10)).map(function () {
-  return function (a) {
-    if (arguments.length === 1 && a === undefined) {
-      return;
-    }
-    if (arguments.length > 2 || a !== 'bar') {
-      throw new Error('invalid arguments');
-    }
-    c++;
-  };
-});
+  var subjects = require('../subjects').createInstances();
+  var addHandles = require('../subjects').addHandles;
+  addHandles(subjects, handels);
 
-addHandles(subjects, handels);
-
-suite('emit many listeners', function () {
-  bench('Theoretical max', function () {
+  s.burn('Theoretical max', function () {
     for (var i = 0; i < 10; i++) {
       (handels[i])('bar');
     }
   });
-});
 
-suite('*emit many listeners', function () {
-  bench('EventEmitter', function () {
+  s.bench('EventEmitter', function () {
     subjects.ee1.emit('foo', 'bar');
   });
-  bench('EventEmitter2', function () {
+  s.bench('EventEmitter2', function () {
     subjects.ee2.emit('foo', 'bar');
   });
-  bench('EventEmitter3', function () {
+  s.bench('EventEmitter3', function () {
     subjects.ee3.emit('foo', 'bar');
   });
-  bench('RXJS', function () {
+  s.bench('RXJS', function () {
     subjects.subject.next('bar');
   });
-  bench('ReactiveProperty', function () {
+  s.bench('ReactiveProperty', function () {
     subjects.rProperty('bar');
   });
-  bench('JS-Signals', function () {
+  s.bench('JS-Signals', function () {
     subjects.signal.dispatch('bar');
   });
-  bench('MiniSignals', function () {
+  s.bench('MiniSignals', function () {
     subjects.miniSignal.dispatch('bar');
   });
-  bench('signal-emitter', function () {
+  s.bench('signal-emitter', function () {
     subjects.signalEmitter.emit('bar');
   });
-  bench('event-signal', function () {
+  s.bench('event-signal', function () {
     subjects.eventSignal.emit('bar');
   });
-  bench('signal-lite', function () {
+  s.bench('signal-lite', function () {
     subjects.signalLite.broadcast('bar');
   });
-  bench('minivents', function () {
+  s.bench('minivents', function () {
     subjects.miniVent.emit('foo', 'bar');
   });
 });

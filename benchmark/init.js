@@ -1,37 +1,44 @@
-/* global bench, suite */
+var assert = require('assert');
+var suite = require('chuhai');
 
-var subjects = require('../subjects').constructors;
+suite('init', function (s) {
+  s.set('maxTime', 0.01);
+  s.set('minSamples', 10);
 
-var dummy = '';
+  var subjects = require('../subjects').constructors;
 
-function Dummy() {}
+  var dummy = null;
 
-suite('init', function () {
-  bench('Theoretical max', function () {
+  s.cycle(function () {
+    assert(dummy);
+    dummy = false;
+  });
+
+  function Dummy() {}
+
+  s.burn('Theoretical max', function () {
     dummy = new Dummy();
   });
-});
 
-suite('*init', function () {
-  bench('EventEmitter', function () {
+  s.bench('EventEmitter', function () {
     dummy = new subjects.EventEmitter1();
   });
-  bench('EventEmitter2', function () {
+  s.bench('EventEmitter2', function () {
     dummy = new subjects.EventEmitter2();
   });
-  bench('EventEmitter3', function () {
+  s.bench('EventEmitter3', function () {
     dummy = new subjects.EventEmitter3();
   });
-  bench('ReactiveProperty', function () {
+  s.bench('ReactiveProperty', function () {
     dummy = subjects.reactiveProperty();
   });
-  bench('JS-Signals', function () {
+  s.bench('JS-Signals', function () {
     dummy = new subjects.Signal();
   });
-  bench('MiniSignals', function () {
+  s.bench('MiniSignals', function () {
     dummy = new subjects.MiniSignal();
   });
-  bench('EventDispatcher', function () {
+  s.bench('EventDispatcher', function () {
     dummy = new subjects.EventDispatcher();
   });
 });
