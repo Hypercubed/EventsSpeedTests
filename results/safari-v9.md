@@ -1,4 +1,3 @@
-
 # Safari 9.0.2 on OS X 10.11.2
 
 ## emit
@@ -118,4 +117,3 @@
     signal-emitter x 223,778 ops/sec ±6.10% (10 runs sampled)
 
 *Fastest is __MiniSignals__*
-
