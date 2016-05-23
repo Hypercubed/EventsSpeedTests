@@ -21,8 +21,8 @@
 
 ## Results
 
-- [Node v6.1.0](./results/node-v6.2.md)
-- [Node v4.4.4](./results/node-v4.4.md)
+- [Node v6.2](./results/node-v6.2.md)
+- [Node v4.4](./results/node-v4.4.md)
 - [Chrome v50](./results/chrome-v50.md)
 - [Firefox v45](./results/firefox-v46.md)
 - [Safari v9](./results/safari-v9.md)
