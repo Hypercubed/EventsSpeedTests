@@ -4,7 +4,9 @@
   "description": "EventsSpeedTests",
   "private": true,
   "scripts": {
-    "test": "xo"
+    "test": "xo",
+    "bench:node": ". ./scripts/node-run-all.sh",
+    "bench:browsers": ". ./scripts/browsers-run-all.sh"
   },
   "repository": {
     "type": "git",
