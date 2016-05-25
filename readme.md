@@ -18,6 +18,7 @@
 - observ: 0.2.0
 - observable: 2.1.4
 - EventDispatcher: 1.0.0
+- drip: 1.4.0
 
 ## Results
 

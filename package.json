@@ -21,9 +21,11 @@
   "devDependencies": {
     "@reactivex/rxjs": "^5.0.0-beta.7",
     "assume": "~1.2.6",
+    "blue-tape": "^0.2.0",
     "browserify": "^13.0.1",
     "chuhai": "^1.0.0",
     "d3-dispatch": "^0.4.3",
+    "drip": "^1.4.0",
     "event-signal": "^0.1.6",
     "eventemitter2": "^1.0.3",
     "eventemitter3": "^1.2.0",

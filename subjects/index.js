@@ -14,6 +14,8 @@ var observ = require('observ');
 var observable = require('observable');
 var namespaceEmitter = require('namespace-emitter');
 var d3Dispatch = require('d3-dispatch').dispatch;
+var DripEmitter = require('drip/lib/drip').EventEmitter;
+var DripEmitterEnhanced = require('drip/lib/drip').EnhancedEmitter;
 var EventDispatcher = require('./eventdispatcher');
 
 if (typeof window === 'undefined') {
@@ -36,7 +38,9 @@ module.exports.constructors = {
   observable: observable,
   namespaceEmitter: namespaceEmitter,
   d3Dispatch: d3Dispatch,
-  EventDispatcher: EventDispatcher
+  EventDispatcher: EventDispatcher,
+  DripEmitter: DripEmitter,
+  DripEmitterEnhanced: DripEmitterEnhanced
 };
 
 module.exports.createInstances = createInstances;
@@ -60,6 +64,8 @@ function createInstances() {
   var nsEmitter = namespaceEmitter();
   var dispatch = d3Dispatch('foo');
   var eventDispatcher = new EventDispatcher();
+  var dripEmitter = new DripEmitter();
+  var dripEmitterEnhanced = new DripEmitterEnhanced();
 
   return {
     ee1: ee1,
@@ -77,7 +83,9 @@ function createInstances() {
     observableValue: observableValue,
     nsEmitter: nsEmitter,
     dispatch: dispatch,
-    eventDispatcher: eventDispatcher
+    eventDispatcher: eventDispatcher,
+    dripEmitter: dripEmitter,
+    dripEmitterEnhanced: dripEmitterEnhanced
   };
 }
 
@@ -99,6 +107,8 @@ function addHandles(subjects, handels) {
     subjects.nsEmitter.on('foo', h);
     subjects.dispatch.on('foo.' + i, h);
     subjects.eventDispatcher.addEventListener('foo', h);
+    subjects.dripEmitter.on('foo', h);
+    subjects.dripEmitterEnhanced.on('foo', h);
   });
 
   return subjects;
