@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test": "xo",
-    "bench:node": ". ./scripts/node-run-all.sh",
+    "platform": "node ./scripts/platform.js",
+    "bench:node": "npm run platform && tap ./benchmark/*.js -R tap",
     "bench:browsers": ". ./scripts/browsers-run-all.sh"
   },
   "repository": {
@@ -41,6 +42,7 @@
     "signal-emitter": "0.0.1",
     "signals": "^1.0.0",
     "signals-lite": "^1.0.0",
+    "tap": "^5.7.2",
     "testling": "^1.7.1",
     "watchify": "^3.7.0",
     "xo": "^0.15.0"

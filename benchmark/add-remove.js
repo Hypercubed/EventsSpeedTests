@@ -1,8 +1,7 @@
-var assert = require('assert');
 var suite = require('chuhai');
 var test = require('blue-tape');
 
-test(function () {
+test('add-remove', function (t) {
   return suite('add-remove', function (s) {
     s.set('maxTime', 0.01);
     s.set('minSamples', 10);
@@ -11,7 +10,8 @@ test(function () {
 
     var called = 0;
 
-    s.cycle(function () {
+    s.cycle(function (e) {
+      t.false(e.target.error, 'runs without error');
       called = 0;
       subjects.ee1.emit('foo', 'bar');
       subjects.ee2.emit('foo', 'bar');
@@ -22,7 +22,7 @@ test(function () {
       subjects.signal.dispatch('bar');
       subjects.miniSignal.dispatch('bar');
       subjects.eventDispatcher.dispatchEvent({type: 'foo', bar: 'bar'});
-      assert.equal(called, 0);
+      t.equal(called, 0, 'never called');
     });
 
     s.bench('EventEmitter', function () {

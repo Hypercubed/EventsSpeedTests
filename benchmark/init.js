@@ -1,8 +1,7 @@
-var assert = require('assert');
 var suite = require('chuhai');
 var test = require('blue-tape');
 
-test(function () {
+test('init', function (t) {
   return suite('init', function (s) {
     s.set('maxTime', 0.01);
     s.set('minSamples', 10);
@@ -11,9 +10,10 @@ test(function () {
 
     var dummy = null;
 
-    s.cycle(function () {
-      assert(dummy);
-      dummy = false;
+    s.cycle(function (e) {
+      t.false(e.target.error, e.target.name + ' runs without error');
+      t.ok(typeof dummy === 'object' || typeof dummy === 'function', e.target.name + ' constructed an object');
+      dummy = null;
     });
 
     function Dummy() {}
