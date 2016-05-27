@@ -48,8 +48,8 @@ test('emit one parameter', function (t) {
     });
 
     s.bench('d3-dispatch', function () {
-      // called = 0;
-      subjects.dispatch.call('foo', this, 'bar');
+      called = 0;
+      subjects.dispatch.call('foo', null, 'bar');
     });
 
     s.bench('namespace-emitter', function () {
@@ -112,11 +112,9 @@ test('emit one parameter', function (t) {
         return;
       }
       if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
-        console.log(arguments.length, 'a === ', a);
         throw new Error('invalid arguments ' + a);
       }
       called++;
-      console.log(called);
     }
 
     function handle2(a) {
