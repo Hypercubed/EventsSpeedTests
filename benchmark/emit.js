@@ -11,7 +11,7 @@ test('emit', function (t) {
     var called = 0;
 
     s.cycle(function (e) {
-      t.false(e.target.error, 'runs without error');
+      t.false(e.target.error, e.target.name + ' runs without error');
       t.equal(called, 4, 'called four times');
     });
 

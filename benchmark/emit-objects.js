@@ -11,7 +11,7 @@ test('emit objects', function (t) {
     var called = null;
 
     s.cycle(function (e) {
-      t.false(e.target.error, 'runs without error');
+      t.false(e.target.error, e.target.name + ' runs without error');
       t.equal(called, 3, 'called three times');
       called = null;
     });

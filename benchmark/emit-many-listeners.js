@@ -26,7 +26,7 @@ test('emit many listeners', function (t) {
     addHandles(subjects, handels);
 
     s.cycle(function (e) {
-      t.false(e.target.error, 'runs without error');
+      t.false(e.target.error, e.target.name + ' runs without error');
       t.equal(called, N, 'called N times');
       called = null;
     });

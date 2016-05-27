@@ -9,7 +9,7 @@ test('emit with bound function', function (t) {
     var called = null;
 
     s.cycle(function (e) {
-      t.false(e.target.error, 'runs without error');
+      t.false(e.target.error, e.target.name + ' runs without error');
       t.equal(called, 1, 'called one time');
       called = null;
     });

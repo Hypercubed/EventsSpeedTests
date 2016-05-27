@@ -11,7 +11,7 @@ test('add-remove', function (t) {
     var called = 0;
 
     s.cycle(function (e) {
-      t.false(e.target.error, 'runs without error');
+      t.false(e.target.error, e.target.name + ' runs without error');
       called = 0;
       subjects.ee1.emit('foo', 'bar');
       subjects.ee2.emit('foo', 'bar');

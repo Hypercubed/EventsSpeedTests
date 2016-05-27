@@ -10,13 +10,13 @@ test('emit one parameter', function (t) {
 
     var called = null;
 
-    /* s.cycle(function (e) {
-      t.false(e.target.error, 'runs without error');
+    s.cycle(function (e) {
+      t.false(e.target.error, e.target.name + ' runs without error');
       t.equal(called, 1, 'called once');
       called = null;
-    }); */
+    });
 
-    s.xburn('Theoretical max', function () {
+    s.burn('Theoretical max', function () {
       called = 0;
       handle('bar');
       handle2('bar');
