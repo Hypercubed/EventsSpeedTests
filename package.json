@@ -43,6 +43,7 @@
     "signals": "^1.0.0",
     "signals-lite": "^1.0.0",
     "tap": "^5.7.2",
+    "tap-summary": "github:hypercubed/tap-summary#tap-summary-markdown",
     "testling": "^1.7.1",
     "watchify": "^3.7.0",
     "xo": "^0.15.0"

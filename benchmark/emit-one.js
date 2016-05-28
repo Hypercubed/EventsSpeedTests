@@ -4,7 +4,7 @@ var test = require('blue-tape');
 test('emit one parameter', function (t) {
   return suite('emit one parameter', function (s) {
     s.set('maxTime', 0.01);
-    s.set('minSamples', 5);
+    s.set('minSamples', 10);
 
     var subjects = require('../subjects').createInstancesOn(handle, handle2);
 

@@ -1,542 +1,178 @@
 # Node.js 6.2.0 on Darwin 64-bit
 
-ok 1 (unnamed assert)
 
-1..1
-# tests 1
-# pass  1
+# Tests 
+    ✔ add-remove [pass: 18, fail: 0, duration: 1ms]
+    ✔ emit arrays [pass: 26, fail: 0, duration: 0ms]
+    ✔ emit with bound function [pass: 26, fail: 0, duration: 4ms]
+    ✔ emit with context [pass: 26, fail: 0, duration: 2ms]
+    ✔ emit many listeners [pass: 28, fail: 0, duration: 1ms]
+    ✔ emit many parameters [pass: 20, fail: 0, duration: 1ms]
+    ✔ emit objects [pass: 28, fail: 0, duration: 0ms]
+    ✔ emit one parameter [pass: 36, fail: 0, duration: 1ms]
+    ✔ emit [pass: 18, fail: 0, duration: 1ms]
+    ✔ init [pass: 20, fail: 0, duration: 5ms]
+
+
+# Summary 
+
+- duration: 16ms
+- assertions: 246
+- pass: 246
+- fail: 0
+
+# Comments 
+
+## add-remove
+    dripEmitter x 27,483,942 ops/sec ±5.14% (10 runs sampled)
+    MiniSignals x 12,965,359 ops/sec ±26.62% (10 runs sampled)
+    ReactiveProperty x 4,732,349 ops/sec ±6.27% (10 runs sampled)
+    EventDispatcher x 4,727,477 ops/sec ±6.42% (10 runs sampled)
+    EventEmitter x 3,862,291 ops/sec ±16.08% (10 runs sampled)
+    EventEmitter3 x 1,782,422 ops/sec ±5.09% (10 runs sampled)
+    EventEmitter2 x 1,206,397 ops/sec ±8.59% (10 runs sampled)
+    JS-Signals x 762,994 ops/sec ±5.07% (10 runs sampled)
+    dripEmitterEnhanced x 667,927 ops/sec ±4.61% (10 runs sampled)
+*Fastest is __dripEmitter__*
+
+## emit arrays
+    Theoretical max x 12,030,253 ops/sec ±7.49% (10 runs sampled) *burn in*
+    MiniSignals x 7,131,352 ops/sec ±1.50% (10 runs sampled)
+    signal-lite x 6,529,882 ops/sec ±2.73% (10 runs sampled)
+    dripEmitter x 5,204,349 ops/sec ±4.14% (10 runs sampled)
+    EventEmitter3 x 4,801,810 ops/sec ±3.09% (10 runs sampled)
+    ReactiveProperty x 4,920,577 ops/sec ±7.86% (10 runs sampled)
+    EventEmitter x 3,099,372 ops/sec ±6.89% (10 runs sampled)
+    event-signal x 1,984,797 ops/sec ±3.37% (10 runs sampled)
+    RXJS x 1,280,306 ops/sec ±5.76% (10 runs sampled)
+    EventEmitter2 x 1,376,666 ops/sec ±23.92% (10 runs sampled)
+    dripEmitterEnhanced x 606,568 ops/sec ±6.22% (10 runs sampled)
+    signal-emitter x 215,464 ops/sec ±8.07% (10 runs sampled)
+    JS-Signals x 184,963 ops/sec ±3.67% (10 runs sampled)
+*Fastest is __MiniSignals__*
+
+## emit with bound function
+    Theoretical max x 31,729,716 ops/sec ±6.24% (10 runs sampled) *burn in*
+    ReactiveProperty x 16,193,844 ops/sec ±5.59% (10 runs sampled)
+    dripEmitter x 13,790,777 ops/sec ±7.14% (10 runs sampled)
+    EventEmitter3 x 12,724,671 ops/sec ±3.82% (10 runs sampled)
+    EventEmitter x 9,155,058 ops/sec ±4.68% (10 runs sampled)
+    MiniSignals x 7,822,893 ops/sec ±5.09% (10 runs sampled)
+    signal-lite x 5,765,027 ops/sec ±8.16% (10 runs sampled)
+    event-signal x 5,360,830 ops/sec ±4.34% (10 runs sampled)
+    EventEmitter2 x 4,787,591 ops/sec ±3.97% (10 runs sampled)
+    RXJS x 4,166,016 ops/sec ±4.03% (10 runs sampled)
+    dripEmitterEnhanced x 2,239,850 ops/sec ±5.83% (10 runs sampled)
+    signal-emitter x 644,050 ops/sec ±8.77% (10 runs sampled)
+    JS-Signals x 594,206 ops/sec ±3.18% (10 runs sampled)
+*Fastest is __ReactiveProperty__*
+
+## emit with context
+    Theoretical max x 32,427,299 ops/sec ±5.13% (10 runs sampled) *burn in*
+    signal-lite x 17,530,833 ops/sec ±4.93% (10 runs sampled)
+    ReactiveProperty x 16,744,005 ops/sec ±7.34% (10 runs sampled)
+    MiniSignals x 16,553,889 ops/sec ±18.36% (10 runs sampled)
+    EventEmitter3 x 13,518,249 ops/sec ±9.11% (10 runs sampled)
+    dripEmitter x 13,043,625 ops/sec ±5.68% (10 runs sampled)
+    EventEmitter x 9,103,091 ops/sec ±4.44% (10 runs sampled)
+    event-signal x 5,861,469 ops/sec ±10.00% (10 runs sampled)
+    EventEmitter2 x 4,402,221 ops/sec ±4.22% (10 runs sampled)
+    RXJS x 4,294,659 ops/sec ±5.48% (10 runs sampled)
+    dripEmitterEnhanced x 2,342,778 ops/sec ±5.65% (10 runs sampled)
+    signal-emitter x 620,037 ops/sec ±6.60% (10 runs sampled)
+    JS-Signals x 520,308 ops/sec ±6.98% (10 runs sampled)
+*Fastest is __signal-lite, ReactiveProperty, MiniSignals__*
+
+## emit many listeners
+    MiniSignals x 4,678,155 ops/sec ±4.12% (10 runs sampled)
+    signal-lite x 4,400,896 ops/sec ±7.89% (10 runs sampled)
+    Theoretical max x 4,244,126 ops/sec ±8.02% (10 runs sampled) *burn in*
+    dripEmitter x 4,183,198 ops/sec ±7.46% (10 runs sampled)
+    EventEmitter3 x 3,824,791 ops/sec ±6.82% (10 runs sampled)
+    EventEmitter x 3,471,914 ops/sec ±6.34% (10 runs sampled)
+    ReactiveProperty x 3,230,463 ops/sec ±9.05% (10 runs sampled)
+    event-signal x 2,726,757 ops/sec ±10.47% (10 runs sampled)
+    EventEmitter2 x 2,488,979 ops/sec ±4.42% (10 runs sampled)
+    dripEmitterEnhanced x 1,352,202 ops/sec ±3.99% (10 runs sampled)
+    RXJS x 1,367,807 ops/sec ±9.00% (10 runs sampled)
+    signal-emitter x 568,980 ops/sec ±8.75% (10 runs sampled)
+    JS-Signals x 252,484 ops/sec ±7.71% (10 runs sampled)
+    minivents x 108,790 ops/sec ±5.08% (10 runs sampled)
+*Fastest is __MiniSignals, signal-lite__*
+
+## emit many parameters
+    Theoretical max x 17,046,266 ops/sec ±4.80% (10 runs sampled) *burn in*
+    MiniSignals x 14,665,243 ops/sec ±3.64% (10 runs sampled)
+    signal-lite x 14,095,605 ops/sec ±3.08% (10 runs sampled)
+    EventEmitter x 702,977 ops/sec ±4.92% (10 runs sampled)
+    EventEmitter3 x 693,567 ops/sec ±5.87% (10 runs sampled)
+    dripEmitterEnhanced x 569,246 ops/sec ±4.87% (10 runs sampled)
+    EventEmitter2 x 547,784 ops/sec ±41.64% (10 runs sampled)
+    signal-emitter x 353,013 ops/sec ±10.66% (10 runs sampled)
+    JS-Signals x 213,921 ops/sec ±4.27% (10 runs sampled)
+    minivents x 128,226 ops/sec ±6.47% (10 runs sampled)
+*Fastest is __MiniSignals, signal-lite__*
+
+## emit objects
+    Theoretical max x 10,748,261 ops/sec ±6.09% (10 runs sampled) *burn in*
+    MiniSignals x 6,061,492 ops/sec ±6.05% (10 runs sampled)
+    signal-lite x 5,937,968 ops/sec ±4.67% (10 runs sampled)
+    ReactiveProperty x 5,128,783 ops/sec ±5.27% (10 runs sampled)
+    EventEmitter3 x 4,554,202 ops/sec ±2.73% (10 runs sampled)
+    dripEmitter x 4,750,904 ops/sec ±8.36% (10 runs sampled)
+    EventEmitter x 3,080,255 ops/sec ±4.04% (10 runs sampled)
+    EventDispatcher x 2,257,780 ops/sec ±8.99% (10 runs sampled)
+    event-signal x 1,705,841 ops/sec ±7.84% (10 runs sampled)
+    EventEmitter2 x 1,573,673 ops/sec ±5.17% (10 runs sampled)
+    RXJS x 1,304,671 ops/sec ±4.65% (10 runs sampled)
+    dripEmitterEnhanced x 465,773 ops/sec ±5.80% (10 runs sampled)
+    signal-emitter x 236,295 ops/sec ±9.60% (10 runs sampled)
+    JS-Signals x 180,998 ops/sec ±4.69% (10 runs sampled)
+*Fastest is __MiniSignals, signal-lite__*
+
+## emit one parameter
+    Theoretical max x 26,980,762 ops/sec ±9.47% (5 runs sampled) *burn in*
+    MiniSignals x 15,225,870 ops/sec ±5.41% (5 runs sampled)
+    dripEmitter x 14,712,130 ops/sec ±7.03% (5 runs sampled)
+    signal-lite x 16,090,395 ops/sec ±20.86% (5 runs sampled)
+    ReactiveProperty x 13,645,053 ops/sec ±6.45% (5 runs sampled)
+    EventEmitter3 x 13,420,062 ops/sec ±6.67% (5 runs sampled)
+    EventEmitter x 8,223,286 ops/sec ±12.52% (5 runs sampled)
+    observ x 5,624,357 ops/sec ±5.49% (5 runs sampled)
+    event-signal x 5,698,538 ops/sec ±7.89% (5 runs sampled)
+    EventEmitter2 x 4,125,993 ops/sec ±13.12% (5 runs sampled)
+    RXJS x 3,622,978 ops/sec ±14.46% (5 runs sampled)
+    d3-dispatch x 1,885,154 ops/sec ±11.68% (5 runs sampled)
+    dripEmitterEnhanced x 1,739,344 ops/sec ±7.72% (5 runs sampled)
+    signal-emitter x 666,301 ops/sec ±5.21% (5 runs sampled)
+    JS-Signals x 563,082 ops/sec ±5.82% (5 runs sampled)
+    minivents x 534,318 ops/sec ±5.58% (5 runs sampled)
+    namespace-emitter x 556,283 ops/sec ±10.95% (5 runs sampled)
+    observable x 470,719 ops/sec ±4.07% (5 runs sampled)
+*Fastest is __MiniSignals, dripEmitter, signal-lite__*
+
+## emit
+    Theoretical max x 10,934,732 ops/sec ±4.04% (10 runs sampled) *burn in*
+    MiniSignals x 5,705,970 ops/sec ±5.89% (10 runs sampled)
+    signal-lite x 4,842,920 ops/sec ±6.75% (10 runs sampled)
+    EventEmitter x 2,266,620 ops/sec ±9.84% (10 runs sampled)
+    EventEmitter3 x 1,106,549 ops/sec ±5.00% (10 runs sampled)
+    EventEmitter2 x 689,457 ops/sec ±6.42% (10 runs sampled)
+    dripEmitterEnhanced x 361,309 ops/sec ±7.74% (10 runs sampled)
+    signal-emitter x 162,189 ops/sec ±4.22% (10 runs sampled)
+    JS-Signals x 138,870 ops/sec ±7.97% (10 runs sampled)
+*Fastest is __MiniSignals__*
+
+## init
+    EventEmitter3 x 46,914,775 ops/sec ±3.44% (10 runs sampled)
+    EventDispatcher x 44,533,750 ops/sec ±5.35% (10 runs sampled)
+    DripEmitter x 44,972,764 ops/sec ±10.33% (10 runs sampled)
+    MiniSignals x 35,065,851 ops/sec ±4.46% (10 runs sampled)
+    Theoretical max x 37,970,675 ops/sec ±35.42% (10 runs sampled) *burn in*
+    EventEmitter2 x 29,274,149 ops/sec ±4.58% (10 runs sampled)
+    DripEmitterEnhanced x 21,102,556 ops/sec ±3.91% (10 runs sampled)
+    EventEmitter x 16,119,370 ops/sec ±4.04% (10 runs sampled)
+    JS-Signals x 1,886,030 ops/sec ±22.18% (10 runs sampled)
+    ReactiveProperty x 1,080,099 ops/sec ±26.78% (10 runs sampled)
+*Fastest is __EventEmitter3, EventDispatcher, DripEmitter__*
 
-# ok
-
-TAP version 13
-    # Subtest: ./benchmark/add-remove.js
-    # add-remove
-    ok 1 EventEmitter runs without error
-    ok 2 never called
-    ok 3 EventEmitter2 runs without error
-    ok 4 never called
-    ok 5 EventEmitter3 runs without error
-    ok 6 never called
-    ok 7 dripEmitter runs without error
-    ok 8 never called
-    ok 9 dripEmitterEnhanced runs without error
-    ok 10 never called
-    ok 11 ReactiveProperty runs without error
-    ok 12 never called
-    ok 13 JS-Signals runs without error
-    ok 14 never called
-    ok 15 MiniSignals runs without error
-    ok 16 never called
-    ok 17 EventDispatcher runs without error
-    ok 18 never called
-    ## add-remove
-
-        dripEmitter x 27,292,800 ops/sec ±4.46% (10 runs sampled)
-        MiniSignals x 10,724,777 ops/sec ±29.32% (10 runs sampled)
-        EventDispatcher x 5,328,112 ops/sec ±4.94% (10 runs sampled)
-        ReactiveProperty x 5,066,076 ops/sec ±2.84% (10 runs sampled)
-        EventEmitter x 3,898,823 ops/sec ±14.54% (10 runs sampled)
-        EventEmitter3 x 1,899,788 ops/sec ±5.74% (10 runs sampled)
-        EventEmitter2 x 1,265,348 ops/sec ±6.74% (10 runs sampled)
-        JS-Signals x 829,303 ops/sec ±4.16% (10 runs sampled)
-        dripEmitterEnhanced x 762,512 ops/sec ±2.30% (10 runs sampled)
-
-    *Fastest is __dripEmitter__*
-
-
-    1..18
-    # tests 18
-    # pass  18
-
-    # ok
-
-ok 1 - ./benchmark/add-remove.js # time=18413.647ms
-
-    # Subtest: ./benchmark/emit-arrays.js
-    # emit arrays
-    ok 1 Theoretical max runs without error
-    ok 2 called three times
-    ok 3 EventEmitter runs without error
-    ok 4 called three times
-    ok 5 EventEmitter2 runs without error
-    ok 6 called three times
-    ok 7 EventEmitter3 runs without error
-    ok 8 called three times
-    ok 9 dripEmitter runs without error
-    ok 10 called three times
-    ok 11 dripEmitterEnhanced runs without error
-    ok 12 called three times
-    ok 13 RXJS runs without error
-    ok 14 called three times
-    ok 15 ReactiveProperty runs without error
-    ok 16 called three times
-    ok 17 JS-Signals runs without error
-    ok 18 called three times
-    ok 19 MiniSignals runs without error
-    ok 20 called three times
-    ok 21 signal-emitter runs without error
-    ok 22 called three times
-    ok 23 event-signal runs without error
-    ok 24 called three times
-    ok 25 signal-lite runs without error
-    ok 26 called three times
-    ## emit arrays
-
-        Theoretical max x 13,740,340 ops/sec ±2.40% (10 runs sampled) *burn in*
-        MiniSignals x 6,703,901 ops/sec ±4.93% (10 runs sampled)
-        dripEmitter x 5,383,534 ops/sec ±3.57% (10 runs sampled)
-        EventEmitter3 x 4,943,721 ops/sec ±3.33% (10 runs sampled)
-        signal-lite x 5,292,146 ops/sec ±13.70% (10 runs sampled)
-        ReactiveProperty x 4,196,381 ops/sec ±7.02% (10 runs sampled)
-        EventEmitter x 3,407,923 ops/sec ±5.11% (10 runs sampled)
-        event-signal x 1,865,417 ops/sec ±7.20% (10 runs sampled)
-        EventEmitter2 x 1,688,604 ops/sec ±3.43% (10 runs sampled)
-        RXJS x 1,289,193 ops/sec ±6.44% (10 runs sampled)
-        dripEmitterEnhanced x 633,415 ops/sec ±3.49% (10 runs sampled)
-        signal-emitter x 210,783 ops/sec ±10.58% (10 runs sampled)
-        JS-Signals x 153,182 ops/sec ±6.02% (10 runs sampled)
-
-    *Fastest is __MiniSignals__*
-
-
-    1..26
-    # tests 26
-    # pass  26
-
-    # ok
-
-ok 2 - ./benchmark/emit-arrays.js # time=24614.194ms
-
-    # Subtest: ./benchmark/emit-bound.js
-    # emit with bound function
-    ok 1 Theoretical max runs without error
-    ok 2 called one time
-    ok 3 EventEmitter runs without error
-    ok 4 called one time
-    ok 5 EventEmitter2 runs without error
-    ok 6 called one time
-    ok 7 EventEmitter3 runs without error
-    ok 8 called one time
-    ok 9 dripEmitter runs without error
-    ok 10 called one time
-    ok 11 dripEmitterEnhanced runs without error
-    ok 12 called one time
-    ok 13 RXJS runs without error
-    ok 14 called one time
-    ok 15 ReactiveProperty runs without error
-    ok 16 called one time
-    ok 17 JS-Signals runs without error
-    ok 18 called one time
-    ok 19 MiniSignals runs without error
-    ok 20 called one time
-    ok 21 signal-emitter runs without error
-    ok 22 called one time
-    ok 23 event-signal runs without error
-    ok 24 called one time
-    ok 25 signal-lite runs without error
-    ok 26 called one time
-    ## emit with bound function
-
-        Theoretical max x 31,134,611 ops/sec ±6.08% (10 runs sampled) *burn in*
-        ReactiveProperty x 15,952,512 ops/sec ±5.97% (10 runs sampled)
-        dripEmitter x 14,017,810 ops/sec ±6.61% (10 runs sampled)
-        EventEmitter3 x 12,876,188 ops/sec ±3.09% (10 runs sampled)
-        EventEmitter x 8,822,643 ops/sec ±7.23% (10 runs sampled)
-        MiniSignals x 6,733,411 ops/sec ±13.22% (10 runs sampled)
-        signal-lite x 5,658,684 ops/sec ±6.76% (10 runs sampled)
-        event-signal x 5,135,207 ops/sec ±8.19% (10 runs sampled)
-        EventEmitter2 x 4,429,761 ops/sec ±7.29% (10 runs sampled)
-        RXJS x 4,052,519 ops/sec ±2.89% (10 runs sampled)
-        dripEmitterEnhanced x 2,025,759 ops/sec ±6.17% (10 runs sampled)
-        signal-emitter x 675,592 ops/sec ±4.13% (10 runs sampled)
-        JS-Signals x 559,052 ops/sec ±2.62% (10 runs sampled)
-
-    *Fastest is __ReactiveProperty__*
-
-
-    1..26
-    # tests 26
-    # pass  26
-
-    # ok
-
-ok 3 - ./benchmark/emit-bound.js # time=24389.615ms
-
-    # Subtest: ./benchmark/emit-context.js
-    # emit with context
-    ok 1 Theoretical max runs without error
-    ok 2 called one time
-    ok 3 EventEmitter runs without error
-    ok 4 called one time
-    ok 5 EventEmitter2 runs without error
-    ok 6 called one time
-    ok 7 EventEmitter3 runs without error
-    ok 8 called one time
-    ok 9 dripEmitter runs without error
-    ok 10 called one time
-    ok 11 dripEmitterEnhanced runs without error
-    ok 12 called one time
-    ok 13 RXJS runs without error
-    ok 14 called one time
-    ok 15 ReactiveProperty runs without error
-    ok 16 called one time
-    ok 17 JS-Signals runs without error
-    ok 18 called one time
-    ok 19 MiniSignals runs without error
-    ok 20 called one time
-    ok 21 signal-emitter runs without error
-    ok 22 called one time
-    ok 23 event-signal runs without error
-    ok 24 called one time
-    ok 25 signal-lite runs without error
-    ok 26 called one time
-    ## emit with context
-
-        Theoretical max x 31,879,189 ops/sec ±4.08% (10 runs sampled) *burn in*
-        MiniSignals x 20,792,795 ops/sec ±3.42% (10 runs sampled)
-        signal-lite x 19,769,499 ops/sec ±4.15% (10 runs sampled)
-        ReactiveProperty x 16,952,090 ops/sec ±3.74% (10 runs sampled)
-        EventEmitter3 x 13,379,775 ops/sec ±5.30% (10 runs sampled)
-        dripEmitter x 13,243,077 ops/sec ±4.82% (10 runs sampled)
-        EventEmitter x 9,236,508 ops/sec ±4.86% (10 runs sampled)
-        event-signal x 6,415,023 ops/sec ±3.75% (10 runs sampled)
-        EventEmitter2 x 4,901,441 ops/sec ±2.62% (10 runs sampled)
-        RXJS x 4,072,093 ops/sec ±4.49% (10 runs sampled)
-        dripEmitterEnhanced x 2,350,940 ops/sec ±8.95% (10 runs sampled)
-        signal-emitter x 655,961 ops/sec ±5.72% (10 runs sampled)
-        JS-Signals x 601,836 ops/sec ±4.48% (10 runs sampled)
-
-    *Fastest is __MiniSignals, signal-lite__*
-
-
-    1..26
-    # tests 26
-    # pass  26
-
-    # ok
-
-ok 4 - ./benchmark/emit-context.js # time=24673.833ms
-
-    # Subtest: ./benchmark/emit-many-listeners.js
-    # emit many listeners
-    ok 1 Theoretical max runs without error
-    ok 2 called N times
-    ok 3 EventEmitter runs without error
-    ok 4 called N times
-    ok 5 EventEmitter2 runs without error
-    ok 6 called N times
-    ok 7 EventEmitter3 runs without error
-    ok 8 called N times
-    ok 9 dripEmitter runs without error
-    ok 10 called N times
-    ok 11 dripEmitterEnhanced runs without error
-    ok 12 called N times
-    ok 13 RXJS runs without error
-    ok 14 called N times
-    ok 15 ReactiveProperty runs without error
-    ok 16 called N times
-    ok 17 JS-Signals runs without error
-    ok 18 called N times
-    ok 19 MiniSignals runs without error
-    ok 20 called N times
-    ok 21 signal-emitter runs without error
-    ok 22 called N times
-    ok 23 event-signal runs without error
-    ok 24 called N times
-    ok 25 signal-lite runs without error
-    ok 26 called N times
-    ok 27 minivents runs without error
-    ok 28 called N times
-    ## emit many listeners
-
-        Theoretical max x 4,776,740 ops/sec ±3.83% (10 runs sampled) *burn in*
-        dripEmitter x 4,515,543 ops/sec ±4.15% (10 runs sampled)
-        MiniSignals x 4,362,106 ops/sec ±2.80% (10 runs sampled)
-        signal-lite x 4,319,217 ops/sec ±9.66% (10 runs sampled)
-        EventEmitter3 x 4,085,060 ops/sec ±3.94% (10 runs sampled)
-        EventEmitter x 3,913,704 ops/sec ±2.83% (10 runs sampled)
-        ReactiveProperty x 3,843,075 ops/sec ±6.63% (10 runs sampled)
-        event-signal x 3,011,075 ops/sec ±5.36% (10 runs sampled)
-        EventEmitter2 x 2,620,877 ops/sec ±3.95% (10 runs sampled)
-        RXJS x 1,575,125 ops/sec ±2.97% (10 runs sampled)
-        dripEmitterEnhanced x 1,430,346 ops/sec ±4.59% (10 runs sampled)
-        signal-emitter x 617,334 ops/sec ±9.08% (10 runs sampled)
-        JS-Signals x 281,712 ops/sec ±3.23% (10 runs sampled)
-        minivents x 118,384 ops/sec ±4.07% (10 runs sampled)
-
-    *Fastest is __dripEmitter, MiniSignals, signal-lite__*
-
-
-    1..28
-    # tests 28
-    # pass  28
-
-    # ok
-
-ok 5 - ./benchmark/emit-many-listeners.js # time=26375.085ms
-
-    # Subtest: ./benchmark/emit-many-params.js
-    # emit many parameters
-    ok 1 Theoretical max runs without error
-    ok 2 called three times
-    ok 3 EventEmitter runs without error
-    ok 4 called three times
-    ok 5 EventEmitter2 runs without error
-    ok 6 called three times
-    ok 7 EventEmitter3 runs without error
-    ok 8 called three times
-    ok 9 dripEmitterEnhanced runs without error
-    ok 10 called three times
-    ok 11 JS-Signals runs without error
-    ok 12 called three times
-    ok 13 MiniSignals runs without error
-    ok 14 called three times
-    ok 15 signal-emitter runs without error
-    ok 16 called three times
-    ok 17 signal-lite runs without error
-    ok 18 called three times
-    ok 19 minivents runs without error
-    ok 20 called three times
-    ## emit many parameters
-
-        Theoretical max x 17,171,552 ops/sec ±7.29% (10 runs sampled) *burn in*
-        signal-lite x 14,514,839 ops/sec ±2.90% (10 runs sampled)
-        MiniSignals x 14,483,135 ops/sec ±4.05% (10 runs sampled)
-        EventEmitter x 721,170 ops/sec ±4.07% (10 runs sampled)
-        EventEmitter3 x 730,909 ops/sec ±7.03% (10 runs sampled)
-        EventEmitter2 x 706,549 ops/sec ±4.54% (10 runs sampled)
-        dripEmitterEnhanced x 578,134 ops/sec ±6.48% (10 runs sampled)
-        signal-emitter x 391,939 ops/sec ±6.10% (10 runs sampled)
-        JS-Signals x 222,579 ops/sec ±3.89% (10 runs sampled)
-        minivents x 147,389 ops/sec ±4.13% (10 runs sampled)
-
-    *Fastest is __signal-lite, MiniSignals__*
-
-
-    1..20
-    # tests 20
-    # pass  20
-
-    # ok
-
-ok 6 - ./benchmark/emit-many-params.js # time=19314.658ms
-
-    # Subtest: ./benchmark/emit-objects.js
-    # emit objects
-    ok 1 Theoretical max runs without error
-    ok 2 called three times
-    ok 3 EventEmitter runs without error
-    ok 4 called three times
-    ok 5 EventEmitter2 runs without error
-    ok 6 called three times
-    ok 7 EventEmitter3 runs without error
-    ok 8 called three times
-    ok 9 dripEmitter runs without error
-    ok 10 called three times
-    ok 11 dripEmitterEnhanced runs without error
-    ok 12 called three times
-    ok 13 RXJS runs without error
-    ok 14 called three times
-    ok 15 ReactiveProperty runs without error
-    ok 16 called three times
-    ok 17 JS-Signals runs without error
-    ok 18 called three times
-    ok 19 MiniSignals runs without error
-    ok 20 called three times
-    ok 21 signal-emitter runs without error
-    ok 22 called three times
-    ok 23 event-signal runs without error
-    ok 24 called three times
-    ok 25 signal-lite runs without error
-    ok 26 called three times
-    ok 27 EventDispatcher runs without error
-    ok 28 called three times
-    ## emit objects
-
-        Theoretical max x 12,140,097 ops/sec ±4.31% (10 runs sampled) *burn in*
-        MiniSignals x 6,454,126 ops/sec ±5.66% (10 runs sampled)
-        signal-lite x 6,088,344 ops/sec ±9.74% (10 runs sampled)
-        ReactiveProperty x 5,466,063 ops/sec ±3.56% (10 runs sampled)
-        dripEmitter x 5,112,719 ops/sec ±4.84% (10 runs sampled)
-        EventEmitter3 x 4,859,045 ops/sec ±3.72% (10 runs sampled)
-        EventEmitter x 3,278,374 ops/sec ±2.72% (10 runs sampled)
-        EventDispatcher x 2,568,818 ops/sec ±3.80% (10 runs sampled)
-        event-signal x 1,916,630 ops/sec ±3.87% (10 runs sampled)
-        RXJS x 1,367,494 ops/sec ±4.47% (10 runs sampled)
-        EventEmitter2 x 1,493,749 ops/sec ±14.71% (10 runs sampled)
-        dripEmitterEnhanced x 661,286 ops/sec ±3.71% (10 runs sampled)
-        signal-emitter x 242,176 ops/sec ±6.88% (10 runs sampled)
-        JS-Signals x 201,834 ops/sec ±3.44% (10 runs sampled)
-
-    *Fastest is __MiniSignals, signal-lite__*
-
-
-    1..28
-    # tests 28
-    # pass  28
-
-    # ok
-
-ok 7 - ./benchmark/emit-objects.js # time=27508.874ms
-
-    # Subtest: ./benchmark/emit-one.js
-    # emit one parameter
-    ok 1 Theoretical max runs without error
-    ok 2 called once
-    ok 3 EventEmitter runs without error
-    ok 4 called once
-    ok 5 EventEmitter2 runs without error
-    ok 6 called once
-    ok 7 EventEmitter3 runs without error
-    ok 8 called once
-    ok 9 dripEmitter runs without error
-    ok 10 called once
-    ok 11 dripEmitterEnhanced runs without error
-    ok 12 called once
-    ok 13 d3-dispatch runs without error
-    ok 14 called once
-    ok 15 namespace-emitter runs without error
-    ok 16 called once
-    ok 17 ReactiveProperty runs without error
-    ok 18 called once
-    ok 19 observable runs without error
-    ok 20 called once
-    ok 21 observ runs without error
-    ok 22 called once
-    ok 23 RXJS runs without error
-    ok 24 called once
-    ok 25 JS-Signals runs without error
-    ok 26 called once
-    ok 27 MiniSignals runs without error
-    ok 28 called once
-    ok 29 signal-emitter runs without error
-    ok 30 called once
-    ok 31 event-signal runs without error
-    ok 32 called once
-    ok 33 signal-lite runs without error
-    ok 34 called once
-    ok 35 minivents runs without error
-    ok 36 called once
-    ## emit one parameter
-
-        Theoretical max x 24,841,679 ops/sec ±4.40% (5 runs sampled) *burn in*
-        MiniSignals x 17,893,569 ops/sec ±5.30% (5 runs sampled)
-        signal-lite x 17,434,761 ops/sec ±8.47% (5 runs sampled)
-        EventEmitter3 x 12,756,332 ops/sec ±4.85% (5 runs sampled)
-        dripEmitter x 13,857,104 ops/sec ±14.46% (5 runs sampled)
-        ReactiveProperty x 10,927,422 ops/sec ±23.72% (5 runs sampled)
-        EventEmitter x 8,816,294 ops/sec ±5.35% (5 runs sampled)
-        observ x 6,255,281 ops/sec ±7.56% (5 runs sampled)
-        event-signal x 5,213,935 ops/sec ±7.47% (5 runs sampled)
-        EventEmitter2 x 4,085,607 ops/sec ±27.26% (5 runs sampled)
-        RXJS x 3,233,926 ops/sec ±16.53% (5 runs sampled)
-        d3-dispatch x 1,849,023 ops/sec ±12.29% (5 runs sampled)
-        dripEmitterEnhanced x 1,430,279 ops/sec ±49.53% (5 runs sampled)
-        signal-emitter x 729,872 ops/sec ±6.04% (5 runs sampled)
-        JS-Signals x 571,931 ops/sec ±5.43% (5 runs sampled)
-        minivents x 513,631 ops/sec ±6.40% (5 runs sampled)
-        namespace-emitter x 513,209 ops/sec ±8.31% (5 runs sampled)
-        observable x 368,863 ops/sec ±31.57% (5 runs sampled)
-
-    *Fastest is __MiniSignals, signal-lite__*
-
-
-    1..36
-    # tests 36
-    # pass  36
-
-    # ok
-
-ok 8 - ./benchmark/emit-one.js # time=21341.397ms
-
-    # Subtest: ./benchmark/emit.js
-    # emit
-    ok 1 Theoretical max runs without error
-    ok 2 called four times
-    ok 3 EventEmitter runs without error
-    ok 4 called four times
-    ok 5 EventEmitter2 runs without error
-    ok 6 called four times
-    ok 7 EventEmitter3 runs without error
-    ok 8 called four times
-    ok 9 dripEmitterEnhanced runs without error
-    ok 10 called four times
-    ok 11 JS-Signals runs without error
-    ok 12 called four times
-    ok 13 MiniSignals runs without error
-    ok 14 called four times
-    ok 15 signal-emitter runs without error
-    ok 16 called four times
-    ok 17 signal-lite runs without error
-    ok 18 called four times
-    ## emit
-
-        Theoretical max x 9,835,125 ops/sec ±5.65% (10 runs sampled) *burn in*
-        MiniSignals x 4,794,795 ops/sec ±8.66% (10 runs sampled)
-        signal-lite x 4,065,813 ops/sec ±13.36% (10 runs sampled)
-        EventEmitter x 2,335,679 ops/sec ±5.51% (10 runs sampled)
-        EventEmitter3 x 874,773 ops/sec ±21.54% (10 runs sampled)
-        EventEmitter2 x 623,254 ops/sec ±9.82% (10 runs sampled)
-        dripEmitterEnhanced x 290,874 ops/sec ±18.19% (10 runs sampled)
-        signal-emitter x 124,320 ops/sec ±13.73% (10 runs sampled)
-        JS-Signals x 92,273 ops/sec ±30.66% (10 runs sampled)
-
-    *Fastest is __MiniSignals__*
-
-
-    1..18
-    # tests 18
-    # pass  18
-
-    # ok
-
-ok 9 - ./benchmark/emit.js # time=19781.646ms
-
-    # Subtest: ./benchmark/init.js
-    # init
-    ok 1 Theoretical max runs without error
-    ok 2 Theoretical max constructed an object
-    ok 3 EventEmitter runs without error
-    ok 4 EventEmitter constructed an object
-    ok 5 EventEmitter2 runs without error
-    ok 6 EventEmitter2 constructed an object
-    ok 7 EventEmitter3 runs without error
-    ok 8 EventEmitter3 constructed an object
-    ok 9 DripEmitter runs without error
-    ok 10 DripEmitter constructed an object
-    ok 11 DripEmitterEnhanced runs without error
-    ok 12 DripEmitterEnhanced constructed an object
-    ok 13 ReactiveProperty runs without error
-    ok 14 ReactiveProperty constructed an object
-    ok 15 JS-Signals runs without error
-    ok 16 JS-Signals constructed an object
-    ok 17 MiniSignals runs without error
-    ok 18 MiniSignals constructed an object
-    ok 19 EventDispatcher runs without error
-    ok 20 EventDispatcher constructed an object
-    ## init
-
-        EventEmitter3 x 43,276,167 ops/sec ±10.35% (10 runs sampled)
-        DripEmitter x 38,431,042 ops/sec ±13.16% (10 runs sampled)
-        EventDispatcher x 37,403,349 ops/sec ±13.25% (10 runs sampled)
-        DripEmitterEnhanced x 20,050,653 ops/sec ±9.05% (10 runs sampled)
-        EventEmitter x 20,632,496 ops/sec ±23.66% (10 runs sampled)
-        EventEmitter2 x 20,031,903 ops/sec ±21.46% (10 runs sampled)
-        Theoretical max x 26,734,483 ops/sec ±62.13% (10 runs sampled) *burn in*
-        MiniSignals x 21,622,878 ops/sec ±42.78% (10 runs sampled)
-        JS-Signals x 1,889,326 ops/sec ±22.34% (10 runs sampled)
-        ReactiveProperty x 1,123,304 ops/sec ±23.64% (10 runs sampled)
-
-    *Fastest is __EventEmitter3, DripEmitter__*
-
-
-    1..20
-    # tests 20
-    # pass  20
-
-    # ok
-
-ok 10 - ./benchmark/init.js # time=22251.409ms
-
-1..10
-# time=228683.728ms
