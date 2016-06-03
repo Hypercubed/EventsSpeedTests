@@ -35,7 +35,7 @@
     "eventemitter3": "^1.2.0",
     "execa": "^0.4.0",
     "fast-event-emitter": "0.0.2",
-    "grunion": "^1.0.0",
+    "grunion": "^1.1.0",
     "microtime": "^2.1.1",
     "mini-signals": "^1.1.1",
     "minivents": "^2.0.1",
