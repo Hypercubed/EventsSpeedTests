@@ -27,7 +27,7 @@
     "assume": "~1.2.6",
     "blue-tape": "^0.2.0",
     "browserify": "^13.0.1",
-    "chuhai": "^1.0.0",
+    "chuhai": "^1.1.1",
     "d3-dispatch": "^0.4.4",
     "drip": "^1.4.0",
     "event-signal": "^0.1.6",
@@ -50,12 +50,10 @@
     "signal-emitter": "0.0.1",
     "signals": "^1.0.0",
     "signals-lite": "^1.0.0",
+    "tap-markdown": "^1.0.2",
     "testling": "^1.7.1",
     "watchify": "^3.7.0",
     "xo": "^0.15.0"
-  },
-  "dependencies": {
-    "tap-markdown": "^1.0.0"
   },
   "xo": {
     "space": 2,

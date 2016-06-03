@@ -17,7 +17,7 @@ module.exports = {
     bench: {
       node: `grunion ${nodeScripts} --serial --raw`,
       node4: `grunion ${nodeScripts} --serial --raw | tee ./raw/node-v4.4.md`,
-      node6: `grunion ${nodeScripts} --serial --no-raw | tee ./raw/node-v6.2.md`,
+      node6: `grunion ${nodeScripts} --serial --raw | tee ./raw/node-v6.2.md`,
       browser: `grunion --run "testling -x \\"${browsers.chrome}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw`,
       chrome: `grunion --run "testling -x \\"${browsers.chrome}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-chrome-v50.md`,
       firefox: `grunion --run "testling -x \\"${browsers.firefox}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-firefox-v46.md`,
