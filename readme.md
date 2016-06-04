@@ -19,18 +19,20 @@
 - observable: 2.1.4
 - EventDispatcher: 1.0.0
 - drip: 1.4.0
+- barracks: 6.0.4
+- push-stream: 2.0.3
 
 ## Results
 
 - [Node v6.2](./results/node-v6.2.md)
 - [Node v4.4](./results/node-v4.4.md)
-- [Chrome v50](./results/chrome-v50.md)
+- [Chrome v51](./results/chrome-v51.md)
 - [Firefox v45](./results/firefox-v46.md)
 - [Safari v9](./results/safari-v9.md)
 
 ## How?
 
-Benchmarks generated using [Chūhai](https://github.com/Hypercubed/chuhai)
+Benchmarks generated using [Chūhai](https://github.com/Hypercubed/chuhai), [grunion](https://github.com/Hypercubed/grunion), and [https://github.com/Hypercubed/tap-markdown](tap-markdown).
 
 ## License
 
