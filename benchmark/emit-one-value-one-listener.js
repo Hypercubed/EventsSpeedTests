@@ -1,25 +1,25 @@
 var suite = require('chuhai');
 var test = require('blue-tape');
+var setup = require('../subjects');
 
-test('emit one parameter', function (t) {
-  return suite('emit one parameter', function (s) {
-    s.set('maxTime', 0.01);
-    s.set('minSamples', 10);
+test('emit one value - one listener', function (t) {
+  return suite('emit one value - one listener', function (s) {
+    s.set('maxTime', setup.maxTime);
+    s.set('minSamples', setup.minSamples);
 
-    var subjects = require('../subjects').createInstancesOn(handle, handle2);
+    var subjects = setup.createInstancesOn(handle);
 
     var called = null;
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, 1, 'called once');
+      t.equal(called, 1, 'handle called once');
       called = null;
     });
 
     s.burn('Theoretical max', function () {
       called = 0;
       handle('bar');
-      handle2('bar');
     });
 
     s.bench('EventEmitter', function () {
@@ -40,6 +40,16 @@ test('emit one parameter', function (t) {
     s.bench('dripEmitter', function () {
       called = 0;
       subjects.dripEmitter.emit('foo', 'bar');
+    });
+
+    s.bench('barracks', function () {
+      called = 0;
+      subjects.barracksDispatcher('foo', 'bar');
+    });
+
+    s.bench('push-stream', function () {
+      called = 0;
+      subjects.pushStream.push('bar');
     });
 
     s.bench('dripEmitterEnhanced', function () {
@@ -115,15 +125,6 @@ test('emit one parameter', function (t) {
         throw new Error('invalid arguments ' + a);
       }
       called++;
-    }
-
-    function handle2(a) {
-      if (arguments.length === 1 && a === undefined) {
-        return;
-      }
-      if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
-        throw new Error('invalid arguments');
-      }
     }
   });
 });

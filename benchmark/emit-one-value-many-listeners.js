@@ -1,10 +1,11 @@
 var suite = require('chuhai');
 var test = require('blue-tape');
+var setup = require('../subjects');
 
 test('emit many listeners', function (t) {
   return suite('emit many listeners', function (s) {
-    s.set('maxTime', 0.01);
-    s.set('minSamples', 10);
+    s.set('maxTime', setup.maxTime);
+    s.set('minSamples', setup.minSamples);
 
     var called = null;
     var N = 10;
@@ -21,13 +22,12 @@ test('emit many listeners', function (t) {
       };
     });
 
-    var subjects = require('../subjects').createInstances();
-    var addHandles = require('../subjects').addHandles;
-    addHandles(subjects, handels);
+    var subjects = setup.createInstances();
+    setup.addHandles(subjects, handels);
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, N, 'called N times');
+      t.equal(called, N, 'handels called N times');
       called = null;
     });
 

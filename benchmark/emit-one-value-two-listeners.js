@@ -1,0 +1,143 @@
+var suite = require('chuhai');
+var test = require('blue-tape');
+var setup = require('../subjects');
+
+test('emit one value - two listeners', function (t) {
+  return suite('emit one value - two listeners', function (s) {
+    s.set('maxTime', setup.maxTime);
+    s.set('minSamples', setup.minSamples);
+
+    var subjects = setup.createInstancesOn(handle, handle2);
+
+    var called = null;
+    var called2 = null;
+
+    s.cycle(function (e) {
+      t.false(e.target.error, e.target.name + ' runs without error');
+      t.equal(called, 1, 'handle called once');
+      t.equal(called2, 1, 'handle2 called once');
+      called = called2 = null;
+    });
+
+    s.burn('Theoretical max', function () {
+      called = called2 = 0;
+      handle('bar');
+      handle2('bar');
+    });
+
+    s.bench('EventEmitter', function () {
+      called = called2 = 0;
+      subjects.ee1.emit('foo', 'bar');
+    });
+
+    s.bench('EventEmitter2', function () {
+      called = called2 = 0;
+      subjects.ee2.emit('foo', 'bar');
+    });
+
+    s.bench('EventEmitter3', function () {
+      called = called2 = 0;
+      subjects.ee3.emit('foo', 'bar');
+    });
+
+    s.bench('dripEmitter', function () {
+      called = called2 = 0;
+      subjects.dripEmitter.emit('foo', 'bar');
+    });
+
+    /* s.bench('barracks', function () {  // not fair, only calls first callback
+      called = called2 = 0;
+      subjects.barracksDispatcher('foo', 'bar');
+    }); */
+
+    s.bench('push-stream', function () {
+      called = called2 = 0;
+      subjects.pushStream.push('bar');
+    });
+
+    s.bench('dripEmitterEnhanced', function () {
+      called = called2 = 0;
+      subjects.dripEmitterEnhanced.emit('foo', 'bar');
+    });
+
+    s.bench('d3-dispatch', function () {
+      called = called2 = 0;
+      subjects.dispatch.call('foo', null, 'bar');
+    });
+
+    s.bench('namespace-emitter', function () {
+      called = called2 = 0;
+      subjects.nsEmitter.emit('foo', 'bar');
+    });
+
+    s.bench('ReactiveProperty', function () {
+      called = called2 = 0;
+      subjects.rProperty('bar');
+    });
+
+    s.bench('observable', function () {
+      called = called2 = 0;
+      subjects.observableValue('bar');
+    });
+
+    s.bench('observ', function () {
+      called = called2 = 0;
+      subjects.observValue.set('bar');
+    });
+
+    s.bench('RXJS', function () {
+      called = called2 = 0;
+      subjects.subject.next('bar');
+    });
+
+    s.bench('JS-Signals', function () {
+      called = called2 = 0;
+      subjects.signal.dispatch('bar');
+    });
+
+    s.bench('MiniSignals', function () {
+      called = called2 = 0;
+      subjects.miniSignal.dispatch('bar');
+    });
+
+    s.bench('signal-emitter', function () {
+      called = called2 = 0;
+      subjects.signalEmitter.emit('bar');
+    });
+
+    s.bench('event-signal', function () {
+      called = called2 = 0;
+      subjects.eventSignal.emit('bar');
+    });
+
+    s.bench('signal-lite', function () {
+      called = called2 = 0;
+      subjects.signalLite.broadcast('bar');
+    });
+
+    s.bench('minivents', function () {
+      called = called2 = 0;
+      subjects.miniVent.emit('foo', 'bar');
+    });
+
+    function handle(a) {
+      if (arguments.length === 1 && a === undefined) {
+        return;
+      }
+      if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+        throw new Error('invalid arguments ' + a);
+      }
+      called++;
+    }
+
+    function handle2(a) {
+      if (arguments.length === 1 && a === undefined) {
+        return;
+      }
+      if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+        throw new Error('invalid arguments');
+      }
+      called2++;
+    }
+  });
+});

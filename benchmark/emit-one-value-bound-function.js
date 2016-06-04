@@ -1,24 +1,27 @@
 var suite = require('chuhai');
 var test = require('blue-tape');
+var setup = require('../subjects');
 
 test('emit with bound function', function (t) {
   return suite('emit with bound function', function (s) {
-    s.set('maxTime', 0.01);
-    s.set('minSamples', 10);
+    s.set('maxTime', setup.maxTime);
+    s.set('minSamples', setup.minSamples);
 
     var called = null;
+    var called2 = null;
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, 1, 'called one time');
-      called = null;
+      t.equal(called, 1, 'handle called one time');
+      t.equal(called2, 1, 'handle2 called one time');
+      called = called2 = null;
     });
 
     var ctx = {
       foo: 'bar'
     };
 
-    var subjects = require('../subjects').createInstances();
+    var subjects = setup.createInstances();
 
     subjects.ee1.on('foo', handle.bind(ctx));
     subjects.ee1.on('foo', handle2);
@@ -48,68 +51,68 @@ test('emit with bound function', function (t) {
     var bHandel = handle.bind(ctx);
 
     s.burn('Theoretical max', function () {
-      called = 0;
+      called = called2 = 0;
       bHandel('bar');
       handle2('bar');
     });
 
     s.bench('EventEmitter', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.ee1.emit('foo', 'bar');
     });
 
     s.bench('EventEmitter2', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.ee2.emit('foo', 'bar');
     });
 
     s.bench('EventEmitter3', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.ee3.emit('foo', 'bar');
     });
 
     s.bench('dripEmitter', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.dripEmitter.emit('foo', 'bar');
     });
 
     s.bench('dripEmitterEnhanced', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.dripEmitterEnhanced.emit('foo', 'bar');
     });
 
     s.bench('RXJS', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.subject.next('bar');
     });
 
     s.bench('ReactiveProperty', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.rProperty('bar');
     });
 
     s.bench('JS-Signals', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.signal.dispatch('bar');
     });
 
     s.bench('MiniSignals', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.miniSignal.dispatch('bar');
     });
 
     s.bench('signal-emitter', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.signalEmitter.emit('bar');
     });
 
     s.bench('event-signal', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.eventSignal.emit('bar');
     });
 
     s.bench('signal-lite', function () {
-      called = 0;
+      called = called2 = 0;
       subjects.signalLite.broadcast('bar');
     });
 
@@ -127,6 +130,7 @@ test('emit with bound function', function (t) {
       if (arguments.length === 0 || arguments.length > 2) {
         throw new Error('invalid arguments length');
       }
+      called2++;
     }
   });
 });

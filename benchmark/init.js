@@ -1,12 +1,13 @@
 var suite = require('chuhai');
 var test = require('blue-tape');
+var setup = require('../subjects');
 
 test('init', function (t) {
   return suite('init', function (s) {
-    s.set('maxTime', 0.01);
-    s.set('minSamples', 10);
+    s.set('maxTime', setup.maxTime);
+    s.set('minSamples', setup.minSamples);
 
-    var subjects = require('../subjects').constructors;
+    var constructors = setup.constructors;
 
     var dummy = null;
 
@@ -23,31 +24,39 @@ test('init', function (t) {
     });
 
     s.bench('EventEmitter', function () {
-      dummy = new subjects.EventEmitter1();
+      dummy = new constructors.EventEmitter1();
     });
+
     s.bench('EventEmitter2', function () {
-      dummy = new subjects.EventEmitter2();
+      dummy = new constructors.EventEmitter2();
     });
+
     s.bench('EventEmitter3', function () {
-      dummy = new subjects.EventEmitter3();
+      dummy = new constructors.EventEmitter3();
     });
+
     s.bench('DripEmitter', function () {
-      dummy = new subjects.DripEmitter();
+      dummy = new constructors.DripEmitter();
     });
+
     s.bench('DripEmitterEnhanced', function () {
-      dummy = new subjects.DripEmitterEnhanced();
+      dummy = new constructors.DripEmitterEnhanced();
     });
+
     s.bench('ReactiveProperty', function () {
-      dummy = subjects.reactiveProperty();
+      dummy = constructors.reactiveProperty();
     });
+
     s.bench('JS-Signals', function () {
-      dummy = new subjects.Signal();
+      dummy = new constructors.Signal();
     });
+
     s.bench('MiniSignals', function () {
-      dummy = new subjects.MiniSignal();
+      dummy = new constructors.MiniSignal();
     });
+
     s.bench('EventDispatcher', function () {
-      dummy = new subjects.EventDispatcher();
+      dummy = new constructors.EventDispatcher();
     });
   });
 });

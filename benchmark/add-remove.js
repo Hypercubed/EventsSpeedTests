@@ -1,12 +1,13 @@
 var suite = require('chuhai');
 var test = require('blue-tape');
+var setup = require('../subjects');
 
 test('add-remove', function (t) {
   return suite('add-remove', function (s) {
-    s.set('maxTime', 0.01);
-    s.set('minSamples', 10);
+    s.set('maxTime', setup.maxTime);
+    s.set('minSamples', setup.minSamples);
 
-    var subjects = require('../subjects').createInstances();
+    var subjects = setup.createInstances();
 
     var called = 0;
 
@@ -22,7 +23,7 @@ test('add-remove', function (t) {
       subjects.signal.dispatch('bar');
       subjects.miniSignal.dispatch('bar');
       subjects.eventDispatcher.dispatchEvent({type: 'foo', bar: 'bar'});
-      t.equal(called, 0, 'never called');
+      t.equal(called, 0, 'handle never called');
     });
 
     s.bench('EventEmitter', function () {
