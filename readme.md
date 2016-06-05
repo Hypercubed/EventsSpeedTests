@@ -32,7 +32,7 @@
 
 ## How?
 
-Benchmarks generated using [Chūhai](https://github.com/Hypercubed/chuhai), [grunion](https://github.com/Hypercubed/grunion), and [https://github.com/Hypercubed/tap-markdown](tap-markdown).
+Benchmarks generated using [Chūhai](https://github.com/Hypercubed/chuhai), [grunion](https://github.com/Hypercubed/grunion), and [tap-markdown](https://github.com/Hypercubed/tap-markdown).
 
 ## License
 
