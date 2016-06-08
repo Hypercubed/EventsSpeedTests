@@ -1,5 +1,6 @@
 var suite = require('chuhai');
 var test = require('blue-tape');
+var pull = require('pull-stream');
 var setup = require('../subjects');
 
 test('emit with context', function (t) {
@@ -47,6 +48,8 @@ test('emit with context', function (t) {
     subjects.subject.subscribe(handle2);
     subjects.rProperty.on(handle.bind(ctx));
     subjects.rProperty.on(handle2);
+    pull(subjects.pullNotify.listen(), pull.drain(handle.bind(ctx)));
+    pull(subjects.pullNotify.listen(), pull.drain(handle2));
 
     var bHandel = handle.bind(ctx);
 
@@ -114,6 +117,11 @@ test('emit with context', function (t) {
     s.bench('signal-lite', function () {
       called = called2 = 0;
       subjects.signalLite.broadcast('bar');
+    });
+
+    s.bench('pull-notify', function () {
+      called = called2 = 0;
+      subjects.pullNotify('bar');
     });
 
     function handle() {

@@ -55,11 +55,6 @@ test('emit one value - two listeners', function (t) {
       subjects.pushStream.push('bar');
     });
 
-    s.bench('pull-notify', function () {
-      called = called2 = 0;
-      subjects.pullNotify('bar');
-    });
-
     s.bench('dripEmitterEnhanced', function () {
       called = called2 = 0;
       subjects.dripEmitterEnhanced.emit('foo', 'bar');
@@ -123,6 +118,11 @@ test('emit one value - two listeners', function (t) {
     s.bench('minivents', function () {
       called = called2 = 0;
       subjects.miniVent.emit('foo', 'bar');
+    });
+
+    s.bench('pull-notify', function () {
+      called = called2 = 0;
+      subjects.pullNotify('bar');
     });
 
     function handle(a) {

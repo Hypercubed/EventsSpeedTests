@@ -58,5 +58,9 @@ test('init', function (t) {
     s.bench('EventDispatcher', function () {
       dummy = new constructors.EventDispatcher();
     });
+
+    s.bench('pull-notify', function () {
+      dummy = new constructors.pull.notify();
+    });
   });
 });

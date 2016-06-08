@@ -113,6 +113,13 @@ test('emit multiple arrays', function (t) {
       subjects.signalLite.broadcast(['bar', 'baz', 'boom']);
     });
 
+    s.bench('pull-notify', function () {
+      called = called2 = 0;
+      subjects.pullNotify(['bar']);
+      subjects.pullNotify(['bar', 'baz']);
+      subjects.pullNotify(['bar', 'baz', 'boom']);
+    });
+
     function handle(a) {
       if (arguments.length === 1 && a === undefined) {
         return;
