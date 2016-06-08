@@ -52,6 +52,11 @@ test('emit one value - one listener', function (t) {
       subjects.pushStream.push('bar');
     });
 
+    s.bench('pull-notify', function () {
+      called = 0;
+      subjects.pullNotify('bar');
+    });
+
     s.bench('dripEmitterEnhanced', function () {
       called = 0;
       subjects.dripEmitterEnhanced.emit('foo', 'bar');

@@ -55,6 +55,11 @@ test('emit one value - two listeners', function (t) {
       subjects.pushStream.push('bar');
     });
 
+    s.bench('pull-notify', function () {
+      called = called2 = 0;
+      subjects.pullNotify('bar');
+    });
+
     s.bench('dripEmitterEnhanced', function () {
       called = called2 = 0;
       subjects.dripEmitterEnhanced.emit('foo', 'bar');

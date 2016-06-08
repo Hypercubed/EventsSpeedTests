@@ -1,4 +1,3 @@
-
 var EventEmitter1 = require('events').EventEmitter;
 var EventEmitter2 = require('eventemitter2');
 var EventEmitter3 = require('eventemitter3');
@@ -18,6 +17,8 @@ var DripEmitter = require('drip/lib/drip').EventEmitter;
 var DripEmitterEnhanced = require('drip/lib/drip').EnhancedEmitter;
 var barracks = require('barracks');
 var push = require('push-stream');
+var pull = require('pull-stream');
+pull.notify = require('pull-notify');
 var EventDispatcher = require('./eventdispatcher');
 
 if (typeof window === 'undefined') {
@@ -44,7 +45,8 @@ module.exports.constructors = {
   DripEmitter: DripEmitter,
   DripEmitterEnhanced: DripEmitterEnhanced,
   barracks: barracks,
-  push: push
+  push: push,
+  pull: pull
 };
 
 module.exports.createInstances = createInstances;
@@ -74,6 +76,7 @@ function createInstances() {
   var dripEmitterEnhanced = new DripEmitterEnhanced();
   var barracksDispatcher = barracks();
   var pushStream = push.stream();
+  var pullNotify = pull.notify();
 
   return {
     ee1: ee1,
@@ -95,7 +98,8 @@ function createInstances() {
     dripEmitter: dripEmitter,
     dripEmitterEnhanced: dripEmitterEnhanced,
     barracksDispatcher: barracksDispatcher,
-    pushStream: pushStream
+    pushStream: pushStream,
+    pullNotify: pullNotify
   };
 }
 
@@ -121,6 +125,7 @@ function addHandles(subjects, handels) {
     subjects.dripEmitterEnhanced.on('foo', h);
     subjects.barracksDispatcher.on('foo', h);
     subjects.pushStream(h);
+    pull(subjects.pullNotify.listen(), pull.drain(h));
   });
 
   return subjects;

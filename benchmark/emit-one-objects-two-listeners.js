@@ -57,6 +57,13 @@ test('emit one object', function (t) {
       subjects.pushStream.push({bar: 'bar', baz: 'baz', boom: 'boom'});
     });
 
+    s.bench('pull-notify', function () {
+      called = called2 = 0;
+      subjects.pullNotify({bar: 'bar'});
+      subjects.pullNotify({bar: 'bar', baz: 'baz'});
+      subjects.pullNotify({bar: 'bar', baz: 'baz', boom: 'boom'});
+    });
+
     s.bench('dripEmitter', function () {
       called = called2 = 0;
       subjects.dripEmitter.emit('foo', {bar: 'bar'});
