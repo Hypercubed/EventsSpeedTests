@@ -125,6 +125,11 @@ test('emit one value - two listeners', function (t) {
       subjects.miniVent.emit('foo', 'bar');
     });
 
+    s.bench('pull-notify', function () {
+      called = called2 = 0;
+      subjects.pullNotify('bar');
+    });
+
     function handle(a) {
       if (arguments.length === 1 && a === undefined) {
         return;

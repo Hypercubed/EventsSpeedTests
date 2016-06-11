@@ -134,6 +134,13 @@ test('emit one object', function (t) {
       subjects.eventDispatcher.dispatchEvent({type: 'foo', bar: 'bar', baz: 'baz', boom: 'boom'});
     });
 
+    s.bench('pull-notify', function () {
+      called = called2 = 0;
+      subjects.pullNotify({bar: 'bar'});
+      subjects.pullNotify({bar: 'bar', baz: 'baz'});
+      subjects.pullNotify({bar: 'bar', baz: 'baz', boom: 'boom'});
+    });
+
     function handle(a) {
       if (arguments.length === 1 && a === undefined) {
         return;

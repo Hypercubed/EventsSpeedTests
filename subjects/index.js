@@ -1,4 +1,3 @@
-
 var EventEmitter1 = require('events').EventEmitter;
 var EventEmitter2 = require('eventemitter2');
 var EventEmitter3 = require('eventemitter3');
@@ -18,6 +17,8 @@ var DripEmitter = require('drip/lib/drip').EventEmitter;
 var DripEmitterEnhanced = require('drip/lib/drip').EnhancedEmitter;
 var barracks = require('barracks');
 var push = require('push-stream/stream');
+var pull = require('pull-stream');
+pull.notify = require('pull-notify');
 var EventDispatcher = require('./eventdispatcher');
 var miniPipe = require('./pipe');
 var pushPatch = require('./push-stream-patch');
@@ -50,7 +51,8 @@ module.exports.constructors = {
   push: push,
   miniPipe: miniPipe,
   pushPatch: pushPatch,
-  MicroSignal: MicroSignal
+  MicroSignal: MicroSignal,
+  pull: pull
 };
 
 module.exports.createInstances = createInstances;
@@ -83,6 +85,7 @@ function createInstances() {
   var pipe = miniPipe();
   var pushStreamPatch = pushPatch();
   var microSignal = new MicroSignal();
+  var pullNotify = pull.notify();
 
   return {
     ee1: ee1,
@@ -107,7 +110,8 @@ function createInstances() {
     pushStream: pushStream,
     pipe: pipe,
     pushStreamPatch: pushStreamPatch,
-    microSignal: microSignal
+    microSignal: microSignal,
+    pullNotify: pullNotify
   };
 }
 
@@ -131,11 +135,15 @@ function addHandles(subjects, handels) {
     subjects.eventDispatcher.addEventListener('foo', h);
     subjects.dripEmitter.on('foo', h);
     subjects.dripEmitterEnhanced.on('foo', h);
-    subjects.barracksDispatcher.on('foo', h);
+    try {
+      subjects.barracksDispatcher.on('foo', h);
+    } catch (e) {
+    }
     subjects.pushStream(h);
     subjects.pipe(h);
     subjects.pushStreamPatch(h);
     subjects.microSignal.add(h);
+    pull(subjects.pullNotify.listen(), pull.drain(h));
   });
 
   return subjects;

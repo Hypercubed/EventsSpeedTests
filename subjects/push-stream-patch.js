@@ -1,3 +1,6 @@
+// minor patch https://github.com/ahdinosaur/push-stream/blob/master/stream.js
+// for testing
+
 module.exports = Stream;
 
 function Stream() {
