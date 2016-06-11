@@ -1,5 +1,7 @@
 mkdir -p raw
 
+npm run build
+
 npm start bench.chrome
 sleep 10
 

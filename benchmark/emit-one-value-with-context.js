@@ -1,9 +1,10 @@
 var suite = require('chuhai');
 var test = require('blue-tape');
+var pull = require('pull-stream');
 var setup = require('../subjects');
 
 test('emit with context', function (t) {
-  return suite('emit with context', function (s) {
+  return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
@@ -47,6 +48,10 @@ test('emit with context', function (t) {
     subjects.subject.subscribe(handle2);
     subjects.rProperty.on(handle.bind(ctx));
     subjects.rProperty.on(handle2);
+    subjects.pushStream(handle.bind(ctx));
+    subjects.pushStream(handle2);
+    pull(subjects.pullNotify.listen(), pull.drain(handle.bind(ctx)));
+    pull(subjects.pullNotify.listen(), pull.drain(handle2));
 
     var bHandel = handle.bind(ctx);
 
@@ -69,6 +74,11 @@ test('emit with context', function (t) {
     s.bench('EventEmitter3', function () {
       called = called2 = 0;
       subjects.ee3.emit('foo', 'bar');
+    });
+
+    s.bench('push-stream', function () {
+      called = called2 = 0;
+      subjects.pushStream.push('bar');
     });
 
     s.bench('dripEmitter', function () {
@@ -114,6 +124,11 @@ test('emit with context', function (t) {
     s.bench('signal-lite', function () {
       called = called2 = 0;
       subjects.signalLite.broadcast('bar');
+    });
+
+    s.bench('pull-notify', function () {
+      called = called2 = 0;
+      subjects.pullNotify('bar');
     });
 
     function handle() {

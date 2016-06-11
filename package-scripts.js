@@ -15,6 +15,7 @@ module.exports = {
   scripts: {
     build: `grunion --run "${browserify}" ${nodeScripts}`,
     bench: {
+      default: `grunion ${nodeScripts}`,
       node: `grunion ${nodeScripts}`,
       node4: `grunion ${nodeScripts} --serial --raw | tee ./raw/node-v4.4.md`,
       node6: `grunion ${nodeScripts} --serial --raw | tee ./raw/node-v6.2.md`,

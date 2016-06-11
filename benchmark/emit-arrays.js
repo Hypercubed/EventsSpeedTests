@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var setup = require('../subjects');
 
 test('emit multiple arrays', function (t) {
-  return suite('emit multiple arrays', function (s) {
+  return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
@@ -48,6 +48,13 @@ test('emit multiple arrays', function (t) {
       subjects.ee3.emit('foo', ['bar']);
       subjects.ee3.emit('foo', ['bar', 'baz']);
       subjects.ee3.emit('foo', ['bar', 'baz', 'boom']);
+    });
+
+    s.bench('push-stream', function () {
+      called = called2 = 0;
+      subjects.pushStream.push(['bar']);
+      subjects.pushStream.push(['bar', 'baz']);
+      subjects.pushStream.push(['bar', 'baz', 'boom']);
     });
 
     s.bench('dripEmitter', function () {
@@ -113,6 +120,13 @@ test('emit multiple arrays', function (t) {
       subjects.signalLite.broadcast(['bar', 'baz', 'boom']);
     });
 
+    s.bench('pull-notify', function () {
+      called = called2 = 0;
+      subjects.pullNotify(['bar']);
+      subjects.pullNotify(['bar', 'baz']);
+      subjects.pullNotify(['bar', 'baz', 'boom']);
+    });
+
     function handle(a) {
       if (arguments.length === 1 && a === undefined) {
         return;
@@ -121,13 +135,13 @@ test('emit multiple arrays', function (t) {
         throw new Error('invalid arguments length');
       } else {
         if (a[0] !== 'bar') {
-          throw new Error('invalid a[0]');
+          throw new Error('invalid a[0] !== ' + a[0]);
         }
         if (a.length > 1 && a[1] !== 'baz') {
-          throw new Error('invalid a[1]');
+          throw new Error('invalid a[1] !== ' + a[1]);
         }
         if (a.length > 2 && a[2] !== 'boom') {
-          throw new Error('invalid a[2]');
+          throw new Error('invalid a[2] !== ' + a[1]);
         }
         if (a.length > 3) {
           throw new Error('invalid array length');

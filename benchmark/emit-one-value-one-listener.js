@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var setup = require('../subjects');
 
 test('emit one value - one listener', function (t) {
-  return suite('emit one value - one listener', function (s) {
+  return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
@@ -13,7 +13,7 @@ test('emit one value - one listener', function (t) {
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, 1, 'handle called once');
+      t.equal(called, 1, e.target.name + ' called handle once');
       called = null;
     });
 
@@ -50,6 +50,16 @@ test('emit one value - one listener', function (t) {
     s.bench('push-stream', function () {
       called = 0;
       subjects.pushStream.push('bar');
+    });
+
+    s.bench('push-stream-patch', function () {
+      called = 0;
+      subjects.pushStreamPatch.push('bar');
+    });
+
+    s.bench('mini-pipe', function () {
+      called = 0;
+      subjects.pipe.push('bar');
     });
 
     s.bench('dripEmitterEnhanced', function () {
@@ -97,6 +107,11 @@ test('emit one value - one listener', function (t) {
       subjects.miniSignal.dispatch('bar');
     });
 
+    s.bench('MicroSignals', function () {
+      called = 0;
+      subjects.microSignal.dispatch('bar');
+    });
+
     s.bench('signal-emitter', function () {
       called = 0;
       subjects.signalEmitter.emit('bar');
@@ -115,6 +130,11 @@ test('emit one value - one listener', function (t) {
     s.bench('minivents', function () {
       called = 0;
       subjects.miniVent.emit('foo', 'bar');
+    });
+
+    s.bench('pull-notify', function () {
+      called = 0;
+      subjects.pullNotify('bar');
     });
 
     function handle(a) {

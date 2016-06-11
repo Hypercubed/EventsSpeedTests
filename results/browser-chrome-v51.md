@@ -1,241 +1,317 @@
 # Tests
 
 ```
-✔ Platform [pass: 1, fail: 0, duration: 1ms]
-✔ init [pass: 20, fail: 0]
-✔ emit [pass: 18, fail: 0, duration: 3ms]
-✔ emit one parameter [pass: 36, fail: 0, duration: 4ms]
-✔ emit objects [pass: 28, fail: 0, duration: 1ms]
-✔ emit many parameters [pass: 20, fail: 0]
-✔ emit many listeners [pass: 28, fail: 0, duration: 1ms]
-✔ emit with context [pass: 26, fail: 0]
-✔ emit with bound function [pass: 26, fail: 0, duration: 1ms]
-✔ emit arrays [pass: 26, fail: 0, duration: 13ms]
-✔ add-remove [pass: 18, fail: 0, duration: 10ms]
+✔ Platform [pass: 1, fail: 0, duration: 2ms]
+✔ init [pass: 24, fail: 0, duration: 1ms]
+✔ emit variable values [pass: 27, fail: 0, duration: 1ms]
+✔ emit with context [pass: 45, fail: 0, duration: 2ms]
+✔ emit one value - two listeners [pass: 66, fail: 0, duration: 9ms]
+✔ emit one value - one listener [pass: 48, fail: 0, duration: 1ms]
+✔ emit many listeners [pass: 30, fail: 0, duration: 2ms]
+✔ emit with bound function [pass: 45, fail: 0, duration: 1ms]
+✔ emit one object [pass: 51, fail: 0, duration: 1ms]
+✔ emit one object [pass: 32, fail: 0, duration: 2ms]
+✔ emit many values [pass: 30, fail: 0]
+✔ emit multiple arrays [pass: 45, fail: 0, duration: 1ms]
+✔ add-remove [pass: 20, fail: 0, duration: 5ms]
 ```
 
 # Summary
 
-- duration: 34ms
-- assertions: 247
-- pass: 247
+- duration: 28ms
+- planned: 464
+- assertions: 464
+- pass: 464
 - fail: 0
 
 # Comments
 
 # Platform
 
-Chrome 51.0.2704.63 on OS X 10.11.2
+Chrome 51.0.2704.84 on OS X 10.11.2
 
 # init
 
-## init
+## benchmarks
 
 ```
-EventDispatcher x 45,922,205 ops/sec ±2.49% (10 runs sampled)
-Theoretical max x 42,542,840 ops/sec ±6.32% (10 runs sampled) *burn in*
-EventEmitter3 x 41,566,707 ops/sec ±4.48% (10 runs sampled)
-DripEmitter x 42,079,456 ops/sec ±8.57% (10 runs sampled)
-EventEmitter x 33,730,853 ops/sec ±3.81% (10 runs sampled)
-MiniSignals x 28,422,199 ops/sec ±2.97% (10 runs sampled)
-EventEmitter2 x 25,889,210 ops/sec ±2.28% (10 runs sampled)
-DripEmitterEnhanced x 17,323,138 ops/sec ±2.10% (10 runs sampled)
-JS-Signals x 1,604,326 ops/sec ±19.76% (10 runs sampled)
-ReactiveProperty x 952,877 ops/sec ±23.11% (10 runs sampled)
+EventDispatcher x 47,204,468 ops/sec ±7.22% (10 runs sampled)
+DripEmitter x 45,788,157 ops/sec ±4.29% (10 runs sampled)
+Theoretical max x 45,201,696 ops/sec ±4.95% (10 runs sampled) *burn in*
+EventEmitter3 x 44,297,310 ops/sec ±5.87% (10 runs sampled)
+EventEmitter x 33,967,270 ops/sec ±3.87% (10 runs sampled)
+EventEmitter2 x 29,503,525 ops/sec ±3.67% (10 runs sampled)
+MiniSignals x 26,964,885 ops/sec ±7.14% (10 runs sampled)
+DripEmitterEnhanced x 18,902,535 ops/sec ±4.14% (10 runs sampled)
+push-stream x 13,594,718 ops/sec ±6.27% (10 runs sampled)
+JS-Signals x 1,961,500 ops/sec ±7.83% (10 runs sampled)
+ReactiveProperty x 1,165,568 ops/sec ±11.60% (10 runs sampled)
+pull-notify x 936,829 ops/sec ±9.39% (10 runs sampled)
 ```
 
-_Fastest is **EventDispatcher, DripEmitter**_
+_Fastest is **EventDispatcher, DripEmitter, EventEmitter3**_
 
-# emit
+# emit variable values
 
-## emit
+## benchmarks
 
 ```
-Theoretical max x 8,902,736 ops/sec ±10.68% (10 runs sampled) *burn in*
-signal-lite x 5,193,552 ops/sec ±3.11% (10 runs sampled)
-MiniSignals x 4,734,558 ops/sec ±4.32% (10 runs sampled)
-EventEmitter3 x 1,221,904 ops/sec ±3.92% (10 runs sampled)
-EventEmitter2 x 667,607 ops/sec ±4.04% (10 runs sampled)
-dripEmitterEnhanced x 395,277 ops/sec ±6.15% (10 runs sampled)
-signal-emitter x 303,816 ops/sec ±5.29% (10 runs sampled)
-EventEmitter x 102,618 ops/sec ±3.24% (10 runs sampled)
-JS-Signals x 102,413 ops/sec ±3.58% (10 runs sampled)
+Theoretical max x 7,242,274 ops/sec ±4.22% (10 runs sampled) *burn in*
+MiniSignals x 4,147,094 ops/sec ±13.45% (10 runs sampled)
+signal-lite x 3,649,062 ops/sec ±12.75% (10 runs sampled)
+EventEmitter3 x 1,032,531 ops/sec ±16.18% (10 runs sampled)
+EventEmitter2 x 721,435 ops/sec ±4.44% (10 runs sampled)
+dripEmitterEnhanced x 438,849 ops/sec ±2.18% (10 runs sampled)
+signal-emitter x 314,806 ops/sec ±2.58% (10 runs sampled)
+JS-Signals x 121,683 ops/sec ±3.87% (10 runs sampled)
+EventEmitter x 109,986 ops/sec ±10.92% (10 runs sampled)
+```
+
+_Fastest is **MiniSignals**_
+
+# emit with context
+
+## benchmarks
+
+```
+Theoretical max x 32,545,052 ops/sec ±3.24% (10 runs sampled) *burn in*
+signal-lite x 16,927,740 ops/sec ±4.95% (10 runs sampled)
+MiniSignals x 17,718,360 ops/sec ±19.49% (10 runs sampled)
+push-stream x 15,609,022 ops/sec ±5.31% (10 runs sampled)
+EventEmitter3 x 14,396,218 ops/sec ±4.32% (10 runs sampled)
+ReactiveProperty x 14,375,284 ops/sec ±17.94% (10 runs sampled)
+dripEmitter x 12,918,285 ops/sec ±6.12% (10 runs sampled)
+event-signal x 5,959,482 ops/sec ±7.94% (10 runs sampled)
+RXJS x 4,478,897 ops/sec ±2.57% (10 runs sampled)
+EventEmitter2 x 4,604,570 ops/sec ±8.04% (10 runs sampled)
+dripEmitterEnhanced x 1,862,618 ops/sec ±16.30% (10 runs sampled)
+signal-emitter x 1,405,150 ops/sec ±5.39% (10 runs sampled)
+pull-notify x 1,400,438 ops/sec ±6.85% (10 runs sampled)
+JS-Signals x 515,667 ops/sec ±6.94% (10 runs sampled)
+EventEmitter x 505,227 ops/sec ±10.48% (10 runs sampled)
 ```
 
 _Fastest is **signal-lite**_
 
-# emit one parameter
+# emit one value - two listeners
 
-## emit one parameter
-
-```
-Theoretical max x 20,813,866 ops/sec ±3.25% (10 runs sampled) *burn in*
-MiniSignals x 18,196,569 ops/sec ±5.64% (10 runs sampled)
-signal-lite x 15,649,943 ops/sec ±4.28% (10 runs sampled)
-dripEmitter x 14,840,354 ops/sec ±2.65% (10 runs sampled)
-EventEmitter3 x 12,737,983 ops/sec ±6.21% (10 runs sampled)
-ReactiveProperty x 11,642,592 ops/sec ±1.89% (10 runs sampled)
-event-signal x 5,721,308 ops/sec ±3.37% (10 runs sampled)
-observ x 4,914,566 ops/sec ±3.11% (10 runs sampled)
-EventEmitter2 x 4,494,390 ops/sec ±4.84% (10 runs sampled)
-RXJS x 3,958,919 ops/sec ±4.94% (10 runs sampled)
-d3-dispatch x 2,212,817 ops/sec ±5.17% (10 runs sampled)
-dripEmitterEnhanced x 2,097,877 ops/sec ±3.82% (10 runs sampled)
-signal-emitter x 1,265,219 ops/sec ±5.54% (10 runs sampled)
-observable x 625,428 ops/sec ±5.51% (10 runs sampled)
-EventEmitter x 493,366 ops/sec ±6.41% (10 runs sampled)
-JS-Signals x 440,230 ops/sec ±6.40% (10 runs sampled)
-namespace-emitter x 421,144 ops/sec ±2.59% (10 runs sampled)
-minivents x 302,669 ops/sec ±7.02% (10 runs sampled)
-```
-
-_Fastest is **MiniSignals**_
-
-# emit objects
-
-## emit objects
+## benchmarks
 
 ```
-Theoretical max x 10,743,656 ops/sec ±9.52% (10 runs sampled) *burn in*
-MiniSignals x 5,863,763 ops/sec ±3.51% (10 runs sampled)
-signal-lite x 5,574,691 ops/sec ±5.40% (10 runs sampled)
-ReactiveProperty x 5,272,746 ops/sec ±5.93% (10 runs sampled)
-EventEmitter3 x 4,653,783 ops/sec ±4.75% (10 runs sampled)
-dripEmitter x 4,205,355 ops/sec ±2.74% (10 runs sampled)
-EventDispatcher x 2,078,428 ops/sec ±4.08% (10 runs sampled)
-event-signal x 1,880,484 ops/sec ±2.75% (10 runs sampled)
-EventEmitter2 x 1,421,456 ops/sec ±3.54% (10 runs sampled)
-RXJS x 1,360,575 ops/sec ±7.32% (10 runs sampled)
-dripEmitterEnhanced x 715,761 ops/sec ±3.83% (10 runs sampled)
-signal-emitter x 428,742 ops/sec ±5.92% (10 runs sampled)
-EventEmitter x 169,425 ops/sec ±3.20% (10 runs sampled)
-JS-Signals x 145,306 ops/sec ±18.18% (10 runs sampled)
+Theoretical max x 22,734,014 ops/sec ±9.38% (10 runs sampled) *burn in*
+MiniSignals x 16,598,468 ops/sec ±8.93% (10 runs sampled)
+MicroSignals x 15,770,272 ops/sec ±5.26% (10 runs sampled)
+push-stream-patch x 14,400,772 ops/sec ±3.92% (10 runs sampled)
+signal-lite x 14,427,898 ops/sec ±5.11% (10 runs sampled)
+dripEmitter x 13,650,903 ops/sec ±5.56% (10 runs sampled)
+push-stream x 13,698,798 ops/sec ±7.03% (10 runs sampled)
+ReactiveProperty x 13,367,844 ops/sec ±5.71% (10 runs sampled)
+EventEmitter3 x 12,799,483 ops/sec ±6.92% (10 runs sampled)
+observ x 5,648,148 ops/sec ±2.88% (10 runs sampled)
+event-signal x 5,783,210 ops/sec ±5.69% (10 runs sampled)
+EventEmitter2 x 4,795,635 ops/sec ±5.70% (10 runs sampled)
+RXJS x 3,944,474 ops/sec ±4.88% (10 runs sampled)
+d3-dispatch x 2,265,241 ops/sec ±7.48% (10 runs sampled)
+dripEmitterEnhanced x 2,133,111 ops/sec ±4.79% (10 runs sampled)
+signal-emitter x 1,454,231 ops/sec ±3.84% (10 runs sampled)
+pull-notify x 1,310,803 ops/sec ±5.66% (10 runs sampled)
+observable x 692,813 ops/sec ±13.24% (10 runs sampled)
+EventEmitter x 533,536 ops/sec ±4.06% (10 runs sampled)
+JS-Signals x 478,347 ops/sec ±11.06% (10 runs sampled)
+namespace-emitter x 436,996 ops/sec ±5.74% (10 runs sampled)
+minivents x 323,780 ops/sec ±2.70% (10 runs sampled)
 ```
 
-_Fastest is **MiniSignals, signal-lite**_
+_Fastest is **MiniSignals, MicroSignals, signal-lite**_
 
-# emit many parameters
+# emit one value - one listener
 
-## emit many parameters
+## benchmarks
 
 ```
-Theoretical max x 15,309,279 ops/sec ±5.30% (10 runs sampled) *burn in*
-MiniSignals x 14,120,598 ops/sec ±5.54% (10 runs sampled)
-signal-lite x 12,496,511 ops/sec ±5.59% (10 runs sampled)
-EventEmitter3 x 746,589 ops/sec ±6.64% (10 runs sampled)
-EventEmitter2 x 684,269 ops/sec ±4.79% (10 runs sampled)
-dripEmitterEnhanced x 545,312 ops/sec ±4.11% (10 runs sampled)
-signal-emitter x 449,381 ops/sec ±3.24% (10 runs sampled)
-EventEmitter x 107,235 ops/sec ±9.30% (10 runs sampled)
-JS-Signals x 100,311 ops/sec ±3.26% (10 runs sampled)
-minivents x 61,638 ops/sec ±3.43% (10 runs sampled)
+Theoretical max x 35,492,635 ops/sec ±14.80% (10 runs sampled) *burn in*
+MicroSignals x 30,341,925 ops/sec ±7.68% (10 runs sampled)
+mini-pipe x 26,152,680 ops/sec ±6.88% (10 runs sampled)
+MiniSignals x 26,911,765 ops/sec ±14.24% (10 runs sampled)
+signal-lite x 24,431,817 ops/sec ±4.74% (10 runs sampled)
+dripEmitter x 20,994,007 ops/sec ±4.60% (10 runs sampled)
+EventEmitter2 x 20,635,840 ops/sec ±5.17% (10 runs sampled)
+push-stream x 19,687,505 ops/sec ±6.96% (10 runs sampled)
+ReactiveProperty x 18,731,719 ops/sec ±6.49% (10 runs sampled)
+EventEmitter3 x 18,955,789 ops/sec ±13.89% (10 runs sampled)
+push-stream-patch x 17,699,836 ops/sec ±26.31% (10 runs sampled)
+observ x 9,221,196 ops/sec ±2.39% (10 runs sampled)
+EventEmitter x 9,845,963 ops/sec ±18.98% (10 runs sampled)
+event-signal x 6,740,063 ops/sec ±8.82% (10 runs sampled)
+RXJS x 5,433,408 ops/sec ±4.56% (10 runs sampled)
+barracks x 4,615,205 ops/sec ±7.45% (10 runs sampled)
+d3-dispatch x 4,356,452 ops/sec ±5.93% (10 runs sampled)
+pull-notify x 2,404,157 ops/sec ±5.72% (10 runs sampled)
+dripEmitterEnhanced x 2,303,838 ops/sec ±4.35% (10 runs sampled)
+signal-emitter x 1,334,403 ops/sec ±7.33% (10 runs sampled)
+observable x 742,092 ops/sec ±5.53% (10 runs sampled)
+minivents x 639,255 ops/sec ±2.97% (10 runs sampled)
+JS-Signals x 551,415 ops/sec ±5.11% (10 runs sampled)
+namespace-emitter x 509,381 ops/sec ±3.01% (10 runs sampled)
 ```
 
-_Fastest is **MiniSignals**_
+_Fastest is **MicroSignals, MiniSignals**_
 
 # emit many listeners
 
-## emit many listeners
+## benchmarks
 
 ```
-Theoretical max x 4,466,684 ops/sec ±6.89% (10 runs sampled) *burn in*
-MiniSignals x 4,301,019 ops/sec ±4.59% (10 runs sampled)
-signal-lite x 4,175,471 ops/sec ±2.58% (10 runs sampled)
-EventEmitter3 x 3,768,089 ops/sec ±3.71% (10 runs sampled)
-ReactiveProperty x 3,636,245 ops/sec ±2.50% (10 runs sampled)
-dripEmitter x 3,676,819 ops/sec ±4.88% (10 runs sampled)
-event-signal x 2,575,030 ops/sec ±3.39% (10 runs sampled)
-EventEmitter2 x 2,131,473 ops/sec ±6.32% (10 runs sampled)
-dripEmitterEnhanced x 1,434,635 ops/sec ±3.45% (10 runs sampled)
-RXJS x 1,434,815 ops/sec ±4.23% (10 runs sampled)
-signal-emitter x 982,550 ops/sec ±3.70% (10 runs sampled)
-EventEmitter x 271,604 ops/sec ±6.68% (10 runs sampled)
-JS-Signals x 244,618 ops/sec ±5.14% (10 runs sampled)
-minivents x 70,188 ops/sec ±5.38% (10 runs sampled)
+MiniSignals x 4,792,210 ops/sec ±5.89% (10 runs sampled)
+push-stream x 4,608,055 ops/sec ±6.37% (10 runs sampled)
+signal-lite x 4,494,799 ops/sec ±5.85% (10 runs sampled)
+dripEmitter x 4,268,506 ops/sec ±5.26% (10 runs sampled)
+Theoretical max x 4,465,835 ops/sec ±12.12% (10 runs sampled) *burn in*
+ReactiveProperty x 4,021,277 ops/sec ±4.29% (10 runs sampled)
+EventEmitter3 x 3,971,649 ops/sec ±7.18% (10 runs sampled)
+event-signal x 2,634,168 ops/sec ±5.41% (10 runs sampled)
+EventEmitter2 x 2,432,910 ops/sec ±4.27% (10 runs sampled)
+RXJS x 1,550,236 ops/sec ±4.28% (10 runs sampled)
+dripEmitterEnhanced x 1,524,387 ops/sec ±7.30% (10 runs sampled)
+signal-emitter x 1,110,550 ops/sec ±5.15% (10 runs sampled)
+EventEmitter x 316,261 ops/sec ±3.36% (10 runs sampled)
+JS-Signals x 277,272 ops/sec ±5.05% (10 runs sampled)
+minivents x 81,012 ops/sec ±3.68% (10 runs sampled)
 ```
 
-_Fastest is **MiniSignals, signal-lite**_
-
-# emit with context
-
-## emit with context
-
-```
-Theoretical max x 26,359,725 ops/sec ±12.59% (10 runs sampled) *burn in*
-MiniSignals x 18,340,121 ops/sec ±4.41% (10 runs sampled)
-signal-lite x 17,760,592 ops/sec ±4.07% (10 runs sampled)
-ReactiveProperty x 15,171,217 ops/sec ±3.24% (10 runs sampled)
-EventEmitter3 x 13,792,473 ops/sec ±3.68% (10 runs sampled)
-dripEmitter x 12,771,644 ops/sec ±3.31% (10 runs sampled)
-event-signal x 5,353,952 ops/sec ±5.71% (10 runs sampled)
-RXJS x 4,376,244 ops/sec ±3.42% (10 runs sampled)
-EventEmitter2 x 4,204,106 ops/sec ±6.40% (10 runs sampled)
-dripEmitterEnhanced x 2,070,519 ops/sec ±4.06% (10 runs sampled)
-signal-emitter x 1,342,382 ops/sec ±5.03% (10 runs sampled)
-EventEmitter x 500,375 ops/sec ±2.55% (10 runs sampled)
-JS-Signals x 456,704 ops/sec ±13.33% (10 runs sampled)
-```
-
-_Fastest is **MiniSignals, signal-lite**_
+_Fastest is **MiniSignals, push-stream**_
 
 # emit with bound function
 
-## emit with bound function
+## benchmarks
 
 ```
-Theoretical max x 29,643,717 ops/sec ±4.97% (10 runs sampled) *burn in*
-ReactiveProperty x 14,754,970 ops/sec ±3.43% (10 runs sampled)
-dripEmitter x 12,750,649 ops/sec ±4.04% (10 runs sampled)
-EventEmitter3 x 12,384,689 ops/sec ±4.70% (10 runs sampled)
-MiniSignals x 7,033,613 ops/sec ±4.51% (10 runs sampled)
-event-signal x 5,606,618 ops/sec ±3.63% (10 runs sampled)
-signal-lite x 5,575,957 ops/sec ±6.19% (10 runs sampled)
-EventEmitter2 x 4,450,296 ops/sec ±3.48% (10 runs sampled)
-RXJS x 3,849,130 ops/sec ±4.88% (10 runs sampled)
-dripEmitterEnhanced x 1,990,438 ops/sec ±4.78% (10 runs sampled)
-signal-emitter x 1,330,189 ops/sec ±4.80% (10 runs sampled)
-EventEmitter x 413,779 ops/sec ±9.44% (10 runs sampled)
-JS-Signals x 374,091 ops/sec ±5.19% (10 runs sampled)
+Theoretical max x 28,474,626 ops/sec ±10.65% (10 runs sampled) *burn in*
+push-stream x 16,778,729 ops/sec ±2.43% (10 runs sampled)
+dripEmitter x 14,447,553 ops/sec ±2.76% (10 runs sampled)
+ReactiveProperty x 16,220,991 ops/sec ±16.96% (10 runs sampled)
+EventEmitter3 x 13,644,951 ops/sec ±6.34% (10 runs sampled)
+MiniSignals x 7,275,577 ops/sec ±9.92% (10 runs sampled)
+event-signal x 5,717,026 ops/sec ±6.59% (10 runs sampled)
+signal-lite x 5,889,353 ops/sec ±16.15% (10 runs sampled)
+EventEmitter2 x 5,060,949 ops/sec ±6.60% (10 runs sampled)
+RXJS x 4,811,571 ops/sec ±6.48% (10 runs sampled)
+dripEmitterEnhanced x 2,180,627 ops/sec ±14.62% (10 runs sampled)
+pull-notify x 1,616,300 ops/sec ±2.62% (10 runs sampled)
+signal-emitter x 1,478,598 ops/sec ±3.25% (10 runs sampled)
+EventEmitter x 616,214 ops/sec ±1.77% (10 runs sampled)
+JS-Signals x 562,537 ops/sec ±2.23% (10 runs sampled)
 ```
 
-_Fastest is **ReactiveProperty**_
+_Fastest is **push-stream, ReactiveProperty**_
 
-# emit arrays
+# emit one object
 
-## emit arrays
+## benchmarks
 
 ```
-Theoretical max x 11,364,286 ops/sec ±9.93% (10 runs sampled) *burn in*
-MiniSignals x 6,530,635 ops/sec ±5.61% (10 runs sampled)
-signal-lite x 6,184,621 ops/sec ±3.45% (10 runs sampled)
-dripEmitter x 4,913,037 ops/sec ±4.88% (10 runs sampled)
-EventEmitter3 x 4,725,084 ops/sec ±4.74% (10 runs sampled)
-ReactiveProperty x 4,572,608 ops/sec ±4.91% (10 runs sampled)
-event-signal x 1,888,208 ops/sec ±4.80% (10 runs sampled)
-RXJS x 1,499,675 ops/sec ±2.42% (10 runs sampled)
-EventEmitter2 x 1,521,167 ops/sec ±5.01% (10 runs sampled)
-dripEmitterEnhanced x 646,743 ops/sec ±2.82% (10 runs sampled)
-signal-emitter x 452,175 ops/sec ±3.82% (10 runs sampled)
-EventEmitter x 175,375 ops/sec ±2.77% (10 runs sampled)
-JS-Signals x 144,081 ops/sec ±3.37% (10 runs sampled)
+Theoretical max x 7,623,776 ops/sec ±11.59% (10 runs sampled) *burn in*
+MiniSignals x 5,293,244 ops/sec ±5.15% (10 runs sampled)
+MicroSignals x 5,306,484 ops/sec ±6.00% (10 runs sampled)
+push-stream x 4,955,702 ops/sec ±3.88% (10 runs sampled)
+signal-lite x 4,929,481 ops/sec ±4.18% (10 runs sampled)
+ReactiveProperty x 4,764,800 ops/sec ±5.12% (10 runs sampled)
+EventEmitter3 x 4,416,264 ops/sec ±4.52% (10 runs sampled)
+dripEmitter x 4,310,067 ops/sec ±4.00% (10 runs sampled)
+EventDispatcher x 2,277,520 ops/sec ±3.42% (10 runs sampled)
+event-signal x 1,817,383 ops/sec ±5.60% (10 runs sampled)
+EventEmitter2 x 1,610,955 ops/sec ±3.13% (10 runs sampled)
+RXJS x 1,428,217 ops/sec ±4.89% (10 runs sampled)
+dripEmitterEnhanced x 718,819 ops/sec ±2.82% (10 runs sampled)
+signal-emitter x 526,123 ops/sec ±1.54% (10 runs sampled)
+pull-notify x 467,433 ops/sec ±2.16% (10 runs sampled)
+EventEmitter x 176,710 ops/sec ±3.06% (10 runs sampled)
+JS-Signals x 162,146 ops/sec ±3.91% (10 runs sampled)
 ```
 
-_Fastest is **MiniSignals, signal-lite**_
+_Fastest is **MiniSignals, MicroSignals**_
+
+## benchmarks
+
+```
+Theoretical max x 12,236,739 ops/sec ±3.38% (10 runs sampled) *burn in*
+mini-pipe x 9,749,645 ops/sec ±5.35% (10 runs sampled)
+MiniSignals x 9,489,445 ops/sec ±5.08% (10 runs sampled)
+signal-lite x 8,721,929 ops/sec ±4.94% (10 runs sampled)
+push-stream x 7,576,541 ops/sec ±6.04% (10 runs sampled)
+dripEmitter x 7,338,037 ops/sec ±3.01% (10 runs sampled)
+EventEmitter3 x 7,240,795 ops/sec ±3.92% (10 runs sampled)
+ReactiveProperty x 7,185,286 ops/sec ±3.21% (10 runs sampled)
+EventEmitter2 x 7,054,892 ops/sec ±5.97% (10 runs sampled)
+EventDispatcher x 2,980,950 ops/sec ±4.04% (10 runs sampled)
+EventEmitter x 3,113,684 ops/sec ±11.93% (10 runs sampled)
+event-signal x 2,347,738 ops/sec ±4.22% (10 runs sampled)
+RXJS x 1,870,401 ops/sec ±5.03% (10 runs sampled)
+dripEmitterEnhanced x 757,409 ops/sec ±3.99% (10 runs sampled)
+signal-emitter x 497,968 ops/sec ±6.60% (10 runs sampled)
+JS-Signals x 201,329 ops/sec ±6.52% (10 runs sampled)
+```
+
+_Fastest is **mini-pipe, MiniSignals**_
+
+# emit many values
+
+## benchmarks
+
+```
+Theoretical max x 16,437,162 ops/sec ±11.01% (10 runs sampled) *burn in*
+MiniSignals x 14,653,778 ops/sec ±3.64% (10 runs sampled)
+signal-lite x 13,381,603 ops/sec ±4.08% (10 runs sampled)
+EventEmitter3 x 867,905 ops/sec ±3.05% (10 runs sampled)
+EventEmitter2 x 828,840 ops/sec ±3.07% (10 runs sampled)
+dripEmitterEnhanced x 695,014 ops/sec ±2.03% (10 runs sampled)
+signal-emitter x 585,759 ops/sec ±3.08% (10 runs sampled)
+JS-Signals x 123,131 ops/sec ±4.25% (10 runs sampled)
+EventEmitter x 122,552 ops/sec ±4.66% (10 runs sampled)
+minivents x 64,948 ops/sec ±5.64% (10 runs sampled)
+```
+
+_Fastest is **MiniSignals**_
+
+# emit multiple arrays
+
+## benchmarks
+
+```
+Theoretical max x 12,980,438 ops/sec ±3.35% (10 runs sampled) *burn in*
+MiniSignals x 7,310,297 ops/sec ±3.33% (10 runs sampled)
+signal-lite x 6,646,595 ops/sec ±4.61% (10 runs sampled)
+push-stream x 6,316,974 ops/sec ±3.80% (10 runs sampled)
+ReactiveProperty x 5,214,483 ops/sec ±2.91% (10 runs sampled)
+dripEmitter x 5,251,424 ops/sec ±5.60% (10 runs sampled)
+EventEmitter3 x 5,154,098 ops/sec ±6.26% (10 runs sampled)
+event-signal x 2,102,488 ops/sec ±3.95% (10 runs sampled)
+EventEmitter2 x 1,662,761 ops/sec ±12.14% (10 runs sampled)
+RXJS x 1,542,492 ops/sec ±4.30% (10 runs sampled)
+dripEmitterEnhanced x 782,481 ops/sec ±4.72% (10 runs sampled)
+signal-emitter x 541,951 ops/sec ±2.35% (10 runs sampled)
+pull-notify x 498,281 ops/sec ±4.21% (10 runs sampled)
+JS-Signals x 167,200 ops/sec ±2.81% (10 runs sampled)
+EventEmitter x 150,356 ops/sec ±14.94% (10 runs sampled)
+```
+
+_Fastest is **MiniSignals**_
 
 # add-remove
 
-## add-remove
+## benchmarks
 
 ```
-dripEmitter x 25,242,053 ops/sec ±8.62% (10 runs sampled)
-MiniSignals x 10,317,323 ops/sec ±5.40% (10 runs sampled)
-EventDispatcher x 4,068,341 ops/sec ±2.63% (10 runs sampled)
-ReactiveProperty x 3,510,996 ops/sec ±5.61% (10 runs sampled)
-EventEmitter3 x 1,839,987 ops/sec ±6.03% (10 runs sampled)
-EventEmitter x 1,414,975 ops/sec ±8.95% (10 runs sampled)
-EventEmitter2 x 1,032,601 ops/sec ±3.42% (10 runs sampled)
-JS-Signals x 668,377 ops/sec ±4.89% (10 runs sampled)
-dripEmitterEnhanced x 528,284 ops/sec ±5.58% (10 runs sampled)
+dripEmitter x 28,363,697 ops/sec ±3.30% (10 runs sampled)
+MiniSignals x 12,422,808 ops/sec ±6.15% (10 runs sampled)
+EventDispatcher x 5,049,612 ops/sec ±2.71% (10 runs sampled)
+ReactiveProperty x 4,239,759 ops/sec ±15.28% (10 runs sampled)
+pushStream x 3,506,897 ops/sec ±6.05% (10 runs sampled)
+EventEmitter3 x 2,182,525 ops/sec ±5.13% (10 runs sampled)
+EventEmitter x 1,430,501 ops/sec ±10.57% (10 runs sampled)
+EventEmitter2 x 1,271,452 ops/sec ±4.04% (10 runs sampled)
+JS-Signals x 825,314 ops/sec ±3.44% (10 runs sampled)
+dripEmitterEnhanced x 606,859 ops/sec ±3.31% (10 runs sampled)
 ```
 
 _Fastest is **dripEmitter**_

@@ -2,8 +2,8 @@ var suite = require('chuhai');
 var test = require('blue-tape');
 var setup = require('../subjects');
 
-test('emit', function (t) {
-  return suite('emit', function (s) {
+test('emit variable values', function (t) {
+  return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
@@ -102,7 +102,7 @@ test('emit', function (t) {
       subjects.signalLite.broadcast('bar', 'baz', 'boom');
     });
 
-    function handle(a, b) {
+    function handle(a, b, c) {
       if (arguments.length === 1 && a === undefined) {
         return;
       }
@@ -110,6 +110,9 @@ test('emit', function (t) {
         throw new Error('invalid arguments');
       }
       if (arguments.length > 1 && b !== 'baz') {
+        throw new Error('invalid arguments');
+      }
+      if (arguments.length > 2 && c !== 'boom') {
         throw new Error('invalid arguments');
       }
       if (arguments.length > 100) {

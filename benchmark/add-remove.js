@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var setup = require('../subjects');
 
 test('add-remove', function (t) {
-  return suite('add-remove', function (s) {
+  return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
@@ -23,6 +23,7 @@ test('add-remove', function (t) {
       subjects.signal.dispatch('bar');
       subjects.miniSignal.dispatch('bar');
       subjects.eventDispatcher.dispatchEvent({type: 'foo', bar: 'bar'});
+      subjects.pushStream.push('bar');
       t.equal(called, 0, 'handle never called');
     });
 
@@ -41,6 +42,10 @@ test('add-remove', function (t) {
     s.bench('dripEmitter', function () {
       subjects.dripEmitter.on('foo', handle);
       subjects.dripEmitter.off('foo', handle);
+    });
+    s.bench('pushStream', function () {
+      var remove = subjects.pushStream(handle);
+      remove();
     });
     s.bench('dripEmitterEnhanced', function () {
       subjects.dripEmitterEnhanced.on('foo', handle);
