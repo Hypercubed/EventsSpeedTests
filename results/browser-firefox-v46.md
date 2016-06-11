@@ -3,20 +3,20 @@
 ```
 ✔ Platform [pass: 1, fail: 0, duration: 1ms]
 ✔ init [pass: 20, fail: 0, duration: 1ms]
-✔ emit [pass: 18, fail: 0, duration: 4ms]
-✔ emit one parameter [pass: 36, fail: 0, duration: 3ms]
-✔ emit objects [pass: 28, fail: 0, duration: 1ms]
-✔ emit many parameters [pass: 20, fail: 0]
-✔ emit many listeners [pass: 28, fail: 0, duration: 2ms]
-✔ emit with context [pass: 26, fail: 0]
-✔ emit with bound function [pass: 26, fail: 0, duration: 1ms]
-✔ emit arrays [pass: 26, fail: 0, duration: 4ms]
+✔ emit [pass: 18, fail: 0, duration: 11ms]
+✔ emit one parameter [pass: 36, fail: 0, duration: 5ms]
+✔ emit objects [pass: 28, fail: 0, duration: 2ms]
+✔ emit many parameters [pass: 20, fail: 0, duration: 1ms]
+✔ emit many listeners [pass: 28, fail: 0, duration: 1ms]
+✔ emit with context [pass: 26, fail: 0, duration: 1ms]
+✔ emit with bound function [pass: 26, fail: 0, duration: 2ms]
+✔ emit arrays [pass: 26, fail: 0, duration: 3ms]
 ✔ add-remove [pass: 18, fail: 0, duration: 10ms]
 ```
 
 # Summary
 
-- duration: 27ms
+- duration: 38ms
 - assertions: 247
 - pass: 247
 - fail: 0

@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var setup = require('../subjects');
 
 test('init', function (t) {
-  return suite('init', function (s) {
+  return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
@@ -33,6 +33,10 @@ test('init', function (t) {
 
     s.bench('EventEmitter3', function () {
       dummy = new constructors.EventEmitter3();
+    });
+
+    s.bench('push-stream', function () {
+      dummy = constructors.push();
     });
 
     s.bench('DripEmitter', function () {

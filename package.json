@@ -8,9 +8,7 @@
     "start": "package-scripts",
     "clean": "rimraf browserified",
     "prebuild": "npm run clean && mkdirp browserified",
-    "build": "package-scripts build",
-    "bench:browsers": "gulp browsers",
-    "summary": "gulp summary"
+    "build": "package-scripts build"
   },
   "repository": {
     "type": "git",

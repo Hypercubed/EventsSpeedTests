@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var setup = require('../subjects');
 
 test('emit one value - two listeners', function (t) {
-  return suite('emit one value - two listeners', function (s) {
+  return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
@@ -14,8 +14,8 @@ test('emit one value - two listeners', function (t) {
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, 1, 'handle called once');
-      t.equal(called2, 1, 'handle2 called once');
+      t.equal(called, 1, e.target.name + ' called handle once');
+      t.equal(called2, 1, e.target.name + ' called handle2 once');
       called = called2 = null;
     });
 
@@ -45,10 +45,10 @@ test('emit one value - two listeners', function (t) {
       subjects.dripEmitter.emit('foo', 'bar');
     });
 
-    /* s.bench('barracks', function () {  // not fair, only calls first callback
+    s.bench('push-stream-patch', function () {
       called = called2 = 0;
-      subjects.barracksDispatcher('foo', 'bar');
-    }); */
+      subjects.pushStreamPatch.push('bar');
+    });
 
     s.bench('push-stream', function () {
       called = called2 = 0;
@@ -98,6 +98,11 @@ test('emit one value - two listeners', function (t) {
     s.bench('MiniSignals', function () {
       called = called2 = 0;
       subjects.miniSignal.dispatch('bar');
+    });
+
+    s.bench('MicroSignals', function () {
+      called = called2 = 0;
+      subjects.microSignal.dispatch('bar');
     });
 
     s.bench('signal-emitter', function () {

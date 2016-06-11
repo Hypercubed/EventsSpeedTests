@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var setup = require('../subjects');
 
 test('emit one object', function (t) {
-  return suite('emit one object', function (s) {
+  return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
@@ -14,8 +14,8 @@ test('emit one object', function (t) {
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, 3, 'handle called three times');
-      t.equal(called2, 3, 'handle2 called three times');
+      t.equal(called, 3, e.target.name + ' called handle three times');
+      t.equal(called2, 3, e.target.name + ' called handle2 three times');
       called = called2 = null;
     });
 
@@ -99,6 +99,13 @@ test('emit one object', function (t) {
       subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
     });
 
+    s.bench('MicroSignals', function () {
+      called = called2 = 0;
+      subjects.miniSignal.dispatch({bar: 'bar'});
+      subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz'});
+      subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
+    });
+
     s.bench('signal-emitter', function () {
       called = called2 = 0;
       subjects.signalEmitter.emit({bar: 'bar'});
@@ -136,13 +143,13 @@ test('emit one object', function (t) {
       }
       if (arguments.length === 1) {
         if (a.bar !== 'bar') {
-          throw new Error('Invlid bar');
+          throw new Error('Invalid bar !== ' + a.bar);
         }
         if (a.baz && a.baz !== 'baz') {
-          throw new Error('Invlid baz');
+          throw new Error('Invalid baz !== ' + a.baz);
         }
         if (a.boom && a.boom !== 'boom') {
-          throw new Error('Invlid boom');
+          throw new Error('Invalid boom !== ' + a.boom);
         }
       }
       called++;
@@ -150,7 +157,7 @@ test('emit one object', function (t) {
 
     function handle2() {
       if (arguments.length < 1 || arguments.length > 2) {
-        throw new Error('Invlid arguments.length');
+        throw new Error('Invalid arguments.length');
       }
       called2++;
     }

@@ -1,22 +1,22 @@
 # Tests
 
 ```
-✔ Platform [pass: 1, fail: 0, duration: 1ms]
+✔ Platform [pass: 1, fail: 0, duration: 2ms]
 ✔ init [pass: 20, fail: 0]
-✔ emit [pass: 18, fail: 0, duration: 3ms]
-✔ emit one parameter [pass: 36, fail: 0, duration: 4ms]
+✔ emit [pass: 18, fail: 0, duration: 19ms]
+✔ emit one parameter [pass: 36, fail: 0, duration: 7ms]
 ✔ emit objects [pass: 28, fail: 0, duration: 1ms]
-✔ emit many parameters [pass: 20, fail: 0]
+✔ emit many parameters [pass: 20, fail: 0, duration: 1ms]
 ✔ emit many listeners [pass: 28, fail: 0, duration: 1ms]
-✔ emit with context [pass: 26, fail: 0]
+✔ emit with context [pass: 26, fail: 0, duration: 1ms]
 ✔ emit with bound function [pass: 26, fail: 0, duration: 1ms]
-✔ emit arrays [pass: 26, fail: 0, duration: 13ms]
-✔ add-remove [pass: 18, fail: 0, duration: 10ms]
+✔ emit arrays [pass: 26, fail: 0, duration: 2ms]
+✔ add-remove [pass: 18, fail: 0, duration: 6ms]
 ```
 
 # Summary
 
-- duration: 34ms
+- duration: 41ms
 - assertions: 247
 - pass: 247
 - fail: 0

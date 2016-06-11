@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var setup = require('../subjects');
 
 test('emit with bound function', function (t) {
-  return suite('emit with bound function', function (s) {
+  return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
@@ -47,6 +47,8 @@ test('emit with bound function', function (t) {
     subjects.subject.subscribe(handle2);
     subjects.rProperty.on(handle.bind(ctx));
     subjects.rProperty.on(handle2);
+    subjects.pushStream(handle.bind(ctx));
+    subjects.pushStream(handle2);
 
     var bHandel = handle.bind(ctx);
 
@@ -69,6 +71,11 @@ test('emit with bound function', function (t) {
     s.bench('EventEmitter3', function () {
       called = called2 = 0;
       subjects.ee3.emit('foo', 'bar');
+    });
+
+    s.bench('push-stream', function () {
+      called = called2 = 0;
+      subjects.pushStream.push('bar');
     });
 
     s.bench('dripEmitter', function () {
