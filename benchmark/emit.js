@@ -2,7 +2,7 @@ var suite = require('chuhai');
 var test = require('blue-tape');
 var setup = require('../subjects');
 
-test('emit variable values', function (t) {
+test('emit variable number of values', function (t) {
   return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);

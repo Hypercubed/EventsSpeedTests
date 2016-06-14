@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var pull = require('pull-stream');
 var setup = require('../subjects');
 
-test('emit with context', function (t) {
+test('emit with single value with context', function (t) {
   return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);

@@ -2,7 +2,7 @@ var suite = require('chuhai');
 var test = require('blue-tape');
 var setup = require('../subjects');
 
-test('emit many listeners', function (t) {
+test('emit one value to many listeners', function (t) {
   return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
@@ -10,7 +10,7 @@ test('emit many listeners', function (t) {
     var called = null;
     var N = 10;
 
-    var handels = Array.apply(null, Array(N)).map(function () {
+    var handles = Array.apply(null, Array(N)).map(function () {
       return function (a) {
         if (arguments.length === 1 && a === undefined) {
           return;
@@ -23,18 +23,18 @@ test('emit many listeners', function (t) {
     });
 
     var subjects = setup.createInstances();
-    setup.addHandles(subjects, handels);
+    setup.addHandles(subjects, handles);
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, N, 'handels called N times');
+      t.equal(called, N, 'handles called N times');
       called = null;
     });
 
     s.burn('Theoretical max', function () {
       called = 0;
       for (var i = 0; i < 10; i++) {
-        (handels[i])('bar');
+        (handles[i])('bar');
       }
     });
 

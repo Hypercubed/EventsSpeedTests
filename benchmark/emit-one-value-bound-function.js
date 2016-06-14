@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var pull = require('pull-stream');
 var setup = require('../subjects');
 
-test('emit with bound function', function (t) {
+test('emit single value to bound function', function (t) {
   return suite('benchmarks', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
