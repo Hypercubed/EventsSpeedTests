@@ -137,6 +137,11 @@ test('emit one value - one listener', function (t) {
       subjects.pullNotify('bar');
     });
 
+    s.bench('pull-pushable', function () {
+      called = 0;
+      subjects.pullPushable.push('bar');
+    });
+
     function handle(a) {
       if (arguments.length === 1 && a === undefined) {
         return;

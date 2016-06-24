@@ -19,6 +19,7 @@ var barracks = require('barracks');
 var push = require('push-stream/stream');
 var pull = require('pull-stream');
 pull.notify = require('pull-notify');
+pull.pushable = require('pull-pushable');
 var EventDispatcher = require('./eventdispatcher');
 var miniPipe = require('./pipe');
 var pushPatch = require('./push-stream-patch');
@@ -86,6 +87,7 @@ function createInstances() {
   var pushStreamPatch = pushPatch();
   var microSignal = new MicroSignal();
   var pullNotify = pull.notify();
+  var pullPushable = pull.pushable();
 
   return {
     ee1: ee1,
@@ -111,7 +113,8 @@ function createInstances() {
     pipe: pipe,
     pushStreamPatch: pushStreamPatch,
     microSignal: microSignal,
-    pullNotify: pullNotify
+    pullNotify: pullNotify,
+    pullPushable: pullPushable
   };
 }
 
@@ -144,6 +147,7 @@ function addHandles(subjects, handels) {
     subjects.pushStreamPatch(h);
     subjects.microSignal.add(h);
     pull(subjects.pullNotify.listen(), pull.drain(h));
+    pull(subjects.pullPushable, pull.drain(h));
   });
 
   return subjects;
