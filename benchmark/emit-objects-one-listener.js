@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var setup = require('../subjects');
 
 test('emit one object - one listener', function (t) {
-  return suite('benchmarks', function (s) {
+  return suite('', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
@@ -130,14 +130,14 @@ test('emit one object - one listener', function (t) {
     });
 
     s.bench('pull-notify', function () {
-      called = called2 = 0;
+      called = 0;
       subjects.pullNotify({bar: 'bar'});
       subjects.pullNotify({bar: 'bar', baz: 'baz'});
       subjects.pullNotify({bar: 'bar', baz: 'baz', boom: 'boom'});
     });
 
     s.bench('pull-pushable', function () {
-      called = called2 = 0;
+      called = 0;
       subjects.pullPushable.push({bar: 'bar'});
       subjects.pullPushable.push({bar: 'bar', baz: 'baz'});
       subjects.pullPushable.push({bar: 'bar', baz: 'baz', boom: 'boom'});

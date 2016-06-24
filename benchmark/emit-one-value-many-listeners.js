@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var setup = require('../subjects');
 
 test('emit one value to many listeners', function (t) {
-  return suite('benchmarks', function (s) {
+  return suite('', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
