@@ -29,6 +29,7 @@
     "chuhai": "^1.2.0",
     "d3-dispatch": "^0.5.0",
     "drip": "^1.4.0",
+    "envify": "^3.4.1",
     "event-signal": "^0.1.6",
     "eventemitter2": "^1.0.4",
     "eventemitter3": "^1.2.0",
@@ -56,7 +57,8 @@
     "tap-markdown": "^1.2.1",
     "testling": "^1.7.1",
     "watchify": "^3.7.0",
-    "xo": "^0.15.1"
+    "xo": "^0.15.1",
+    "xstream": "^5.0.6"
   },
   "xo": {
     "space": 2,
@@ -66,6 +68,7 @@
     ],
     "ignores": [
       "subjects/eventdispatcher.js",
+      "subjects/micro-signals.js",
       "browserified/*.js"
     ]
   }

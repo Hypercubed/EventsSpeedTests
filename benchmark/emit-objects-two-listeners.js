@@ -141,8 +141,15 @@ test('emit one object - two listeners', function (t) {
       subjects.pullNotify({bar: 'bar', baz: 'baz', boom: 'boom'});
     });
 
+    s.bench('xstream', function () {
+      called = called2 = 0;
+      subjects.xstream.shamefullySendNext({bar: 'bar'});
+      subjects.xstream.shamefullySendNext({bar: 'bar', baz: 'baz'});
+      subjects.xstream.shamefullySendNext({bar: 'bar', baz: 'baz', boom: 'boom'});
+    });
+
     function handle(a) {
-      if (arguments.length === 1 && a === undefined) {
+      if (!subjects) { // ignore calls before bechmarks start
         return;
       }
       if (arguments.length < 1 || arguments.length > 2) {

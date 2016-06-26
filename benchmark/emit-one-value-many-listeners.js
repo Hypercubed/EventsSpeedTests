@@ -2,17 +2,18 @@ var suite = require('chuhai');
 var test = require('blue-tape');
 var setup = require('../subjects');
 
-test('emit one value to many listeners', function (t) {
+test('emit one value - many listeners', function (t) {
   return suite('', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
 
     var called = null;
     var N = 10;
+    var started;
 
     var handles = Array.apply(null, Array(N)).map(function () {
       return function (a) {
-        if (arguments.length === 1 && a === undefined) {
+        if (!started) { // ignore calls before bechmarks start
           return;
         }
         if (arguments.length > 2 || a !== 'bar') {
@@ -24,6 +25,7 @@ test('emit one value to many listeners', function (t) {
 
     var subjects = setup.createInstances();
     setup.addHandles(subjects, handles);
+    started = true;
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
@@ -78,6 +80,10 @@ test('emit one value to many listeners', function (t) {
       called = 0;
       subjects.miniSignal.dispatch('bar');
     });
+    s.bench('MicroSignal', function () {
+      called = 0;
+      subjects.microSignal.dispatch('bar');
+    });
     s.bench('signal-emitter', function () {
       called = 0;
       subjects.signalEmitter.emit('bar');
@@ -93,6 +99,14 @@ test('emit one value to many listeners', function (t) {
     s.bench('minivents', function () {
       called = 0;
       subjects.miniVent.emit('foo', 'bar');
+    });
+    s.bench('pull-notify', function () {
+      called = 0;
+      subjects.pullNotify('bar');
+    });
+    s.bench('xstream', function () {
+      called = 0;
+      subjects.xstream.shamefullySendNext('bar');
     });
   });
 });

@@ -1,6 +1,7 @@
 mkdir -p raw
 
-nvm exec v6 npm start bench.node6
+nvm use system
+npm start bench.node6
 
 sleep 60
 

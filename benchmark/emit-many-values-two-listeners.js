@@ -66,8 +66,8 @@ test('emit many values - two listeners', function (t) {
       subjects.miniVent.emit('foo', 'bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, 9);
     });
 
-    function handle(a) {
-      if (arguments.length === 1 && a === undefined) {
+    function handle() {
+      if (!subjects) { // ignore calls before bechmarks start
         return;
       }
       if (arguments.length !== 12) {
@@ -76,8 +76,8 @@ test('emit many values - two listeners', function (t) {
       called++;
     }
 
-    function handle2(a) {
-      if (arguments.length === 1 && a === undefined) {
+    function handle2() {
+      if (!subjects) { // ignore calls before bechmarks start
         return;
       }
       if (arguments.length !== 12) {

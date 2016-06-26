@@ -1,5 +1,5 @@
 
-const browserify = 'browserify <%= file.path %> --im -o ./browserified/<%= file.base %>';
+const browserify = 'browserify <%= file.path %> --im -t envify -o ./browserified/<%= file.base %>';
 const tapMarkdown = 'tap-markdown';
 
 const nodeScripts = './benchmark/platform-tape.js ./benchmark/*.js';
@@ -13,21 +13,22 @@ const browsers = {
 
 module.exports = {
   scripts: {
-    build: `grunion --run "${browserify}" ${nodeScripts}`,
+    build: `grunion --run "${browserify}" --silent ${nodeScripts}`,
     bench: {
       default: `grunion ${nodeScripts}`,
+      fast: `BENCH=fast grunion ${nodeScripts}`,
       node: `grunion ${nodeScripts}`,
-      node4: `grunion ${nodeScripts} --serial --raw | tee ./raw/node-v4.4.md`,
-      node6: `grunion ${nodeScripts} --serial --raw | tee ./raw/node-v6.2.md`,
+      node4: `NODE_ENV=production grunion ${nodeScripts} --serial --raw | tee ./raw/node-v4.4.tap`,
+      node6: `NODE_ENV=production grunion ${nodeScripts} --serial --raw | tee ./raw/node-v6.2.tap`,
       browser: `grunion --run "testling -x \\"${browsers.chrome}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw`,
-      chrome: `grunion --run "testling -x \\"${browsers.chrome}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-chrome-v51.md`,
-      firefox: `grunion --run "testling -x \\"${browsers.firefox}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-firefox-v46.md`,
-      safari: `grunion --run "testling -x \\"${browsers.safari}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-safari-v9.md`
+      chrome: `grunion --run "testling -x \\"${browsers.chrome}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-chrome-v51.tap`,
+      firefox: `grunion --run "testling -x \\"${browsers.firefox}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-firefox-v47.tap`,
+      safari: `grunion --run "testling -x \\"${browsers.safari}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-safari-v9.tap`
     },
     summary: {
-      default: `grunion --run "${tapMarkdown} < <%= file.path %> > ./results/<%= file.base %>" ./raw/*.md`,
-      node: `grunion --run "${tapMarkdown} < <%= file.path %> > ./results/<%= file.base %>" ./raw/node-*.md`,
-      browsers: `grunion --run "${tapMarkdown} < <%= file.path %> > ./results/<%= file.base %>" ./raw/browser-*.md`
+      default: `grunion --run "${tapMarkdown} < <%= file.path %> > ./results/<%= file.base %>.md" ./raw/*.tap`,
+      node: `grunion --run "${tapMarkdown} < <%= file.path %> > ./results/<%= file.base %>.md" ./raw/node-*.tap`,
+      browsers: `grunion --run "${tapMarkdown} < <%= file.path %> > ./results/<%= file.base %>.md" ./raw/browser-*.tap`
     }
   }
 };

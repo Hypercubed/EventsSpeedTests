@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var pull = require('pull-stream');
 var setup = require('../subjects');
 
-test('emit with single value with context', function (t) {
+test('emit one value - with context', function (t) {
   return suite('', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
@@ -38,6 +38,8 @@ test('emit with single value with context', function (t) {
     subjects.signal.add(handle2);
     subjects.miniSignal.add(handle, ctx);
     subjects.miniSignal.add(handle2);
+    subjects.microSignal.add(handle.bind(ctx));
+    subjects.microSignal.add(handle2);
     subjects.signalEmitter.on(handle, ctx);
     subjects.signalEmitter.on(handle2);
     subjects.eventSignal.addListener(handle, ctx);
@@ -111,6 +113,11 @@ test('emit with single value with context', function (t) {
       subjects.miniSignal.dispatch('bar');
     });
 
+    s.bench('MicroSignals', function () {
+      called = called2 = 0;
+      subjects.microSignal.dispatch('bar');
+    });
+
     s.bench('signal-emitter', function () {
       called = called2 = 0;
       subjects.signalEmitter.emit('bar');
@@ -132,6 +139,9 @@ test('emit with single value with context', function (t) {
     });
 
     function handle() {
+      if (!subjects) { // ignore calls before bechmarks start
+        return;
+      }
       if (arguments.length === 0 || arguments.length > 2) {
         throw new Error('invalid arguments length');
       }

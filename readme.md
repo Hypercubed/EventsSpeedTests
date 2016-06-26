@@ -11,6 +11,7 @@
 - eventemitter3: 1.2.0
 - fast-event-emitter: 0.0.2
 - mini-signals: 1.1.1
+- micro-signal: [experimental](./subjects/micro-signals.js)
 - minivents: 2.0.1
 - namespace-emitter: 1.0.0
 - observ: 0.2.0
@@ -29,7 +30,7 @@
 - [Node v6.2](./results/node-v6.2.md)
 - [Node v4.4](./results/node-v4.4.md)
 - [Chrome v51](./results/chrome-v51.md)
-- [Firefox v45](./results/firefox-v46.md)
+- [Firefox v47](./results/firefox-v47.md)
 - [Safari v9](./results/safari-v9.md)
 
 ## How?

@@ -101,6 +101,13 @@ test('emit one object - one listener', function (t) {
       subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
     });
 
+    s.bench('MicroSignals', function () {
+      called = 0;
+      subjects.microSignal.dispatch({bar: 'bar'});
+      subjects.microSignal.dispatch({bar: 'bar', baz: 'baz'});
+      subjects.microSignal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
+    });
+
     s.bench('signal-emitter', function () {
       called = 0;
       subjects.signalEmitter.emit({bar: 'bar'});
@@ -143,8 +150,15 @@ test('emit one object - one listener', function (t) {
       subjects.pullPushable.push({bar: 'bar', baz: 'baz', boom: 'boom'});
     });
 
+    s.bench('xstream', function () {
+      called = 0;
+      subjects.xstream.shamefullySendNext({bar: 'bar'});
+      subjects.xstream.shamefullySendNext({bar: 'bar', baz: 'baz'});
+      subjects.xstream.shamefullySendNext({bar: 'bar', baz: 'baz', boom: 'boom'});
+    });
+
     function handle(a) {
-      if (arguments.length === 1 && a === undefined) {  // observable emits first
+      if (!subjects) { // ignore calls before bechmarks start
         return;
       }
       if (arguments.length < 1 || arguments.length > 2) {

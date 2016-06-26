@@ -3,7 +3,7 @@ var test = require('blue-tape');
 var pull = require('pull-stream');
 var setup = require('../subjects');
 
-test('emit single value to bound function', function (t) {
+test('emit one value - bound function', function (t) {
   return suite('', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);
@@ -38,6 +38,8 @@ test('emit single value to bound function', function (t) {
     subjects.signal.add(handle2);
     subjects.miniSignal.add(handle.bind(ctx));
     subjects.miniSignal.add(handle2);
+    subjects.microSignal.add(handle.bind(ctx));
+    subjects.microSignal.add(handle2);
     subjects.signalEmitter.on(handle.bind(ctx));
     subjects.signalEmitter.on(handle2);
     subjects.eventSignal.addListener(handle.bind(ctx));
@@ -52,6 +54,24 @@ test('emit single value to bound function', function (t) {
     subjects.pushStream(handle2);
     pull(subjects.pullNotify.listen(), pull.drain(handle.bind(ctx)));
     pull(subjects.pullNotify.listen(), pull.drain(handle2));
+    subjects.xstream.addListener({
+      next: handle.bind(ctx),
+      error: function (err) {
+        console.error(err);
+      },
+      complete: function () {
+        console.log('completed');
+      }
+    });
+    subjects.xstream.addListener({
+      next: handle2,
+      error: function (err) {
+        console.error(err);
+      },
+      complete: function () {
+        console.log('completed');
+      }
+    });
 
     var bHandel = handle.bind(ctx);
 
@@ -111,6 +131,11 @@ test('emit single value to bound function', function (t) {
       subjects.miniSignal.dispatch('bar');
     });
 
+    s.bench('MicroSignals', function () {
+      called = called2 = 0;
+      subjects.microSignal.dispatch('bar');
+    });
+
     s.bench('signal-emitter', function () {
       called = called2 = 0;
       subjects.signalEmitter.emit('bar');
@@ -129,6 +154,11 @@ test('emit single value to bound function', function (t) {
     s.bench('pull-notify', function () {
       called = called2 = 0;
       subjects.pullNotify('bar');
+    });
+
+    s.bench('xstream', function () {
+      called = called2 = 0;
+      subjects.xstream.shamefullySendNext('bar');
     });
 
     function handle() {

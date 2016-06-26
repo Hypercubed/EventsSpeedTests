@@ -20,6 +20,8 @@ var push = require('push-stream/stream');
 var pull = require('pull-stream');
 pull.notify = require('pull-notify');
 pull.pushable = require('pull-pushable');
+var xs = require('xstream').default;
+
 var EventDispatcher = require('./eventdispatcher');
 var miniPipe = require('./pipe');
 var pushPatch = require('./push-stream-patch');
@@ -53,14 +55,15 @@ module.exports.constructors = {
   miniPipe: miniPipe,
   pushPatch: pushPatch,
   MicroSignal: MicroSignal,
-  pull: pull
+  pull: pull,
+  xstream: xs
 };
 
 module.exports.createInstances = createInstances;
 module.exports.createInstancesOn = createInstancesOn;
 module.exports.addHandles = addHandles;
-module.exports.minSamples = 10;
-module.exports.maxTime = 0.01;
+module.exports.minSamples = process.env.BENCH === 'fast' ? 1 : 10;
+module.exports.maxTime = process.env.BENCH === 'fast' ? 0.01 : 0.5;
 
 function createInstances() {
   var ee1 = new EventEmitter1();
@@ -88,6 +91,7 @@ function createInstances() {
   var microSignal = new MicroSignal();
   var pullNotify = pull.notify();
   var pullPushable = pull.pushable();
+  var xstream = xs.create();
 
   return {
     ee1: ee1,
@@ -114,7 +118,8 @@ function createInstances() {
     pushStreamPatch: pushStreamPatch,
     microSignal: microSignal,
     pullNotify: pullNotify,
-    pullPushable: pullPushable
+    pullPushable: pullPushable,
+    xstream: xstream
   };
 }
 
@@ -148,6 +153,15 @@ function addHandles(subjects, handels) {
     subjects.microSignal.add(h);
     pull(subjects.pullNotify.listen(), pull.drain(h));
     pull(subjects.pullPushable, pull.drain(h));
+    subjects.xstream.addListener({
+      next: h,
+      error: function (err) {
+        console.error(err);
+      },
+      complete: function () {
+        console.log('completed');
+      }
+    });
   });
 
   return subjects;

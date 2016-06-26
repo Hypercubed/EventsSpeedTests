@@ -142,8 +142,13 @@ test('emit one value - one listener', function (t) {
       subjects.pullPushable.push('bar');
     });
 
+    s.bench('xstream', function () {
+      called = 0;
+      subjects.xstream.shamefullySendNext('bar');
+    });
+
     function handle(a) {
-      if (arguments.length === 1 && a === undefined) {
+      if (!subjects) { // ignore calls before bechmarks start
         return;
       }
       if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {

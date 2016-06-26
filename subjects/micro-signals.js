@@ -1,4 +1,5 @@
 'use strict';
+/* Like MiniSignals, but only emits one value */
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -133,13 +134,13 @@ var MicroSignal = function () {
       return false;
     }
 
-    while (node) {
+    do {
       if (node._once) {
         this.detach(node);
       }
       node._fn(value);
       node = node._next;
-    }
+    } while (node);
 
     return true;
   };

@@ -130,8 +130,13 @@ test('emit one value - two listeners', function (t) {
       subjects.pullNotify('bar');
     });
 
+    s.bench('xstream', function () {
+      called = called2 = 0;
+      subjects.xstream.shamefullySendNext('bar');
+    });
+
     function handle(a) {
-      if (arguments.length === 1 && a === undefined) {
+      if (!subjects) { // ignore calls before bechmarks start
         return;
       }
       if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
@@ -141,7 +146,7 @@ test('emit one value - two listeners', function (t) {
     }
 
     function handle2(a) {
-      if (arguments.length === 1 && a === undefined) {
+      if (!subjects) { // ignore calls before bechmarks start
         return;
       }
       if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {

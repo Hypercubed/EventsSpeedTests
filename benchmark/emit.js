@@ -103,7 +103,7 @@ test('emit variable number of values', function (t) {
     });
 
     function handle(a, b, c) {
-      if (arguments.length === 1 && a === undefined) {
+      if (!subjects) { // ignore calls before bechmarks start
         return;
       }
       if (arguments.length > 0 && a !== 'bar') {

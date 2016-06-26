@@ -99,6 +99,13 @@ test('emit one array', function (t) {
       subjects.miniSignal.dispatch(['bar', 'baz', 'boom']);
     });
 
+    s.bench('MicroSignals', function () {
+      called = called2 = 0;
+      subjects.microSignal.dispatch(['bar']);
+      subjects.microSignal.dispatch(['bar', 'baz']);
+      subjects.microSignal.dispatch(['bar', 'baz', 'boom']);
+    });
+
     s.bench('signal-emitter', function () {
       called = called2 = 0;
       subjects.signalEmitter.emit(['bar']);
