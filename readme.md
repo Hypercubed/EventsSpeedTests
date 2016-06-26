@@ -27,11 +27,11 @@
 
 ## Results
 
-- [Node v6.2](./results/node-v6.2.md)
-- [Node v4.4](./results/node-v4.4.md)
-- [Chrome v51](./results/chrome-v51.md)
-- [Firefox v47](./results/firefox-v47.md)
-- [Safari v9](./results/safari-v9.md)
+- [Node v6.2](./results/node-v6.2.tap.md)
+- [Node v4.4](./results/node-v4.4.tap.md)
+- [Chrome v51](./results/chrome-v51.tap.md)
+- [Firefox v47](./results/firefox-v47.tap.md)
+- [Safari v9](./results/safari-v9.tap.md)
 
 ## How?
 
