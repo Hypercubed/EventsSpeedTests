@@ -29,7 +29,7 @@ test('emit one value - many listeners', function (t) {
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, N, 'handles called N times');
+      t.equal(called, N, e.target.name + 'called handles N times');
       called = null;
     });
 

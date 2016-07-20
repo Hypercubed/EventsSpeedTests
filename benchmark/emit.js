@@ -14,8 +14,8 @@ test('emit variable number of values', function (t) {
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, 4, 'handle called four times');
-      t.equal(called2, 4, 'handle2 called four times');
+      t.equal(called, 4, e.target.name + ' called handle four times');
+      t.equal(called2, 4, e.target.name + ' called handle2 four times');
     });
 
     s.burn('Theoretical max', function () {

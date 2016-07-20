@@ -21,6 +21,7 @@ var pull = require('pull-stream');
 pull.notify = require('pull-notify');
 pull.pushable = require('pull-pushable');
 var xs = require('xstream').default;
+var waddup = require('waddup').default;
 
 var EventDispatcher = require('./eventdispatcher');
 var miniPipe = require('./pipe');
@@ -56,14 +57,27 @@ module.exports.constructors = {
   pushPatch: pushPatch,
   MicroSignal: MicroSignal,
   pull: pull,
-  xstream: xs
+  xs: xs,
+  waddup: waddup
 };
 
 module.exports.createInstances = createInstances;
 module.exports.createInstancesOn = createInstancesOn;
 module.exports.addHandles = addHandles;
-module.exports.minSamples = process.env.BENCH === 'fast' ? 1 : 10;
-module.exports.maxTime = process.env.BENCH === 'fast' ? 0.01 : 0.5;
+
+switch (process.env.BENCH) {
+  case 'fast':
+    module.exports.minSamples = 1;
+    module.exports.maxTime = 0.01;
+    break;
+  case 'full':
+    module.exports.minSamples = 5;
+    module.exports.maxTime = 5;
+    break;
+  default:
+    module.exports.minSamples = 10;
+    module.exports.maxTime = 0.5;
+}
 
 function createInstances() {
   var ee1 = new EventEmitter1();
@@ -92,6 +106,7 @@ function createInstances() {
   var pullNotify = pull.notify();
   var pullPushable = pull.pushable();
   var xstream = xs.create();
+  // var waddup = waddup;
 
   return {
     ee1: ee1,
@@ -119,7 +134,8 @@ function createInstances() {
     microSignal: microSignal,
     pullNotify: pullNotify,
     pullPushable: pullPushable,
-    xstream: xstream
+    xstream: xstream,
+    waddup: waddup
   };
 }
 
@@ -145,7 +161,7 @@ function addHandles(subjects, handels) {
     subjects.dripEmitterEnhanced.on('foo', h);
     try {
       subjects.barracksDispatcher.on('foo', h);
-    } catch (e) {
+    } catch (err) {
     }
     subjects.pushStream(h);
     subjects.pipe(h);
@@ -161,6 +177,9 @@ function addHandles(subjects, handels) {
       complete: function () {
         console.log('completed');
       }
+    });
+    subjects.waddup.subscribe('foo', function (topic, data) {
+      h(data);
     });
   });
 

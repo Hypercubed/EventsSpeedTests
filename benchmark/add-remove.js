@@ -24,7 +24,7 @@ test('add and remove', function (t) {
       subjects.miniSignal.dispatch('bar');
       subjects.eventDispatcher.dispatchEvent({type: 'foo', bar: 'bar'});
       subjects.pushStream.push('bar');
-      t.equal(called, 0, 'handle never called');
+      t.equal(called, 0, e.target.name + ' never called handle');
     });
 
     s.bench('EventEmitter', function () {

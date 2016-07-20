@@ -13,8 +13,8 @@ test('emit one value - bound function', function (t) {
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, 1, 'handle called one time');
-      t.equal(called2, 1, 'handle2 called one time');
+      t.equal(called, 1, e.target.name + ' called handle one time');
+      t.equal(called2, 1, e.target.name + ' called handle2 one time');
       called = called2 = null;
     });
 

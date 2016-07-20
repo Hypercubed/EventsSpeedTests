@@ -12,8 +12,8 @@ test('emit one array', function (t) {
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, 3, 'handle called three times');
-      t.equal(called2, 3, 'handle2 called three times');
+      t.equal(called, 3, e.target.name + ' called handle three times');
+      t.equal(called2, 3, e.target.name + ' called handle2 three times');
       called = called2 = null;
     });
 

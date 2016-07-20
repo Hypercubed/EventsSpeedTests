@@ -21,140 +21,140 @@ test('emit one object - one listener', function (t) {
       called = 0;
       handle({bar: 'bar'});
       handle({bar: 'bar', baz: 'baz'});
-      handle({bar: 'bar', baz: 'baz', boom: 'boom'});
+      handle({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('EventEmitter', function () {
       called = 0;
       subjects.ee1.emit('foo', {bar: 'bar'});
       subjects.ee1.emit('foo', {bar: 'bar', baz: 'baz'});
-      subjects.ee1.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.ee1.emit('foo', {bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('EventEmitter2', function () {
       called = 0;
       subjects.ee2.emit('foo', {bar: 'bar'});
       subjects.ee2.emit('foo', {bar: 'bar', baz: 'baz'});
-      subjects.ee2.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.ee2.emit('foo', {bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('EventEmitter3', function () {
       called = 0;
       subjects.ee3.emit('foo', {bar: 'bar'});
       subjects.ee3.emit('foo', {bar: 'bar', baz: 'baz'});
-      subjects.ee3.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.ee3.emit('foo', {bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('push-stream', function () {
       called = 0;
       subjects.pushStream.push({bar: 'bar'});
       subjects.pushStream.push({bar: 'bar', baz: 'baz'});
-      subjects.pushStream.push({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.pushStream.push({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('mini-pipe', function () {
       called = 0;
       subjects.pipe.push({bar: 'bar'});
       subjects.pipe.push({bar: 'bar', baz: 'baz'});
-      subjects.pipe.push({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.pipe.push({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('dripEmitter', function () {
       called = 0;
       subjects.dripEmitter.emit('foo', {bar: 'bar'});
       subjects.dripEmitter.emit('foo', {bar: 'bar', baz: 'baz'});
-      subjects.dripEmitter.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.dripEmitter.emit('foo', {bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('dripEmitterEnhanced', function () {
       called = 0;
       subjects.dripEmitterEnhanced.emit('foo', {bar: 'bar'});
       subjects.dripEmitterEnhanced.emit('foo', {bar: 'bar', baz: 'baz'});
-      subjects.dripEmitterEnhanced.emit('foo', {bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.dripEmitterEnhanced.emit('foo', {bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('RXJS', function () {
       called = 0;
       subjects.subject.next({bar: 'bar'});
       subjects.subject.next({bar: 'bar', baz: 'baz'});
-      subjects.subject.next({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.subject.next({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('ReactiveProperty', function () {
       called = 0;
       subjects.rProperty({bar: 'bar'});
       subjects.rProperty({bar: 'bar', baz: 'baz'});
-      subjects.rProperty({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.rProperty({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('JS-Signals', function () {
       called = 0;
       subjects.signal.dispatch({bar: 'bar'});
       subjects.signal.dispatch({bar: 'bar', baz: 'baz'});
-      subjects.signal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.signal.dispatch({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('MiniSignals', function () {
       called = 0;
       subjects.miniSignal.dispatch({bar: 'bar'});
       subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz'});
-      subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.miniSignal.dispatch({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('MicroSignals', function () {
       called = 0;
       subjects.microSignal.dispatch({bar: 'bar'});
       subjects.microSignal.dispatch({bar: 'bar', baz: 'baz'});
-      subjects.microSignal.dispatch({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.microSignal.dispatch({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('signal-emitter', function () {
       called = 0;
       subjects.signalEmitter.emit({bar: 'bar'});
       subjects.signalEmitter.emit({bar: 'bar', baz: 'baz'});
-      subjects.signalEmitter.emit({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.signalEmitter.emit({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('event-signal', function () {
       called = 0;
       subjects.eventSignal.emit({bar: 'bar'});
       subjects.eventSignal.emit({bar: 'bar', baz: 'baz'});
-      subjects.eventSignal.emit({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.eventSignal.emit({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('signal-lite', function () {
       called = 0;
       subjects.signalLite.broadcast({bar: 'bar'});
       subjects.signalLite.broadcast({bar: 'bar', baz: 'baz'});
-      subjects.signalLite.broadcast({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.signalLite.broadcast({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('EventDispatcher', function () {
       called = 0;
       subjects.eventDispatcher.dispatchEvent({type: 'foo', bar: 'bar'});
       subjects.eventDispatcher.dispatchEvent({type: 'foo', bar: 'bar', baz: 'baz'});
-      subjects.eventDispatcher.dispatchEvent({type: 'foo', bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.eventDispatcher.dispatchEvent({type: 'foo', bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('pull-notify', function () {
       called = 0;
       subjects.pullNotify({bar: 'bar'});
       subjects.pullNotify({bar: 'bar', baz: 'baz'});
-      subjects.pullNotify({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.pullNotify({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('pull-pushable', function () {
       called = 0;
       subjects.pullPushable.push({bar: 'bar'});
       subjects.pullPushable.push({bar: 'bar', baz: 'baz'});
-      subjects.pullPushable.push({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.pullPushable.push({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     s.bench('xstream', function () {
       called = 0;
       subjects.xstream.shamefullySendNext({bar: 'bar'});
       subjects.xstream.shamefullySendNext({bar: 'bar', baz: 'baz'});
-      subjects.xstream.shamefullySendNext({bar: 'bar', baz: 'baz', boom: 'boom'});
+      subjects.xstream.shamefullySendNext({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
     function handle(a) {
@@ -171,7 +171,7 @@ test('emit one object - one listener', function (t) {
         if (a.baz && a.baz !== 'baz') {
           throw new Error('Invalid baz !== ' + a.baz);
         }
-        if (a.boom && a.boom !== 'boom') {
+        if (a.boom && typeof a.boom !== 'number') {
           throw new Error('Invalid boom !== ' + a.boom);
         }
       }

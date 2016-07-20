@@ -21,130 +21,130 @@ test('emit one value - two listeners', function (t) {
 
     s.burn('Theoretical max', function () {
       called = called2 = 0;
-      handle('bar');
-      handle2('bar');
+      handle(Math.random());
+      handle2(Math.random());
     });
 
     s.bench('EventEmitter', function () {
       called = called2 = 0;
-      subjects.ee1.emit('foo', 'bar');
+      subjects.ee1.emit('foo', Math.random());
     });
 
     s.bench('EventEmitter2', function () {
       called = called2 = 0;
-      subjects.ee2.emit('foo', 'bar');
+      subjects.ee2.emit('foo', Math.random());
     });
 
     s.bench('EventEmitter3', function () {
       called = called2 = 0;
-      subjects.ee3.emit('foo', 'bar');
+      subjects.ee3.emit('foo', Math.random());
     });
 
     s.bench('dripEmitter', function () {
       called = called2 = 0;
-      subjects.dripEmitter.emit('foo', 'bar');
+      subjects.dripEmitter.emit('foo', Math.random());
     });
 
     s.bench('push-stream-patch', function () {
       called = called2 = 0;
-      subjects.pushStreamPatch.push('bar');
+      subjects.pushStreamPatch.push(Math.random());
     });
 
     s.bench('push-stream', function () {
       called = called2 = 0;
-      subjects.pushStream.push('bar');
+      subjects.pushStream.push(Math.random());
     });
 
     s.bench('dripEmitterEnhanced', function () {
       called = called2 = 0;
-      subjects.dripEmitterEnhanced.emit('foo', 'bar');
+      subjects.dripEmitterEnhanced.emit('foo', Math.random());
     });
 
     s.bench('d3-dispatch', function () {
       called = called2 = 0;
-      subjects.dispatch.call('foo', null, 'bar');
+      subjects.dispatch.call('foo', null, Math.random());
     });
 
     s.bench('namespace-emitter', function () {
       called = called2 = 0;
-      subjects.nsEmitter.emit('foo', 'bar');
+      subjects.nsEmitter.emit('foo', Math.random());
     });
 
     s.bench('ReactiveProperty', function () {
       called = called2 = 0;
-      subjects.rProperty('bar');
+      subjects.rProperty(Math.random());
     });
 
     s.bench('observable', function () {
       called = called2 = 0;
-      subjects.observableValue('bar');
+      subjects.observableValue(Math.random());
     });
 
     s.bench('observ', function () {
       called = called2 = 0;
-      subjects.observValue.set('bar');
+      subjects.observValue.set(Math.random());
     });
 
     s.bench('RXJS', function () {
       called = called2 = 0;
-      subjects.subject.next('bar');
+      subjects.subject.next(Math.random());
     });
 
     s.bench('JS-Signals', function () {
       called = called2 = 0;
-      subjects.signal.dispatch('bar');
+      subjects.signal.dispatch(Math.random());
     });
 
     s.bench('MiniSignals', function () {
       called = called2 = 0;
-      subjects.miniSignal.dispatch('bar');
+      subjects.miniSignal.dispatch(Math.random());
     });
 
     s.bench('MicroSignals', function () {
       called = called2 = 0;
-      subjects.microSignal.dispatch('bar');
+      subjects.microSignal.dispatch(Math.random());
     });
 
     s.bench('signal-emitter', function () {
       called = called2 = 0;
-      subjects.signalEmitter.emit('bar');
+      subjects.signalEmitter.emit(Math.random());
     });
 
     s.bench('event-signal', function () {
       called = called2 = 0;
-      subjects.eventSignal.emit('bar');
+      subjects.eventSignal.emit(Math.random());
     });
 
     s.bench('signal-lite', function () {
       called = called2 = 0;
-      subjects.signalLite.broadcast('bar');
+      subjects.signalLite.broadcast(Math.random());
     });
 
     s.bench('minivents', function () {
       called = called2 = 0;
-      subjects.miniVent.emit('foo', 'bar');
+      subjects.miniVent.emit('foo', Math.random());
     });
 
     s.bench('pull-notify', function () {
       called = called2 = 0;
-      subjects.pullNotify('bar');
+      subjects.pullNotify(Math.random());
     });
 
     s.bench('xstream', function () {
       called = called2 = 0;
-      subjects.xstream.shamefullySendNext('bar');
+      subjects.xstream.shamefullySendNext(Math.random());
     });
 
     s.bench('waddup', function () {
       called = called2 = 0;
-      subjects.waddup.publish('foo', 'bar');
+      subjects.waddup.publish('foo', Math.random());
     });
 
     function handle(a) {
       if (!subjects) { // ignore calls before bechmarks start
         return;
       }
-      if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+      if (arguments.length === 0 || arguments.length > 2 || typeof a !== 'number') {
         throw new Error('invalid arguments ' + a);
       }
       called++;
@@ -154,7 +154,7 @@ test('emit one value - two listeners', function (t) {
       if (!subjects) { // ignore calls before bechmarks start
         return;
       }
-      if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+      if (arguments.length === 0 || arguments.length > 2 || typeof a !== 'number') {
         throw new Error('invalid arguments');
       }
       called2++;
