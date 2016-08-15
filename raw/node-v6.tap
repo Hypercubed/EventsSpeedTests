@@ -367,7 +367,7 @@ ok 57 evee called handle2 three times
 
 
 TAP version 13
-# emit one value - one listener
+# emit one random value - one listener
 ok 1 Theoretical max runs without error
 ok 2 Theoretical max called handle once
 ok 3 EventEmitter runs without error
@@ -463,7 +463,7 @@ ok 54 evee called handle once
 
 
 TAP version 13
-# emit one value - two listeners
+# emit one random value - two listeners
 ok 1 Theoretical max runs without error
 ok 2 Theoretical max called handle once
 ok 3 Theoretical max called handle2 once
@@ -1129,5 +1129,3 @@ ok 24 pull-notify constructed an object
 # pass  24
 
 # ok
-
-

@@ -14,8 +14,7 @@ const browsers = {
 module.exports = {
   scripts: {
     build: {
-      default: `grunion --run "${browserify}" --silent ${nodeScripts}`,
-      evee: 'cd ./node_modules/evee && npm install'
+      default: `grunion --run "${browserify}" --silent ${nodeScripts}`
     },
     bench: {
       default: `grunion ${nodeScripts}`,

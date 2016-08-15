@@ -141,6 +141,13 @@ test('emit one array', function (t) {
       subjects.evee.emit('foo', ['bar', 'baz', 'boom']);
     });
 
+    s.bench('sister', function () {
+      called = called2 = 0;
+      subjects.sister.trigger('foo', ['bar']);
+      subjects.sister.trigger('foo', ['bar', 'baz']);
+      subjects.sister.trigger('foo', ['bar', 'baz', 'boom']);
+    });
+
     function handle(a) {
       if (arguments.length === 1 && a === undefined) {
         return;

@@ -32,8 +32,11 @@ test('emit one value - with context', function (t) {
     subjects.ee3.on('foo', handle2);
     subjects.dripEmitter.on('foo', handle.bind(ctx));
     subjects.dripEmitter.on('foo', handle2);
+    subjects.sister.on('foo', handle.bind(ctx));
+    subjects.sister.on('foo', handle2);
     subjects.dripEmitterEnhanced.on('foo', handle.bind(ctx));
     subjects.dripEmitterEnhanced.on('foo', handle2);
+
     subjects.signal.add(handle, ctx);
     subjects.signal.add(handle2);
     subjects.miniSignal.add(handle, ctx);
@@ -52,6 +55,7 @@ test('emit one value - with context', function (t) {
     subjects.rProperty.on(handle2);
     subjects.pushStream(handle.bind(ctx));
     subjects.pushStream(handle2);
+
     pull(subjects.pullNotify.listen(), pull.drain(handle.bind(ctx)));
     pull(subjects.pullNotify.listen(), pull.drain(handle2));
     subjects.evee.on('foo', function (e) {
@@ -147,6 +151,11 @@ test('emit one value - with context', function (t) {
     s.bench('evee', function () {
       called = called2 = 0;
       subjects.evee.emit('foo', 'bar');
+    });
+
+    s.bench('sister', function () {
+      called = called2 = 0;
+      subjects.sister.trigger('foo', 'bar');
     });
 
     function handle(a) {

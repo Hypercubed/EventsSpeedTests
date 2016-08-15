@@ -2,7 +2,7 @@ var suite = require('chuhai');
 var test = require('blue-tape');
 var setup = require('../subjects');
 
-test('emit one value - two listeners', function (t) {
+test('emit one random value - two listeners', function (t) {
   return suite('', function (s) {
     s.set('maxTime', setup.maxTime);
     s.set('minSamples', setup.minSamples);

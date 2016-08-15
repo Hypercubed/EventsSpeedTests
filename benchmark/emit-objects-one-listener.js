@@ -164,6 +164,13 @@ test('emit one object - one listener', function (t) {
       subjects.evee.emit('foo', {bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
+    s.bench('sister', function () {
+      called = 0;
+      subjects.sister.trigger('foo', {bar: 'bar'});
+      subjects.sister.trigger('foo', {bar: 'bar', baz: 'baz'});
+      subjects.sister.trigger('foo', {bar: 'bar', baz: 'baz', boom: Math.random()});
+    });
+
     function handle(a) {
       if (!subjects) { // ignore calls before bechmarks start
         return;

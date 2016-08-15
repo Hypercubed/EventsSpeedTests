@@ -25,6 +25,7 @@ pull.pushable = require('pull-pushable');
 var xs = require('xstream').default;
 var waddup = require('waddup').default;
 var Evee = require('evee/dist/evee');
+var Sister = require('sister');
 
 var EventDispatcher = require('./eventdispatcher');
 var miniPipe = require('./pipe');
@@ -62,7 +63,8 @@ module.exports.constructors = {
   pull: pull,
   xs: xs,
   waddup: waddup,
-  Evee: Evee
+  Evee: Evee,
+  Sister: Sister
 };
 
 switch (process.env.BENCH) {
@@ -107,6 +109,7 @@ var createInstances = function createInstances() {
   var pullPushable = pull.pushable();
   var xstream = xs.create();
   var evee = new Evee();
+  var sister = Sister();
 
   return {
     ee1: ee1,
@@ -136,7 +139,8 @@ var createInstances = function createInstances() {
     pullPushable: pullPushable,
     xstream: xstream,
     waddup: waddup,
-    evee: evee
+    evee: evee,
+    sister: sister
   };
 };
 
@@ -185,6 +189,7 @@ var addHandles = function addHandles(subjects, handels) {
     subjects.evee.on('foo', function (e) {
       return h(e.data);
     });
+    subjects.sister.on('foo', h);
   });
 
   return subjects;

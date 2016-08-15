@@ -86,6 +86,7 @@
     "signal-emitter": "0.0.1",
     "signals": "1.0.0",
     "signals-lite": "1.0.0",
+    "sister": "^3.0.0",
     "waddup": "1.0.3",
     "xstream": "5.3.2"
   }

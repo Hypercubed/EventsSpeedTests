@@ -152,6 +152,11 @@ test('emit one value - one listener', function (t) {
       subjects.evee.emit('foo', 'bar');
     });
 
+    s.bench('sister', function () {
+      called = 0;
+      subjects.sister.trigger('foo', 'bar');
+    });
+
     function handle(a) {
       if (!subjects) { // ignore calls before bechmarks start
         return;
