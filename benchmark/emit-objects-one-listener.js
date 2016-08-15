@@ -157,6 +157,13 @@ test('emit one object - one listener', function (t) {
       subjects.xstream.shamefullySendNext({bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
+    s.bench('evee', function () {
+      called = 0;
+      subjects.evee.emit('foo', {bar: 'bar'});
+      subjects.evee.emit('foo', {bar: 'bar', baz: 'baz'});
+      subjects.evee.emit('foo', {bar: 'bar', baz: 'baz', boom: Math.random()});
+    });
+
     function handle(a) {
       if (!subjects) { // ignore calls before bechmarks start
         return;

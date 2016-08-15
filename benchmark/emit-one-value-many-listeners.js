@@ -29,7 +29,7 @@ test('emit one value - many listeners', function (t) {
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, N, e.target.name + 'called handles N times');
+      t.equal(called, N, e.target.name + ' called handles N times');
       called = null;
     });
 
@@ -107,6 +107,10 @@ test('emit one value - many listeners', function (t) {
     s.bench('xstream', function () {
       called = 0;
       subjects.xstream.shamefullySendNext('bar');
+    });
+    s.bench('evee', function () {
+      called = 0;
+      subjects.evee.emit('foo', 'bar');
     });
   });
 });

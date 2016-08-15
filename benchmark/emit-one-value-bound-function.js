@@ -72,6 +72,12 @@ test('emit one value - bound function', function (t) {
         console.log('completed');
       }
     });
+    subjects.evee.on('foo', function (e) {
+      return handle.bind(ctx)(e.data);
+    });
+    subjects.evee.on('foo', function (e) {
+      handle2(e.data);
+    });
 
     var bHandel = handle.bind(ctx);
 
@@ -161,12 +167,21 @@ test('emit one value - bound function', function (t) {
       subjects.xstream.shamefullySendNext('bar');
     });
 
-    function handle() {
+    s.bench('evee', function () {
+      called = called2 = 0;
+      subjects.evee.emit('foo', 'bar');
+    });
+
+    function handle(a) {
       if (arguments.length === 0 || arguments.length > 2) {
         throw new Error('invalid arguments length');
       }
       if (this !== ctx) {
         throw new Error('invalid context');
+      }
+      if (a !== 'bar') {
+        console.log('err:', a);
+        throw new Error('invalid arguments');
       }
       called++;
     }

@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "lint": "xo",
+    "test": "package-scripts bench.fast",
     "start": "package-scripts",
     "clean": "rimraf browserified",
     "prebuild": "npm run clean && mkdirp browserified",
@@ -23,20 +24,20 @@
   "devDependencies": {
     "assume": "~1.2.6",
     "blue-tape": "^0.2.0",
-    "browserify": "^13.0.1",
+    "browserify": "^13.1.0",
     "chuhai": "^1.2.0",
     "envify": "^3.4.1",
-    "execa": "^0.4.0",
+    "eslint-plugin-node": "^2.0.0",
     "grunion": "^1.3.1",
     "microtime": "^2.1.1",
     "mkdirp": "^0.5.1",
-    "p-s": "^1.0.2",
+    "p-s": "^2.3.0",
     "platform": "^1.3.1",
-    "rimraf": "^2.5.2",
+    "rimraf": "^2.5.4",
     "tap-markdown": "^1.2.1",
     "testling": "^1.7.1",
     "watchify": "^3.7.0",
-    "xo": "^0.15.1"
+    "xo": "^0.16.0"
   },
   "xo": {
     "space": 2,
@@ -48,31 +49,44 @@
       "subjects/eventdispatcher.js",
       "subjects/micro-signals.js",
       "browserified/*.js"
-    ]
+    ],
+    "plugins": [
+      "node"
+    ],
+    "rules": {
+      "node/no-unsupported-features": [
+        2,
+        {
+          "version": 4
+        }
+      ]
+    }
   },
   "dependencies": {
-    "@reactivex/rxjs": "^5.0.0-beta.9",
-    "barracks": "^6.0.6",
-    "d3-dispatch": "^0.5.0",
-    "drip": "^1.4.0",
-    "event-signal": "^0.1.6",
-    "eventemitter2": "^1.0.4",
-    "eventemitter3": "^1.2.0",
+    "@reactivex/rxjs": "^5.0.0-beta.11",
+    "assume": "^1.4.1",
+    "barracks": "6.0.6",
+    "d3-dispatch": "1.0.1",
+    "drip": "1.4.0",
+    "evee": "0.8.4",
+    "event-signal": "0.1.6",
+    "eventemitter2": "2.1.0",
+    "eventemitter3": "1.2.0",
     "fast-event-emitter": "0.0.2",
-    "mini-signals": "^1.1.1",
-    "minivents": "^2.0.1",
-    "namespace-emitter": "^1.0.0",
-    "observ": "^0.2.0",
-    "observable": "^2.1.4",
-    "pull-notify": "^0.1.0",
-    "pull-pushable": "^2.0.0",
-    "pull-stream": "^3.4.3",
-    "push-stream": "^2.0.3",
-    "reactive-property": "^1.0.0",
+    "mini-signals": "1.1.1",
+    "minivents": "2.0.1",
+    "namespace-emitter": "1.0.0",
+    "observ": "0.2.0",
+    "observable": "2.1.4",
+    "pull-notify": "0.1.1",
+    "pull-pushable": "2.0.1",
+    "pull-stream": "3.4.3",
+    "push-stream": "2.0.3",
+    "reactive-property": "1.0.0",
     "signal-emitter": "0.0.1",
-    "signals": "^1.0.0",
-    "signals-lite": "^1.0.0",
-    "waddup": "^1.0.0",
-    "xstream": "^5.0.6"
+    "signals": "1.0.0",
+    "signals-lite": "1.0.0",
+    "waddup": "1.0.3",
+    "xstream": "5.3.2"
   }
 }

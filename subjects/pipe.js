@@ -1,18 +1,12 @@
 
-module.exports = miniPipe;
-
-function noop() {
-
-}
-
-function miniPipe() {
-  var _observer = noop;
+module.exports = function miniPipe() {
+  var _observer = function noop() {};
 
   function pipe(observer) {
     _observer = observer;
 
     return function removeObserver() {
-      _observer = noop;
+      _observer = function noop() {};
     };
   }
 
@@ -21,4 +15,4 @@ function miniPipe() {
   };
 
   return pipe;
-}
+};

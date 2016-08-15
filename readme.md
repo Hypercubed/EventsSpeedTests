@@ -2,12 +2,13 @@
 
 ## Testing
 
-- @reactivex/rxjs: 5.0.0-beta.9
+- @reactivex/rxjs: 5.0.0-beta.11
 - barracks: 6.0.6
-- d3-dispatch: 0.5.0
+- d3-dispatch: 1.0.1
 - drip: 1.4.0
+- evee: 0.8.4
 - event-signal: 0.1.6
-- eventemitter2: 1.0.4
+- eventemitter2: 2.1.0
 - eventemitter3: 1.2.0
 - fast-event-emitter: 0.0.2
 - mini-signals: 1.1.1
@@ -16,14 +17,16 @@
 - namespace-emitter: 1.0.0
 - observ: 0.2.0
 - observable: 2.1.4
-- pull-notify: 0.1.0
-- pull-pushable: 2.0.0
+- pull-notify: 0.1.1
+- pull-pushable: 2.0.1
 - pull-stream: 3.4.3
 - push-stream: 2.0.3
 - reactive-property: 1.0.0
 - signal-emitter: 0.0.1
 - signals: 1.0.0
 - signals-lite: 1.0.0
+- waddup: 1.0.3
+- xstream: 5.3.2
 
 ## Results
 

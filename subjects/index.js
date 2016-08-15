@@ -1,3 +1,5 @@
+'use strict';
+
 var EventEmitter1 = require('events').EventEmitter;
 var EventEmitter2 = require('eventemitter2');
 var EventEmitter3 = require('eventemitter3');
@@ -22,6 +24,7 @@ pull.notify = require('pull-notify');
 pull.pushable = require('pull-pushable');
 var xs = require('xstream').default;
 var waddup = require('waddup').default;
+var Evee = require('evee/dist/evee');
 
 var EventDispatcher = require('./eventdispatcher');
 var miniPipe = require('./pipe');
@@ -58,12 +61,9 @@ module.exports.constructors = {
   MicroSignal: MicroSignal,
   pull: pull,
   xs: xs,
-  waddup: waddup
+  waddup: waddup,
+  Evee: Evee
 };
-
-module.exports.createInstances = createInstances;
-module.exports.createInstancesOn = createInstancesOn;
-module.exports.addHandles = addHandles;
 
 switch (process.env.BENCH) {
   case 'fast':
@@ -79,7 +79,7 @@ switch (process.env.BENCH) {
     module.exports.maxTime = 0.5;
 }
 
-function createInstances() {
+var createInstances = function createInstances() {
   var ee1 = new EventEmitter1();
   var ee2 = new EventEmitter2();
   var ee3 = new EventEmitter3();
@@ -106,7 +106,7 @@ function createInstances() {
   var pullNotify = pull.notify();
   var pullPushable = pull.pushable();
   var xstream = xs.create();
-  // var waddup = waddup;
+  var evee = new Evee();
 
   return {
     ee1: ee1,
@@ -135,11 +135,12 @@ function createInstances() {
     pullNotify: pullNotify,
     pullPushable: pullPushable,
     xstream: xstream,
-    waddup: waddup
+    waddup: waddup,
+    evee: evee
   };
-}
+};
 
-function addHandles(subjects, handels) {
+var addHandles = function addHandles(subjects, handels) {
   handels.forEach(function (h, i) {
     subjects.ee1.on('foo', h);
     subjects.ee2.on('foo', h);
@@ -181,13 +182,20 @@ function addHandles(subjects, handels) {
     subjects.waddup.subscribe('foo', function (topic, data) {
       h(data);
     });
+    subjects.evee.on('foo', function (e) {
+      return h(e.data);
+    });
   });
 
   return subjects;
-}
+};
 
-function createInstancesOn() {
+var createInstancesOn = function createInstancesOn() {
   var subjects = createInstances();
   var args = Array.prototype.slice.apply(arguments);
   return addHandles(subjects, args);
-}
+};
+
+module.exports.createInstances = createInstances;
+module.exports.createInstancesOn = createInstancesOn;
+module.exports.addHandles = addHandles;

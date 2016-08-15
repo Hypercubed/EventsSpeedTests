@@ -13,13 +13,16 @@ const browsers = {
 
 module.exports = {
   scripts: {
-    build: `grunion --run "${browserify}" --silent ${nodeScripts}`,
+    build: {
+      default: `grunion --run "${browserify}" --silent ${nodeScripts}`,
+      evee: 'cd ./node_modules/evee && npm install'
+    },
     bench: {
       default: `grunion ${nodeScripts}`,
       fast: `BENCH=fast grunion ${nodeScripts}`,
       node: `grunion ${nodeScripts}`,
-      node4: `NODE_ENV=production grunion ${nodeScripts} --serial --raw | tee ./raw/node-v4.4.tap`,
-      node6: `NODE_ENV=production grunion ${nodeScripts} --serial --raw | tee ./raw/node-v6.2.tap`,
+      node4: `NODE_ENV=production grunion ${nodeScripts} --serial --raw | tee ./raw/node-v4.tap`,
+      node6: `NODE_ENV=production grunion ${nodeScripts} --serial --raw | tee ./raw/node-v6.tap`,
       browser: `grunion --run "testling -x \\"${browsers.chrome}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw`,
       chrome: `grunion --run "testling -x \\"${browsers.chrome}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-chrome-v51.tap`,
       firefox: `grunion --run "testling -x \\"${browsers.firefox}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-firefox-v47.tap`,

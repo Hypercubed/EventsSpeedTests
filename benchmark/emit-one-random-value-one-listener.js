@@ -147,6 +147,11 @@ test('emit one value - one listener', function (t) {
       subjects.xstream.shamefullySendNext(Math.random());
     });
 
+    s.bench('evee', function () {
+      called = 0;
+      subjects.evee.emit('foo', Math.random());
+    });
+
     function handle(a) {
       if (!subjects) { // ignore calls before bechmarks start
         return;

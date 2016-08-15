@@ -134,6 +134,13 @@ test('emit one array', function (t) {
       subjects.pullNotify(['bar', 'baz', 'boom']);
     });
 
+    s.bench('evee', function () {
+      called = called2 = 0;
+      subjects.evee.emit('foo', ['bar']);
+      subjects.evee.emit('foo', ['bar', 'baz']);
+      subjects.evee.emit('foo', ['bar', 'baz', 'boom']);
+    });
+
     function handle(a) {
       if (arguments.length === 1 && a === undefined) {
         return;

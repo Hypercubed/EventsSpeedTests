@@ -140,6 +140,11 @@ test('emit one value - two listeners', function (t) {
       subjects.waddup.publish('foo', 'bar');
     });
 
+    s.bench('evee', function () {
+      called = called2 = 0;
+      subjects.evee.emit('foo', 'bar');
+    });
+
     function handle(a) {
       if (!subjects) { // ignore calls before bechmarks start
         return;

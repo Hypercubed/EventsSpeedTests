@@ -1,9 +1,7 @@
 // minor patch https://github.com/ahdinosaur/push-stream/blob/master/stream.js
 // for testing
 
-module.exports = Stream;
-
-function Stream() {
+module.exports = function Stream() {
   var observers = [];
 
   function stream(observer) {
@@ -29,4 +27,4 @@ function Stream() {
       observers[len](value);
     }
   }
-}
+};

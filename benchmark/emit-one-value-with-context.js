@@ -54,6 +54,12 @@ test('emit one value - with context', function (t) {
     subjects.pushStream(handle2);
     pull(subjects.pullNotify.listen(), pull.drain(handle.bind(ctx)));
     pull(subjects.pullNotify.listen(), pull.drain(handle2));
+    subjects.evee.on('foo', function (e) {
+      handle.bind(ctx)(e.data);
+    });
+    subjects.evee.on('foo', function (e) {
+      handle2(e.data);
+    });
 
     var bHandel = handle.bind(ctx);
 
@@ -138,7 +144,12 @@ test('emit one value - with context', function (t) {
       subjects.pullNotify('bar');
     });
 
-    function handle() {
+    s.bench('evee', function () {
+      called = called2 = 0;
+      subjects.evee.emit('foo', 'bar');
+    });
+
+    function handle(a) {
       if (!subjects) { // ignore calls before bechmarks start
         return;
       }
@@ -147,6 +158,9 @@ test('emit one value - with context', function (t) {
       }
       if (this !== ctx) {
         throw new Error('invalid context');
+      }
+      if (a !== 'bar') {
+        throw new Error('invalid arguments ' + a);
       }
       called++;
     }

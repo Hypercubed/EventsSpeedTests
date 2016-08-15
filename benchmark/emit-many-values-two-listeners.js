@@ -29,38 +29,47 @@ test('emit many values - two listeners', function (t) {
       called = called2 = 0;
       subjects.ee1.emit('foo', 'bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, Math.random());
     });
+
     s.bench('EventEmitter2', function () {
       called = called2 = 0;
       subjects.ee2.emit('foo', 'bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, Math.random());
     });
+
     s.bench('EventEmitter3', function () {
       called = called2 = 0;
       subjects.ee3.emit('foo', 'bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, Math.random());
     });
+
     s.xbench('dripEmitter', function () {  // see https://github.com/qualiancy/drip/pull/4
       called = called2 = 0;
       subjects.dripEmitter.emit('foo', 'bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, Math.random());
     });
+
     s.bench('dripEmitterEnhanced', function () {
       called = called2 = 0;
       subjects.dripEmitterEnhanced.emit('foo', 'bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, Math.random());
     });
+
     s.bench('JS-Signals', function () {
       called = called2 = 0;
       subjects.signal.dispatch('bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, Math.random());
     });
+
     s.bench('MiniSignals', function () {
       called = called2 = 0;
       subjects.miniSignal.dispatch('bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, Math.random());
     });
+
     s.bench('signal-emitter', function () {
       called = called2 = 0;
       subjects.signalEmitter.emit('bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, Math.random());
     });
+
     s.bench('signal-lite', function () {
       called = called2 = 0;
       subjects.signalLite.broadcast('bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, Math.random());
     });
+
     s.bench('minivents', function () {
       called = called2 = 0;
       subjects.miniVent.emit('foo', 'bar', 'baz', 'boom', 1, 2, 3, 4, 5, 6, 7, 8, Math.random());
