@@ -25,13 +25,14 @@
 - signal-emitter: 0.0.1
 - signals: 1.0.0
 - signals-lite: 1.0.0
+- sister: 3.0.0
 - waddup: 1.0.3
 - xstream: 5.3.2
 
 ## Results
 
-- [Node v6.2](./results/node-v6.2.tap.md)
-- [Node v4.4](./results/node-v4.4.tap.md)
+- [Node v6.2](./results/node-v6.tap.md)
+- [Node v4.4](./results/node-v4.tap.md)
 - [Chrome v51](./results/browser-chrome-v51.tap.md)
 - [Firefox v47](./results/browser-firefox-v47.tap.md)
 - [Safari v9](./results/browser-safari-v9.tap.md)

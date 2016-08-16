@@ -1,24 +1,24 @@
 # Tests
 
-- ✔ Platform [pass: 1, fail: 0, duration: 2ms]
+- ✔ Platform [pass: 1, fail: 0, duration: 1ms]
 - ✔ add and remove [pass: 20, fail: 0, duration: 1ms]
-- ✔ emit one array [pass: 54, fail: 0, duration: 7ms]
+- ✔ emit one array [pass: 54, fail: 0, duration: 11ms]
 - ✔ emit many values - two listeners [pass: 30, fail: 0, duration: 2ms]
-- ✔ emit one object - one listener [pass: 44, fail: 0, duration: 2ms]
-- ✔ emit one object - two listeners [pass: 60, fail: 0, duration: 2ms]
-- ✔ emit one random value - one listener [pass: 54, fail: 0, duration: 3ms]
-- ✔ emit one random value - two listeners [pass: 75, fail: 0, duration: 3ms]
-- ✔ emit one value - bound function [pass: 54, fail: 0, duration: 1ms]
-- ✔ emit one value - many listeners [pass: 38, fail: 0, duration: 1ms]
+- ✔ emit one object - one listener [pass: 44, fail: 0, duration: 3ms]
+- ✔ emit one object - two listeners [pass: 60, fail: 0, duration: 1ms]
+- ✔ emit one random value - one listener [pass: 54, fail: 0, duration: 4ms]
+- ✔ emit one random value - two listeners [pass: 75, fail: 0, duration: 2ms]
+- ✔ emit one value - bound function [pass: 54, fail: 0, duration: 9ms]
+- ✔ emit one value - many listeners [pass: 38, fail: 0, duration: 2ms]
 - ✔ emit one value - one listener [pass: 56, fail: 0, duration: 1ms]
 - ✔ emit one value - two listeners [pass: 78, fail: 0, duration: 1ms]
-- ✔ emit one value - with context [pass: 54, fail: 0, duration: 0ms]
-- ✔ emit variable number of values [pass: 27, fail: 0, duration: 1ms]
-- ✔ init [pass: 24, fail: 0, duration: 9ms]
+- ✔ emit one value - with context [pass: 54, fail: 0, duration: 1ms]
+- ✔ emit variable number of values [pass: 27, fail: 0, duration: 12ms]
+- ✔ init [pass: 24, fail: 0, duration: 10ms]
 
 # Summary
 
-- duration: 36ms
+- duration: 61ms
 - planned: 669
 - assertions: 669
 - pass: 669
