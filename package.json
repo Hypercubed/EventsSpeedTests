@@ -68,7 +68,7 @@
     "barracks": "6.0.6",
     "d3-dispatch": "1.0.1",
     "drip": "1.4.0",
-    "evee": "^1.0.0",
+    "evee": "^1.1.0",
     "event-signal": "0.1.6",
     "eventemitter2": "2.1.0",
     "eventemitter3": "1.2.0",
