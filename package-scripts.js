@@ -14,7 +14,7 @@ const browsers = {
 module.exports = {
   scripts: {
     build: {
-      default: `grunion --run "${browserify}" --silent ${nodeScripts}`
+      default: `NODE_ENV=production grunion --run "${browserify}" --silent ${nodeScripts}`
     },
     bench: {
       default: `grunion ${nodeScripts}`,
