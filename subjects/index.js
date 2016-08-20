@@ -78,7 +78,7 @@ switch (process.env.BENCH) {
     break;
   default:
     module.exports.minSamples = 10;
-    module.exports.maxTime = 0.5;
+    module.exports.maxTime = 0.1;
 }
 
 var createInstances = function createInstances() {
