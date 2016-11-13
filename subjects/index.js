@@ -26,6 +26,7 @@ var xs = require('xstream').default;
 var waddup = require('waddup').default;
 var Evee = require('evee/dist/evee');
 var Sister = require('sister');
+var mobx = require('mobx');
 
 var EventDispatcher = require('./eventdispatcher');
 var miniPipe = require('./pipe');
@@ -35,6 +36,8 @@ var MicroSignal = require('./micro-signals');
 if (typeof window === 'undefined') {
   EventEmitter2 = EventEmitter2.EventEmitter2;
 }
+
+mobx.useStrict(true);
 
 module.exports.constructors = {
   EventEmitter1: EventEmitter1,
@@ -64,7 +67,8 @@ module.exports.constructors = {
   xs: xs,
   waddup: waddup,
   Evee: Evee,
-  Sister: Sister
+  Sister: Sister,
+  mobx: mobx
 };
 
 switch (process.env.BENCH) {
@@ -109,7 +113,8 @@ var createInstances = function createInstances() {
   var pullPushable = pull.pushable();
   var xstream = xs.create();
   var evee = new Evee();
-  var sister = Sister();
+  var sister = new Sister();
+  var mobxObservable = mobx.observable(0);
 
   return {
     ee1: ee1,
@@ -140,7 +145,8 @@ var createInstances = function createInstances() {
     xstream: xstream,
     waddup: waddup,
     evee: evee,
-    sister: sister
+    sister: sister,
+    mobxObservable: mobxObservable
   };
 };
 
@@ -190,6 +196,7 @@ var addHandles = function addHandles(subjects, handels) {
       return h(e.data);
     });
     subjects.sister.on('foo', h);
+    subjects.mobxObservable.observe(h);
   });
 
   return subjects;

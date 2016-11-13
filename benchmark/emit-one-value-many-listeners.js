@@ -112,5 +112,9 @@ test('emit one value - many listeners', function (t) {
       called = 0;
       subjects.evee.emit('foo', 'bar');
     });
+    s.bench('mobx', function () {
+      called = 0;
+      subjects.mobxObservable.setNewValue('bar');
+    });
   });
 });

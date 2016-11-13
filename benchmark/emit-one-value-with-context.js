@@ -55,6 +55,8 @@ test('emit one value - with context', function (t) {
     subjects.rProperty.on(handle2);
     subjects.pushStream(handle.bind(ctx));
     subjects.pushStream(handle2);
+    subjects.mobxObservable.observe(handle.bind(ctx));
+    subjects.mobxObservable.observe(handle2);
 
     pull(subjects.pullNotify.listen(), pull.drain(handle.bind(ctx)));
     pull(subjects.pullNotify.listen(), pull.drain(handle2));
@@ -156,6 +158,11 @@ test('emit one value - with context', function (t) {
     s.bench('sister', function () {
       called = called2 = 0;
       subjects.sister.trigger('foo', 'bar');
+    });
+
+    s.bench('mobx', function () {
+      called = called2 = 0;
+      subjects.mobxObservable.setNewValue('bar');
     });
 
     function handle(a) {

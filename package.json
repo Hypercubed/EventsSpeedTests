@@ -76,6 +76,7 @@
     "fast-event-emitter": "0.0.2",
     "mini-signals": "1.1.1",
     "minivents": "^2.0.2",
+    "mobx": "^2.6.0",
     "namespace-emitter": "1.0.0",
     "observ": "0.2.0",
     "observable": "2.1.4",

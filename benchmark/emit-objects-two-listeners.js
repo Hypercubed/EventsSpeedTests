@@ -162,6 +162,13 @@ test('emit one object - two listeners', function (t) {
       subjects.sister.trigger('foo', {bar: 'bar', baz: 'baz', boom: Math.random()});
     });
 
+    s.bench('mobx', function () {
+      called = called2 = 0;
+      subjects.mobxObservable.setNewValue({bar: 'bar'});
+      subjects.mobxObservable.setNewValue({bar: 'bar', baz: 'baz'});
+      subjects.mobxObservable.setNewValue({bar: 'bar', baz: 'baz', boom: Math.random()});
+    });
+
     function handle(a) {
       if (!subjects) { // ignore calls before bechmarks start
         return;

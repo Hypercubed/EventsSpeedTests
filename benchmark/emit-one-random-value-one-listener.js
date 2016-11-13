@@ -152,6 +152,11 @@ test('emit one random value - one listener', function (t) {
       subjects.evee.emit('foo', Math.random());
     });
 
+    s.bench('mobx', function () {
+      called = 0;
+      subjects.mobxObservable.setNewValue(Math.random());
+    });
+
     function handle(a) {
       if (!subjects) { // ignore calls before bechmarks start
         return;
