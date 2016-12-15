@@ -22,6 +22,7 @@ module.exports = {
       node: `grunion ${nodeScripts}`,
       node4: `cross-env NODE_ENV=production grunion ${nodeScripts} --serial --raw | tee ./raw/node-v4.tap`,
       node6: `cross-env NODE_ENV=production grunion ${nodeScripts} --serial --raw | tee ./raw/node-v6.tap`,
+      node7: `cross-env NODE_ENV=production grunion ${nodeScripts} --serial --raw | tee ./raw/node-v7.tap`,
       browser: `grunion --run "testling -x \\"${browsers.chrome}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw`,
       chrome: `grunion --run "testling -x \\"${browsers.chrome}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-chrome-v51.tap`,
       firefox: `grunion --run "testling -x \\"${browsers.firefox}\\" < <%= file.path %>" ${browserifiedScripts} --serial --raw | tee ./raw/browser-firefox-v47.tap`,

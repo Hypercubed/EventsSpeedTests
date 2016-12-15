@@ -2,7 +2,7 @@
 TAP version 13
 # Platform
 ok 1 should be truthy
-Node.js 6.3.1 on Darwin 64-bit
+Node.js 6.9.1 on Darwin 64-bit
 NODE_ENV = production
 BENCH = undefined
 
@@ -37,16 +37,16 @@ ok 18 MiniSignals never called handle
 ok 19 EventDispatcher runs without error
 ok 20 EventDispatcher never called handle
 
-    dripEmitter x 29,717,517 ops/sec ±3.22% (17 runs sampled)
-    MiniSignals x 14,922,019 ops/sec ±16.87% (15 runs sampled)
-    EventDispatcher x 5,210,900 ops/sec ±3.24% (16 runs sampled)
-    ReactiveProperty x 5,283,830 ops/sec ±7.68% (16 runs sampled)
-    pushStream x 3,759,969 ops/sec ±2.53% (17 runs sampled)
-    EventEmitter x 3,905,038 ops/sec ±9.60% (15 runs sampled)
-    EventEmitter3 x 1,571,119 ops/sec ±4.32% (17 runs sampled)
-    EventEmitter2 x 1,161,836 ops/sec ±4.34% (16 runs sampled)
-    JS-Signals x 855,787 ops/sec ±2.53% (18 runs sampled)
-    dripEmitterEnhanced x 596,425 ops/sec ±6.38% (17 runs sampled)
+    dripEmitter x 19,077,251 ops/sec ±12.71% (11 runs sampled)
+    MiniSignals x 11,655,856 ops/sec ±4.87% (11 runs sampled)
+    EventEmitter x 3,703,959 ops/sec ±12.94% (11 runs sampled)
+    ReactiveProperty x 2,491,303 ops/sec ±3.45% (11 runs sampled)
+    EventEmitter3 x 2,065,287 ops/sec ±4.54% (11 runs sampled)
+    EventEmitter2 x 1,391,823 ops/sec ±7.26% (11 runs sampled)
+    EventDispatcher x 607,716 ops/sec ±2.87% (11 runs sampled)
+    pushStream x 464,748 ops/sec ±8.25% (11 runs sampled)
+    dripEmitterEnhanced x 284,514 ops/sec ±4.34% (11 runs sampled)
+    JS-Signals x 260,468 ops/sec ±3.67% (11 runs sampled)
 
 *Fastest is __dripEmitter__*
 
@@ -116,26 +116,26 @@ ok 52 sister runs without error
 ok 53 sister called handle three times
 ok 54 sister called handle2 three times
 
-    Theoretical max x 13,453,678 ops/sec ±2.50% (17 runs sampled) *burn in*
-    sister x 7,669,582 ops/sec ±2.85% (18 runs sampled)
-    MicroSignals x 6,904,666 ops/sec ±1.76% (16 runs sampled)
-    push-stream x 6,206,390 ops/sec ±3.30% (17 runs sampled)
-    MiniSignals x 6,333,780 ops/sec ±6.11% (17 runs sampled)
-    dripEmitter x 5,473,044 ops/sec ±4.17% (16 runs sampled)
-    EventEmitter3 x 5,171,984 ops/sec ±3.57% (17 runs sampled)
-    signal-lite x 5,330,338 ops/sec ±10.22% (13 runs sampled)
-    ReactiveProperty x 4,193,850 ops/sec ±9.13% (17 runs sampled)
-    EventEmitter x 3,648,598 ops/sec ±2.55% (18 runs sampled)
-    evee x 2,259,000 ops/sec ±8.63% (16 runs sampled)
-    event-signal x 1,779,575 ops/sec ±5.83% (16 runs sampled)
-    EventEmitter2 x 1,617,645 ops/sec ±8.42% (16 runs sampled)
-    RXJS x 1,374,428 ops/sec ±4.92% (17 runs sampled)
-    pull-notify x 1,162,793 ops/sec ±4.70% (16 runs sampled)
-    dripEmitterEnhanced x 660,822 ops/sec ±3.54% (18 runs sampled)
-    signal-emitter x 227,753 ops/sec ±3.94% (16 runs sampled)
-    JS-Signals x 174,405 ops/sec ±4.42% (17 runs sampled)
+    Theoretical max x 12,975,156 ops/sec ±5.24% (10 runs sampled) *burn in*
+    MicroSignals x 7,317,373 ops/sec ±4.47% (11 runs sampled)
+    signal-lite x 6,606,112 ops/sec ±4.56% (11 runs sampled)
+    push-stream x 6,195,000 ops/sec ±3.89% (11 runs sampled)
+    sister x 6,982,959 ops/sec ±18.11% (10 runs sampled)
+    MiniSignals x 6,680,758 ops/sec ±14.07% (11 runs sampled)
+    dripEmitter x 5,585,955 ops/sec ±4.41% (11 runs sampled)
+    EventEmitter3 x 5,290,951 ops/sec ±3.50% (11 runs sampled)
+    ReactiveProperty x 5,305,887 ops/sec ±4.25% (11 runs sampled)
+    evee x 4,582,047 ops/sec ±4.87% (11 runs sampled)
+    EventEmitter x 3,179,587 ops/sec ±10.88% (11 runs sampled)
+    pull-notify x 1,195,533 ops/sec ±4.58% (11 runs sampled)
+    dripEmitterEnhanced x 758,567 ops/sec ±2.90% (11 runs sampled)
+    signal-emitter x 480,623 ops/sec ±5.84% (11 runs sampled)
+    RXJS x 216,395 ops/sec ±2.28% (11 runs sampled)
+    EventEmitter2 x 218,250 ops/sec ±3.37% (11 runs sampled)
+    event-signal x 212,960 ops/sec ±8.05% (11 runs sampled)
+    JS-Signals x 95,317 ops/sec ±5.58% (11 runs sampled)
 
-*Fastest is __sister__*
+*Fastest is __MicroSignals, sister, MiniSignals__*
 
 
 1..54
@@ -179,18 +179,18 @@ ok 28 minivents runs without error
 ok 29 minivents called handle once
 ok 30 minivents called handle2 once
 
-    Theoretical max x 30,017,112 ops/sec ±3.68% (16 runs sampled) *burn in*
-    MiniSignals x 15,455,570 ops/sec ±10.64% (16 runs sampled)
-    signal-lite x 13,475,794 ops/sec ±6.42% (16 runs sampled)
-    EventEmitter3 x 731,602 ops/sec ±3.52% (16 runs sampled)
-    EventEmitter x 725,259 ops/sec ±3.11% (17 runs sampled)
-    EventEmitter2 x 709,373 ops/sec ±3.96% (17 runs sampled)
-    dripEmitterEnhanced x 542,823 ops/sec ±3.71% (17 runs sampled)
-    signal-emitter x 378,314 ops/sec ±3.23% (16 runs sampled)
-    JS-Signals x 220,574 ops/sec ±3.71% (18 runs sampled)
-    minivents x 105,534 ops/sec ±4.43% (17 runs sampled)
+    Theoretical max x 29,222,826 ops/sec ±6.91% (11 runs sampled) *burn in*
+    MiniSignals x 16,289,652 ops/sec ±3.62% (11 runs sampled)
+    signal-lite x 15,624,058 ops/sec ±4.79% (11 runs sampled)
+    EventEmitter x 866,080 ops/sec ±3.42% (11 runs sampled)
+    EventEmitter3 x 884,113 ops/sec ±9.16% (11 runs sampled)
+    dripEmitterEnhanced x 630,025 ops/sec ±10.63% (11 runs sampled)
+    signal-emitter x 515,733 ops/sec ±16.36% (11 runs sampled)
+    EventEmitter2 x 350,331 ops/sec ±6.94% (11 runs sampled)
+    JS-Signals x 107,501 ops/sec ±4.76% (11 runs sampled)
+    minivents x 64,981 ops/sec ±4.75% (11 runs sampled)
 
-*Fastest is __MiniSignals__*
+*Fastest is __MiniSignals, signal-lite__*
 
 
 1..30
@@ -247,36 +247,39 @@ ok 41 evee runs without error
 ok 42 evee called handle three times
 ok 43 sister runs without error
 ok 44 sister called handle three times
+ok 45 mobx runs without error
+ok 46 mobx called handle three times
 
-    Theoretical max x 9,901,489 ops/sec ±5.38% (16 runs sampled) *burn in*
-    MicroSignals x 10,131,974 ops/sec ±9.68% (17 runs sampled)
-    MiniSignals x 9,230,348 ops/sec ±9.03% (18 runs sampled)
-    mini-pipe x 8,844,699 ops/sec ±9.82% (16 runs sampled)
-    signal-lite x 7,817,600 ops/sec ±9.20% (17 runs sampled)
-    push-stream x 7,024,746 ops/sec ±10.33% (16 runs sampled)
-    xstream x 6,207,688 ops/sec ±12.91% (16 runs sampled)
-    sister x 5,885,105 ops/sec ±7.33% (16 runs sampled)
-    ReactiveProperty x 5,950,536 ops/sec ±13.91% (16 runs sampled)
-    dripEmitter x 5,620,818 ops/sec ±14.37% (14 runs sampled)
-    EventEmitter2 x 5,129,039 ops/sec ±18.42% (17 runs sampled)
-    EventEmitter3 x 4,498,938 ops/sec ±15.75% (16 runs sampled)
-    EventEmitter x 3,993,183 ops/sec ±8.24% (16 runs sampled)
-    EventDispatcher x 2,916,260 ops/sec ±8.79% (17 runs sampled)
-    evee x 2,763,292 ops/sec ±9.63% (17 runs sampled)
-    pull-pushable x 2,228,797 ops/sec ±4.75% (17 runs sampled)
-    pull-notify x 2,076,015 ops/sec ±13.21% (15 runs sampled)
-    event-signal x 1,726,022 ops/sec ±8.34% (16 runs sampled)
-    RXJS x 1,590,904 ops/sec ±7.55% (16 runs sampled)
-    dripEmitterEnhanced x 648,150 ops/sec ±4.85% (17 runs sampled)
-    JS-Signals x 251,142 ops/sec ±5.82% (17 runs sampled)
-    signal-emitter x 169,705 ops/sec ±16.44% (13 runs sampled)
+    Theoretical max x 11,548,488 ops/sec ±3.12% (11 runs sampled) *burn in*
+    MicroSignals x 9,963,915 ops/sec ±6.34% (11 runs sampled)
+    MiniSignals x 8,726,570 ops/sec ±4.60% (11 runs sampled)
+    signal-lite x 7,730,473 ops/sec ±5.64% (11 runs sampled)
+    push-stream x 7,215,356 ops/sec ±2.75% (11 runs sampled)
+    mini-pipe x 7,825,123 ops/sec ±15.48% (11 runs sampled)
+    xstream x 6,975,849 ops/sec ±3.82% (11 runs sampled)
+    dripEmitter x 6,668,334 ops/sec ±4.34% (11 runs sampled)
+    sister x 6,302,777 ops/sec ±3.21% (10 runs sampled)
+    EventEmitter2 x 6,461,779 ops/sec ±7.19% (11 runs sampled)
+    EventEmitter3 x 5,949,377 ops/sec ±14.13% (11 runs sampled)
+    ReactiveProperty x 5,693,308 ops/sec ±19.91% (11 runs sampled)
+    EventEmitter x 4,876,331 ops/sec ±3.10% (11 runs sampled)
+    evee x 4,261,827 ops/sec ±4.85% (11 runs sampled)
+    EventDispatcher x 3,010,383 ops/sec ±2.68% (11 runs sampled)
+    pull-pushable x 2,122,812 ops/sec ±5.48% (11 runs sampled)
+    pull-notify x 1,916,533 ops/sec ±15.40% (10 runs sampled)
+    dripEmitterEnhanced x 725,110 ops/sec ±15.26% (11 runs sampled)
+    signal-emitter x 431,270 ops/sec ±15.89% (10 runs sampled)
+    RXJS x 283,718 ops/sec ±7.27% (11 runs sampled)
+    event-signal x 284,892 ops/sec ±15.52% (11 runs sampled)
+    mobx x 260,325 ops/sec ±6.35% (11 runs sampled)
+    JS-Signals x 115,624 ops/sec ±7.15% (11 runs sampled)
 
 *Fastest is __MicroSignals__*
 
 
-1..44
-# tests 44
-# pass  44
+1..46
+# tests 46
+# pass  46
 
 # ok
 
@@ -344,34 +347,38 @@ ok 57 evee called handle2 three times
 ok 58 sister runs without error
 ok 59 sister called handle three times
 ok 60 sister called handle2 three times
+ok 61 mobx runs without error
+ok 62 mobx called handle three times
+ok 63 mobx called handle2 three times
 
-    Theoretical max x 7,606,284 ops/sec ±3.84% (16 runs sampled) *burn in*
-    MiniSignals x 5,401,228 ops/sec ±2.87% (18 runs sampled)
-    MicroSignals x 5,173,774 ops/sec ±4.04% (17 runs sampled)
-    signal-lite x 5,116,036 ops/sec ±2.95% (17 runs sampled)
-    ReactiveProperty x 4,702,933 ops/sec ±2.97% (17 runs sampled)
-    EventEmitter3 x 4,089,682 ops/sec ±2.68% (17 runs sampled)
-    push-stream x 4,391,581 ops/sec ±11.11% (16 runs sampled)
-    sister x 4,178,264 ops/sec ±9.37% (16 runs sampled)
-    dripEmitter x 3,970,579 ops/sec ±4.94% (16 runs sampled)
-    xstream x 3,290,491 ops/sec ±4.25% (17 runs sampled)
-    EventEmitter x 2,738,087 ops/sec ±11.98% (17 runs sampled)
-    EventDispatcher x 2,450,764 ops/sec ±3.79% (17 runs sampled)
-    evee x 1,977,649 ops/sec ±2.47% (18 runs sampled)
-    event-signal x 1,785,680 ops/sec ±4.10% (16 runs sampled)
-    RXJS x 1,350,020 ops/sec ±6.23% (16 runs sampled)
-    EventEmitter2 x 1,422,142 ops/sec ±12.95% (17 runs sampled)
-    pull-notify x 988,687 ops/sec ±3.92% (17 runs sampled)
-    dripEmitterEnhanced x 650,186 ops/sec ±4.13% (16 runs sampled)
-    signal-emitter x 258,363 ops/sec ±2.76% (18 runs sampled)
-    JS-Signals x 181,011 ops/sec ±4.87% (17 runs sampled)
+    Theoretical max x 7,343,420 ops/sec ±15.69% (11 runs sampled) *burn in*
+    MicroSignals x 5,511,846 ops/sec ±1.78% (11 runs sampled)
+    MiniSignals x 5,020,271 ops/sec ±13.54% (11 runs sampled)
+    push-stream x 4,581,075 ops/sec ±4.07% (11 runs sampled)
+    dripEmitter x 4,415,127 ops/sec ±3.08% (11 runs sampled)
+    ReactiveProperty x 4,426,309 ops/sec ±3.61% (11 runs sampled)
+    EventEmitter3 x 4,176,658 ops/sec ±3.95% (11 runs sampled)
+    sister x 4,175,045 ops/sec ±6.74% (11 runs sampled)
+    signal-lite x 4,508,399 ops/sec ±15.99% (11 runs sampled)
+    xstream x 3,531,446 ops/sec ±4.22% (11 runs sampled)
+    EventEmitter x 3,002,968 ops/sec ±7.06% (11 runs sampled)
+    evee x 2,968,872 ops/sec ±6.73% (11 runs sampled)
+    EventDispatcher x 2,288,979 ops/sec ±5.84% (11 runs sampled)
+    pull-notify x 952,724 ops/sec ±9.84% (11 runs sampled)
+    dripEmitterEnhanced x 679,426 ops/sec ±16.56% (10 runs sampled)
+    signal-emitter x 436,372 ops/sec ±2.74% (11 runs sampled)
+    RXJS x 210,346 ops/sec ±3.58% (11 runs sampled)
+    mobx x 196,233 ops/sec ±3.85% (11 runs sampled)
+    event-signal x 196,090 ops/sec ±7.88% (11 runs sampled)
+    EventEmitter2 x 187,701 ops/sec ±15.45% (11 runs sampled)
+    JS-Signals x 87,991 ops/sec ±7.10% (11 runs sampled)
 
-*Fastest is __MiniSignals, MicroSignals__*
+*Fastest is __MicroSignals, MiniSignals__*
 
 
-1..60
-# tests 60
-# pass  60
+1..63
+# tests 63
+# pass  63
 
 # ok
 
@@ -433,41 +440,44 @@ ok 51 xstream runs without error
 ok 52 xstream called handle once
 ok 53 evee runs without error
 ok 54 evee called handle once
+ok 55 mobx runs without error
+ok 56 mobx called handle once
 
-    Theoretical max x 28,677,172 ops/sec ±9.57% (15 runs sampled) *burn in*
-    xstream x 27,174,139 ops/sec ±4.81% (17 runs sampled)
-    MiniSignals x 23,406,581 ops/sec ±2.92% (16 runs sampled)
-    signal-lite x 21,600,282 ops/sec ±5.30% (17 runs sampled)
-    MicroSignals x 21,707,313 ops/sec ±10.56% (16 runs sampled)
-    mini-pipe x 20,735,544 ops/sec ±10.64% (15 runs sampled)
-    push-stream-patch x 18,707,678 ops/sec ±5.79% (16 runs sampled)
-    dripEmitter x 18,479,424 ops/sec ±5.55% (16 runs sampled)
-    EventEmitter3 x 17,910,291 ops/sec ±4.99% (17 runs sampled)
-    push-stream x 16,793,900 ops/sec ±3.69% (17 runs sampled)
-    EventEmitter2 x 17,265,494 ops/sec ±20.05% (17 runs sampled)
-    ReactiveProperty x 15,235,476 ops/sec ±7.36% (17 runs sampled)
-    EventEmitter x 12,917,851 ops/sec ±2.55% (17 runs sampled)
-    evee x 9,914,152 ops/sec ±3.63% (16 runs sampled)
-    observ x 8,975,983 ops/sec ±9.88% (16 runs sampled)
-    pull-pushable x 6,666,957 ops/sec ±9.98% (15 runs sampled)
-    event-signal x 6,113,887 ops/sec ±4.87% (17 runs sampled)
-    pull-notify x 6,223,436 ops/sec ±8.70% (17 runs sampled)
-    RXJS x 5,443,520 ops/sec ±2.87% (16 runs sampled)
-    barracks x 4,443,751 ops/sec ±4.57% (17 runs sampled)
-    d3-dispatch x 3,001,996 ops/sec ±7.94% (17 runs sampled)
-    dripEmitterEnhanced x 2,029,776 ops/sec ±10.22% (17 runs sampled)
-    minivents x 830,172 ops/sec ±2.95% (17 runs sampled)
-    JS-Signals x 740,624 ops/sec ±2.79% (16 runs sampled)
-    signal-emitter x 654,870 ops/sec ±6.47% (16 runs sampled)
-    namespace-emitter x 632,147 ops/sec ±10.76% (16 runs sampled)
-    observable x 565,062 ops/sec ±4.70% (16 runs sampled)
+    Theoretical max x 28,401,726 ops/sec ±3.96% (11 runs sampled) *burn in*
+    MicroSignals x 23,947,651 ops/sec ±3.12% (11 runs sampled)
+    xstream x 24,383,275 ops/sec ±14.26% (11 runs sampled)
+    MiniSignals x 22,051,857 ops/sec ±6.97% (11 runs sampled)
+    mini-pipe x 22,463,155 ops/sec ±15.23% (11 runs sampled)
+    push-stream x 18,684,177 ops/sec ±2.22% (11 runs sampled)
+    EventEmitter3 x 18,565,018 ops/sec ±3.41% (11 runs sampled)
+    push-stream-patch x 17,950,745 ops/sec ±17.43% (10 runs sampled)
+    evee x 15,653,900 ops/sec ±3.11% (11 runs sampled)
+    EventEmitter2 x 16,952,562 ops/sec ±19.78% (11 runs sampled)
+    dripEmitter x 16,016,061 ops/sec ±18.66% (10 runs sampled)
+    ReactiveProperty x 12,475,575 ops/sec ±14.21% (11 runs sampled)
+    EventEmitter x 11,927,373 ops/sec ±9.82% (11 runs sampled)
+    signal-lite x 13,874,300 ops/sec ±34.16% (11 runs sampled)
+    observ x 8,390,544 ops/sec ±4.82% (11 runs sampled)
+    pull-notify x 6,911,599 ops/sec ±4.85% (11 runs sampled)
+    pull-pushable x 6,263,220 ops/sec ±9.73% (11 runs sampled)
+    barracks x 4,402,900 ops/sec ±19.93% (11 runs sampled)
+    d3-dispatch x 3,110,884 ops/sec ±20.26% (10 runs sampled)
+    dripEmitterEnhanced x 1,715,426 ops/sec ±9.26% (11 runs sampled)
+    signal-emitter x 1,297,016 ops/sec ±4.93% (11 runs sampled)
+    event-signal x 799,309 ops/sec ±3.90% (11 runs sampled)
+    RXJS x 739,267 ops/sec ±2.39% (11 runs sampled)
+    mobx x 596,884 ops/sec ±5.59% (11 runs sampled)
+    namespace-emitter x 497,394 ops/sec ±6.31% (11 runs sampled)
+    observable x 526,385 ops/sec ±16.58% (11 runs sampled)
+    minivents x 360,489 ops/sec ±3.81% (10 runs sampled)
+    JS-Signals x 331,243 ops/sec ±3.61% (11 runs sampled)
 
-*Fastest is __xstream__*
+*Fastest is __MicroSignals, xstream, mini-pipe__*
 
 
-1..54
-# tests 54
-# pass  54
+1..56
+# tests 56
+# pass  56
 
 # ok
 
@@ -551,31 +561,31 @@ ok 73 evee runs without error
 ok 74 evee called handle once
 ok 75 evee called handle2 once
 
-    Theoretical max x 18,264,125 ops/sec ±2.30% (18 runs sampled) *burn in*
-    MicroSignals x 16,247,002 ops/sec ±10.35% (18 runs sampled)
-    signal-lite x 14,958,037 ops/sec ±4.15% (17 runs sampled)
-    MiniSignals x 14,260,176 ops/sec ±6.63% (16 runs sampled)
-    push-stream-patch x 13,789,617 ops/sec ±4.60% (16 runs sampled)
-    xstream x 12,950,790 ops/sec ±3.32% (17 runs sampled)
-    push-stream x 13,602,847 ops/sec ±8.77% (18 runs sampled)
-    EventEmitter3 x 12,185,186 ops/sec ±3.39% (17 runs sampled)
-    dripEmitter x 12,741,310 ops/sec ±8.71% (17 runs sampled)
-    ReactiveProperty x 11,530,676 ops/sec ±5.28% (17 runs sampled)
-    EventEmitter x 9,015,903 ops/sec ±3.68% (16 runs sampled)
-    evee x 6,226,180 ops/sec ±7.84% (18 runs sampled)
-    observ x 5,442,058 ops/sec ±2.99% (17 runs sampled)
-    event-signal x 4,981,464 ops/sec ±10.11% (15 runs sampled)
-    EventEmitter2 x 4,422,225 ops/sec ±9.93% (16 runs sampled)
-    RXJS x 3,489,860 ops/sec ±1.92% (17 runs sampled)
-    pull-notify x 3,043,073 ops/sec ±5.06% (17 runs sampled)
-    waddup x 2,563,290 ops/sec ±3.77% (17 runs sampled)
-    dripEmitterEnhanced x 1,929,909 ops/sec ±4.87% (17 runs sampled)
-    d3-dispatch x 1,700,112 ops/sec ±4.04% (17 runs sampled)
-    signal-emitter x 741,017 ops/sec ±3.48% (16 runs sampled)
-    JS-Signals x 563,619 ops/sec ±6.26% (17 runs sampled)
-    namespace-emitter x 509,439 ops/sec ±5.30% (16 runs sampled)
-    observable x 471,498 ops/sec ±5.65% (17 runs sampled)
-    minivents x 484,296 ops/sec ±10.35% (17 runs sampled)
+    Theoretical max x 17,301,993 ops/sec ±6.48% (11 runs sampled) *burn in*
+    MicroSignals x 16,360,947 ops/sec ±3.49% (11 runs sampled)
+    signal-lite x 14,293,841 ops/sec ±7.29% (11 runs sampled)
+    MiniSignals x 14,130,022 ops/sec ±8.80% (11 runs sampled)
+    dripEmitter x 12,809,184 ops/sec ±4.87% (11 runs sampled)
+    push-stream x 12,248,128 ops/sec ±2.58% (11 runs sampled)
+    EventEmitter3 x 12,022,089 ops/sec ±3.82% (11 runs sampled)
+    push-stream-patch x 12,037,169 ops/sec ±4.83% (11 runs sampled)
+    ReactiveProperty x 11,021,795 ops/sec ±3.71% (11 runs sampled)
+    xstream x 11,806,803 ops/sec ±16.34% (11 runs sampled)
+    evee x 10,421,757 ops/sec ±3.82% (11 runs sampled)
+    EventEmitter x 8,686,934 ops/sec ±3.90% (10 runs sampled)
+    observ x 5,465,586 ops/sec ±5.34% (11 runs sampled)
+    pull-notify x 2,993,483 ops/sec ±6.99% (11 runs sampled)
+    waddup x 2,557,245 ops/sec ±8.83% (11 runs sampled)
+    dripEmitterEnhanced x 1,875,258 ops/sec ±3.23% (10 runs sampled)
+    d3-dispatch x 1,871,265 ops/sec ±5.31% (11 runs sampled)
+    signal-emitter x 1,390,736 ops/sec ±4.16% (11 runs sampled)
+    event-signal x 612,205 ops/sec ±4.48% (11 runs sampled)
+    observable x 620,000 ops/sec ±5.95% (11 runs sampled)
+    EventEmitter2 x 593,387 ops/sec ±5.00% (11 runs sampled)
+    RXJS x 528,680 ops/sec ±3.52% (11 runs sampled)
+    namespace-emitter x 357,253 ops/sec ±8.49% (11 runs sampled)
+    JS-Signals x 247,790 ops/sec ±2.63% (11 runs sampled)
+    minivents x 232,009 ops/sec ±3.31% (11 runs sampled)
 
 *Fastest is __MicroSignals__*
 
@@ -645,24 +655,24 @@ ok 52 evee runs without error
 ok 53 evee called handle one time
 ok 54 evee called handle2 one time
 
-    Theoretical max x 28,679,762 ops/sec ±9.44% (16 runs sampled) *burn in*
-    MicroSignals x 17,704,332 ops/sec ±4.68% (17 runs sampled)
-    push-stream x 15,003,847 ops/sec ±3.82% (16 runs sampled)
-    xstream x 13,534,586 ops/sec ±9.27% (17 runs sampled)
-    dripEmitter x 12,354,666 ops/sec ±2.36% (16 runs sampled)
-    EventEmitter3 x 11,924,982 ops/sec ±6.71% (17 runs sampled)
-    ReactiveProperty x 12,002,373 ops/sec ±9.96% (17 runs sampled)
-    EventEmitter x 9,417,147 ops/sec ±3.70% (18 runs sampled)
-    MiniSignals x 7,053,554 ops/sec ±4.37% (17 runs sampled)
-    signal-lite x 5,764,153 ops/sec ±9.36% (17 runs sampled)
-    event-signal x 5,374,941 ops/sec ±5.26% (16 runs sampled)
-    EventEmitter2 x 4,857,284 ops/sec ±3.14% (16 runs sampled)
-    pull-notify x 3,568,758 ops/sec ±4.81% (18 runs sampled)
-    RXJS x 3,496,806 ops/sec ±14.80% (17 runs sampled)
-    evee x 1,719,223 ops/sec ±5.47% (17 runs sampled)
-    dripEmitterEnhanced x 1,669,636 ops/sec ±4.32% (17 runs sampled)
-    signal-emitter x 727,424 ops/sec ±4.00% (17 runs sampled)
-    JS-Signals x 571,029 ops/sec ±5.84% (17 runs sampled)
+    Theoretical max x 31,138,710 ops/sec ±4.02% (11 runs sampled) *burn in*
+    MicroSignals x 17,050,184 ops/sec ±4.06% (11 runs sampled)
+    ReactiveProperty x 14,692,857 ops/sec ±4.55% (11 runs sampled)
+    xstream x 14,609,269 ops/sec ±5.13% (10 runs sampled)
+    push-stream x 13,421,468 ops/sec ±4.48% (11 runs sampled)
+    EventEmitter3 x 11,734,495 ops/sec ±4.99% (11 runs sampled)
+    EventEmitter x 9,028,869 ops/sec ±5.95% (11 runs sampled)
+    dripEmitter x 9,451,992 ops/sec ±12.26% (11 runs sampled)
+    MiniSignals x 7,871,683 ops/sec ±8.19% (11 runs sampled)
+    signal-lite x 6,105,338 ops/sec ±2.93% (11 runs sampled)
+    pull-notify x 3,495,670 ops/sec ±4.17% (11 runs sampled)
+    evee x 2,237,316 ops/sec ±2.62% (11 runs sampled)
+    dripEmitterEnhanced x 1,735,800 ops/sec ±18.76% (11 runs sampled)
+    signal-emitter x 1,239,706 ops/sec ±4.00% (11 runs sampled)
+    RXJS x 580,195 ops/sec ±3.42% (11 runs sampled)
+    EventEmitter2 x 573,640 ops/sec ±5.00% (11 runs sampled)
+    event-signal x 534,277 ops/sec ±5.99% (11 runs sampled)
+    JS-Signals x 265,851 ops/sec ±7.66% (11 runs sampled)
 
 *Fastest is __MicroSignals__*
 
@@ -715,33 +725,36 @@ ok 35 xstream runs without error
 ok 36 xstream called handles N times
 ok 37 evee runs without error
 ok 38 evee called handles N times
+ok 39 mobx runs without error
+ok 40 mobx called handles N times
 
-    Theoretical max x 5,140,091 ops/sec ±2.22% (17 runs sampled) *burn in*
-    MicroSignal x 4,890,461 ops/sec ±3.86% (18 runs sampled)
-    MiniSignals x 4,852,217 ops/sec ±3.73% (18 runs sampled)
-    push-stream x 4,449,766 ops/sec ±3.80% (17 runs sampled)
-    signal-lite x 4,507,407 ops/sec ±5.35% (17 runs sampled)
-    dripEmitter x 4,417,330 ops/sec ±5.34% (17 runs sampled)
-    xstream x 4,131,268 ops/sec ±3.00% (17 runs sampled)
-    EventEmitter3 x 3,723,939 ops/sec ±7.15% (17 runs sampled)
-    EventEmitter x 3,626,631 ops/sec ±5.17% (15 runs sampled)
-    ReactiveProperty x 3,683,753 ops/sec ±9.33% (17 runs sampled)
-    event-signal x 2,777,318 ops/sec ±10.19% (15 runs sampled)
-    EventEmitter2 x 2,473,745 ops/sec ±4.34% (17 runs sampled)
-    evee x 1,687,973 ops/sec ±3.38% (17 runs sampled)
-    RXJS x 1,610,331 ops/sec ±3.07% (18 runs sampled)
-    dripEmitterEnhanced x 1,415,436 ops/sec ±4.25% (16 runs sampled)
-    pull-notify x 781,443 ops/sec ±5.11% (16 runs sampled)
-    signal-emitter x 635,202 ops/sec ±4.66% (16 runs sampled)
-    JS-Signals x 284,703 ops/sec ±3.08% (17 runs sampled)
-    minivents x 104,845 ops/sec ±2.83% (17 runs sampled)
+    Theoretical max x 5,364,323 ops/sec ±3.74% (11 runs sampled) *burn in*
+    MicroSignal x 4,829,208 ops/sec ±5.52% (11 runs sampled)
+    signal-lite x 4,683,450 ops/sec ±4.69% (11 runs sampled)
+    push-stream x 4,629,201 ops/sec ±5.10% (11 runs sampled)
+    dripEmitter x 4,484,452 ops/sec ±3.82% (11 runs sampled)
+    EventEmitter3 x 4,251,259 ops/sec ±4.69% (11 runs sampled)
+    MiniSignals x 4,592,623 ops/sec ±13.86% (10 runs sampled)
+    xstream x 4,176,647 ops/sec ±3.86% (11 runs sampled)
+    ReactiveProperty x 4,066,445 ops/sec ±2.57% (11 runs sampled)
+    EventEmitter x 3,792,287 ops/sec ±4.37% (11 runs sampled)
+    evee x 3,011,179 ops/sec ±4.11% (11 runs sampled)
+    dripEmitterEnhanced x 1,618,338 ops/sec ±2.14% (11 runs sampled)
+    signal-emitter x 1,150,322 ops/sec ±3.16% (11 runs sampled)
+    pull-notify x 754,171 ops/sec ±7.05% (11 runs sampled)
+    EventEmitter2 x 209,077 ops/sec ±4.26% (11 runs sampled)
+    event-signal x 201,069 ops/sec ±7.05% (11 runs sampled)
+    mobx x 193,846 ops/sec ±4.44% (11 runs sampled)
+    RXJS x 193,066 ops/sec ±4.12% (11 runs sampled)
+    JS-Signals x 120,396 ops/sec ±6.17% (11 runs sampled)
+    minivents x 57,911 ops/sec ±5.88% (10 runs sampled)
 
-*Fastest is __MicroSignal, MiniSignals__*
+*Fastest is __MicroSignal, signal-lite, push-stream, MiniSignals__*
 
 
-1..38
-# tests 38
-# pass  38
+1..40
+# tests 40
+# pass  40
 
 # ok
 
@@ -806,34 +819,34 @@ ok 54 evee called handle once
 ok 55 sister runs without error
 ok 56 sister called handle once
 
-    Theoretical max x 42,776,512 ops/sec ±4.07% (17 runs sampled) *burn in*
-    xstream x 33,660,619 ops/sec ±5.51% (17 runs sampled)
-    MicroSignals x 31,640,734 ops/sec ±4.51% (17 runs sampled)
-    sister x 27,851,357 ops/sec ±5.21% (17 runs sampled)
-    MiniSignals x 27,167,245 ops/sec ±4.52% (17 runs sampled)
-    mini-pipe x 25,287,381 ops/sec ±5.44% (16 runs sampled)
-    signal-lite x 23,014,705 ops/sec ±4.13% (18 runs sampled)
-    EventEmitter2 x 22,925,025 ops/sec ±4.10% (17 runs sampled)
-    EventEmitter3 x 22,445,820 ops/sec ±3.70% (16 runs sampled)
-    dripEmitter x 22,148,943 ops/sec ±3.96% (16 runs sampled)
-    push-stream x 20,149,057 ops/sec ±2.84% (17 runs sampled)
-    ReactiveProperty x 19,361,720 ops/sec ±3.00% (16 runs sampled)
-    push-stream-patch x 19,754,307 ops/sec ±5.25% (17 runs sampled)
-    EventEmitter x 14,505,366 ops/sec ±8.80% (16 runs sampled)
-    evee x 11,315,095 ops/sec ±4.19% (17 runs sampled)
-    observ x 10,911,994 ops/sec ±4.27% (15 runs sampled)
-    pull-pushable x 7,274,546 ops/sec ±10.61% (15 runs sampled)
-    pull-notify x 7,255,801 ops/sec ±12.84% (18 runs sampled)
-    event-signal x 6,182,139 ops/sec ±3.02% (17 runs sampled)
-    RXJS x 5,670,037 ops/sec ±4.14% (17 runs sampled)
-    barracks x 4,897,156 ops/sec ±3.70% (17 runs sampled)
-    d3-dispatch x 3,310,675 ops/sec ±5.89% (17 runs sampled)
-    dripEmitterEnhanced x 1,869,308 ops/sec ±10.16% (17 runs sampled)
-    JS-Signals x 696,544 ops/sec ±4.39% (17 runs sampled)
-    minivents x 679,953 ops/sec ±8.79% (16 runs sampled)
-    namespace-emitter x 632,181 ops/sec ±7.41% (16 runs sampled)
-    signal-emitter x 582,530 ops/sec ±10.66% (16 runs sampled)
-    observable x 508,715 ops/sec ±10.46% (16 runs sampled)
+    Theoretical max x 42,063,091 ops/sec ±3.61% (11 runs sampled) *burn in*
+    xstream x 35,125,330 ops/sec ±3.75% (11 runs sampled)
+    MiniSignals x 29,356,044 ops/sec ±2.21% (10 runs sampled)
+    mini-pipe x 29,430,182 ops/sec ±4.33% (11 runs sampled)
+    sister x 28,373,296 ops/sec ±4.29% (11 runs sampled)
+    MicroSignals x 30,825,156 ops/sec ±14.67% (11 runs sampled)
+    signal-lite x 24,908,264 ops/sec ±6.38% (11 runs sampled)
+    EventEmitter3 x 22,306,105 ops/sec ±4.35% (11 runs sampled)
+    EventEmitter2 x 21,782,018 ops/sec ±3.19% (11 runs sampled)
+    push-stream x 21,487,851 ops/sec ±3.85% (11 runs sampled)
+    push-stream-patch x 21,483,418 ops/sec ±5.22% (11 runs sampled)
+    dripEmitter x 20,865,298 ops/sec ±4.02% (11 runs sampled)
+    evee x 19,769,488 ops/sec ±3.60% (11 runs sampled)
+    ReactiveProperty x 19,319,017 ops/sec ±5.21% (11 runs sampled)
+    EventEmitter x 15,898,057 ops/sec ±6.32% (11 runs sampled)
+    observ x 10,219,951 ops/sec ±10.31% (11 runs sampled)
+    pull-notify x 8,195,231 ops/sec ±4.16% (11 runs sampled)
+    pull-pushable x 7,482,467 ops/sec ±10.71% (11 runs sampled)
+    barracks x 5,270,792 ops/sec ±3.07% (11 runs sampled)
+    d3-dispatch x 4,638,678 ops/sec ±6.06% (11 runs sampled)
+    dripEmitterEnhanced x 2,251,246 ops/sec ±8.38% (11 runs sampled)
+    signal-emitter x 1,454,404 ops/sec ±3.05% (11 runs sampled)
+    event-signal x 864,536 ops/sec ±5.12% (11 runs sampled)
+    RXJS x 831,543 ops/sec ±6.17% (11 runs sampled)
+    observable x 723,467 ops/sec ±4.22% (11 runs sampled)
+    namespace-emitter x 507,487 ops/sec ±4.02% (11 runs sampled)
+    minivents x 395,006 ops/sec ±5.84% (11 runs sampled)
+    JS-Signals x 338,335 ops/sec ±5.27% (10 runs sampled)
 
 *Fastest is __xstream, MicroSignals__*
 
@@ -927,34 +940,34 @@ ok 76 sister runs without error
 ok 77 sister called handle once
 ok 78 sister called handle2 once
 
-    Theoretical max x 24,816,672 ops/sec ±4.65% (17 runs sampled) *burn in*
-    MicroSignals x 18,416,183 ops/sec ±4.79% (16 runs sampled)
-    MiniSignals x 17,763,363 ops/sec ±3.99% (17 runs sampled)
-    sister x 17,965,905 ops/sec ±10.25% (16 runs sampled)
-    push-stream-patch x 15,465,545 ops/sec ±4.03% (17 runs sampled)
-    push-stream x 15,104,310 ops/sec ±2.70% (16 runs sampled)
-    xstream x 13,937,345 ops/sec ±4.74% (17 runs sampled)
-    dripEmitter x 13,646,739 ops/sec ±4.86% (17 runs sampled)
-    ReactiveProperty x 13,260,189 ops/sec ±3.91% (17 runs sampled)
-    EventEmitter3 x 13,065,582 ops/sec ±3.70% (17 runs sampled)
-    signal-lite x 11,928,079 ops/sec ±11.74% (15 runs sampled)
-    EventEmitter x 8,832,166 ops/sec ±11.11% (16 runs sampled)
-    evee x 6,736,397 ops/sec ±3.46% (17 runs sampled)
-    observ x 5,698,289 ops/sec ±11.58% (16 runs sampled)
-    EventEmitter2 x 4,854,133 ops/sec ±3.81% (17 runs sampled)
-    RXJS x 3,813,434 ops/sec ±5.63% (16 runs sampled)
-    event-signal x 3,759,889 ops/sec ±16.08% (14 runs sampled)
-    pull-notify x 2,996,734 ops/sec ±4.19% (17 runs sampled)
-    waddup x 2,564,338 ops/sec ±3.99% (17 runs sampled)
-    dripEmitterEnhanced x 1,896,946 ops/sec ±4.95% (17 runs sampled)
-    d3-dispatch x 1,710,462 ops/sec ±11.22% (16 runs sampled)
-    signal-emitter x 692,372 ops/sec ±4.51% (16 runs sampled)
-    JS-Signals x 621,472 ops/sec ±5.34% (16 runs sampled)
-    namespace-emitter x 471,155 ops/sec ±5.90% (16 runs sampled)
-    observable x 469,282 ops/sec ±7.80% (17 runs sampled)
-    minivents x 426,181 ops/sec ±9.98% (17 runs sampled)
+    Theoretical max x 26,117,576 ops/sec ±4.54% (11 runs sampled) *burn in*
+    sister x 18,267,415 ops/sec ±4.85% (11 runs sampled)
+    MicroSignals x 18,033,798 ops/sec ±3.83% (11 runs sampled)
+    MiniSignals x 17,807,823 ops/sec ±3.92% (10 runs sampled)
+    signal-lite x 16,378,747 ops/sec ±4.30% (11 runs sampled)
+    push-stream-patch x 14,997,785 ops/sec ±4.57% (10 runs sampled)
+    push-stream x 14,709,996 ops/sec ±3.92% (11 runs sampled)
+    dripEmitter x 13,619,910 ops/sec ±3.76% (10 runs sampled)
+    xstream x 13,769,213 ops/sec ±6.06% (11 runs sampled)
+    EventEmitter3 x 13,289,572 ops/sec ±4.76% (11 runs sampled)
+    ReactiveProperty x 13,309,425 ops/sec ±8.70% (11 runs sampled)
+    evee x 11,883,609 ops/sec ±2.67% (11 runs sampled)
+    EventEmitter x 9,851,482 ops/sec ±4.56% (11 runs sampled)
+    observ x 6,515,881 ops/sec ±3.84% (11 runs sampled)
+    pull-notify x 3,193,525 ops/sec ±3.76% (11 runs sampled)
+    waddup x 2,854,394 ops/sec ±2.58% (11 runs sampled)
+    d3-dispatch x 2,490,048 ops/sec ±3.18% (11 runs sampled)
+    dripEmitterEnhanced x 2,268,759 ops/sec ±4.53% (11 runs sampled)
+    signal-emitter x 1,468,903 ops/sec ±5.13% (11 runs sampled)
+    event-signal x 653,627 ops/sec ±2.41% (11 runs sampled)
+    RXJS x 611,077 ops/sec ±5.48% (11 runs sampled)
+    EventEmitter2 x 588,545 ops/sec ±4.49% (10 runs sampled)
+    namespace-emitter x 462,789 ops/sec ±8.93% (11 runs sampled)
+    observable x 520,231 ops/sec ±35.93% (11 runs sampled)
+    JS-Signals x 293,041 ops/sec ±6.13% (11 runs sampled)
+    minivents x 255,580 ops/sec ±4.48% (11 runs sampled)
 
-*Fastest is __MicroSignals, MiniSignals, sister__*
+*Fastest is __sister, MicroSignals, MiniSignals__*
 
 
 1..78
@@ -1021,32 +1034,36 @@ ok 51 evee called handle2 called one time
 ok 52 sister runs without error
 ok 53 sister called handle one time
 ok 54 sister called handle2 called one time
+ok 55 mobx runs without error
+ok 56 mobx called handle one time
+ok 57 mobx called handle2 called one time
 
-    Theoretical max x 27,823,082 ops/sec ±3.97% (17 runs sampled) *burn in*
-    MiniSignals x 18,650,239 ops/sec ±3.87% (16 runs sampled)
-    MicroSignals x 17,750,098 ops/sec ±3.66% (17 runs sampled)
-    sister x 16,756,057 ops/sec ±6.42% (17 runs sampled)
-    signal-lite x 16,340,324 ops/sec ±4.12% (18 runs sampled)
-    push-stream x 15,196,303 ops/sec ±3.28% (17 runs sampled)
-    EventEmitter3 x 14,639,994 ops/sec ±3.35% (18 runs sampled)
-    ReactiveProperty x 14,497,190 ops/sec ±5.33% (17 runs sampled)
-    dripEmitter x 13,175,955 ops/sec ±4.75% (18 runs sampled)
-    EventEmitter x 9,288,105 ops/sec ±3.38% (15 runs sampled)
-    event-signal x 5,572,927 ops/sec ±3.42% (17 runs sampled)
-    EventEmitter2 x 4,960,338 ops/sec ±3.17% (17 runs sampled)
-    RXJS x 4,333,688 ops/sec ±4.75% (17 runs sampled)
-    pull-notify x 3,209,189 ops/sec ±9.36% (17 runs sampled)
-    dripEmitterEnhanced x 1,960,693 ops/sec ±4.95% (15 runs sampled)
-    evee x 1,517,260 ops/sec ±3.97% (17 runs sampled)
-    signal-emitter x 743,378 ops/sec ±4.68% (17 runs sampled)
-    JS-Signals x 453,617 ops/sec ±5.62% (16 runs sampled)
+    Theoretical max x 29,658,769 ops/sec ±5.24% (10 runs sampled) *burn in*
+    sister x 18,708,952 ops/sec ±3.48% (11 runs sampled)
+    MicroSignals x 17,895,937 ops/sec ±3.76% (11 runs sampled)
+    signal-lite x 17,278,649 ops/sec ±4.58% (11 runs sampled)
+    MiniSignals x 16,647,429 ops/sec ±7.36% (10 runs sampled)
+    push-stream x 15,561,023 ops/sec ±3.94% (10 runs sampled)
+    EventEmitter3 x 14,795,421 ops/sec ±3.01% (11 runs sampled)
+    ReactiveProperty x 14,216,603 ops/sec ±5.11% (11 runs sampled)
+    dripEmitter x 13,214,319 ops/sec ±3.52% (11 runs sampled)
+    EventEmitter x 9,182,485 ops/sec ±2.16% (11 runs sampled)
+    pull-notify x 2,758,762 ops/sec ±22.10% (11 runs sampled)
+    dripEmitterEnhanced x 2,259,401 ops/sec ±4.16% (11 runs sampled)
+    evee x 2,109,991 ops/sec ±7.56% (11 runs sampled)
+    signal-emitter x 1,460,379 ops/sec ±2.92% (11 runs sampled)
+    RXJS x 635,569 ops/sec ±2.73% (11 runs sampled)
+    EventEmitter2 x 620,085 ops/sec ±4.18% (11 runs sampled)
+    event-signal x 624,671 ops/sec ±5.62% (11 runs sampled)
+    mobx x 464,986 ops/sec ±12.22% (11 runs sampled)
+    JS-Signals x 296,477 ops/sec ±7.31% (11 runs sampled)
 
-*Fastest is __MiniSignals, MicroSignals__*
+*Fastest is __sister, MicroSignals__*
 
 
-1..54
-# tests 54
-# pass  54
+1..57
+# tests 57
+# pass  57
 
 # ok
 
@@ -1082,15 +1099,15 @@ ok 25 signal-lite runs without error
 ok 26 signal-lite called handle four times
 ok 27 signal-lite called handle2 four times
 
-    Theoretical max x 6,583,696 ops/sec ±4.58% (17 runs sampled) *burn in*
-    MiniSignals x 4,745,853 ops/sec ±2.85% (18 runs sampled)
-    signal-lite x 4,285,286 ops/sec ±3.24% (18 runs sampled)
-    EventEmitter x 2,240,283 ops/sec ±3.87% (16 runs sampled)
-    EventEmitter3 x 1,124,123 ops/sec ±3.53% (18 runs sampled)
-    EventEmitter2 x 720,079 ops/sec ±2.71% (17 runs sampled)
-    dripEmitterEnhanced x 391,925 ops/sec ±3.70% (17 runs sampled)
-    signal-emitter x 157,266 ops/sec ±6.03% (16 runs sampled)
-    JS-Signals x 145,859 ops/sec ±4.87% (18 runs sampled)
+    Theoretical max x 6,769,119 ops/sec ±5.18% (11 runs sampled) *burn in*
+    MiniSignals x 4,634,128 ops/sec ±3.06% (11 runs sampled)
+    signal-lite x 4,430,146 ops/sec ±2.91% (11 runs sampled)
+    EventEmitter x 2,370,254 ops/sec ±3.82% (11 runs sampled)
+    EventEmitter3 x 1,212,434 ops/sec ±3.99% (11 runs sampled)
+    dripEmitterEnhanced x 447,621 ops/sec ±3.52% (11 runs sampled)
+    signal-emitter x 305,735 ops/sec ±4.96% (11 runs sampled)
+    EventEmitter2 x 147,200 ops/sec ±3.17% (11 runs sampled)
+    JS-Signals x 70,674 ops/sec ±7.60% (11 runs sampled)
 
 *Fastest is __MiniSignals__*
 
@@ -1130,20 +1147,20 @@ ok 22 EventDispatcher constructed an object
 ok 23 pull-notify runs without error
 ok 24 pull-notify constructed an object
 
-    EventEmitter3 x 49,519,190 ops/sec ±5.32% (17 runs sampled)
-    EventDispatcher x 48,879,733 ops/sec ±4.83% (17 runs sampled)
-    Theoretical max x 44,268,495 ops/sec ±18.56% (15 runs sampled) *burn in*
-    DripEmitter x 43,221,672 ops/sec ±21.43% (17 runs sampled)
-    MiniSignals x 34,627,688 ops/sec ±4.57% (17 runs sampled)
-    EventEmitter2 x 31,833,518 ops/sec ±2.88% (18 runs sampled)
-    EventEmitter x 26,064,811 ops/sec ±7.74% (16 runs sampled)
-    DripEmitterEnhanced x 21,722,009 ops/sec ±4.95% (16 runs sampled)
-    push-stream x 14,434,874 ops/sec ±3.84% (18 runs sampled)
-    JS-Signals x 1,981,853 ops/sec ±9.69% (13 runs sampled)
-    ReactiveProperty x 1,305,025 ops/sec ±12.21% (14 runs sampled)
-    pull-notify x 973,411 ops/sec ±18.32% (12 runs sampled)
+    EventDispatcher x 51,328,935 ops/sec ±3.18% (11 runs sampled)
+    EventEmitter3 x 49,991,647 ops/sec ±4.18% (11 runs sampled)
+    DripEmitter x 47,959,687 ops/sec ±4.71% (11 runs sampled)
+    Theoretical max x 43,091,846 ops/sec ±36.96% (11 runs sampled) *burn in*
+    EventEmitter2 x 30,483,478 ops/sec ±5.97% (11 runs sampled)
+    EventEmitter x 26,769,272 ops/sec ±3.53% (11 runs sampled)
+    MiniSignals x 27,595,381 ops/sec ±14.22% (11 runs sampled)
+    DripEmitterEnhanced x 21,847,248 ops/sec ±2.84% (11 runs sampled)
+    push-stream x 14,891,621 ops/sec ±4.18% (11 runs sampled)
+    JS-Signals x 1,988,231 ops/sec ±13.38% (11 runs sampled)
+    ReactiveProperty x 1,173,561 ops/sec ±28.20% (11 runs sampled)
+    pull-notify x 1,004,497 ops/sec ±18.95% (11 runs sampled)
 
-*Fastest is __EventEmitter3, EventDispatcher, DripEmitter__*
+*Fastest is __EventDispatcher, EventEmitter3__*
 
 
 1..24
