@@ -2,40 +2,49 @@
 
 ## Testing
 
-- @reactivex/rxjs: 5.0.0-beta.11
-- barracks: 6.0.6
-- d3-dispatch: 1.0.1
-- drip: 1.4.0
-- evee: 0.8.4
+- [mini-signals](https://www.npmjs.com/package/mini-signals): 2.0.0-1
+- [drip](https://www.npmjs.com/package/drip): 1.4.0
+- [sister](https://www.npmjs.com/package/sister): 3.0.0
+- [reactive-property](https://www.npmjs.com/package/reactive-property): 1.0.0
+- [eventemitter3](https://www.npmjs.com/package/eventemitter3): 5.0.0
+- rxjs: 7.8.0
+- d3-dispatch: 3.0.1
+- evee: 2.1.0
 - event-signal: 0.1.6
-- eventemitter2: 2.1.0
-- eventemitter3: 1.2.0
-- fast-event-emitter: 0.0.2
-- mini-signals: 1.1.1
-- micro-signal: [experimental](./subjects/micro-signals.js)
-- minivents: 2.0.1
-- namespace-emitter: 1.0.0
+- eventemitter2: 6.4.9
+- minivents: 2.0.2
+- namespace-emitter: 2.0.1
 - observ: 0.2.0
 - observable: 2.1.4
-- pull-notify: 0.1.1
-- pull-pushable: 2.0.1
-- pull-stream: 3.4.3
-- push-stream: 2.0.3
-- reactive-property: 1.0.0
 - signal-emitter: 0.0.1
 - signals: 1.0.0
 - signals-lite: 1.0.0
-- sister: 3.0.0
-- waddup: 1.0.3
-- xstream: 5.3.2
+- waddup: 2.0.1
 
 ## Results
 
-- [Node v6.2](./results/node-v6.tap.md)
-- [Node v4.4](./results/node-v4.tap.md)
-- [Chrome v51](./results/browser-chrome-v51.tap.md)
-- [Firefox v47](./results/browser-firefox-v47.tap.md)
-- [Safari v9](./results/browser-safari-v9.tap.md)
+### [Node v16](./results/node-v16.tap.md)
+
+Number of times each library appeared in the "fastest" list:
+
+```
+MiniSignals       XXXXXXXXX
+drip              XXXXX
+sister            XXXXX
+reactive-property XX
+EventEmitter3     X
+```
+
+### [Node v18](./results/node-v18.tap.md)
+
+Number of times each library appeared in the "fastest" list:
+
+```
+MiniSignals       XXXXXXXX
+drip              XXXXXXX
+reactive-property XXXXX
+sister            XX
+```
 
 ## How?
 

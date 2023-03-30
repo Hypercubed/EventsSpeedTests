@@ -1,11 +1,16 @@
-var suite = require('chuhai');
-var test = require('blue-tape');
-var setup = require('../subjects');
+import suite from 'chuhai';
+import test from 'blue-tape';
+import {
+  maxTime,
+  minSamples,
+  createInstances,
+  addHandles,
+} from '../subjects/index.mjs';
 
 test('emit one value - many listeners', function (t) {
   return suite('', function (s) {
-    s.set('maxTime', setup.maxTime);
-    s.set('minSamples', setup.minSamples);
+    s.set('maxTime', maxTime);
+    s.set('minSamples', minSamples);
 
     var called = null;
     var N = 10;
@@ -13,7 +18,8 @@ test('emit one value - many listeners', function (t) {
 
     var handles = Array.apply(null, Array(N)).map(function () {
       return function (a) {
-        if (!started) { // ignore calls before bechmarks start
+        if (!started) {
+          // ignore calls before benchmarks start
           return;
         }
         if (arguments.length > 2 || a !== 'bar') {
@@ -23,8 +29,8 @@ test('emit one value - many listeners', function (t) {
       };
     });
 
-    var subjects = setup.createInstances();
-    setup.addHandles(subjects, handles);
+    var subjects = createInstances();
+    addHandles(subjects, handles);
     started = true;
 
     s.cycle(function (e) {
@@ -36,7 +42,7 @@ test('emit one value - many listeners', function (t) {
     s.burn('Theoretical max', function () {
       called = 0;
       for (var i = 0; i < 10; i++) {
-        (handles[i])('bar');
+        handles[i]('bar');
       }
     });
 
@@ -52,10 +58,6 @@ test('emit one value - many listeners', function (t) {
       called = 0;
       subjects.ee3.emit('foo', 'bar');
     });
-    s.bench('push-stream', function () {
-      called = 0;
-      subjects.pushStream.push('bar');
-    });
     s.bench('dripEmitter', function () {
       called = 0;
       subjects.dripEmitter.emit('foo', 'bar');
@@ -64,13 +66,13 @@ test('emit one value - many listeners', function (t) {
       called = 0;
       subjects.dripEmitterEnhanced.emit('foo', 'bar');
     });
-    s.bench('RXJS', function () {
+    s.bench('rxjs Subject', function () {
       called = 0;
       subjects.subject.next('bar');
     });
     s.bench('ReactiveProperty', function () {
       called = 0;
-      subjects.rProperty('bar');
+      subjects.reactiveProperty('bar');
     });
     s.bench('JS-Signals', function () {
       called = 0;
@@ -79,10 +81,6 @@ test('emit one value - many listeners', function (t) {
     s.bench('MiniSignals', function () {
       called = 0;
       subjects.miniSignal.dispatch('bar');
-    });
-    s.bench('MicroSignal', function () {
-      called = 0;
-      subjects.microSignal.dispatch('bar');
     });
     s.bench('signal-emitter', function () {
       called = 0;
@@ -99,14 +97,6 @@ test('emit one value - many listeners', function (t) {
     s.bench('minivents', function () {
       called = 0;
       subjects.miniVent.emit('foo', 'bar');
-    });
-    s.bench('pull-notify', function () {
-      called = 0;
-      subjects.pullNotify('bar');
-    });
-    s.bench('xstream', function () {
-      called = 0;
-      subjects.xstream.shamefullySendNext('bar');
     });
     s.bench('evee', function () {
       called = 0;

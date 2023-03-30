@@ -1,13 +1,13 @@
-var suite = require('chuhai');
-var test = require('blue-tape');
-var setup = require('../subjects');
+import suite from 'chuhai';
+import test from 'blue-tape';
+import { maxTime, minSamples, createInstancesOn } from '../subjects/index.mjs';
 
 test('emit one random value - two listeners', function (t) {
   return suite('', function (s) {
-    s.set('maxTime', setup.maxTime);
-    s.set('minSamples', setup.minSamples);
+    s.set('maxTime', maxTime);
+    s.set('minSamples', minSamples);
 
-    var subjects = setup.createInstancesOn(handle, handle2);
+    var subjects = createInstancesOn(handle, handle2);
 
     var called = null;
     var called2 = null;
@@ -45,16 +45,6 @@ test('emit one random value - two listeners', function (t) {
       subjects.dripEmitter.emit('foo', Math.random());
     });
 
-    s.bench('push-stream-patch', function () {
-      called = called2 = 0;
-      subjects.pushStreamPatch.push(Math.random());
-    });
-
-    s.bench('push-stream', function () {
-      called = called2 = 0;
-      subjects.pushStream.push(Math.random());
-    });
-
     s.bench('dripEmitterEnhanced', function () {
       called = called2 = 0;
       subjects.dripEmitterEnhanced.emit('foo', Math.random());
@@ -62,30 +52,30 @@ test('emit one random value - two listeners', function (t) {
 
     s.bench('d3-dispatch', function () {
       called = called2 = 0;
-      subjects.dispatch.call('foo', null, Math.random());
+      subjects.d3Dispatch.call('foo', null, Math.random());
     });
 
     s.bench('namespace-emitter', function () {
       called = called2 = 0;
-      subjects.nsEmitter.emit('foo', Math.random());
+      subjects.namespaceEmitter.emit('foo', Math.random());
     });
 
     s.bench('ReactiveProperty', function () {
       called = called2 = 0;
-      subjects.rProperty(Math.random());
+      subjects.reactiveProperty(Math.random());
     });
 
     s.bench('observable', function () {
       called = called2 = 0;
-      subjects.observableValue(Math.random());
+      subjects.observable(Math.random());
     });
 
     s.bench('observ', function () {
       called = called2 = 0;
-      subjects.observValue.set(Math.random());
+      subjects.observ.set(Math.random());
     });
 
-    s.bench('RXJS', function () {
+    s.bench('rxjs Subject', function () {
       called = called2 = 0;
       subjects.subject.next(Math.random());
     });
@@ -98,11 +88,6 @@ test('emit one random value - two listeners', function (t) {
     s.bench('MiniSignals', function () {
       called = called2 = 0;
       subjects.miniSignal.dispatch(Math.random());
-    });
-
-    s.bench('MicroSignals', function () {
-      called = called2 = 0;
-      subjects.microSignal.dispatch(Math.random());
     });
 
     s.bench('signal-emitter', function () {
@@ -125,16 +110,6 @@ test('emit one random value - two listeners', function (t) {
       subjects.miniVent.emit('foo', Math.random());
     });
 
-    s.bench('pull-notify', function () {
-      called = called2 = 0;
-      subjects.pullNotify(Math.random());
-    });
-
-    s.bench('xstream', function () {
-      called = called2 = 0;
-      subjects.xstream.shamefullySendNext(Math.random());
-    });
-
     s.bench('waddup', function () {
       called = called2 = 0;
       subjects.waddup.publish('foo', Math.random());
@@ -146,20 +121,28 @@ test('emit one random value - two listeners', function (t) {
     });
 
     function handle(a) {
-      if (!subjects) { // ignore calls before bechmarks start
+      if (!subjects) {
+        // ignore calls before benchmarks start
         return;
       }
-      if (arguments.length === 0 || arguments.length > 2 || typeof a !== 'number') {
+      // if (arguments.length === 0 || arguments.length > 2) {
+      //   throw new Error('invalid arguments ' + a);
+      // }
+      if (typeof a !== 'number') {
         throw new Error('invalid arguments ' + a);
       }
       called++;
     }
 
     function handle2(a) {
-      if (!subjects) { // ignore calls before bechmarks start
+      if (!subjects) {
+        // ignore calls before benchmarks start
         return;
       }
-      if (arguments.length === 0 || arguments.length > 2 || typeof a !== 'number') {
+      // if (arguments.length === 0 || arguments.length > 2) {
+      //   throw new Error('invalid arguments');
+      // }
+      if (typeof a !== 'number') {
         throw new Error('invalid arguments');
       }
       called2++;

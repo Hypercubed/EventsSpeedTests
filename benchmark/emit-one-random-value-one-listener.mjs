@@ -1,13 +1,13 @@
-var suite = require('chuhai');
-var test = require('blue-tape');
-var setup = require('../subjects');
+import suite from 'chuhai';
+import test from 'blue-tape';
+import { maxTime, minSamples, createInstancesOn } from '../subjects/index.mjs';
 
 test('emit one random value - one listener', function (t) {
   return suite('', function (s) {
-    s.set('maxTime', setup.maxTime);
-    s.set('minSamples', setup.minSamples);
+    s.set('maxTime', maxTime);
+    s.set('minSamples', minSamples);
 
-    var subjects = setup.createInstancesOn(handle);
+    var subjects = createInstancesOn(handle);
 
     var called = null;
 
@@ -42,26 +42,6 @@ test('emit one random value - one listener', function (t) {
       subjects.dripEmitter.emit('foo', Math.random());
     });
 
-    s.bench('barracks', function () {
-      called = 0;
-      subjects.barracksDispatcher('foo', Math.random());
-    });
-
-    s.bench('push-stream', function () {
-      called = 0;
-      subjects.pushStream.push(Math.random());
-    });
-
-    s.bench('push-stream-patch', function () {
-      called = 0;
-      subjects.pushStreamPatch.push(Math.random());
-    });
-
-    s.bench('mini-pipe', function () {
-      called = 0;
-      subjects.pipe.push(Math.random());
-    });
-
     s.bench('dripEmitterEnhanced', function () {
       called = 0;
       subjects.dripEmitterEnhanced.emit('foo', Math.random());
@@ -69,30 +49,30 @@ test('emit one random value - one listener', function (t) {
 
     s.bench('d3-dispatch', function () {
       called = 0;
-      subjects.dispatch.call('foo', null, Math.random());
+      subjects.d3Dispatch.call('foo', null, Math.random());
     });
 
     s.bench('namespace-emitter', function () {
       called = 0;
-      subjects.nsEmitter.emit('foo', Math.random());
+      subjects.namespaceEmitter.emit('foo', Math.random());
     });
 
     s.bench('ReactiveProperty', function () {
       called = 0;
-      subjects.rProperty(Math.random());
+      subjects.reactiveProperty(Math.random());
     });
 
     s.bench('observable', function () {
       called = 0;
-      subjects.observableValue(Math.random());
+      subjects.observable(Math.random());
     });
 
     s.bench('observ', function () {
       called = 0;
-      subjects.observValue.set(Math.random());
+      subjects.observ.set(Math.random());
     });
 
-    s.bench('RXJS', function () {
+    s.bench('rxjs Subject', function () {
       called = 0;
       subjects.subject.next(Math.random());
     });
@@ -105,11 +85,6 @@ test('emit one random value - one listener', function (t) {
     s.bench('MiniSignals', function () {
       called = 0;
       subjects.miniSignal.dispatch(Math.random());
-    });
-
-    s.bench('MicroSignals', function () {
-      called = 0;
-      subjects.microSignal.dispatch(Math.random());
     });
 
     s.bench('signal-emitter', function () {
@@ -132,31 +107,20 @@ test('emit one random value - one listener', function (t) {
       subjects.miniVent.emit('foo', Math.random());
     });
 
-    s.bench('pull-notify', function () {
-      called = 0;
-      subjects.pullNotify(Math.random());
-    });
-
-    s.bench('pull-pushable', function () {
-      called = 0;
-      subjects.pullPushable.push(Math.random());
-    });
-
-    s.bench('xstream', function () {
-      called = 0;
-      subjects.xstream.shamefullySendNext(Math.random());
-    });
-
     s.bench('evee', function () {
       called = 0;
       subjects.evee.emit('foo', Math.random());
     });
 
     function handle(a) {
-      if (!subjects) { // ignore calls before bechmarks start
+      if (!subjects) {
+        // ignore calls before benchmarks start
         return;
       }
-      if (arguments.length === 0 || arguments.length > 2 || typeof a !== 'number') {
+      // if (arguments.length === 0 || arguments.length > 2) {
+      //   throw new Error('invalid number of arguments ' + arguments.length);
+      // }
+      if (typeof a !== 'number') {
         throw new Error('invalid arguments ' + a);
       }
       called++;

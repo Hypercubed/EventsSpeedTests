@@ -1,13 +1,13 @@
-var suite = require('chuhai');
-var test = require('blue-tape');
-var setup = require('../subjects');
+import suite from 'chuhai';
+import test from 'blue-tape';
+import { maxTime, minSamples, createInstancesOn } from '../subjects/index.mjs';
 
 test('emit variable number of values', function (t) {
   return suite('', function (s) {
-    s.set('maxTime', setup.maxTime);
-    s.set('minSamples', setup.minSamples);
+    s.set('maxTime', maxTime);
+    s.set('minSamples', minSamples);
 
-    var subjects = setup.createInstancesOn(handle, handle2);
+    var subjects = createInstancesOn(handle, handle2);
 
     var called = 0;
     var called2 = 0;
@@ -54,7 +54,8 @@ test('emit variable number of values', function (t) {
       subjects.ee3.emit('foo', 'bar', 'baz', 'boom');
     });
 
-    s.xbench('dripEmitter', function () {  // see https://github.com/qualiancy/drip/pull/4
+    s.xbench('dripEmitter', function () {
+      // see https://github.com/qualiancy/drip/pull/4
       called = called2 = 0;
       subjects.dripEmitter.emit('foo');
       subjects.dripEmitter.emit('foo', 'bar');
@@ -103,7 +104,8 @@ test('emit variable number of values', function (t) {
     });
 
     function handle(a, b, c) {
-      if (!subjects) { // ignore calls before bechmarks start
+      if (!subjects) {
+        // ignore calls before benchmarks start
         return;
       }
       if (arguments.length > 0 && a !== 'bar') {

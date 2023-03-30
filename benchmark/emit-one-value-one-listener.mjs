@@ -1,13 +1,13 @@
-var suite = require('chuhai');
-var test = require('blue-tape');
-var setup = require('../subjects');
+import suite from 'chuhai';
+import test from 'blue-tape';
+import { maxTime, minSamples, createInstancesOn } from '../subjects/index.mjs';
 
 test('emit one value - one listener', function (t) {
   return suite('', function (s) {
-    s.set('maxTime', setup.maxTime);
-    s.set('minSamples', setup.minSamples);
+    s.set('maxTime', maxTime);
+    s.set('minSamples', minSamples);
 
-    var subjects = setup.createInstancesOn(handle);
+    var subjects = createInstancesOn(handle);
 
     var called = null;
 
@@ -42,26 +42,6 @@ test('emit one value - one listener', function (t) {
       subjects.dripEmitter.emit('foo', 'bar');
     });
 
-    s.bench('barracks', function () {
-      called = 0;
-      subjects.barracksDispatcher('foo', 'bar');
-    });
-
-    s.bench('push-stream', function () {
-      called = 0;
-      subjects.pushStream.push('bar');
-    });
-
-    s.bench('push-stream-patch', function () {
-      called = 0;
-      subjects.pushStreamPatch.push('bar');
-    });
-
-    s.bench('mini-pipe', function () {
-      called = 0;
-      subjects.pipe.push('bar');
-    });
-
     s.bench('dripEmitterEnhanced', function () {
       called = 0;
       subjects.dripEmitterEnhanced.emit('foo', 'bar');
@@ -69,30 +49,30 @@ test('emit one value - one listener', function (t) {
 
     s.bench('d3-dispatch', function () {
       called = 0;
-      subjects.dispatch.call('foo', null, 'bar');
+      subjects.d3Dispatch.call('foo', null, 'bar');
     });
 
     s.bench('namespace-emitter', function () {
       called = 0;
-      subjects.nsEmitter.emit('foo', 'bar');
+      subjects.namespaceEmitter.emit('foo', 'bar');
     });
 
     s.bench('ReactiveProperty', function () {
       called = 0;
-      subjects.rProperty('bar');
+      subjects.reactiveProperty('bar');
     });
 
     s.bench('observable', function () {
       called = 0;
-      subjects.observableValue('bar');
+      subjects.observable('bar');
     });
 
     s.bench('observ', function () {
       called = 0;
-      subjects.observValue.set('bar');
+      subjects.observ.set('bar');
     });
 
-    s.bench('RXJS', function () {
+    s.bench('rxjs Subject', function () {
       called = 0;
       subjects.subject.next('bar');
     });
@@ -105,11 +85,6 @@ test('emit one value - one listener', function (t) {
     s.bench('MiniSignals', function () {
       called = 0;
       subjects.miniSignal.dispatch('bar');
-    });
-
-    s.bench('MicroSignals', function () {
-      called = 0;
-      subjects.microSignal.dispatch('bar');
     });
 
     s.bench('signal-emitter', function () {
@@ -132,21 +107,6 @@ test('emit one value - one listener', function (t) {
       subjects.miniVent.emit('foo', 'bar');
     });
 
-    s.bench('pull-notify', function () {
-      called = 0;
-      subjects.pullNotify('bar');
-    });
-
-    s.bench('pull-pushable', function () {
-      called = 0;
-      subjects.pullPushable.push('bar');
-    });
-
-    s.bench('xstream', function () {
-      called = 0;
-      subjects.xstream.shamefullySendNext('bar');
-    });
-
     s.bench('evee', function () {
       called = 0;
       subjects.evee.emit('foo', 'bar');
@@ -158,10 +118,14 @@ test('emit one value - one listener', function (t) {
     });
 
     function handle(a) {
-      if (!subjects) { // ignore calls before bechmarks start
+      if (!subjects) {
+        // ignore calls before benchmarks start
         return;
       }
-      if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+      // if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+      //   throw new Error('invalid arguments ' + a);
+      // }
+      if (a !== 'bar') {
         throw new Error('invalid arguments ' + a);
       }
       called++;

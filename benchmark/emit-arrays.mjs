@@ -1,11 +1,11 @@
-var suite = require('chuhai');
-var test = require('blue-tape');
-var setup = require('../subjects');
+import suite from 'chuhai';
+import test from 'blue-tape';
+import { maxTime, minSamples, createInstancesOn } from '../subjects/index.mjs';
 
 test('emit one array', function (t) {
   return suite('', function (s) {
-    s.set('maxTime', setup.maxTime);
-    s.set('minSamples', setup.minSamples);
+    s.set('maxTime', maxTime);
+    s.set('minSamples', minSamples);
 
     var called = null;
     var called2 = null;
@@ -17,7 +17,7 @@ test('emit one array', function (t) {
       called = called2 = null;
     });
 
-    var subjects = setup.createInstancesOn(handle, handle2);
+    var subjects = createInstancesOn(handle, handle2);
 
     s.burn('Theoretical max', function () {
       called = called2 = 0;
@@ -50,13 +50,6 @@ test('emit one array', function (t) {
       subjects.ee3.emit('foo', ['bar', 'baz', 'boom']);
     });
 
-    s.bench('push-stream', function () {
-      called = called2 = 0;
-      subjects.pushStream.push(['bar']);
-      subjects.pushStream.push(['bar', 'baz']);
-      subjects.pushStream.push(['bar', 'baz', 'boom']);
-    });
-
     s.bench('dripEmitter', function () {
       called = called2 = 0;
       subjects.dripEmitter.emit('foo', ['bar']);
@@ -71,7 +64,7 @@ test('emit one array', function (t) {
       subjects.dripEmitterEnhanced.emit('foo', ['bar', 'baz', 'boom']);
     });
 
-    s.bench('RXJS', function () {
+    s.bench('rxjs Subject', function () {
       called = called2 = 0;
       subjects.subject.next(['bar']);
       subjects.subject.next(['bar', 'baz']);
@@ -80,9 +73,9 @@ test('emit one array', function (t) {
 
     s.bench('ReactiveProperty', function () {
       called = called2 = 0;
-      subjects.rProperty(['bar']);
-      subjects.rProperty(['bar', 'baz']);
-      subjects.rProperty(['bar', 'baz', 'boom']);
+      subjects.reactiveProperty(['bar']);
+      subjects.reactiveProperty(['bar', 'baz']);
+      subjects.reactiveProperty(['bar', 'baz', 'boom']);
     });
 
     s.bench('JS-Signals', function () {
@@ -97,13 +90,6 @@ test('emit one array', function (t) {
       subjects.miniSignal.dispatch(['bar']);
       subjects.miniSignal.dispatch(['bar', 'baz']);
       subjects.miniSignal.dispatch(['bar', 'baz', 'boom']);
-    });
-
-    s.bench('MicroSignals', function () {
-      called = called2 = 0;
-      subjects.microSignal.dispatch(['bar']);
-      subjects.microSignal.dispatch(['bar', 'baz']);
-      subjects.microSignal.dispatch(['bar', 'baz', 'boom']);
     });
 
     s.bench('signal-emitter', function () {
@@ -125,13 +111,6 @@ test('emit one array', function (t) {
       subjects.signalLite.broadcast(['bar']);
       subjects.signalLite.broadcast(['bar', 'baz']);
       subjects.signalLite.broadcast(['bar', 'baz', 'boom']);
-    });
-
-    s.bench('pull-notify', function () {
-      called = called2 = 0;
-      subjects.pullNotify(['bar']);
-      subjects.pullNotify(['bar', 'baz']);
-      subjects.pullNotify(['bar', 'baz', 'boom']);
     });
 
     s.bench('evee', function () {
@@ -172,7 +151,8 @@ test('emit one array', function (t) {
     }
 
     function handle2() {
-      if (arguments.length === 0 || arguments.length > 2) {  // reactiveProperty emits old value
+      if (arguments.length === 0 || arguments.length > 2) {
+        // reactiveProperty emits old value
         throw new Error('Invlid arguments.length');
       }
       called2++;

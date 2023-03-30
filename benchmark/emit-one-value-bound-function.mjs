@@ -1,12 +1,11 @@
-var suite = require('chuhai');
-var test = require('blue-tape');
-var pull = require('pull-stream');
-var setup = require('../subjects');
+import suite from 'chuhai';
+import test from 'blue-tape';
+import { maxTime, minSamples, createInstances } from '../subjects/index.mjs';
 
 test('emit one value - bound function', function (t) {
   return suite('', function (s) {
-    s.set('maxTime', setup.maxTime);
-    s.set('minSamples', setup.minSamples);
+    s.set('maxTime', maxTime);
+    s.set('minSamples', minSamples);
 
     var called = null;
     var called2 = null;
@@ -19,10 +18,10 @@ test('emit one value - bound function', function (t) {
     });
 
     var ctx = {
-      foo: 'bar'
+      foo: 'bar',
     };
 
-    var subjects = setup.createInstances();
+    var subjects = createInstances();
 
     subjects.ee1.on('foo', handle.bind(ctx));
     subjects.ee1.on('foo', handle2);
@@ -38,8 +37,6 @@ test('emit one value - bound function', function (t) {
     subjects.signal.add(handle2);
     subjects.miniSignal.add(handle.bind(ctx));
     subjects.miniSignal.add(handle2);
-    subjects.microSignal.add(handle.bind(ctx));
-    subjects.microSignal.add(handle2);
     subjects.signalEmitter.on(handle.bind(ctx));
     subjects.signalEmitter.on(handle2);
     subjects.eventSignal.addListener(handle.bind(ctx));
@@ -48,36 +45,11 @@ test('emit one value - bound function', function (t) {
     subjects.signalLite.add(handle2);
     subjects.subject.subscribe(handle.bind(ctx));
     subjects.subject.subscribe(handle2);
-    subjects.rProperty.on(handle.bind(ctx));
-    subjects.rProperty.on(handle2);
-    subjects.pushStream(handle.bind(ctx));
-    subjects.pushStream(handle2);
-    pull(subjects.pullNotify.listen(), pull.drain(handle.bind(ctx)));
-    pull(subjects.pullNotify.listen(), pull.drain(handle2));
-    subjects.xstream.addListener({
-      next: handle.bind(ctx),
-      error: function (err) {
-        console.error(err);
-      },
-      complete: function () {
-        console.log('completed');
-      }
-    });
-    subjects.xstream.addListener({
-      next: handle2,
-      error: function (err) {
-        console.error(err);
-      },
-      complete: function () {
-        console.log('completed');
-      }
-    });
-    subjects.evee.on('foo', function (e) {
-      return handle.bind(ctx)(e.data);
-    });
-    subjects.evee.on('foo', function (e) {
-      handle2(e.data);
-    });
+    subjects.reactiveProperty.on(handle.bind(ctx));
+    subjects.reactiveProperty.on(handle2);
+
+    subjects.evee.on('foo', (e) => handle.bind(ctx)(e.data));
+    subjects.evee.on('foo', (e) => handle2(e.data));
 
     var bHandel = handle.bind(ctx);
 
@@ -102,11 +74,6 @@ test('emit one value - bound function', function (t) {
       subjects.ee3.emit('foo', 'bar');
     });
 
-    s.bench('push-stream', function () {
-      called = called2 = 0;
-      subjects.pushStream.push('bar');
-    });
-
     s.bench('dripEmitter', function () {
       called = called2 = 0;
       subjects.dripEmitter.emit('foo', 'bar');
@@ -117,14 +84,14 @@ test('emit one value - bound function', function (t) {
       subjects.dripEmitterEnhanced.emit('foo', 'bar');
     });
 
-    s.bench('RXJS', function () {
+    s.bench('rxjs Subject', function () {
       called = called2 = 0;
       subjects.subject.next('bar');
     });
 
     s.bench('ReactiveProperty', function () {
       called = called2 = 0;
-      subjects.rProperty('bar');
+      subjects.reactiveProperty('bar');
     });
 
     s.bench('JS-Signals', function () {
@@ -135,11 +102,6 @@ test('emit one value - bound function', function (t) {
     s.bench('MiniSignals', function () {
       called = called2 = 0;
       subjects.miniSignal.dispatch('bar');
-    });
-
-    s.bench('MicroSignals', function () {
-      called = called2 = 0;
-      subjects.microSignal.dispatch('bar');
     });
 
     s.bench('signal-emitter', function () {
@@ -155,16 +117,6 @@ test('emit one value - bound function', function (t) {
     s.bench('signal-lite', function () {
       called = called2 = 0;
       subjects.signalLite.broadcast('bar');
-    });
-
-    s.bench('pull-notify', function () {
-      called = called2 = 0;
-      subjects.pullNotify('bar');
-    });
-
-    s.bench('xstream', function () {
-      called = called2 = 0;
-      subjects.xstream.shamefullySendNext('bar');
     });
 
     s.bench('evee', function () {

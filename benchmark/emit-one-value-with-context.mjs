@@ -1,12 +1,11 @@
-var suite = require('chuhai');
-var test = require('blue-tape');
-var pull = require('pull-stream');
-var setup = require('../subjects');
+import suite from 'chuhai';
+import test from 'blue-tape';
+import { maxTime, minSamples, createInstances } from '../subjects/index.mjs';
 
 test('emit one value - with context', function (t) {
   return suite('', function (s) {
-    s.set('maxTime', setup.maxTime);
-    s.set('minSamples', setup.minSamples);
+    s.set('maxTime', maxTime);
+    s.set('minSamples', minSamples);
 
     var called = null;
     var called2 = null;
@@ -19,10 +18,10 @@ test('emit one value - with context', function (t) {
     });
 
     var ctx = {
-      foo: 'bar'
+      foo: 'bar',
     };
 
-    var subjects = setup.createInstances();
+    var subjects = createInstances();
 
     subjects.ee1.on('foo', handle.bind(ctx));
     subjects.ee1.on('foo', handle2);
@@ -39,10 +38,8 @@ test('emit one value - with context', function (t) {
 
     subjects.signal.add(handle, ctx);
     subjects.signal.add(handle2);
-    subjects.miniSignal.add(handle, ctx);
+    subjects.miniSignal.add(handle.bind(ctx));
     subjects.miniSignal.add(handle2);
-    subjects.microSignal.add(handle.bind(ctx));
-    subjects.microSignal.add(handle2);
     subjects.signalEmitter.on(handle, ctx);
     subjects.signalEmitter.on(handle2);
     subjects.eventSignal.addListener(handle, ctx);
@@ -51,13 +48,9 @@ test('emit one value - with context', function (t) {
     subjects.signalLite.add(handle2);
     subjects.subject.subscribe(handle.bind(ctx));
     subjects.subject.subscribe(handle2);
-    subjects.rProperty.on(handle.bind(ctx));
-    subjects.rProperty.on(handle2);
-    subjects.pushStream(handle.bind(ctx));
-    subjects.pushStream(handle2);
+    subjects.reactiveProperty.on(handle.bind(ctx));
+    subjects.reactiveProperty.on(handle2);
 
-    pull(subjects.pullNotify.listen(), pull.drain(handle.bind(ctx)));
-    pull(subjects.pullNotify.listen(), pull.drain(handle2));
     subjects.evee.on('foo', function (e) {
       handle.bind(ctx)(e.data);
     });
@@ -88,11 +81,6 @@ test('emit one value - with context', function (t) {
       subjects.ee3.emit('foo', 'bar');
     });
 
-    s.bench('push-stream', function () {
-      called = called2 = 0;
-      subjects.pushStream.push('bar');
-    });
-
     s.bench('dripEmitter', function () {
       called = called2 = 0;
       subjects.dripEmitter.emit('foo', 'bar');
@@ -103,14 +91,14 @@ test('emit one value - with context', function (t) {
       subjects.dripEmitterEnhanced.emit('foo', 'bar');
     });
 
-    s.bench('RXJS', function () {
+    s.bench('rxjs Subject', function () {
       called = called2 = 0;
       subjects.subject.next('bar');
     });
 
     s.bench('ReactiveProperty', function () {
       called = called2 = 0;
-      subjects.rProperty('bar');
+      subjects.reactiveProperty('bar');
     });
 
     s.bench('JS-Signals', function () {
@@ -121,11 +109,6 @@ test('emit one value - with context', function (t) {
     s.bench('MiniSignals', function () {
       called = called2 = 0;
       subjects.miniSignal.dispatch('bar');
-    });
-
-    s.bench('MicroSignals', function () {
-      called = called2 = 0;
-      subjects.microSignal.dispatch('bar');
     });
 
     s.bench('signal-emitter', function () {
@@ -143,11 +126,6 @@ test('emit one value - with context', function (t) {
       subjects.signalLite.broadcast('bar');
     });
 
-    s.bench('pull-notify', function () {
-      called = called2 = 0;
-      subjects.pullNotify('bar');
-    });
-
     s.bench('evee', function () {
       called = called2 = 0;
       subjects.evee.emit('foo', 'bar');
@@ -159,7 +137,8 @@ test('emit one value - with context', function (t) {
     });
 
     function handle(a) {
-      if (!subjects) { // ignore calls before bechmarks start
+      if (!subjects) {
+        // ignore calls before benchmarks start
         return;
       }
       if (arguments.length === 0 || arguments.length > 2) {

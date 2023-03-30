@@ -1,13 +1,13 @@
-var suite = require('chuhai');
-var test = require('blue-tape');
-var setup = require('../subjects');
+import suite from 'chuhai';
+import test from 'blue-tape';
+import { maxTime, minSamples, createInstancesOn } from '../subjects/index.mjs';
 
 test('emit one value - two listeners', function (t) {
   return suite('', function (s) {
-    s.set('maxTime', setup.maxTime);
-    s.set('minSamples', setup.minSamples);
+    s.set('maxTime', maxTime);
+    s.set('minSamples', minSamples);
 
-    var subjects = setup.createInstancesOn(handle, handle2);
+    var subjects = createInstancesOn(handle, handle2);
 
     var called = null;
     var called2 = null;
@@ -45,16 +45,6 @@ test('emit one value - two listeners', function (t) {
       subjects.dripEmitter.emit('foo', 'bar');
     });
 
-    s.bench('push-stream-patch', function () {
-      called = called2 = 0;
-      subjects.pushStreamPatch.push('bar');
-    });
-
-    s.bench('push-stream', function () {
-      called = called2 = 0;
-      subjects.pushStream.push('bar');
-    });
-
     s.bench('dripEmitterEnhanced', function () {
       called = called2 = 0;
       subjects.dripEmitterEnhanced.emit('foo', 'bar');
@@ -62,30 +52,30 @@ test('emit one value - two listeners', function (t) {
 
     s.bench('d3-dispatch', function () {
       called = called2 = 0;
-      subjects.dispatch.call('foo', null, 'bar');
+      subjects.d3Dispatch.call('foo', null, 'bar');
     });
 
     s.bench('namespace-emitter', function () {
       called = called2 = 0;
-      subjects.nsEmitter.emit('foo', 'bar');
+      subjects.namespaceEmitter.emit('foo', 'bar');
     });
 
     s.bench('ReactiveProperty', function () {
       called = called2 = 0;
-      subjects.rProperty('bar');
+      subjects.reactiveProperty('bar');
     });
 
     s.bench('observable', function () {
       called = called2 = 0;
-      subjects.observableValue('bar');
+      subjects.observable('bar');
     });
 
     s.bench('observ', function () {
       called = called2 = 0;
-      subjects.observValue.set('bar');
+      subjects.observ.set('bar');
     });
 
-    s.bench('RXJS', function () {
+    s.bench('rxjs Subject', function () {
       called = called2 = 0;
       subjects.subject.next('bar');
     });
@@ -98,11 +88,6 @@ test('emit one value - two listeners', function (t) {
     s.bench('MiniSignals', function () {
       called = called2 = 0;
       subjects.miniSignal.dispatch('bar');
-    });
-
-    s.bench('MicroSignals', function () {
-      called = called2 = 0;
-      subjects.microSignal.dispatch('bar');
     });
 
     s.bench('signal-emitter', function () {
@@ -125,16 +110,6 @@ test('emit one value - two listeners', function (t) {
       subjects.miniVent.emit('foo', 'bar');
     });
 
-    s.bench('pull-notify', function () {
-      called = called2 = 0;
-      subjects.pullNotify('bar');
-    });
-
-    s.bench('xstream', function () {
-      called = called2 = 0;
-      subjects.xstream.shamefullySendNext('bar');
-    });
-
     s.bench('waddup', function () {
       called = called2 = 0;
       subjects.waddup.publish('foo', 'bar');
@@ -151,20 +126,28 @@ test('emit one value - two listeners', function (t) {
     });
 
     function handle(a) {
-      if (!subjects) { // ignore calls before bechmarks start
+      if (!subjects) {
+        // ignore calls before benchmarks start
         return;
       }
-      if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+      // if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+      //   throw new Error('invalid arguments ' + a);
+      // }
+      if (a !== 'bar') {
         throw new Error('invalid arguments ' + a);
       }
       called++;
     }
 
     function handle2(a) {
-      if (!subjects) { // ignore calls before bechmarks start
+      if (!subjects) {
+        // ignore calls before benchmarks start
         return;
       }
-      if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+      // if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
+      //   throw new Error('invalid arguments');
+      // }
+      if (a !== 'bar') {
         throw new Error('invalid arguments');
       }
       called2++;

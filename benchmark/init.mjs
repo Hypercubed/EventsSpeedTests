@@ -1,19 +1,26 @@
-var suite = require('chuhai');
-var test = require('blue-tape');
-var setup = require('../subjects');
+import suite from 'chuhai';
+import test from 'blue-tape';
+import {
+  maxTime,
+  minSamples,
+  constructors as _constructors,
+} from '../subjects/index.mjs';
 
 test('init', function (t) {
   return suite('', function (s) {
-    s.set('maxTime', setup.maxTime);
-    s.set('minSamples', setup.minSamples);
+    s.set('maxTime', maxTime);
+    s.set('minSamples', minSamples);
 
-    var constructors = setup.constructors;
+    var constructors = _constructors;
 
     var dummy = null;
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.ok(typeof dummy === 'object' || typeof dummy === 'function', e.target.name + ' constructed an object');
+      t.ok(
+        typeof dummy === 'object' || typeof dummy === 'function',
+        e.target.name + ' constructed an object'
+      );
       dummy = null;
     });
 
@@ -24,7 +31,7 @@ test('init', function (t) {
     });
 
     s.bench('EventEmitter', function () {
-      dummy = new constructors.EventEmitter1();
+      dummy = new constructors.Events();
     });
 
     s.bench('EventEmitter2', function () {
@@ -33,10 +40,6 @@ test('init', function (t) {
 
     s.bench('EventEmitter3', function () {
       dummy = new constructors.EventEmitter3();
-    });
-
-    s.bench('push-stream', function () {
-      dummy = constructors.push();
     });
 
     s.bench('DripEmitter', function () {
@@ -57,14 +60,6 @@ test('init', function (t) {
 
     s.bench('MiniSignals', function () {
       dummy = new constructors.MiniSignal();
-    });
-
-    s.bench('EventDispatcher', function () {
-      dummy = new constructors.EventDispatcher();
-    });
-
-    s.bench('pull-notify', function () {
-      dummy = constructors.pull.notify();
     });
   });
 });

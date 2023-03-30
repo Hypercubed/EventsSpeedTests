@@ -2,12 +2,8 @@ mkdir -p raw
 
 npm run build
 
-npm start bench.chrome
+npx p-s bench.browser
+mv raw/browser.tap raw/browser-chrome-v111.tap
 sleep 10
 
-npm start bench.firefox
-sleep 10
-
-npm start bench.safari
-
-npm start summary.browsers
+npx p-s summary.browsers
