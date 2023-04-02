@@ -24,7 +24,9 @@
     "fs": "browserify-fs",
     "path": "path-browserify",
     "stream": "stream-browserify",
-    "process": "process/browser.js"
+    "process": "process/browser.js",
+    "events": "events",
+    "buffer": "buffer"
   },
   "homepage": "https://github.com/Hypercubed/EventsSpeedTests",
   "devDependencies": {
@@ -35,6 +37,7 @@
     "esbuild": "^0.17.15",
     "eslint": "^8.37.0",
     "eslint-plugin-node": "^2.0.0",
+    "node-stdlib-browser": "^1.2.0",
     "npm-check": "^6.0.1",
     "prettier": "2.8.7",
     "tap-markdown": "^1.2.1",
@@ -50,6 +53,7 @@
     "event-signal": "0.1.6",
     "eventemitter2": "^6.4.9",
     "eventemitter3": "^5.0.0",
+    "events": "^3.3.0",
     "mini-signals": "^2.0.0-2",
     "minivents": "^2.0.2",
     "namespace-emitter": "^2.0.1",
@@ -62,7 +66,6 @@
     "signals": "1.0.0",
     "signals-lite": "1.0.0",
     "sister": "^3.0.0",
-    "stream": "^0.0.2",
     "typed-signals": "^2.5.0",
     "waddup": "^2.0.1"
   }
