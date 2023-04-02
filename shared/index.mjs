@@ -16,6 +16,8 @@ import { dispatch as d3Dispatch } from 'd3-dispatch';
 import waddup from 'waddup';
 import Evee from 'evee';
 import Sister from 'sister';
+import { Signal as ZSignal } from '@zouloux/signal';
+import { Signal as TSignal } from "typed-signals";
 
 export const constructors = {
   Events,
@@ -36,10 +38,12 @@ export const constructors = {
   waddup,
   Evee,
   Sister,
+  ZSignal,
+  TSignal
 };
 
 export const minSamples = 10;
-export const maxTime = 0.1;
+export const maxTime = 1;
 
 export function createInstances() {
   return {
@@ -61,6 +65,8 @@ export function createInstances() {
     waddup,
     evee: new Evee(),
     sister: Sister(),
+    zSignal: ZSignal(),
+    tSignal: new TSignal()
   };
 }
 
@@ -84,6 +90,8 @@ export function addHandles(subjects, handles) {
     subjects.waddup.subscribe('foo', ({ data }) => h(data));
     subjects.evee.on('foo', (e) => h(e.data));
     subjects.sister.on('foo', h);
+    subjects.zSignal.add(h);
+    subjects.tSignal.connect(h);
   });
 
   return subjects;

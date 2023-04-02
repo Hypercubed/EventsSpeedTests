@@ -28,14 +28,13 @@
   "homepage": "https://github.com/Hypercubed/EventsSpeedTests",
   "devDependencies": {
     "assume": "~1.2.6",
-    "browserify": "^16.5.1",
+    "browserify": "^17.0.0",
     "chuhai": "^1.2.0",
-    "cross-env": "^2.0.1",
-    "envify": "^3.4.1",
+    "cross-env": "^7.0.3",
+    "envify": "^4.1.0",
     "esbuild": "^0.17.15",
     "eslint": "^8.37.0",
     "eslint-plugin-node": "^2.0.0",
-    "mkdirp": "^0.5.1",
     "npm-check": "^6.0.1",
     "prettier": "2.8.7",
     "tap-markdown": "^1.2.1",
@@ -44,6 +43,7 @@
     "tidy-markdown": "2.0.4"
   },
   "dependencies": {
+    "@zouloux/signal": "^0.2.4",
     "assume": "^1.4.1",
     "d3-dispatch": "^3.0.1",
     "evee": "^2.1.0",
@@ -63,6 +63,7 @@
     "signals-lite": "1.0.0",
     "sister": "^3.0.0",
     "stream": "^0.0.2",
+    "typed-signals": "^2.5.0",
     "waddup": "^2.0.1"
   }
 }

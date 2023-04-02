@@ -86,6 +86,22 @@ test('emit variable number of values', function (t) {
       subjects.signalLite.broadcast('bar', 'baz', 'boom');
     });
 
+    s.bench('zouloux/signal', function () {
+      called = called2 = 0;
+      subjects.zSignal.dispatch();
+      subjects.zSignal.dispatch('bar');
+      subjects.zSignal.dispatch('bar', 'baz');
+      subjects.zSignal.dispatch('bar', 'baz', 'boom');
+    });
+
+    s.bench('typed-signals', function () {
+      called = called2 = 0;
+      subjects.tSignal.emit();
+      subjects.tSignal.emit('bar');
+      subjects.tSignal.emit('bar', 'baz');
+      subjects.tSignal.emit('bar', 'baz', 'boom');
+    });
+
     function handle(a, b, c) {
       if (!subjects) {
         // ignore calls before benchmarks start
