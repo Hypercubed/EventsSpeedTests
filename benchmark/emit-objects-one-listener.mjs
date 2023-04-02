@@ -1,6 +1,6 @@
 import suite from 'chuhai';
-import test from 'blue-tape';
-import { maxTime, minSamples, createInstancesOn } from '../subjects/index.mjs';
+import test from 'tape';
+import { maxTime, minSamples, createInstancesOn } from '../shared/index.mjs';
 
 test('emit one object - one listener', function (t) {
   return suite('', function (s) {
@@ -43,28 +43,6 @@ test('emit one object - one listener', function (t) {
       subjects.ee3.emit('foo', { bar: 'bar' });
       subjects.ee3.emit('foo', { bar: 'bar', baz: 'baz' });
       subjects.ee3.emit('foo', { bar: 'bar', baz: 'baz', boom: Math.random() });
-    });
-
-    s.bench('dripEmitter', function () {
-      called = 0;
-      subjects.dripEmitter.emit('foo', { bar: 'bar' });
-      subjects.dripEmitter.emit('foo', { bar: 'bar', baz: 'baz' });
-      subjects.dripEmitter.emit('foo', {
-        bar: 'bar',
-        baz: 'baz',
-        boom: Math.random(),
-      });
-    });
-
-    s.bench('dripEmitterEnhanced', function () {
-      called = 0;
-      subjects.dripEmitterEnhanced.emit('foo', { bar: 'bar' });
-      subjects.dripEmitterEnhanced.emit('foo', { bar: 'bar', baz: 'baz' });
-      subjects.dripEmitterEnhanced.emit('foo', {
-        bar: 'bar',
-        baz: 'baz',
-        boom: Math.random(),
-      });
     });
 
     s.bench('rxjs Subject', function () {

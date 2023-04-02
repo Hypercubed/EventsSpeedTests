@@ -1,10 +1,10 @@
 import suite from 'chuhai';
-import test from 'blue-tape';
+import test from 'tape';
 import {
   maxTime,
   minSamples,
   constructors as _constructors,
-} from '../subjects/index.mjs';
+} from '../shared/index.mjs';
 
 test('init', function (t) {
   return suite('', function (s) {
@@ -40,14 +40,6 @@ test('init', function (t) {
 
     s.bench('EventEmitter3', function () {
       dummy = new constructors.EventEmitter3();
-    });
-
-    s.bench('DripEmitter', function () {
-      dummy = new constructors.DripEmitter();
-    });
-
-    s.bench('DripEmitterEnhanced', function () {
-      dummy = new constructors.DripEmitterEnhanced();
     });
 
     s.bench('ReactiveProperty', function () {

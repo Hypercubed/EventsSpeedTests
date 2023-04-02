@@ -1,6 +1,6 @@
 import suite from 'chuhai';
-import test from 'blue-tape';
-import { maxTime, minSamples, createInstancesOn } from '../subjects/index.mjs';
+import test from 'tape';
+import { maxTime, minSamples, createInstancesOn } from '../shared/index.mjs';
 
 test('emit one random value - two listeners', function (t) {
   return suite('', function (s) {
@@ -38,16 +38,6 @@ test('emit one random value - two listeners', function (t) {
     s.bench('EventEmitter3', function () {
       called = called2 = 0;
       subjects.ee3.emit('foo', Math.random());
-    });
-
-    s.bench('dripEmitter', function () {
-      called = called2 = 0;
-      subjects.dripEmitter.emit('foo', Math.random());
-    });
-
-    s.bench('dripEmitterEnhanced', function () {
-      called = called2 = 0;
-      subjects.dripEmitterEnhanced.emit('foo', Math.random());
     });
 
     s.bench('d3-dispatch', function () {

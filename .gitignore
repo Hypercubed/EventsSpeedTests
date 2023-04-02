@@ -3,4 +3,5 @@ bower_components/
 node_modules/
 .grunt/
 browserified/
+raw/
 .vscode

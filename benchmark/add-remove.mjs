@@ -1,6 +1,6 @@
 import suite from 'chuhai';
-import test from 'blue-tape';
-import { maxTime, minSamples, createInstances } from '../subjects/index.mjs';
+import test from 'tape';
+import { maxTime, minSamples, createInstances } from '../shared/index.mjs';
 
 test('add and remove', (t) => {
   return suite('', (s) => {
@@ -17,8 +17,6 @@ test('add and remove', (t) => {
       subjects.ee1.emit('foo', 'bar');
       subjects.ee2.emit('foo', 'bar');
       subjects.ee3.emit('foo', 'bar');
-      subjects.dripEmitter.emit('foo', 'bar');
-      subjects.dripEmitterEnhanced.emit('foo', 'bar');
       subjects.reactiveProperty('bar');
       subjects.signal.dispatch('bar');
       subjects.miniSignal.dispatch('bar');
@@ -38,16 +36,6 @@ test('add and remove', (t) => {
     s.bench('EventEmitter3', function () {
       subjects.ee3.on('foo', handle);
       subjects.ee3.removeListener('foo', handle);
-    });
-
-    s.bench('dripEmitter', function () {
-      subjects.dripEmitter.on('foo', handle);
-      subjects.dripEmitter.off('foo', handle);
-    });
-
-    s.bench('dripEmitterEnhanced', function () {
-      subjects.dripEmitterEnhanced.on('foo', handle);
-      subjects.dripEmitterEnhanced.off('foo', handle);
     });
 
     s.bench('ReactiveProperty', function () {

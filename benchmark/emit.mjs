@@ -1,6 +1,6 @@
 import suite from 'chuhai';
-import test from 'blue-tape';
-import { maxTime, minSamples, createInstancesOn } from '../subjects/index.mjs';
+import test from 'tape';
+import { maxTime, minSamples, createInstancesOn } from '../shared/index.mjs';
 
 test('emit variable number of values', function (t) {
   return suite('', function (s) {
@@ -52,23 +52,6 @@ test('emit variable number of values', function (t) {
       subjects.ee3.emit('foo', 'bar');
       subjects.ee3.emit('foo', 'bar', 'baz');
       subjects.ee3.emit('foo', 'bar', 'baz', 'boom');
-    });
-
-    s.xbench('dripEmitter', function () {
-      // see https://github.com/qualiancy/drip/pull/4
-      called = called2 = 0;
-      subjects.dripEmitter.emit('foo');
-      subjects.dripEmitter.emit('foo', 'bar');
-      subjects.dripEmitter.emit('foo', 'bar', 'baz');
-      subjects.dripEmitter.emit('foo', 'bar', 'baz', 'boom');
-    });
-
-    s.bench('dripEmitterEnhanced', function () {
-      called = called2 = 0;
-      subjects.dripEmitterEnhanced.emit('foo');
-      subjects.dripEmitterEnhanced.emit('foo', 'bar');
-      subjects.dripEmitterEnhanced.emit('foo', 'bar', 'baz');
-      subjects.dripEmitterEnhanced.emit('foo', 'bar', 'baz', 'boom');
     });
 
     s.bench('JS-Signals', function () {

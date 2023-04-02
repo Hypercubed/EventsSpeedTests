@@ -1,6 +1,6 @@
 import suite from 'chuhai';
-import test from 'blue-tape';
-import { maxTime, minSamples, createInstancesOn } from '../subjects/index.mjs';
+import test from 'tape';
+import { maxTime, minSamples, createInstancesOn } from '../shared/index.mjs';
 
 test('emit many values - two listeners', function (t) {
   return suite('', function (s) {
@@ -66,45 +66,6 @@ test('emit many values - two listeners', function (t) {
     s.bench('EventEmitter3', function () {
       called = called2 = 0;
       subjects.ee3.emit(
-        'foo',
-        'bar',
-        'baz',
-        'boom',
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        Math.random()
-      );
-    });
-
-    s.xbench('dripEmitter', function () {
-      // see https://github.com/qualiancy/drip/pull/4
-      called = called2 = 0;
-      subjects.dripEmitter.emit(
-        'foo',
-        'bar',
-        'baz',
-        'boom',
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        Math.random()
-      );
-    });
-
-    s.bench('dripEmitterEnhanced', function () {
-      called = called2 = 0;
-      subjects.dripEmitterEnhanced.emit(
         'foo',
         'bar',
         'baz',

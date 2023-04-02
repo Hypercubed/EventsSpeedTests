@@ -13,8 +13,6 @@ import observ from 'observ';
 import observable from 'observable';
 import namespaceEmitter from 'namespace-emitter';
 import { dispatch as d3Dispatch } from 'd3-dispatch';
-import DripEmitter from 'drip/lib/drip/emitter.js';
-import DripEmitterEnhanced from 'drip/lib/drip/enhanced.js';
 import waddup from 'waddup';
 import Evee from 'evee';
 import Sister from 'sister';
@@ -35,26 +33,13 @@ export const constructors = {
   observable,
   namespaceEmitter,
   d3Dispatch,
-  DripEmitter,
-  DripEmitterEnhanced,
   waddup,
   Evee,
   Sister,
 };
 
-export let minSamples = 10;
-export let maxTime = 0.1;
-
-switch (process.env.BENCH) {
-  case 'fast':
-    minSamples = 1;
-    maxTime = 0.01;
-    break;
-  case 'full':
-    minSamples = 5;
-    maxTime = 5;
-    break;
-}
+export const minSamples = 10;
+export const maxTime = 0.1;
 
 export function createInstances() {
   return {
@@ -73,8 +58,6 @@ export function createInstances() {
     observable: observable(),
     namespaceEmitter: namespaceEmitter(),
     d3Dispatch: d3Dispatch('foo'),
-    dripEmitter: new DripEmitter(),
-    dripEmitterEnhanced: new DripEmitterEnhanced(),
     waddup,
     evee: new Evee(),
     sister: Sister(),
@@ -98,8 +81,6 @@ export function addHandles(subjects, handles) {
     subjects.observable(h);
     subjects.namespaceEmitter.on('foo', h);
     subjects.d3Dispatch.on('foo.' + i, h);
-    subjects.dripEmitter.on('foo', h);
-    subjects.dripEmitterEnhanced.on('foo', h);
     subjects.waddup.subscribe('foo', ({ data }) => h(data));
     subjects.evee.on('foo', (e) => h(e.data));
     subjects.sister.on('foo', h);

@@ -1,11 +1,11 @@
 import suite from 'chuhai';
-import test from 'blue-tape';
+import test from 'tape';
 import {
   maxTime,
   minSamples,
   createInstances,
   addHandles,
-} from '../subjects/index.mjs';
+} from '../shared/index.mjs';
 
 test('emit one value - many listeners', function (t) {
   return suite('', function (s) {
@@ -57,14 +57,6 @@ test('emit one value - many listeners', function (t) {
     s.bench('EventEmitter3', function () {
       called = 0;
       subjects.ee3.emit('foo', 'bar');
-    });
-    s.bench('dripEmitter', function () {
-      called = 0;
-      subjects.dripEmitter.emit('foo', 'bar');
-    });
-    s.bench('dripEmitterEnhanced', function () {
-      called = 0;
-      subjects.dripEmitterEnhanced.emit('foo', 'bar');
     });
     s.bench('rxjs Subject', function () {
       called = 0;

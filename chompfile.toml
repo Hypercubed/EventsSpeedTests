@@ -1,0 +1,95 @@
+version = 0.1
+
+[[task]]
+name = 'clean'
+validation = 'none'
+run = '''
+  rm -rf browserified
+  mkdir -p raw
+'''
+
+[[task]]
+name = 'build:browser'
+deps = ['benchmark/##.mjs']
+target = 'browserified/##.js'
+run = 'esbuild --bundle --format=cjs $DEP | browserify - -t envify -o $TARGET'
+
+[[task]]
+name = 'bench'
+validation = 'none'
+run = '''
+  chomp bench:node:all
+  chomp bench:browser
+  chomp bench:deno
+  chomp summary
+'''
+
+[[task]]
+name = 'bench:node:all'
+validation = 'none'
+run = '''
+  nvm use v16
+  chomp bench:node
+  nvm use v18
+  chomp bench:node
+'''
+
+[[task]]
+name = 'bench:node'
+validation = 'none'
+run = '''
+  mkdir -p raw
+  rm -f ./raw/node-`node -v`.tap
+  echo "" > ./raw/node-`node -v`.tap
+  chomp bench:node:run
+'''
+
+[[task]]
+name = 'bench:node:run'
+serial = true
+dep = 'benchmark/##.mjs'
+validation = 'none'
+run = 'node $DEP | tee -a ./raw/node-`node -v`.tap'
+
+[[task]]
+name = 'bench:browser'
+validation = 'none'
+deps = ['build:browser']
+run = '''
+  mkdir -p raw
+  rm -f ./raw/browser.tap
+  echo "" > ./raw/browser.tap
+  chomp bench:browser:run
+'''
+
+[[task]]
+name = 'bench:browser:run'
+serial = true
+dep = 'browserified/##.js'
+validation = 'none'
+run = 'testling < $DEP | tee -a ./raw/browser.tap'
+
+[[task]]
+name = 'summary'
+dep = 'raw/##.tap'
+target = 'results/##.md'
+run = 'tap-markdown < $DEP > $TARGET'
+
+[[task]]
+name = 'bench:deno'
+validation = 'none'
+run = '''
+  mkdir -p raw
+  export VER=`deno --version | grep deno | cut -d " " -f 2`
+  rm -f ./raw/deno-$VER.tap
+  echo "" > ./raw/deno-$VER.tap
+  chomp bench:deno:run
+'''
+
+[[task]]
+name = 'bench:deno:run'
+serial = true
+dep = 'benchmark/##.mjs'
+validation = 'none'
+run = 'node $DEP | tee -a ./raw/deno-$VER.tap'
+

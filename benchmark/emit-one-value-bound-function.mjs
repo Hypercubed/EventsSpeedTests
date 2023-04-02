@@ -1,6 +1,6 @@
 import suite from 'chuhai';
-import test from 'blue-tape';
-import { maxTime, minSamples, createInstances } from '../subjects/index.mjs';
+import test from 'tape';
+import { maxTime, minSamples, createInstances } from '../shared/index.mjs';
 
 test('emit one value - bound function', function (t) {
   return suite('', function (s) {
@@ -29,10 +29,6 @@ test('emit one value - bound function', function (t) {
     subjects.ee2.on('foo', handle2);
     subjects.ee3.on('foo', handle.bind(ctx));
     subjects.ee3.on('foo', handle2);
-    subjects.dripEmitter.on('foo', handle.bind(ctx));
-    subjects.dripEmitter.on('foo', handle2);
-    subjects.dripEmitterEnhanced.on('foo', handle.bind(ctx));
-    subjects.dripEmitterEnhanced.on('foo', handle2);
     subjects.signal.add(handle.bind(ctx));
     subjects.signal.add(handle2);
     subjects.miniSignal.add(handle.bind(ctx));
@@ -72,16 +68,6 @@ test('emit one value - bound function', function (t) {
     s.bench('EventEmitter3', function () {
       called = called2 = 0;
       subjects.ee3.emit('foo', 'bar');
-    });
-
-    s.bench('dripEmitter', function () {
-      called = called2 = 0;
-      subjects.dripEmitter.emit('foo', 'bar');
-    });
-
-    s.bench('dripEmitterEnhanced', function () {
-      called = called2 = 0;
-      subjects.dripEmitterEnhanced.emit('foo', 'bar');
     });
 
     s.bench('rxjs Subject', function () {
