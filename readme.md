@@ -22,7 +22,7 @@
 
 ## Results
 
-### [Node v16](./results/node-v16.tap.md)
+### [Node v16](./results/node-v16.md)
 
 Number of times each library appeared in the "fastest" list:
 
@@ -34,7 +34,7 @@ EventEmitter3      XX
 observ             X
 ```
 
-### [Node v18](./results/node-v18.15.0.md)
+### [Node v18](./results/node-v18.md)
 
 Number of times each library appeared in the "fastest" list:
 
@@ -45,7 +45,7 @@ ReactiveProperty   XXX
 EventEmitter3      XX
 ```
 
-### [Deno v1.32](./results/deno-v1.32.3.md)
+### [Deno v1.32](./results/deno-v1.32.md)
 
 ```
 MiniSignals        XXXXXXXXXX
@@ -65,7 +65,7 @@ EventEmitter3      XX
 
 ## How?
 
-Benchmarks generated using [Chūhai](https://github.com/Hypercubed/chuhai), [grunion](https://github.com/Hypercubed/grunion), and [tap-markdown](https://github.com/Hypercubed/tap-markdown).
+Benchmarks generated using [Chūhai](https://github.com/Hypercubed/chuhai), [chomp](https://chompbuild.com/), and [tap-markdown](https://github.com/Hypercubed/tap-markdown).
 
 ## License
 
