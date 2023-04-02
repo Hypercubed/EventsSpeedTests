@@ -23,12 +23,12 @@
   "browser": {
     "fs": "browserify-fs",
     "path": "path-browserify",
-    "stream": "stream-browserify"
+    "stream": "stream-browserify",
+    "process": "process/browser.js"
   },
   "homepage": "https://github.com/Hypercubed/EventsSpeedTests",
   "devDependencies": {
     "assume": "~1.2.6",
-    "browserify": "^17.0.0",
     "chuhai": "^1.2.0",
     "cross-env": "^7.0.3",
     "envify": "^4.1.0",

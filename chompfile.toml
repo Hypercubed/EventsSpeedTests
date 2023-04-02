@@ -4,15 +4,15 @@ version = 0.1
 name = 'clean'
 validation = 'none'
 run = '''
-  rm -rf browserified
+  rm -rf browser
   mkdir -p raw
 '''
 
 [[task]]
 name = 'build:browser'
 deps = ['benchmark/##.mjs']
-target = 'browserified/##.js'
-run = 'esbuild --bundle --format=cjs $DEP | browserify - -t envify -o $TARGET'
+target = 'browser/##.js'
+run = 'esbuild --bundle --format=cjs  --platform=browser --inject:./shared/process-shim.js --outfile=$TARGET --minify --tree-shaking=true $DEP'
 
 [[task]]
 name = 'bench'
@@ -65,7 +65,7 @@ run = '''
 [[task]]
 name = 'bench:browser:run'
 serial = true
-dep = 'browserified/##.js'
+dep = 'browser/##.js'
 validation = 'none'
 run = 'testling < $DEP | tee -a ./raw/browser.tap'
 
@@ -80,7 +80,7 @@ name = 'bench:deno'
 validation = 'none'
 run = '''
   mkdir -p raw
-  export VER=`deno --version | grep deno | cut -d " " -f 2`
+  cross-env VER=`deno --version | grep deno | cut -d " " -f 2`
   rm -f ./raw/deno-$VER.tap
   echo "" > ./raw/deno-$VER.tap
   chomp bench:deno:run
