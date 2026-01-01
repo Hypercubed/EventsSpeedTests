@@ -17,7 +17,7 @@ test('emit one array', function (t) {
       called = called2 = null;
     });
 
-    var subjects = createInstancesOn(handle, handle2);
+    var subjects = createInstancesOn('foo', handle, handle2);
 
     s.burn('Theoretical max', function () {
       called = called2 = 0;

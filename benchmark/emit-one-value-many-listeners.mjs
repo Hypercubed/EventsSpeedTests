@@ -3,8 +3,7 @@ import test from 'tape';
 import {
   maxTime,
   minSamples,
-  createInstances,
-  addHandles,
+  createInstancesOn
 } from '../shared/index.mjs';
 
 test('emit one value - many listeners', function (t) {
@@ -29,8 +28,7 @@ test('emit one value - many listeners', function (t) {
       };
     });
 
-    var subjects = createInstances();
-    addHandles(subjects, handles);
+    var subjects = createInstancesOn('foo', ...handles);
     started = true;
 
     s.cycle(function (e) {

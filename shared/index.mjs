@@ -1,3 +1,4 @@
+import EventEmitter from 'node:events';
 import Events from 'events';
 import EventEmitter2 from 'eventemitter2';
 import EventEmitter3 from 'eventemitter3';
@@ -18,8 +19,13 @@ import Evee from 'evee';
 import Sister from 'sister';
 import { Signal as ZSignal } from '@zouloux/signal';
 import { Signal as TSignal } from "typed-signals";
+import { Event } from 'ts-typed-events';
+import mitt from 'mitt';
+import Emittery from 'emittery';
+import { AwaitableEventEmitter  } from '@bitr/awaitable-event-emitter';
 
 export const constructors = {
+  EventEmitter,
   Events,
   EventEmitter2,
   EventEmitter3,
@@ -39,7 +45,9 @@ export const constructors = {
   Evee,
   Sister,
   ZSignal,
-  TSignal
+  TSignal,
+  Event,
+  mitt
 };
 
 export const minSamples = 10;
@@ -47,6 +55,7 @@ export const maxTime = 1;
 
 export function createInstances() {
   return {
+    ee: new EventEmitter(),
     ee1: new Events(),
     ee2: new EventEmitter2(),
     ee3: new EventEmitter3(),
@@ -66,15 +75,20 @@ export function createInstances() {
     evee: new Evee(),
     sister: Sister(),
     zSignal: ZSignal(),
-    tSignal: new TSignal()
+    tSignal: new TSignal(),
+    tsTypedEvents: new Event(),
+    mitt: mitt(),
+    emittery: new Emittery(),
+    awaitable: new AwaitableEventEmitter()
   };
 }
 
-export function addHandles(subjects, handles) {
+export function addHandles(key, subjects, handles) {
   handles.forEach((h, i) => {
-    subjects.ee1.on('foo', h);
-    subjects.ee2.on('foo', h);
-    subjects.ee3.on('foo', h);
+    subjects.ee.on(key, h);
+    subjects.ee1.on(key, h);
+    subjects.ee2.on(key, h);
+    subjects.ee3.on(key, h);
     subjects.signal.add(h);
     subjects.miniSignal.add(h);
     subjects.signalEmitter.on(h);
@@ -82,23 +96,26 @@ export function addHandles(subjects, handles) {
     subjects.signalLite.add(h);
     subjects.subject.subscribe(h);
     subjects.reactiveProperty.on(h);
-    subjects.miniVent.on('foo', h);
+    subjects.miniVent.on(key, h);
     subjects.observ(h);
     subjects.observable(h);
-    subjects.namespaceEmitter.on('foo', h);
-    subjects.d3Dispatch.on('foo.' + i, h);
-    subjects.waddup.subscribe('foo', ({ data }) => h(data));
-    subjects.evee.on('foo', (e) => h(e.data));
-    subjects.sister.on('foo', h);
+    subjects.namespaceEmitter.on(key, h);
+    subjects.d3Dispatch.on(`${key}.${i}`, h);
+    subjects.waddup.subscribe(key, ({ data }) => h(data));
+    subjects.evee.on(key, (e) => h(e.data));
+    subjects.sister.on(key, h);
     subjects.zSignal.add(h);
     subjects.tSignal.connect(h);
+    subjects.tsTypedEvents.on(h);
+    subjects.mitt.on(key, h);
+    subjects.emittery.on(key, h);
+    subjects.awaitable.on(key, h);
   });
 
   return subjects;
 }
 
-export const createInstancesOn = function createInstancesOn() {
+export function createInstancesOn(key, ...args) {
   const subjects = createInstances();
-  const args = Array.prototype.slice.apply(arguments);
-  return addHandles(subjects, args);
+  return addHandles(key, subjects, args);
 };

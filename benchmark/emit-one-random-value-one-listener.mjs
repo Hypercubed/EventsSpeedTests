@@ -7,7 +7,7 @@ test('emit one random value - one listener', function (t) {
     s.set('maxTime', maxTime);
     s.set('minSamples', minSamples);
 
-    var subjects = createInstancesOn(handle);
+    var subjects = createInstancesOn('foo', handle);
 
     var called = null;
 

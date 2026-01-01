@@ -7,7 +7,7 @@ test('emit one value - one listener', function (t) {
     s.set('maxTime', maxTime);
     s.set('minSamples', minSamples);
 
-    var subjects = createInstancesOn(handle);
+    var subjects = createInstancesOn('foo', handle);
 
     var called = null;
 
@@ -105,6 +105,25 @@ test('emit one value - one listener', function (t) {
     s.bench('sister', function () {
       called = 0;
       subjects.sister.trigger('foo', 'bar');
+    });
+
+    s.bench('ts-typed-events', function () {
+      called = 0;
+      subjects.tsTypedEvents.emit('bar');
+    });
+
+    s.bench('mitt', function () {
+      called = 0;
+      subjects.mitt.emit('foo', 'bar');
+    });
+
+    s.bench('sindresorhus/emittery', {
+      defer: true,
+      fn: async (deferred) => {
+        called = 0;
+        await subjects.emittery.emitSerial('foo', 'bar');
+        deferred.resolve();
+      }
     });
 
     function handle(a) {

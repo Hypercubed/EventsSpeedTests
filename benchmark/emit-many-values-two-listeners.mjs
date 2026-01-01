@@ -7,7 +7,7 @@ test('emit many values - two listeners', function (t) {
     s.set('maxTime', maxTime);
     s.set('minSamples', minSamples);
 
-    var subjects = createInstancesOn(handle, handle2);
+    var subjects = createInstancesOn('foo', handle, handle2);
 
     var called = 0;
     var called2 = 0;

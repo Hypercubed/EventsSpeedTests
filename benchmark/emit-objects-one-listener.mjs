@@ -7,7 +7,7 @@ test('emit one object - one listener', function (t) {
     s.set('maxTime', maxTime);
     s.set('minSamples', minSamples);
 
-    var subjects = createInstancesOn(handle);
+    var subjects = createInstancesOn('foo', handle);
 
     var called = null;
 
@@ -130,6 +130,28 @@ test('emit one object - one listener', function (t) {
       subjects.sister.trigger('foo', { bar: 'bar' });
       subjects.sister.trigger('foo', { bar: 'bar', baz: 'baz' });
       subjects.sister.trigger('foo', {
+        bar: 'bar',
+        baz: 'baz',
+        boom: Math.random(),
+      });
+    });
+
+    s.bench('ts-typed-events', function () {
+      called = 0;
+      subjects.tsTypedEvents.emit({ bar: 'bar' });
+      subjects.tsTypedEvents.emit({ bar: 'bar', baz: 'baz' });
+      subjects.tsTypedEvents.emit({
+        bar: 'bar',
+        baz: 'baz',
+        boom: Math.random(),
+      });
+    });
+
+    s.bench('mitt', function () {
+      called = 0;
+      subjects.mitt.emit('foo', { bar: 'bar' });
+      subjects.mitt.emit('foo', { bar: 'bar', baz: 'baz' });
+      subjects.mitt.emit('foo', {
         bar: 'bar',
         baz: 'baz',
         boom: Math.random(),

@@ -7,7 +7,7 @@ test('emit variable number of values', function (t) {
     s.set('maxTime', maxTime);
     s.set('minSamples', minSamples);
 
-    var subjects = createInstancesOn(handle, handle2);
+    var subjects = createInstancesOn('foo', handle, handle2);
 
     var called = 0;
     var called2 = 0;
@@ -30,7 +30,15 @@ test('emit variable number of values', function (t) {
       handle2('bar', 'baz', 'boom');
     });
 
-    s.bench('EventEmitter', function () {
+    s.bench('node:events', function () {
+      called = called2 = 0;
+      subjects.ee.emit('foo');
+      subjects.ee.emit('foo', 'bar');
+      subjects.ee.emit('foo', 'bar', 'baz');
+      subjects.ee.emit('foo', 'bar', 'baz', 'boom');
+    });
+
+    s.bench('browserify/events', function () {
       called = called2 = 0;
       subjects.ee1.emit('foo');
       subjects.ee1.emit('foo', 'bar');
@@ -38,7 +46,7 @@ test('emit variable number of values', function (t) {
       subjects.ee1.emit('foo', 'bar', 'baz', 'boom');
     });
 
-    s.bench('EventEmitter2', function () {
+    s.bench('EventEmitter2/EventEmitter2', function () {
       called = called2 = 0;
       subjects.ee2.emit('foo');
       subjects.ee2.emit('foo', 'bar');
@@ -46,7 +54,7 @@ test('emit variable number of values', function (t) {
       subjects.ee2.emit('foo', 'bar', 'baz', 'boom');
     });
 
-    s.bench('EventEmitter3', function () {
+    s.bench('rimus/eventemitter3', function () {
       called = called2 = 0;
       subjects.ee3.emit('foo');
       subjects.ee3.emit('foo', 'bar');
@@ -54,7 +62,7 @@ test('emit variable number of values', function (t) {
       subjects.ee3.emit('foo', 'bar', 'baz', 'boom');
     });
 
-    s.bench('JS-Signals', function () {
+    s.bench('millermedeiros/js-signals', function () {
       called = called2 = 0;
       subjects.signal.dispatch();
       subjects.signal.dispatch('bar');
@@ -62,7 +70,7 @@ test('emit variable number of values', function (t) {
       subjects.signal.dispatch('bar', 'baz', 'boom');
     });
 
-    s.bench('MiniSignals', function () {
+    s.bench('Hypercubed/mini-signals', function () {
       called = called2 = 0;
       subjects.miniSignal.dispatch();
       subjects.miniSignal.dispatch('bar');
@@ -70,7 +78,7 @@ test('emit variable number of values', function (t) {
       subjects.miniSignal.dispatch('bar', 'baz', 'boom');
     });
 
-    s.bench('signal-emitter', function () {
+    s.bench('jasonkarns/signal-emitter', function () {
       called = called2 = 0;
       subjects.signalEmitter.emit();
       subjects.signalEmitter.emit('bar');
@@ -78,7 +86,7 @@ test('emit variable number of values', function (t) {
       subjects.signalEmitter.emit('bar', 'baz', 'boom');
     });
 
-    s.bench('signal-lite', function () {
+    s.bench('CaptainN/SignalsLite.js', function () {
       called = called2 = 0;
       subjects.signalLite.broadcast();
       subjects.signalLite.broadcast('bar');
@@ -94,7 +102,7 @@ test('emit variable number of values', function (t) {
       subjects.zSignal.dispatch('bar', 'baz', 'boom');
     });
 
-    s.bench('typed-signals', function () {
+    s.bench('Lusito/typed-signals', function () {
       called = called2 = 0;
       subjects.tSignal.emit();
       subjects.tSignal.emit('bar');
