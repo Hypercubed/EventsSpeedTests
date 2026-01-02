@@ -17,13 +17,10 @@ test('emit one value - many listeners', function (t) {
 
     var handles = Array.apply(null, Array(N)).map(function () {
       return function (a) {
-        if (!started) {
-          // ignore calls before benchmarks start
-          return;
-        }
-        if (arguments.length > 2 || a !== 'bar') {
-          throw new Error('invalid arguments');
-        }
+        if (!started) return; // ignore calls before benchmarks start
+
+        // Some libraries pass more than one argument
+        if (arguments.length > 5 || a !== 'bar') throw new Error('invalid arguments');
         called++;
       };
     });
@@ -44,53 +41,77 @@ test('emit one value - many listeners', function (t) {
       }
     });
 
-    s.bench('EventEmitter', function () {
+    s.bench('node:events', function () {
       called = 0;
-      subjects.ee1.emit('foo', 'bar');
+      subjects.ee.emit('foo', 'bar');
     });
-    s.bench('EventEmitter2', function () {
+    s.bench('hij1nx/EventEmitter2', function () {
       called = 0;
       subjects.ee2.emit('foo', 'bar');
     });
-    s.bench('EventEmitter3', function () {
+    s.bench('primus/eventemitter3', function () {
       called = 0;
       subjects.ee3.emit('foo', 'bar');
     });
-    s.bench('rxjs Subject', function () {
+    s.bench('reactivex/rxjs Subject', function () {
       called = 0;
       subjects.subject.next('bar');
     });
-    s.bench('ReactiveProperty', function () {
+    s.bench('datavis-tech/reactive-property', function () {
       called = 0;
       subjects.reactiveProperty('bar');
     });
-    s.bench('JS-Signals', function () {
+    s.bench('millermedeiros/js-signals', function () {
       called = 0;
       subjects.signal.dispatch('bar');
     });
-    s.bench('MiniSignals', function () {
+    s.bench('Hypercubed/mini-signals', function () {
       called = 0;
       subjects.miniSignal.dispatch('bar');
     });
-    s.bench('signal-emitter', function () {
+    s.bench('jasonkarns/signal-emitter', function () {
       called = 0;
       subjects.signalEmitter.emit('bar');
     });
-    s.bench('event-signal', function () {
+    s.bench('r-park/event-signal', function () {
       called = 0;
       subjects.eventSignal.emit('bar');
     });
-    s.bench('signal-lite', function () {
+    s.bench('CaptainN/SignalsLite.js', function () {
       called = 0;
       subjects.signalLite.broadcast('bar');
     });
-    s.bench('minivents', function () {
+    s.bench('allouis/minivents', function () {
       called = 0;
       subjects.miniVent.emit('foo', 'bar');
     });
-    s.bench('evee', function () {
+    s.bench('SplittyDev/evee.js', function () {
       called = 0;
       subjects.evee.emit('foo', 'bar');
     });
+    s.bench('JacobFischer/ts-typed-events', function () {
+      called = 0;
+      subjects.tsTypedEvents.emit('bar');
+    });
+    s.bench('developit/mitt', function () {
+      called = 0;
+      subjects.mitt.emit('foo', 'bar');
+    });
+    s.bench('Morglod/tseep', function () {
+      called = 0;
+      subjects.tseep.emit('foo', 'bar');
+    });
+    s.bench('garronej/evt', function () {
+      called = 0;
+      subjects.evt.post('bar');
+    });
+    // s.bench('sindresorhus/emittery', {
+    //   defer: true,
+    //   fn: async function (deferred) {
+    //     called = 0;
+    //     await subjects.emittery.emit('foo', 'bar');
+    //     deferred.resolve();
+    //   }
+    // });
   });
 });

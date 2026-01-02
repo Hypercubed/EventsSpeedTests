@@ -9,124 +9,150 @@ test('emit one value - two listeners', function (t) {
 
     var subjects = createInstancesOn('foo', handle, handle2);
 
-    var called = null;
-    var called2 = null;
+    var calls = [];
+    var calls2 = [];
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, 1, e.target.name + ' called handle once');
-      t.equal(called2, 1, e.target.name + ' called handle2 once');
-      called = called2 = null;
+      t.equal(calls.length, 1, e.target.name + ' called handle once');
+      t.equal(calls2.length, 1, e.target.name + ' called handle2 once');
+
+      t.equal(
+         JSON.stringify(calls),
+        '[["bar"]]',
+        e.target.name + ' handle called with correct arguments'
+      );
+      t.equal(
+        JSON.stringify(calls2),
+        '[["bar"]]',
+        e.target.name + ' handle2 called with correct arguments'
+      );
+
+      calls = [];
+      calls2 = [];
     });
 
     s.burn('Theoretical max', function () {
-      called = called2 = 0;
+      calls = [];
+      calls2 = [];
       handle('bar');
       handle2('bar');
     });
 
-    s.bench('EventEmitter', function () {
-      called = called2 = 0;
-      subjects.ee1.emit('foo', 'bar');
+    s.bench('node:events', function () {
+      calls = [];
+      calls2 = [];
+      subjects.ee.emit('foo', 'bar');
     });
 
-    s.bench('EventEmitter2', function () {
-      called = called2 = 0;
+    s.bench('hij1nx/EventEmitter2', function () {
+      calls = [];
+      calls2 = [];
       subjects.ee2.emit('foo', 'bar');
     });
 
-    s.bench('EventEmitter3', function () {
-      called = called2 = 0;
+    s.bench('primus/eventemitter3', function () {
+      calls = [];
+      calls2 = [];
       subjects.ee3.emit('foo', 'bar');
     });
 
-    s.bench('d3-dispatch', function () {
-      called = called2 = 0;
+    s.bench('d3/d3-dispatch', function () {
+      calls = [];
+      calls2 = [];
       subjects.d3Dispatch.call('foo', null, 'bar');
     });
 
-    s.bench('namespace-emitter', function () {
-      called = called2 = 0;
+    s.bench('sethvincent/namespace-emitter', function () {
+      calls = [];
+      calls2 = [];
       subjects.namespaceEmitter.emit('foo', 'bar');
     });
 
-    s.bench('ReactiveProperty', function () {
-      called = called2 = 0;
-      subjects.reactiveProperty('bar');
-    });
+    // s.bench('ReactiveProperty', function () {
+    //   calls = [];
+    //   calls2 = [];
+    //   subjects.reactiveProperty('bar');
+    // });
 
-    s.bench('observable', function () {
-      called = called2 = 0;
+    s.bench('dominictarr/observable', function () {
+      calls = [];
+      calls2 = [];
       subjects.observable('bar');
     });
 
-    s.bench('observ', function () {
-      called = called2 = 0;
+    s.bench('Raynos/observ', function () {
+      calls = [];
+      calls2 = [];
       subjects.observ.set('bar');
     });
 
-    s.bench('rxjs Subject', function () {
-      called = called2 = 0;
+    s.bench('reactivex/rxjs Subject', function () {
+      calls = [];
+      calls2 = [];
       subjects.subject.next('bar');
     });
 
-    s.bench('JS-Signals', function () {
-      called = called2 = 0;
+    s.bench('millermedeiros/js-signals', function () {
+      calls = [];
+      calls2 = [];
       subjects.signal.dispatch('bar');
     });
 
-    s.bench('MiniSignals', function () {
-      called = called2 = 0;
+    s.bench('Hypercubed/mini-signals', function () {
+      calls = [];
+      calls2 = [];
       subjects.miniSignal.dispatch('bar');
     });
 
-    s.bench('signal-emitter', function () {
-      called = called2 = 0;
+    s.bench('jasonkarns/signal-emitter', function () {
+      calls = [];
+      calls2 = [];
       subjects.signalEmitter.emit('bar');
     });
 
-    s.bench('event-signal', function () {
-      called = called2 = 0;
+    s.bench('r-park/event-signal', function () {
+      calls = [];
+      calls2 = [];
       subjects.eventSignal.emit('bar');
     });
 
-    s.bench('signal-lite', function () {
-      called = called2 = 0;
+    s.bench('CaptainN/SignalsLite.js', function () {
+      calls = [];
+      calls2 = [];
       subjects.signalLite.broadcast('bar');
     });
 
-    s.bench('minivents', function () {
-      called = called2 = 0;
+    s.bench('allouis/minivents', function () {
+      calls = [];
+      calls2 = [];
       subjects.miniVent.emit('foo', 'bar');
     });
 
-    s.bench('waddup', function () {
-      called = called2 = 0;
+    s.bench('planttheidea/waddup', function () {
+      calls = [];
+      calls2 = [];
       subjects.waddup.publish('foo', 'bar');
     });
 
-    s.bench('evee', function () {
-      called = called2 = 0;
+    s.bench('SplittyDev/evee.js', function () {
+      calls = [];
+      calls2 = [];
       subjects.evee.emit('foo', 'bar');
     });
 
-    s.bench('sister', function () {
-      called = called2 = 0;
+    s.bench('gajus/sister', function () {
+      calls = [];
+      calls2 = [];
       subjects.sister.trigger('foo', 'bar');
     });
 
     function handle(a) {
-      if (!subjects) {
-        // ignore calls before benchmarks start
-        return;
-      }
-      // if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
-      //   throw new Error('invalid arguments ' + a);
-      // }
+      if (!subjects) return;
       if (a !== 'bar') {
         throw new Error('invalid arguments ' + a);
       }
-      called++;
+      calls.push(Array.from(arguments).filter(Boolean));
     }
 
     function handle2(a) {
@@ -134,13 +160,10 @@ test('emit one value - two listeners', function (t) {
         // ignore calls before benchmarks start
         return;
       }
-      // if (arguments.length === 0 || arguments.length > 2 || a !== 'bar') {
-      //   throw new Error('invalid arguments');
-      // }
       if (a !== 'bar') {
         throw new Error('invalid arguments');
       }
-      called2++;
+      calls2.push(Array.from(arguments).filter(Boolean));
     }
   });
 });

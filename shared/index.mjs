@@ -23,6 +23,10 @@ import { Event } from 'ts-typed-events';
 import mitt from 'mitt';
 import Emittery from 'emittery';
 import { AwaitableEventEmitter  } from '@bitr/awaitable-event-emitter';
+import { EventEmitter as TSeepEventEmitter } from "tseep";
+import { Evt } from "evt";
+import { Signal as SignalPoly } from "signal-polyfill";
+import { batchedEffect } from 'signal-utils/subtle/batched-effect';
 
 export const constructors = {
   EventEmitter,
@@ -47,7 +51,10 @@ export const constructors = {
   ZSignal,
   TSignal,
   Event,
-  mitt
+  mitt,
+  TSeepEventEmitter,
+  Evt,
+  SignalPoly: SignalPoly.State
 };
 
 export const minSamples = 10;
@@ -79,37 +86,43 @@ export function createInstances() {
     tsTypedEvents: new Event(),
     mitt: mitt(),
     emittery: new Emittery(),
-    awaitable: new AwaitableEventEmitter()
+    awaitable: new AwaitableEventEmitter(),
+    tseep: new TSeepEventEmitter(),
+    evt: new Evt.create(),
+    signalState: new SignalPoly.State()
   };
 }
 
 export function addHandles(key, subjects, handles) {
   handles.forEach((h, i) => {
-    subjects.ee.on(key, h);
-    subjects.ee1.on(key, h);
-    subjects.ee2.on(key, h);
-    subjects.ee3.on(key, h);
-    subjects.signal.add(h);
-    subjects.miniSignal.add(h);
-    subjects.signalEmitter.on(h);
-    subjects.eventSignal.addListener(h);
-    subjects.signalLite.add(h);
-    subjects.subject.subscribe(h);
-    subjects.reactiveProperty.on(h);
-    subjects.miniVent.on(key, h);
-    subjects.observ(h);
-    subjects.observable(h);
-    subjects.namespaceEmitter.on(key, h);
-    subjects.d3Dispatch.on(`${key}.${i}`, h);
-    subjects.waddup.subscribe(key, ({ data }) => h(data));
-    subjects.evee.on(key, (e) => h(e.data));
-    subjects.sister.on(key, h);
-    subjects.zSignal.add(h);
-    subjects.tSignal.connect(h);
-    subjects.tsTypedEvents.on(h);
-    subjects.mitt.on(key, h);
-    subjects.emittery.on(key, h);
-    subjects.awaitable.on(key, h);
+    subjects.ee.on(key, h); // node:events
+    subjects.ee1.on(key, h); // Gozala/events
+    subjects.ee2.on(key, h); // hij1nx/EventEmitter2
+    subjects.ee3.on(key, h); // primus/eventemitter3
+    subjects.signal.add(h); // millermedeiros/js-signals
+    subjects.miniSignal.add(h); // Hypercubed/mini-signals
+    subjects.signalEmitter.on(h); // jasonkarns/signal-emitter
+    subjects.eventSignal.addListener(h); // r-park/event-signal
+    subjects.signalLite.add(h); // CaptainN/SignalsLite.js
+    subjects.subject.subscribe(h); // reactivex/rxjs
+    subjects.reactiveProperty.on(h); // datavis-tech/reactive-property
+    subjects.miniVent.on(key, h); // allouis/minivents
+    subjects.observ(h); // Raynos/observ
+    subjects.observable(h); // dominictarr/observable
+    subjects.namespaceEmitter.on(key, h); // sethvincent/namespace-emitter
+    subjects.d3Dispatch.on(`${key}.${i}`, h); // d3/d3-dispatch
+    subjects.waddup.subscribe(key, ({ data }) => h(data)); // planttheidea/waddup
+    subjects.evee.on(key, (e) => h(e.data)); // SplittyDev/evee.js
+    subjects.sister.on(key, h); // gajus/sister
+    subjects.zSignal.add(h); // zouloux/signal
+    subjects.tSignal.connect(h); // Lusito/typed-signals
+    subjects.tsTypedEvents.on(h); // JacobFischer/ts-typed-events
+    subjects.mitt.on(key, h); // developit/mitt
+    subjects.emittery.on(key, h); // sindresorhus/emittery
+    subjects.tseep.on(key, h); // Morglod/tseep
+    subjects.evt.attach(h); // garronej/evt
+    subjects.awaitable.on(key, h); // bitrinjani/awaitable-event-emitter
+    batchedEffect(() => h(subjects.signalState.get())); // signal-polyfill
   });
 
   return subjects;

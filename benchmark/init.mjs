@@ -30,27 +30,27 @@ test('init', function (t) {
       dummy = new Dummy();
     });
 
-    s.bench('EventEmitter', function () {
+    s.bench('Gozala/events', function () {
       dummy = new constructors.Events();
     });
 
-    s.bench('EventEmitter2', function () {
+    s.bench('hij1nx/EventEmitter2', function () {
       dummy = new constructors.EventEmitter2();
     });
 
-    s.bench('EventEmitter3', function () {
+    s.bench('primus/eventemitter3', function () {
       dummy = new constructors.EventEmitter3();
     });
 
-    s.bench('ReactiveProperty', function () {
+    s.bench('datavis-tech/reactive-property', function () {
       dummy = constructors.reactiveProperty();
     });
 
-    s.bench('JS-Signals', function () {
+    s.bench('millermedeiros/js-signals', function () {
       dummy = new constructors.Signal();
     });
 
-    s.bench('MiniSignals', function () {
+    s.bench('Hypercubed/mini-signals', function () {
       dummy = new constructors.MiniSignal();
     });
   });

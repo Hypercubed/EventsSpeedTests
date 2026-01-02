@@ -14,49 +14,37 @@ test('emit one object - one listener', function (t) {
 
     s.cycle(function (e) {
       t.false(e.target.error, e.target.name + ' runs without error');
-      t.equal(called, 3, e.target.name + ' called handle three times');
+      t.equal(called, 1, e.target.name + ' called handle once');
       called = null;
     });
 
     s.burn('Theoretical max', function () {
       called = 0;
-      handle({ bar: 'bar' });
-      handle({ bar: 'bar', baz: 'baz' });
       handle({ bar: 'bar', baz: 'baz', boom: Math.random() });
     });
 
     s.bench('node:events', function () {
       called = 0;
-      subjects.ee.emit('foo', { bar: 'bar' });
-      subjects.ee.emit('foo', { bar: 'bar', baz: 'baz' });
       subjects.ee.emit('foo', { bar: 'bar', baz: 'baz', boom: Math.random() });
     });
 
     s.bench('Gozala/events', function () {
       called = 0;
-      subjects.ee2.emit('foo', { bar: 'bar' });
-      subjects.ee2.emit('foo', { bar: 'bar', baz: 'baz' });
       subjects.ee2.emit('foo', { bar: 'bar', baz: 'baz', boom: Math.random() });
     });
 
     s.bench('hij1nx/EventEmitter2', function () {
       called = 0;
-      subjects.ee3.emit('foo', { bar: 'bar' });
-      subjects.ee3.emit('foo', { bar: 'bar', baz: 'baz' });
       subjects.ee3.emit('foo', { bar: 'bar', baz: 'baz', boom: Math.random() });
     });
 
     s.bench('reactivex/rxjs Subject', function () {
       called = 0;
-      subjects.subject.next({ bar: 'bar' });
-      subjects.subject.next({ bar: 'bar', baz: 'baz' });
       subjects.subject.next({ bar: 'bar', baz: 'baz', boom: Math.random() });
     });
 
     s.bench('datavis-tech/reactive-property', function () {
       called = 0;
-      subjects.reactiveProperty({ bar: 'bar' });
-      subjects.reactiveProperty({ bar: 'bar', baz: 'baz' });
       subjects.reactiveProperty({
         bar: 'bar',
         baz: 'baz',
@@ -66,15 +54,11 @@ test('emit one object - one listener', function (t) {
 
     s.bench('millermedeiros/js-signals', function () {
       called = 0;
-      subjects.signal.dispatch({ bar: 'bar' });
-      subjects.signal.dispatch({ bar: 'bar', baz: 'baz' });
       subjects.signal.dispatch({ bar: 'bar', baz: 'baz', boom: Math.random() });
     });
 
     s.bench('Hypercubed/mini-signals', function () {
       called = 0;
-      subjects.miniSignal.dispatch({ bar: 'bar' });
-      subjects.miniSignal.dispatch({ bar: 'bar', baz: 'baz' });
       subjects.miniSignal.dispatch({
         bar: 'bar',
         baz: 'baz',
@@ -84,8 +68,6 @@ test('emit one object - one listener', function (t) {
 
     s.bench('jasonkarns/signal-emitter', function () {
       called = 0;
-      subjects.signalEmitter.emit({ bar: 'bar' });
-      subjects.signalEmitter.emit({ bar: 'bar', baz: 'baz' });
       subjects.signalEmitter.emit({
         bar: 'bar',
         baz: 'baz',
@@ -95,8 +77,6 @@ test('emit one object - one listener', function (t) {
 
     s.bench('r-park/event-signal', function () {
       called = 0;
-      subjects.eventSignal.emit({ bar: 'bar' });
-      subjects.eventSignal.emit({ bar: 'bar', baz: 'baz' });
       subjects.eventSignal.emit({
         bar: 'bar',
         baz: 'baz',
@@ -106,8 +86,6 @@ test('emit one object - one listener', function (t) {
 
     s.bench('CaptainN/SignalsLite.js', function () {
       called = 0;
-      subjects.signalLite.broadcast({ bar: 'bar' });
-      subjects.signalLite.broadcast({ bar: 'bar', baz: 'baz' });
       subjects.signalLite.broadcast({
         bar: 'bar',
         baz: 'baz',
@@ -117,8 +95,6 @@ test('emit one object - one listener', function (t) {
 
     s.bench('SplittyDev/evee.js', function () {
       called = 0;
-      subjects.evee.emit('foo', { bar: 'bar' });
-      subjects.evee.emit('foo', { bar: 'bar', baz: 'baz' });
       subjects.evee.emit('foo', {
         bar: 'bar',
         baz: 'baz',
@@ -128,8 +104,6 @@ test('emit one object - one listener', function (t) {
 
     s.bench('gajus/sister', function () {
       called = 0;
-      subjects.sister.trigger('foo', { bar: 'bar' });
-      subjects.sister.trigger('foo', { bar: 'bar', baz: 'baz' });
       subjects.sister.trigger('foo', {
         bar: 'bar',
         baz: 'baz',
@@ -139,8 +113,6 @@ test('emit one object - one listener', function (t) {
 
     s.bench('JacobFischer/ts-typed-events', function () {
       called = 0;
-      subjects.tsTypedEvents.emit({ bar: 'bar' });
-      subjects.tsTypedEvents.emit({ bar: 'bar', baz: 'baz' });
       subjects.tsTypedEvents.emit({
         bar: 'bar',
         baz: 'baz',
@@ -150,47 +122,37 @@ test('emit one object - one listener', function (t) {
 
     s.bench('developit/mitt', function () {
       called = 0;
-      subjects.mitt.emit('foo', { bar: 'bar' });
-      subjects.mitt.emit('foo', { bar: 'bar', baz: 'baz' });
       subjects.mitt.emit('foo', {
         bar: 'bar',
         baz: 'baz',
         boom: Math.random(),
       });
     });
+    
+    // s.bench('signal-polyfill', function () {
+    //   called = 0;
+    //   batch(() => {
+    //     subjects.signalState.set({ bar: 'bar', baz: 'baz', boom: Math.random() });
+    //   });
+    // });
 
-    s.bench('signal-polyfill', function () {
+    s.bench('Morglod/tseep', function () {
       called = 0;
-      batch(() => {
-        subjects.signalState.set({ bar: 'bar' });
-      });
-       batch(() => {
-        subjects.signalState.set({ bar: 'bar', baz: 'baz' });
-      });
-      batch(() => {
-        subjects.signalState.set({ bar: 'bar', baz: 'baz', boom: Math.random() });
-      });
+      subjects.tseep.emit('foo', { bar: 'bar', baz: 'baz', boom: Math.random() });
+    });
+
+    s.bench('garronej/evt', function () {
+      called = 0;
+      subjects.evt.post({ bar: 'bar', baz: 'baz', boom: Math.random() });
     });
 
     function handle(a) {
-      if (!subjects) {
-        // ignore calls before benchmarks start
-        return;
-      }
-      if (arguments.length < 1 || arguments.length > 2) {
-        throw new Error('invalid arguments length');
-      }
-      if (arguments.length === 1) {
-        if (a.bar !== 'bar') {
-          throw new Error('Invalid bar !== ' + a.bar);
-        }
-        if (a.baz && a.baz !== 'baz') {
-          throw new Error('Invalid baz !== ' + a.baz);
-        }
-        if (a.boom && typeof a.boom !== 'number') {
-          throw new Error('Invalid boom !== ' + a.boom);
-        }
-      }
+      if (!subjects) return;
+      if (arguments.length < 1 || arguments.length > 5) throw new Error('invalid arguments length');
+
+      if (a.bar !== 'bar') throw new Error('Invalid bar !== ' + a.bar);
+      if (a.baz && a.baz !== 'baz') throw new Error('Invalid baz !== ' + a.baz);
+      if (a.boom && typeof a.boom !== 'number') throw new Error('Invalid boom !== ' + a.boom);
       called++;
     }
   });

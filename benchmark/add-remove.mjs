@@ -23,34 +23,39 @@ test('add and remove', (t) => {
       t.equal(called, 0, e.target.name + ' never called handle');
     });
 
-    s.bench('EventEmitter', function () {
-      subjects.ee1.on('foo', handle);
-      subjects.ee1.removeListener('foo', handle);
+    s.bench('node:events', function () {
+      subjects.ee.on('foo', handle);
+      subjects.ee.removeListener('foo', handle);
     });
 
-    s.bench('EventEmitter2', function () {
+    s.bench('hij1nx/EventEmitter2', function () {
       subjects.ee2.on('foo', handle);
       subjects.ee2.removeListener('foo', handle);
     });
 
-    s.bench('EventEmitter3', function () {
+    s.bench('primus/eventemitter3', function () {
       subjects.ee3.on('foo', handle);
       subjects.ee3.removeListener('foo', handle);
     });
 
-    s.bench('ReactiveProperty', function () {
+    s.bench('datavis-tech/reactive-property', function () {
       subjects.reactiveProperty.on(handle);
       subjects.reactiveProperty.off(handle);
     });
 
-    s.bench('JS-Signals', function () {
+    s.bench('millermedeiros/js-signals', function () {
       subjects.signal.add(handle);
       subjects.signal.remove(handle);
     });
 
-    s.bench('MiniSignals', function () {
+    s.bench('Hypercubed/mini-signals', function () {
       var _handle = subjects.miniSignal.add(handle);
       subjects.miniSignal.detach(_handle);
+    });
+
+    s.bench('Morglod/tseep', function () {
+      subjects.tseep.on('foo', handle);
+      subjects.tseep.removeListener('foo', handle);
     });
 
     function handle() {

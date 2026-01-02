@@ -51,7 +51,7 @@ test('emit async - one listener', t => {
       }
     });
 
-    s.bench('EventEmitter2/EventEmitter2', {
+    s.bench('hij1nx/EventEmitter2', {
       defer: true,
       fn: async (deferred) => {
         called = '';
@@ -80,6 +80,17 @@ test('emit async - one listener', t => {
         await subjects.awaitable.emitParallel('foo', 'X');
         await subjects.awaitable.emitParallel('foo', 'Y');
         await subjects.awaitable.emitParallel('foo', 'Z');
+        deferred.resolve();
+      }
+    });
+
+    s.bench('garronej/evt', {
+      defer: true,
+      fn: async deferred => {
+        called = '';
+        await subjects.evt.postAndWait('X');
+        await subjects.evt.postAndWait('Y');
+        await subjects.evt.postAndWait('Z');
         deferred.resolve();
       }
     });
