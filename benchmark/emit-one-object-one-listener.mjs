@@ -146,6 +146,11 @@ test('emit one object - one listener', function (t) {
       subjects.evt.post({ bar: 'bar', baz: 'baz', boom: Math.random() });
     });
 
+    s.bench('RecursiveVoid/CozyEvent', function () {
+      called = 0;
+      subjects.cozyEvent.emit('foo', { bar: 'bar', baz: 'baz', boom: Math.random() });
+    });
+
     function handle(a) {
       if (!subjects) return;
       if (arguments.length < 1 || arguments.length > 5) throw new Error('invalid arguments length');

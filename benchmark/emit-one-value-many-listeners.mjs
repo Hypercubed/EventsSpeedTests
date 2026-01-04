@@ -105,6 +105,10 @@ test('emit one value - many listeners', function (t) {
       called = 0;
       subjects.evt.post('bar');
     });
+    s.bench('RecursiveVoid/CozyEvent', function () {
+      called = 0;
+      subjects.cozyEvent.emit('foo', 'bar');
+    });
     // s.bench('sindresorhus/emittery', {
     //   defer: true,
     //   fn: async function (deferred) {

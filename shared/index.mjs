@@ -3,7 +3,7 @@ import Events from 'events';
 import EventEmitter2 from 'eventemitter2';
 import EventEmitter3 from 'eventemitter3';
 import Signal from 'signals';
-import { MiniSignal } from 'mini-signals';
+import { MiniSignal, MiniSignalEmitter } from 'mini-signals';
 import SignalEmitter from 'signal-emitter';
 import EventSignal from 'event-signal';
 import { SignalLite } from 'signals-lite';
@@ -27,6 +27,7 @@ import { EventEmitter as TSeepEventEmitter } from "tseep";
 import { Evt } from "evt";
 import { Signal as SignalPoly } from "signal-polyfill";
 import { batchedEffect } from 'signal-utils/subtle/batched-effect';
+import { CozyEvent } from 'cozyevent';
 
 export const constructors = {
   EventEmitter,
@@ -54,7 +55,9 @@ export const constructors = {
   mitt,
   TSeepEventEmitter,
   Evt,
-  SignalPoly: SignalPoly.State
+  SignalPoly: SignalPoly.State,
+  CozyEvent,
+  MiniSignalEmitter
 };
 
 export const minSamples = 10;
@@ -70,6 +73,9 @@ export function createInstances() {
     eventSignal: new EventSignal(),
     signal: new Signal(),
     miniSignal: new MiniSignal(),
+    miniSignalEmitter: new MiniSignalEmitter({
+      'foo': new MiniSignal()
+    }),
     signalLite: new SignalLite(),
     subject: new Subject(),
     reactiveProperty: reactiveProperty(),
@@ -89,7 +95,8 @@ export function createInstances() {
     awaitable: new AwaitableEventEmitter(),
     tseep: new TSeepEventEmitter(),
     evt: new Evt.create(),
-    signalState: new SignalPoly.State()
+    signalState: new SignalPoly.State(),
+    cozyEvent: new CozyEvent()
   };
 }
 
@@ -101,6 +108,7 @@ export function addHandles(key, subjects, handles) {
     subjects.ee3.on(key, h); // primus/eventemitter3
     subjects.signal.add(h); // millermedeiros/js-signals
     subjects.miniSignal.add(h); // Hypercubed/mini-signals
+    subjects.miniSignalEmitter.on('foo', h); // Hypercubed/mini-signals MiniSignalEmitter
     subjects.signalEmitter.on(h); // jasonkarns/signal-emitter
     subjects.eventSignal.addListener(h); // r-park/event-signal
     subjects.signalLite.add(h); // CaptainN/SignalsLite.js
@@ -123,6 +131,7 @@ export function addHandles(key, subjects, handles) {
     subjects.evt.attach(h); // garronej/evt
     subjects.awaitable.on(key, h); // bitrinjani/awaitable-event-emitter
     batchedEffect(() => h(subjects.signalState.get())); // signal-polyfill
+    subjects.cozyEvent.on(key, h); // cozyevent
   });
 
   return subjects;
