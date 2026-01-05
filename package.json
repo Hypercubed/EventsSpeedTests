@@ -60,7 +60,7 @@
     "events": "^3.3.0",
     "evt": "^2.5.9",
     "iso-bench": "^3.0.2",
-    "mini-signals": "^2.1.0",
+    "mini-signals": "^3.0.0-0",
     "minivents": "^2.0.2",
     "mitt": "^3.0.1",
     "namespace-emitter": "^2.0.1",
