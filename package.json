@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/Hypercubed/EventsSpeedTests",
   "devDependencies": {
+    "@types/node": "^25.0.5",
     "assume": "~1.2.6",
     "chuhai": "^1.2.0",
     "cross-env": "^7.0.3",
@@ -59,7 +60,7 @@
     "eventemitter3": "^5.0.1",
     "events": "^3.3.0",
     "evt": "^2.5.9",
-    "iso-bench": "^3.0.2",
+    "iso-bench": "^3.1.1",
     "mini-signals": "^3.0.0-0",
     "minivents": "^2.0.2",
     "mitt": "^3.0.1",

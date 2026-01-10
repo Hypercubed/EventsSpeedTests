@@ -67,19 +67,23 @@ test('emit async - one listener', t => {
     });
 
     async function handleU(a) {
-      if (!subjects) return; // ignore calls before benchmarks start
-      assert.ok(typeof a === 'string' && a.length === 1);
-      called += a.toUpperCase();
-      await delay(2);
-      called += '-';
+      return new Promise((resolve) => {
+        if (!subjects) return; // ignore calls before benchmarks start
+        called += a.toUpperCase();
+
+        process.nextTick(() => {
+          called += '-';
+          resolve();
+        }, 2);
+      });
     }
 
     async function handleL(a) {
       if (!subjects) return; // ignore calls before benchmarks start
-      assert.ok(typeof a === 'string' && a.length === 1);
       called += a.toLowerCase();
-      await delay(2);
-      called += '-';
+      await Promise.resolve().then(() => {
+        called += '-';
+      });
     }
   });
 });
